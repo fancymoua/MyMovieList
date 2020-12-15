@@ -15,6 +15,7 @@
 		B14DF2982589536200FF8819 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B14DF2962589536200FF8819 /* LaunchScreen.storyboard */; };
 		B14DF2A32589536300FF8819 /* MyMovieListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF2A22589536300FF8819 /* MyMovieListTests.swift */; };
 		B14DF2AE2589536300FF8819 /* MyMovieListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF2AD2589536300FF8819 /* MyMovieListUITests.swift */; };
+		B14DF2CE25895F6500FF8819 /* SearchResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF2CD25895F6500FF8819 /* SearchResultsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		B14DF2A92589536300FF8819 /* MyMovieListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyMovieListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B14DF2AD2589536300FF8819 /* MyMovieListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMovieListUITests.swift; sourceTree = "<group>"; };
 		B14DF2AF2589536300FF8819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B14DF2CD25895F6500FF8819 /* SearchResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +103,7 @@
 			children = (
 				B14DF28B2589536000FF8819 /* AppDelegate.swift */,
 				B14DF28D2589536000FF8819 /* SceneDelegate.swift */,
-				B14DF28F2589536000FF8819 /* LandingVC.swift */,
+				B14DF2C925895F5200FF8819 /* Controllers */,
 				B14DF2912589536000FF8819 /* Main.storyboard */,
 				B14DF2942589536200FF8819 /* Assets.xcassets */,
 				B14DF2962589536200FF8819 /* LaunchScreen.storyboard */,
@@ -126,6 +128,15 @@
 				B14DF2AF2589536300FF8819 /* Info.plist */,
 			);
 			path = MyMovieListUITests;
+			sourceTree = "<group>";
+		};
+		B14DF2C925895F5200FF8819 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B14DF28F2589536000FF8819 /* LandingVC.swift */,
+				B14DF2CD25895F6500FF8819 /* SearchResultsVC.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B14DF2902589536000FF8819 /* LandingVC.swift in Sources */,
+				B14DF2CE25895F6500FF8819 /* SearchResultsVC.swift in Sources */,
 				B14DF28C2589536000FF8819 /* AppDelegate.swift in Sources */,
 				B14DF28E2589536000FF8819 /* SceneDelegate.swift in Sources */,
 			);
