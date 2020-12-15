@@ -1,9 +1,3 @@
-//
-//  ViewController.swift
-//  MyMovieList
-//
-//  Created by Fancy on 12/15/20.
-//
 
 import UIKit
 
