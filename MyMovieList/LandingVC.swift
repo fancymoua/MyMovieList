@@ -14,7 +14,7 @@ class LandingVC: UIViewController {
     }
     
     @IBAction func searchButtonPressed(_ sender: Any) {
-        textFieldShouldReturn(searchTextField)
+        dismissKeyboardAndClearSearchTextField()
     }
     
 
@@ -27,9 +27,7 @@ extension LandingVC: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.endEditing(true)
-        print(searchTextField.text)
-        searchTextField.text = ""
+        dismissKeyboardAndClearSearchTextField()
         return true
     }
 }
@@ -38,5 +36,11 @@ extension LandingVC {
     func configureSearchTextField() {
         searchTextField.delegate = self
         searchTextField.textColor = .darkGray
+    }
+    
+    func dismissKeyboardAndClearSearchTextField() {
+        searchTextField.endEditing(true)
+        print("\(searchTextField.text)")
+        searchTextField.text = ""
     }
 }
