@@ -8,6 +8,6 @@ struct MovieDataAPI: Codable {
 
 struct Result: Codable {
     var title: String
-    var release_date: String
+    var release_date: String?
     var poster_path: String?
 }

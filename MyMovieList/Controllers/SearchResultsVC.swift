@@ -73,6 +73,7 @@ class SearchResultsVC: UIViewController {
 
 extension SearchResultsVC {
     private func configureUI() {
-        
+        navigationItem.title = searchText
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
