@@ -17,6 +17,7 @@
 		B14DF2AE2589536300FF8819 /* MyMovieListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF2AD2589536300FF8819 /* MyMovieListUITests.swift */; };
 		B14DF2CE25895F6500FF8819 /* SearchResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF2CD25895F6500FF8819 /* SearchResultsVC.swift */; };
 		B14DF2DA25896AA400FF8819 /* MovieSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF2D925896AA400FF8819 /* MovieSearchResult.swift */; };
+		B14DF2E72589712100FF8819 /* MovieDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF2E62589712100FF8819 /* MovieDataAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		B14DF2AF2589536300FF8819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B14DF2CD25895F6500FF8819 /* SearchResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVC.swift; sourceTree = "<group>"; };
 		B14DF2D925896AA400FF8819 /* MovieSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchResult.swift; sourceTree = "<group>"; };
+		B14DF2E62589712100FF8819 /* MovieDataAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDataAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				B14DF2D925896AA400FF8819 /* MovieSearchResult.swift */,
+				B14DF2E62589712100FF8819 /* MovieDataAPI.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B14DF2902589536000FF8819 /* LandingVC.swift in Sources */,
+				B14DF2E72589712100FF8819 /* MovieDataAPI.swift in Sources */,
 				B14DF2CE25895F6500FF8819 /* SearchResultsVC.swift in Sources */,
 				B14DF28C2589536000FF8819 /* AppDelegate.swift in Sources */,
 				B14DF2DA25896AA400FF8819 /* MovieSearchResult.swift in Sources */,
