@@ -8,15 +8,14 @@ class SearchResultsVC: UIViewController {
     
     private let baseURL = "https://api.themoviedb.org/3/search/movie?api_key=65db6bef59bff99c6a4504f0ce877ade&query="
     
-    var searchResults = [MovieSearchResult]()
+    var searchResultsArray = [MovieSearchResult]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
-        print("Search Text is: \(searchText)")
         getResults(for: searchText)
-        print("searchResults: \(searchResults)")
+        print("searchResultsArray: \(searchResultsArray)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,13 +51,21 @@ class SearchResultsVC: UIViewController {
             
             do {
                 let decoder = JSONDecoder()
-                let results = try decoder.decode(MovieDataAPI.self, from: data)
-                print("Results here \(results)")
+                let allData = try decoder.decode(MovieDataAPI.self, from: data)
+            
+                for item in allData.results {
+                    let title = item.title
+                    let releaseDate = item.release_date
+                    let posterPath = item.poster_path
+
+                    let movie = MovieSearchResult(title: title, release_date: releaseDate, poster_path: posterPath)
+                    self.searchResultsArray.append(movie)
+                }
+                print("Search results now \(self.searchResultsArray)")
             } catch {
-                print("Something went wrong")
+                print("Could not parse data")
             }
         }
-        
         task.resume()
     }
     
