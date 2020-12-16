@@ -6,20 +6,26 @@ class SearchResultsVC: UIViewController {
     
     @IBOutlet weak var resultsCollectionView: UICollectionView!
     
+    enum Section {
+        case main
+    }
+    
     var searchText: String!
     var searchResultsArray = [MovieSearchResult]()
     
     private let baseURL = "https://api.themoviedb.org/3/search/movie?api_key=65db6bef59bff99c6a4504f0ce877ade&query="
     private let photoBaseURL = "https://image.tmdb.org/t/p/original"
     
+    var datasource: UICollectionViewDiffableDataSource<Section, MovieSearchResult>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         resultsCollectionView.delegate = self
-        resultsCollectionView.dataSource = self
         
         configureCollectionView()
         configureUI()
+        configDataSource()
 
         getResults()
         
@@ -71,10 +77,9 @@ class SearchResultsVC: UIViewController {
                     
                     let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath)
                     self.searchResultsArray.append(movie)
+                    
+                    self.updateData(on: self.searchResultsArray)
 
-                    DispatchQueue.main.async {
-                        self.resultsCollectionView.reloadData()
-                    }
                 }
             } catch {
                 print("Could not parse data")
@@ -83,31 +88,49 @@ class SearchResultsVC: UIViewController {
         task.resume()
     }
     
-}
-
-extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchResultsArray.count
+    func configDataSource() {
+        datasource = UICollectionViewDiffableDataSource<Section, MovieSearchResult>(collectionView: resultsCollectionView, cellProvider: { (collectionView, indexPath, follower) -> UICollectionViewCell? in
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
+            
+            let title = self.searchResultsArray[indexPath.item].title
+            var posterImage = UIImage()
+            
+            if let posterPath = self.searchResultsArray[indexPath.item].poster_path {
+                let endpoint = self.photoBaseURL + posterPath
+                let posterImageURL = URL(string: endpoint)!
+                if let data = try? Data(contentsOf: posterImageURL) {
+                    posterImage = UIImage(data: data) ?? #imageLiteral(resourceName: "question-mark")
+                }
+            }
+            
+            cell.configureCell(title: title, posterImage: posterImage)
+            
+            return cell
+        })
+        
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func updateData(on array: [MovieSearchResult]) {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
+        var snapshot = NSDiffableDataSourceSnapshot<Section, MovieSearchResult>()
         
-        let title = self.searchResultsArray[indexPath.item].title
-        var posterImage = UIImage()
+        snapshot.appendSections([.main])
         
-        if let posterPath = searchResultsArray[indexPath.item].poster_path {
-            let endpoint = photoBaseURL + posterPath
-            let posterImageURL = URL(string: endpoint)!
-            if let data = try? Data(contentsOf: posterImageURL) {
-                posterImage = UIImage(data: data) ?? #imageLiteral(resourceName: "question-mark")
-            }
+        snapshot.appendItems(array)
+        
+        DispatchQueue.main.async {
+            print("Hallooo")
+            self.datasource.apply(snapshot, animatingDifferences: true)
         }
         
-        cell.configureCell(title: title, posterImage: posterImage)
+    }
     
-        return cell
+}
+
+extension SearchResultsVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return searchResultsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
