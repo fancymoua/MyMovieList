@@ -8,6 +8,9 @@ class SearchResultsVC: UIViewController {
     
     var searchText: String!
     
+    var imdbID = String()
+    var tmdbID = Int()
+    
     private let baseURL = "https://api.themoviedb.org/3/search/movie?api_key=65db6bef59bff99c6a4504f0ce877ade&query="
     private let photoBaseURL = "https://image.tmdb.org/t/p/original"
     
@@ -34,7 +37,7 @@ class SearchResultsVC: UIViewController {
     func getResults(for query: String) {
         
         let endpoint = baseURL + "\(query)"
-        print("Endpoint: \(endpoint)")
+//        print("Endpoint: \(endpoint)")
         
         guard let url = URL(string: endpoint) else {
             print("Bad URL")
@@ -72,7 +75,7 @@ class SearchResultsVC: UIViewController {
                     let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath)
                     self.searchResultsArray.append(movie)
                 }
-                print("Search results now \(self.searchResultsArray)")
+//                print("Search results now \(self.searchResultsArray)")
             } catch {
                 print("Could not parse data")
             }
@@ -112,10 +115,70 @@ extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let destVC = storyboard?.instantiateViewController(identifier: "MovieDetailView") as! DetailVC
-        var imdbID = String()
         
-        // grab tmdb ID
-        let tmdbID = searchResultsArray[indexPath.item].id
+        tmdbID = searchResultsArray[indexPath.item].id
+        
+        getIMDBID()
+        
+        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&i="
+        let movieEndpoint = baseURL + imdbID
+        print("movieEndpoint: \(movieEndpoint)")
+        
+        guard let url = URL(string: movieEndpoint) else {
+            print("Bad movieEndpoint")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let _ = error {
+                print("error making call to OMDB")
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                print("Something other than 200 from OMDB")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data from OMDB")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(MovieDetailModel.self, from: data)
+                
+                print("result is \(result)")
+                
+                let id = result.imdbID
+                let title = result.Title
+                let year = result.Year
+                let plot = result.Plot
+                let director = result.Director
+                let stars = result.Actors
+                
+                destVC.imdbID = id
+                destVC.movieTitle = title
+                destVC.movieYear = year
+                destVC.moviePlot = plot
+                destVC.movieDirector = director
+                destVC.movieStars = stars
+            } catch {
+                print("Error getting movie details")
+            }
+            
+        }
+        
+        task.resume()
+        
+//        destVC.movieTitle = searchResultsArray[indexPath.item].title
+        
+        show(destVC, sender: self)
+        
+    }
+    
+    func getIMDBID() {
         
         // get IMDB ID
         let convertURL = "https://api.themoviedb.org/3/movie/" + "\(tmdbID)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
@@ -145,19 +208,20 @@ extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource 
             do {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(MovieIDAPI.self, from: data)
-                imdbID = result.imdb_id
-                print("imdb id: \(imdbID)")
+                self.imdbID = result.imdb_id
+                print("imdb id: \(self.imdbID)")
             } catch {
-                print("Cow-- something went wrong")
+                print("Couldn't get IMDB ID")
             }
             
         }
         
         task.resume()
+    }
+    
+    func getMovieDetails() {
         
-//        destVC.movieTitle = searchResultsArray[indexPath.item].title
         
-        show(destVC, sender: self)
         
     }
     
