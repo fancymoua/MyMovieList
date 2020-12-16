@@ -142,10 +142,10 @@
             </objects>
             <point key="canvasLocation" x="1142.0289855072465" y="132.58928571428572"/>
         </scene>
-        <!--View Controller-->
+        <!--DetailVC-->
         <scene sceneID="jp9-UZ-KuI">
             <objects>
-                <viewController id="nPj-1W-EWu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetailView" id="nPj-1W-EWu" customClass="DetailVC" customModule="MyMovieList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1ko-1D-A3l">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -231,6 +231,14 @@
                             <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="XFv-ZE-7jg" secondAttribute="trailing" constant="30" id="v1h-pe-tk7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="directorLabel" destination="2aY-nS-F1I" id="Gnm-f7-Xcx"/>
+                        <outlet property="plotLabel" destination="G1s-RW-eMu" id="hu6-D9-Af0"/>
+                        <outlet property="posterImageView" destination="Veo-lz-yON" id="WC1-vU-sr9"/>
+                        <outlet property="starsLabel" destination="XFv-ZE-7jg" id="rgm-Dj-XpY"/>
+                        <outlet property="titleLabel" destination="RzF-rX-Wv4" id="LEh-Iz-B8U"/>
+                        <outlet property="yearLabel" destination="Urc-Ay-5Dm" id="Ncg-Zh-4Jr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LLN-Gt-ERz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

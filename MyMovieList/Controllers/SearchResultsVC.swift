@@ -106,8 +106,20 @@ extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource 
         }
 
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let destVC = storyboard?.instantiateViewController(identifier: "MovieDetailView") as! DetailVC
+        
+        
+        
+        destVC.movieTitle = searchResultsArray[indexPath.item].title
+        
+        show(destVC, sender: self)
         
     }
+    
 }
 
 extension SearchResultsVC {
