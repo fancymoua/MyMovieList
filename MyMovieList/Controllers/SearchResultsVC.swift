@@ -25,8 +25,8 @@ class SearchResultsVC: UIViewController {
         configureCollectionView()
         configureUI()
         
-        let query = searchText.replacingOccurrences(of: " ", with: "+")
-        getResults(for: query)
+        getResults()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,10 +34,11 @@ class SearchResultsVC: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    func getResults(for query: String) {
+    func getResults() {
+        
+        let query = searchText.replacingOccurrences(of: " ", with: "+")
         
         let endpoint = baseURL + "\(query)"
-//        print("Endpoint: \(endpoint)")
         
         guard let url = URL(string: endpoint) else {
             print("Bad URL")
@@ -71,11 +72,14 @@ class SearchResultsVC: UIViewController {
                     let title = item.title
                     let releaseDate = item.release_date
                     let posterPath = item.poster_path
-
+                    
                     let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath)
                     self.searchResultsArray.append(movie)
+
+                    DispatchQueue.main.async {
+                        self.resultsCollectionView.reloadData()
+                    }
                 }
-//                print("Search results now \(self.searchResultsArray)")
             } catch {
                 print("Could not parse data")
             }
@@ -94,21 +98,19 @@ extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource 
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
         
-        cell.titleLabel.text = self.searchResultsArray[indexPath.item].title
-        cell.configureCell()
+        let title = self.searchResultsArray[indexPath.item].title
+        var posterImage = UIImage()
         
         if let itemImageName = searchResultsArray[indexPath.item].poster_path {
             let combine = photoBaseURL + itemImageName
             let posterImageURL = URL(string: combine)!
             if let data = try? Data(contentsOf: posterImageURL) {
-                DispatchQueue.main.async {
-                    cell.movieImageView.image = UIImage(data: data)
-                }
-            } else {
-                cell.movieImageView.image = #imageLiteral(resourceName: "question-mark")
+                posterImage = UIImage(data: data) ?? #imageLiteral(resourceName: "question-mark")
             }
         }
-
+        
+        cell.configureCell(title: title, posterImage: posterImage)
+    
         return cell
     }
     
@@ -119,61 +121,8 @@ extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource 
         tmdbID = searchResultsArray[indexPath.item].id
         destVC.movieTitle = searchResultsArray[indexPath.item].title
         
-        getIMDBID()
-        
-//        destVC.movieTitle = searchResultsArray[indexPath.item].title
-        
         show(destVC, sender: self)
-        
     }
-    
-    func getIMDBID() {
-        
-        // get IMDB ID
-        let convertURL = "https://api.themoviedb.org/3/movie/" + "\(tmdbID)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
-        print(convertURL)
-        
-        guard let url = URL(string: convertURL) else {
-            print("Bad convert URL")
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            if let _ = error {
-                print("Cow -- error making call")
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                print("Cow -- something other than 200")
-                return
-            }
-            
-            guard let data = data else {
-                print("No data")
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let result = try decoder.decode(MovieIDAPI.self, from: data)
-                self.imdbID = result.imdb_id
-                print("imdb id: \(self.imdbID)")
-            } catch {
-                print("Couldn't get IMDB ID")
-            }
-            
-        }
-        
-        task.resume()
-    }
-    
-    func getMovieDetails() {
-        
-        
-        
-    }
-    
 }
 
 extension SearchResultsVC {
