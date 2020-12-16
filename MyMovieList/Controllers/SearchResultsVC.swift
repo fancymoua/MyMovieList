@@ -64,11 +64,12 @@ class SearchResultsVC: UIViewController {
                 self.searchResultsArray = []
             
                 for item in allData.results {
+                    let id = item.id
                     let title = item.title
                     let releaseDate = item.release_date
                     let posterPath = item.poster_path
 
-                    let movie = MovieSearchResult(title: title, release_date: releaseDate, poster_path: posterPath)
+                    let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath)
                     self.searchResultsArray.append(movie)
                 }
                 print("Search results now \(self.searchResultsArray)")
