@@ -117,60 +117,9 @@ extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource 
         let destVC = storyboard?.instantiateViewController(identifier: "MovieDetailView") as! DetailVC
         
         tmdbID = searchResultsArray[indexPath.item].id
+        destVC.movieTitle = searchResultsArray[indexPath.item].title
         
         getIMDBID()
-        
-        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&i="
-        let movieEndpoint = baseURL + imdbID
-        print("movieEndpoint: \(movieEndpoint)")
-        
-        guard let url = URL(string: movieEndpoint) else {
-            print("Bad movieEndpoint")
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            if let _ = error {
-                print("error making call to OMDB")
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                print("Something other than 200 from OMDB")
-                return
-            }
-            
-            guard let data = data else {
-                print("No data from OMDB")
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let result = try decoder.decode(MovieDetailModel.self, from: data)
-                
-                print("result is \(result)")
-                
-                let id = result.imdbID
-                let title = result.Title
-                let year = result.Year
-                let plot = result.Plot
-                let director = result.Director
-                let stars = result.Actors
-                
-                destVC.imdbID = id
-                destVC.movieTitle = title
-                destVC.movieYear = year
-                destVC.moviePlot = plot
-                destVC.movieDirector = director
-                destVC.movieStars = stars
-            } catch {
-                print("Error getting movie details")
-            }
-            
-        }
-        
-        task.resume()
         
 //        destVC.movieTitle = searchResultsArray[indexPath.item].title
         
