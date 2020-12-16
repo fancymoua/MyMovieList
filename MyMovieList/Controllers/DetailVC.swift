@@ -11,22 +11,11 @@ class DetailVC: UIViewController {
     @IBOutlet weak var directorLabel: UILabel!
     @IBOutlet weak var starsLabel: UILabel!
     
-    var imdbID: String?
     var movieTitle: String?
-    var movieYear: String?
-    var moviePlot: String?
-    var movieDirector: String?
-    var movieStars: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        titleLabel.text = movieTitle
-        yearLabel.text = movieYear
-        plotLabel.text = moviePlot
-        directorLabel.text = movieDirector
-        starsLabel.text = movieStars
-        
+    
         getMovieDetails()
     }
     
@@ -36,10 +25,8 @@ class DetailVC: UIViewController {
         var movieEndpoint = String()
         
         if let title = movieTitle {
-            let noSpaceTitle = title.replacingOccurrences(of: " ", with: "+")
-            movieEndpoint = baseURL + noSpaceTitle
-            
-            print("movieEndpoint: \(movieEndpoint)")
+            let query = title.replacingOccurrences(of: " ", with: "+")
+            movieEndpoint = baseURL + query
             
             guard let url = URL(string: movieEndpoint) else {
                 print("Bad movieEndpoint")
@@ -66,8 +53,6 @@ class DetailVC: UIViewController {
                     let decoder = JSONDecoder()
                     let result = try decoder.decode(MovieDetailModel.self, from: data)
                     
-                    print("result is \(result)")
-                    
                     let title = result.Title
                     let year = result.Year
                     let plot = result.Plot
@@ -85,12 +70,7 @@ class DetailVC: UIViewController {
                     print("Error getting movie details")
                 }
             }
-            
             task.resume()
         }
-        
-        
     }
-    
-
 }

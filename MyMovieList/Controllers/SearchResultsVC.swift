@@ -7,14 +7,10 @@ class SearchResultsVC: UIViewController {
     @IBOutlet weak var resultsCollectionView: UICollectionView!
     
     var searchText: String!
-    
-    var imdbID = String()
-    var tmdbID = Int()
+    var searchResultsArray = [MovieSearchResult]()
     
     private let baseURL = "https://api.themoviedb.org/3/search/movie?api_key=65db6bef59bff99c6a4504f0ce877ade&query="
     private let photoBaseURL = "https://image.tmdb.org/t/p/original"
-    
-    var searchResultsArray = [MovieSearchResult]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +20,7 @@ class SearchResultsVC: UIViewController {
         
         configureCollectionView()
         configureUI()
-        
+
         getResults()
         
     }
@@ -117,8 +113,7 @@ extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let destVC = storyboard?.instantiateViewController(identifier: "MovieDetailView") as! DetailVC
-        
-        tmdbID = searchResultsArray[indexPath.item].id
+
         destVC.movieTitle = searchResultsArray[indexPath.item].title
         
         show(destVC, sender: self)
@@ -129,8 +124,6 @@ extension SearchResultsVC {
     private func configureUI() {
         navigationItem.title = searchText
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.view.backgroundColor = .systemOrange
-        navigationController?.navigationBar.barTintColor = .systemOrange
     }
     
     func configureCollectionView() {
