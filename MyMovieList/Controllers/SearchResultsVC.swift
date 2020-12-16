@@ -18,6 +18,8 @@ class SearchResultsVC: UIViewController {
     
     var datasource: UICollectionViewDiffableDataSource<Section, MovieSearchResult>!
     
+    let cache = NSCache<NSString, UIImage>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,7 +91,7 @@ class SearchResultsVC: UIViewController {
     }
     
     func configDataSource() {
-        datasource = UICollectionViewDiffableDataSource<Section, MovieSearchResult>(collectionView: resultsCollectionView, cellProvider: { (collectionView, indexPath, follower) -> UICollectionViewCell? in
+        datasource = UICollectionViewDiffableDataSource<Section, MovieSearchResult>(collectionView: resultsCollectionView, cellProvider: { [self] (collectionView, indexPath, follower) -> UICollectionViewCell? in
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
             
@@ -97,10 +99,20 @@ class SearchResultsVC: UIViewController {
             var posterImage = UIImage()
             
             if let posterPath = self.searchResultsArray[indexPath.item].poster_path {
+                
                 let endpoint = self.photoBaseURL + posterPath
                 let posterImageURL = URL(string: endpoint)!
-                if let data = try? Data(contentsOf: posterImageURL) {
-                    posterImage = UIImage(data: data) ?? #imageLiteral(resourceName: "question-mark")
+                
+                let cacheKey = NSString(string: endpoint)
+                
+                if let image = cache.object(forKey: cacheKey) {
+                    posterImage = image
+                } else {
+                    print("Get here?")
+                    if let data = try? Data(contentsOf: posterImageURL) {
+                        posterImage = UIImage(data: data) ?? #imageLiteral(resourceName: "question-mark")
+                        self.cache.setObject(posterImage, forKey: cacheKey)
+                    }
                 }
             }
             
@@ -108,7 +120,6 @@ class SearchResultsVC: UIViewController {
             
             return cell
         })
-        
     }
     
     func updateData(on array: [MovieSearchResult]) {
@@ -120,7 +131,6 @@ class SearchResultsVC: UIViewController {
         snapshot.appendItems(array)
         
         DispatchQueue.main.async {
-            print("Hallooo")
             self.datasource.apply(snapshot, animatingDifferences: true)
         }
         
