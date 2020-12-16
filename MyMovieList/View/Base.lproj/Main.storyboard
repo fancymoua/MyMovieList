@@ -142,6 +142,100 @@
             </objects>
             <point key="canvasLocation" x="1142.0289855072465" y="132.58928571428572"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="jp9-UZ-KuI">
+            <objects>
+                <viewController id="nPj-1W-EWu" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1ko-1D-A3l">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrival poster" translatesAutoresizingMaskIntoConstraints="NO" id="Veo-lz-yON">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="zrJ-mq-Mfx"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arrival" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="RzF-rX-Wv4">
+                                <rect key="frame" x="25" y="520" width="300" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="RGm-Gr-nQq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="26"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urc-Ay-5Dm">
+                                <rect key="frame" x="344" y="523" width="40" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="ZL5-NQ-Xq7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Italic" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="G1s-RW-eMu">
+                                <rect key="frame" x="25" y="566" width="359" height="82"/>
+                                <string key="text">A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecrafts appear around the world.</string>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Director:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="pGo-XI-Y6O">
+                                <rect key="frame" x="25" y="663" width="69" height="23.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Denis Villeneuve" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="2aY-nS-F1I">
+                                <rect key="frame" x="104" y="663" width="280" height="23.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starring:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="n3z-d5-Gcb">
+                                <rect key="frame" x="25" y="694.5" width="68" height="24"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Amy Adams, Jeremy Renner, Forest Whitaker" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="XFv-ZE-7jg">
+                                <rect key="frame" x="103" y="694.5" width="281" height="46.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5gn-oy-ygg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pGo-XI-Y6O" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" constant="25" id="0VN-x3-hGQ"/>
+                            <constraint firstItem="n3z-d5-Gcb" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" constant="25" id="2ow-Zs-Uu4"/>
+                            <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="Veo-lz-yON" secondAttribute="trailing" id="3DZ-Gn-FK3"/>
+                            <constraint firstItem="G1s-RW-eMu" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" constant="25" id="3Gy-8K-6tx"/>
+                            <constraint firstItem="Veo-lz-yON" firstAttribute="top" secondItem="1ko-1D-A3l" secondAttribute="top" id="6HJ-aj-fM7"/>
+                            <constraint firstItem="n3z-d5-Gcb" firstAttribute="top" secondItem="pGo-XI-Y6O" secondAttribute="bottom" constant="8" id="7h0-mM-M3K"/>
+                            <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="G1s-RW-eMu" secondAttribute="trailing" constant="30" id="Dwq-BH-Lqx"/>
+                            <constraint firstItem="Veo-lz-yON" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" id="FZE-ed-pZO"/>
+                            <constraint firstItem="RzF-rX-Wv4" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" constant="25" id="JQM-TS-9zn"/>
+                            <constraint firstItem="G1s-RW-eMu" firstAttribute="top" secondItem="RzF-rX-Wv4" secondAttribute="bottom" constant="10" id="M2y-JY-Mvx"/>
+                            <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="Urc-Ay-5Dm" secondAttribute="trailing" constant="30" id="ORB-Ky-69e"/>
+                            <constraint firstItem="Urc-Ay-5Dm" firstAttribute="top" secondItem="Veo-lz-yON" secondAttribute="bottom" constant="23" id="Pww-Et-jXW"/>
+                            <constraint firstItem="2aY-nS-F1I" firstAttribute="top" secondItem="G1s-RW-eMu" secondAttribute="bottom" constant="15" id="Tui-UF-wa3"/>
+                            <constraint firstItem="pGo-XI-Y6O" firstAttribute="top" secondItem="G1s-RW-eMu" secondAttribute="bottom" constant="15" id="ccv-dV-aA1"/>
+                            <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="2aY-nS-F1I" secondAttribute="trailing" constant="30" id="eLW-bS-rod"/>
+                            <constraint firstItem="XFv-ZE-7jg" firstAttribute="top" secondItem="2aY-nS-F1I" secondAttribute="bottom" constant="8" id="hnO-35-pio"/>
+                            <constraint firstItem="RzF-rX-Wv4" firstAttribute="top" secondItem="Veo-lz-yON" secondAttribute="bottom" constant="20" id="mOy-z5-fNj"/>
+                            <constraint firstItem="XFv-ZE-7jg" firstAttribute="leading" secondItem="n3z-d5-Gcb" secondAttribute="trailing" constant="10" id="nSh-dD-iIG"/>
+                            <constraint firstItem="2aY-nS-F1I" firstAttribute="leading" secondItem="pGo-XI-Y6O" secondAttribute="trailing" constant="10" id="o6H-2f-hnV"/>
+                            <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="XFv-ZE-7jg" secondAttribute="trailing" constant="30" id="v1h-pe-tk7"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LLN-Gt-ERz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1895.6521739130437" y="137.94642857142856"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="MWD-44-nWi">
             <objects>
@@ -162,6 +256,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Arrival poster" width="328" height="512"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

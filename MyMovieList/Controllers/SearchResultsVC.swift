@@ -114,6 +114,8 @@ extension SearchResultsVC {
     private func configureUI() {
         navigationItem.title = searchText
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.view.backgroundColor = .systemOrange
+        navigationController?.navigationBar.barTintColor = .systemOrange
     }
     
     func configureCollectionView() {
