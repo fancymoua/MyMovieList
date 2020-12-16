@@ -90,17 +90,17 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SearchResultCell" id="sUl-Qy-9eu" customClass="SearchResultCell" customModule="MyMovieList" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="128"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="51.5" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Bv1-o2-ERz">
-                                            <rect key="frame" x="0.0" y="0.0" width="41.5" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="51.5" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DhT-no-6DL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="41.5" height="97.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="51.5" height="97.5"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xL0-3s-YzG">
-                                                    <rect key="frame" x="0.0" y="102.5" width="41.5" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xL0-3s-YzG">
+                                                    <rect key="frame" x="5" y="102.5" width="41.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -108,9 +108,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="DhT-no-6DL" secondAttribute="trailing" id="36C-tC-HlA"/>
-                                                <constraint firstItem="xL0-3s-YzG" firstAttribute="leading" secondItem="Bv1-o2-ERz" secondAttribute="leading" id="LCG-ly-IBW"/>
+                                                <constraint firstItem="xL0-3s-YzG" firstAttribute="leading" secondItem="Bv1-o2-ERz" secondAttribute="leading" constant="5" id="LCG-ly-IBW"/>
                                                 <constraint firstItem="DhT-no-6DL" firstAttribute="leading" secondItem="Bv1-o2-ERz" secondAttribute="leading" id="O7A-L5-p3x"/>
-                                                <constraint firstAttribute="trailing" secondItem="xL0-3s-YzG" secondAttribute="trailing" id="PKS-Qq-A6W"/>
+                                                <constraint firstAttribute="trailing" secondItem="xL0-3s-YzG" secondAttribute="trailing" constant="5" id="PKS-Qq-A6W"/>
                                                 <constraint firstItem="DhT-no-6DL" firstAttribute="top" secondItem="Bv1-o2-ERz" secondAttribute="top" id="cIQ-3E-jMO"/>
                                                 <constraint firstAttribute="bottom" secondItem="xL0-3s-YzG" secondAttribute="bottom" constant="5" id="gLd-Wr-2bB"/>
                                                 <constraint firstItem="xL0-3s-YzG" firstAttribute="top" secondItem="DhT-no-6DL" secondAttribute="bottom" constant="5" id="zSa-sy-d7B"/>

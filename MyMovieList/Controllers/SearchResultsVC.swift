@@ -9,6 +9,7 @@ class SearchResultsVC: UIViewController {
     var searchText: String!
     
     private let baseURL = "https://api.themoviedb.org/3/search/movie?api_key=65db6bef59bff99c6a4504f0ce877ade&query="
+    private let photoBaseURL = "https://image.tmdb.org/t/p/original"
     
     var searchResultsArray = [MovieSearchResult]()
     
@@ -19,10 +20,10 @@ class SearchResultsVC: UIViewController {
         resultsCollectionView.dataSource = self
         
         configureCollectionView()
-        
         configureUI()
-        getResults(for: searchText)
-        print("Point 1 searchText \(searchText)")
+        
+        let query = searchText.replacingOccurrences(of: " ", with: "+")
+        getResults(for: query)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,7 +93,6 @@ extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource 
         cell.titleLabel.text = self.searchResultsArray[indexPath.item].title
         cell.configureCell()
         
-        let photoBaseURL = "https://image.tmdb.org/t/p/original"
         if let itemImageName = searchResultsArray[indexPath.item].poster_path {
             let combine = photoBaseURL + itemImageName
             let posterImageURL = URL(string: combine)!
