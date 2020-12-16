@@ -31,13 +31,13 @@ class DetailVC: UIViewController {
     }
     
     func getMovieDetails() {
-//        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&i="
         let baseURL = "https://www.omdbapi.com/?apikey=1383769a&t="
         
         var movieEndpoint = String()
         
         if let title = movieTitle {
-            movieEndpoint = baseURL + title
+            let noSpaceTitle = title.replacingOccurrences(of: " ", with: "+")
+            movieEndpoint = baseURL + noSpaceTitle
             
             print("movieEndpoint: \(movieEndpoint)")
             
@@ -81,11 +81,9 @@ class DetailVC: UIViewController {
                         self.directorLabel.text = director
                         self.starsLabel.text = stars
                     }
-                    
                 } catch {
                     print("Error getting movie details")
                 }
-                
             }
             
             task.resume()
