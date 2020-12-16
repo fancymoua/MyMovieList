@@ -4,6 +4,8 @@ import UIKit
 
 class SearchResultsVC: UIViewController {
     
+    @IBOutlet weak var resultsCollectionView: UICollectionView!
+    
     var searchText: String!
     
     private let baseURL = "https://api.themoviedb.org/3/search/movie?api_key=65db6bef59bff99c6a4504f0ce877ade&query="
@@ -13,9 +15,13 @@ class SearchResultsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        resultsCollectionView.delegate = self
+        resultsCollectionView.dataSource = self
+        
+        configureCollectionView()
+        
         configureUI()
         getResults(for: searchText)
-        print("searchResultsArray: \(searchResultsArray)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +58,8 @@ class SearchResultsVC: UIViewController {
             do {
                 let decoder = JSONDecoder()
                 let allData = try decoder.decode(MovieDataAPI.self, from: data)
+                
+                self.searchResultsArray = []
             
                 for item in allData.results {
                     let title = item.title
@@ -71,9 +79,47 @@ class SearchResultsVC: UIViewController {
     
 }
 
+extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return searchResultsArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
+        
+        cell.titleLabel.text = searchResultsArray[indexPath.item].title
+        cell.movieImageView.image = #imageLiteral(resourceName: "tenet")
+        cell.configureCell()
+        
+        return cell
+        
+    }
+}
+
 extension SearchResultsVC {
     private func configureUI() {
         navigationItem.title = searchText
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    func configureCollectionView() {
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        
+        let width = view.bounds.width
+        let padding: CGFloat = 5
+        let minimumSpacing: CGFloat = 5
+        
+        let availableWidth = width - (padding * 2) - (minimumSpacing * 1)
+        
+        let itemWidth = availableWidth / 3
+        
+        flowLayout.itemSize = CGSize(width: itemWidth + 30, height: itemWidth + 90)
+        flowLayout.minimumLineSpacing = 20
+        flowLayout.minimumInteritemSpacing = 5
+        
+        resultsCollectionView.collectionViewLayout = flowLayout
+        
     }
 }
