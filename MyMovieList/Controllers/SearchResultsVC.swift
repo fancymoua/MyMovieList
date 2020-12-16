@@ -112,10 +112,50 @@ extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let destVC = storyboard?.instantiateViewController(identifier: "MovieDetailView") as! DetailVC
+        var imdbID = String()
         
+        // grab tmdb ID
+        let tmdbID = searchResultsArray[indexPath.item].id
         
+        // get IMDB ID
+        let convertURL = "https://api.themoviedb.org/3/movie/" + "\(tmdbID)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
+        print(convertURL)
         
-        destVC.movieTitle = searchResultsArray[indexPath.item].title
+        guard let url = URL(string: convertURL) else {
+            print("Bad convert URL")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let _ = error {
+                print("Cow -- error making call")
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                print("Cow -- something other than 200")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(MovieIDAPI.self, from: data)
+                imdbID = result.imdb_id
+                print("imdb id: \(imdbID)")
+            } catch {
+                print("Cow-- something went wrong")
+            }
+            
+        }
+        
+        task.resume()
+        
+//        destVC.movieTitle = searchResultsArray[indexPath.item].title
         
         show(destVC, sender: self)
         

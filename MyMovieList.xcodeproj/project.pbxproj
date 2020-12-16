@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B1461289258A87C80030859B /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1461288258A87C80030859B /* DetailVC.swift */; };
+		B146128E258A8F960030859B /* MovieIDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B146128D258A8F960030859B /* MovieIDAPI.swift */; };
 		B14DF28C2589536000FF8819 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF28B2589536000FF8819 /* AppDelegate.swift */; };
 		B14DF28E2589536000FF8819 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF28D2589536000FF8819 /* SceneDelegate.swift */; };
 		B14DF2902589536000FF8819 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF28F2589536000FF8819 /* LandingVC.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		B1461288258A87C80030859B /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		B146128D258A8F960030859B /* MovieIDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieIDAPI.swift; sourceTree = "<group>"; };
 		B14DF2882589536000FF8819 /* MyMovieList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMovieList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B14DF28B2589536000FF8819 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B14DF28D2589536000FF8819 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				B14DF2D925896AA400FF8819 /* MovieSearchResult.swift */,
 				B14DF2E62589712100FF8819 /* MovieDataAPI.swift */,
+				B146128D258A8F960030859B /* MovieIDAPI.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				B14DF2E72589712100FF8819 /* MovieDataAPI.swift in Sources */,
 				B14DF2CE25895F6500FF8819 /* SearchResultsVC.swift in Sources */,
 				B14DF28C2589536000FF8819 /* AppDelegate.swift in Sources */,
+				B146128E258A8F960030859B /* MovieIDAPI.swift in Sources */,
 				B1461289258A87C80030859B /* DetailVC.swift in Sources */,
 				B14DF2DA25896AA400FF8819 /* MovieSearchResult.swift in Sources */,
 				B14DF28E2589536000FF8819 /* SceneDelegate.swift in Sources */,
