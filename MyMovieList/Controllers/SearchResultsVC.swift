@@ -22,6 +22,7 @@ class SearchResultsVC: UIViewController {
         
         configureUI()
         getResults(for: searchText)
+        print("Point 1 searchText \(searchText)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,10 +89,22 @@ extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource 
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
         
-        cell.titleLabel.text = searchResultsArray[indexPath.item].title
-        cell.movieImageView.image = #imageLiteral(resourceName: "tenet")
+        cell.titleLabel.text = self.searchResultsArray[indexPath.item].title
         cell.configureCell()
         
+        let photoBaseURL = "https://image.tmdb.org/t/p/original"
+        if let itemImageName = searchResultsArray[indexPath.item].poster_path {
+            let combine = photoBaseURL + itemImageName
+            let posterImageURL = URL(string: combine)!
+            if let data = try? Data(contentsOf: posterImageURL) {
+                DispatchQueue.main.async {
+                    cell.movieImageView.image = UIImage(data: data)
+                }
+            } else {
+                cell.movieImageView.image = #imageLiteral(resourceName: "question-mark")
+            }
+        }
+
         return cell
         
     }
