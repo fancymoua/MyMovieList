@@ -101,9 +101,9 @@ extension SearchResultsVC: UICollectionViewDelegate, UICollectionViewDataSource 
         let title = self.searchResultsArray[indexPath.item].title
         var posterImage = UIImage()
         
-        if let itemImageName = searchResultsArray[indexPath.item].poster_path {
-            let combine = photoBaseURL + itemImageName
-            let posterImageURL = URL(string: combine)!
+        if let posterPath = searchResultsArray[indexPath.item].poster_path {
+            let endpoint = photoBaseURL + posterPath
+            let posterImageURL = URL(string: endpoint)!
             if let data = try? Data(contentsOf: posterImageURL) {
                 posterImage = UIImage(data: data) ?? #imageLiteral(resourceName: "question-mark")
             }
