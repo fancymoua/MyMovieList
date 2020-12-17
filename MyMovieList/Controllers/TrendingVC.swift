@@ -17,7 +17,9 @@ class TrendingVC: UIViewController {
         trendingCollectionView.dataSource = self
         trendingCollectionView.delegate = self
         
+        configureCollectionView()
         getTrendingMovies()
+        
 
     }
     
@@ -88,13 +90,17 @@ extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
         if let posterPath = self.moviesArray[indexPath.item].poster_path {
             
             let endpoint = self.photoBaseURL + posterPath
+            let posterImageURL = URL(string: endpoint)!
             
             let cacheKey = NSString(string: endpoint)
             
             if let image = cache.object(forKey: cacheKey) {
                 posterImage = image
             } else {
-                posterImage = #imageLiteral(resourceName: "question-mark")
+                if let data = try? Data(contentsOf: posterImageURL) {
+                    posterImage = UIImage(data: data) ?? #imageLiteral(resourceName: "question-mark")
+                    self.cache.setObject(posterImage, forKey: cacheKey)
+                }
             }
         }
         
@@ -103,6 +109,27 @@ extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.configureCell(title: title, image: posterImage)
          
         return cell
+        
+    }
+    
+    func configureCollectionView() {
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        
+        let width = view.bounds.width
+        let padding: CGFloat = 5
+        let minimumSpacing: CGFloat = 5
+        
+        let availableWidth = width - (padding * 2) - (minimumSpacing * 1)
+        
+        let itemWidth = availableWidth / 4
+        
+        flowLayout.itemSize = CGSize(width: itemWidth + 25, height: itemWidth + 80)
+        flowLayout.minimumLineSpacing = 20
+        flowLayout.minimumInteritemSpacing = 5
+        flowLayout.scrollDirection = .horizontal
+        
+        trendingCollectionView.collectionViewLayout = flowLayout
         
     }
     
