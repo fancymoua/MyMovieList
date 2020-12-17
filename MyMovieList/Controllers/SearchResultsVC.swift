@@ -76,6 +76,7 @@ class SearchResultsVC: UIViewController {
                     let title = item.title
                     let releaseDate = item.release_date
                     let posterPath = item.poster_path
+//                    let imdbID = self.getIMDBID(id: id)
                     
                     let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath)
                     self.searchResultsArray.append(movie)
@@ -108,7 +109,6 @@ class SearchResultsVC: UIViewController {
                 if let image = cache.object(forKey: cacheKey) {
                     posterImage = image
                 } else {
-                    print("Get here?")
                     if let data = try? Data(contentsOf: posterImageURL) {
                         posterImage = UIImage(data: data) ?? #imageLiteral(resourceName: "question-mark")
                         self.cache.setObject(posterImage, forKey: cacheKey)
@@ -148,6 +148,7 @@ extension SearchResultsVC: UICollectionViewDelegate {
         let destVC = storyboard?.instantiateViewController(identifier: "MovieDetailView") as! DetailVC
 
         destVC.movieTitle = searchResultsArray[indexPath.item].title
+//        destVC.imdbID = searchResultsArray[indexPath.item].imdbID
         
         show(destVC, sender: self)
     }
@@ -178,4 +179,52 @@ extension SearchResultsVC {
         resultsCollectionView.collectionViewLayout = flowLayout
         
     }
+}
+
+extension SearchResultsVC {
+    func getIMDBID(id: Int, completed: @escaping (String?) -> Void) {
+            
+            // get IMDB ID
+            let convertURL = "https://api.themoviedb.org/3/movie/" + "\(id)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
+            print(convertURL)
+            
+            guard let url = URL(string: convertURL) else {
+                print("Bad convert URL")
+                return
+            }
+        
+            var cowID = String()
+            
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                
+                if let _ = error {
+                    print("Cow -- error making call")
+                }
+                
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    print("Cow -- something other than 200")
+                    return
+                }
+                
+                guard let data = data else {
+                    print("No data")
+                    return
+                }
+                
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let result = try decoder.decode(MovieIDAPI.self, from: data)
+                    print("checkpoint")
+                    cowID = result.imdb_id
+                    completed(cowID)
+                } catch {
+                    print("Couldn't get IMDB ID")
+                }
+    
+            }
+        
+            task.resume()
+
+        }
 }

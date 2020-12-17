@@ -12,11 +12,14 @@ class DetailVC: UIViewController {
     @IBOutlet weak var starsLabel: UILabel!
     
     var movieTitle: String?
+    var imdbID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         getMovieDetails()
+        
+        print("detail imdbID: \(imdbID)")
     }
     
     func getMovieDetails() {
@@ -27,6 +30,8 @@ class DetailVC: UIViewController {
         if let title = movieTitle {
             let query = title.replacingOccurrences(of: " ", with: "+")
             movieEndpoint = baseURL + query
+            
+            print("This is movieEndpoint \(movieEndpoint)")
             
             guard let url = URL(string: movieEndpoint) else {
                 print("Bad movieEndpoint")
