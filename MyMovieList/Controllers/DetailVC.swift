@@ -13,13 +13,12 @@ class DetailVC: UIViewController {
     
     var movieTitle: String?
     var imdbID: String?
+    var posterImage = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         getMovieDetails()
-        
-        print("detail imdbID: \(imdbID)")
     }
     
     func getMovieDetails() {
@@ -64,25 +63,13 @@ class DetailVC: UIViewController {
                     let director = result.Director
                     let stars = result.Actors
                     
-                    var cowImage = UIImage()
-                    
-                    if let posterPath = result.Poster {
-                        if let url = URL(string: posterPath) {
-                            if let data = try? Data(contentsOf: url) {
-                                cowImage = UIImage(data: data)!
-                            } else {
-                                cowImage = #imageLiteral(resourceName: "question-mark")
-                            }
-                        }
-                    }
-                    
                     DispatchQueue.main.async {
                         self.titleLabel.text = title
                         self.yearLabel.text = year
                         self.plotLabel.text = plot
                         self.directorLabel.text = director
                         self.starsLabel.text = stars
-                        self.posterImageView.image = cowImage
+                        self.posterImageView.image = self.posterImage
                     }
                 } catch {
                     print("Error getting movie details")

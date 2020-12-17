@@ -146,9 +146,24 @@ extension SearchResultsVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let destVC = storyboard?.instantiateViewController(identifier: "MovieDetailView") as! DetailVC
-
+        
+        var posterImage = UIImage()
+        
+        if let posterPath = self.searchResultsArray[indexPath.item].poster_path {
+            
+            let endpoint = self.photoBaseURL + posterPath
+            
+            let cacheKey = NSString(string: endpoint)
+            
+            if let image = cache.object(forKey: cacheKey) {
+                posterImage = image
+            } else {
+                posterImage = #imageLiteral(resourceName: "question-mark")
+            }
+        }
+        
         destVC.movieTitle = searchResultsArray[indexPath.item].title
-//        destVC.imdbID = searchResultsArray[indexPath.item].imdbID
+        destVC.posterImage = posterImage
         
         show(destVC, sender: self)
     }
