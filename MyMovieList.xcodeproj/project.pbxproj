@@ -22,6 +22,7 @@
 		B14DF2DA25896AA400FF8819 /* MovieSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF2D925896AA400FF8819 /* MovieSearchResult.swift */; };
 		B14DF2E72589712100FF8819 /* MovieDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF2E62589712100FF8819 /* MovieDataAPI.swift */; };
 		B14DF2EF258982D100FF8819 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14DF2EE258982D100FF8819 /* SearchResultCell.swift */; };
+		B189BE8E258BE30500422624 /* CustomKeywordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B189BE8D258BE30500422624 /* CustomKeywordButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		B14DF2D925896AA400FF8819 /* MovieSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchResult.swift; sourceTree = "<group>"; };
 		B14DF2E62589712100FF8819 /* MovieDataAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDataAPI.swift; sourceTree = "<group>"; };
 		B14DF2EE258982D100FF8819 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		B189BE8D258BE30500422624 /* CustomKeywordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeywordButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,10 +169,19 @@
 		B14DF2E125896B1D00FF8819 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B189BE8C258BE2E600422624 /* Custom */,
 				B14DF2912589536000FF8819 /* Main.storyboard */,
 				B14DF2EE258982D100FF8819 /* SearchResultCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B189BE8C258BE2E600422624 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				B189BE8D258BE30500422624 /* CustomKeywordButton.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,6 +317,7 @@
 				B14DF2EF258982D100FF8819 /* SearchResultCell.swift in Sources */,
 				B14DF2902589536000FF8819 /* LandingVC.swift in Sources */,
 				B14DF2E72589712100FF8819 /* MovieDataAPI.swift in Sources */,
+				B189BE8E258BE30500422624 /* CustomKeywordButton.swift in Sources */,
 				B14DF2CE25895F6500FF8819 /* SearchResultsVC.swift in Sources */,
 				B14DF28C2589536000FF8819 /* AppDelegate.swift in Sources */,
 				B146128E258A8F960030859B /* MovieIDAPI.swift in Sources */,
