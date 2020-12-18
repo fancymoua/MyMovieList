@@ -92,22 +92,13 @@
                                 </constraints>
                             </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vly-Vf-DKB">
-                                <rect key="frame" x="20" y="228" width="374" height="230"/>
+                                <rect key="frame" x="20" y="228" width="374" height="250"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="230" id="e8C-r4-i2m"/>
+                                    <constraint firstAttribute="height" constant="250" id="e8C-r4-i2m"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="HDp-QW-iT6" kind="embed" identifier="FirstSegue" id="o9Y-yN-1Oe"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f1w-dv-9vz">
-                                <rect key="frame" x="20" y="483" width="374" height="230"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="230" id="qms-et-LvL"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="HDp-QW-iT6" kind="embed" identifier="SecondSegue" id="Fbe-eJ-JqB"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -118,14 +109,11 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="v6d-9U-zCj" secondAttribute="trailing" constant="20" id="Bnw-DS-zhg"/>
                             <constraint firstItem="v6d-9U-zCj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="N0p-NO-7Lb"/>
                             <constraint firstItem="vly-Vf-DKB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="OnY-ZG-BLD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="f1w-dv-9vz" secondAttribute="trailing" constant="20" id="PO5-87-IzB"/>
-                            <constraint firstItem="f1w-dv-9vz" firstAttribute="top" secondItem="vly-Vf-DKB" secondAttribute="bottom" constant="25" id="UMm-zp-5V1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vly-Vf-DKB" secondAttribute="trailing" constant="20" id="XmS-dx-NzY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SaR-U0-LbZ" secondAttribute="trailing" constant="20" id="bGW-uz-0su"/>
                             <constraint firstItem="vly-Vf-DKB" firstAttribute="top" secondItem="SaR-U0-LbZ" secondAttribute="bottom" constant="20" id="dNJ-lE-GW5"/>
                             <constraint firstItem="SaR-U0-LbZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="eeJ-uT-yaA"/>
                             <constraint firstItem="SaR-U0-LbZ" firstAttribute="top" secondItem="v6d-9U-zCj" secondAttribute="bottom" constant="20" id="xLb-GJ-Yem"/>
-                            <constraint firstItem="f1w-dv-9vz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="xkf-al-vpx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5wm-UN-icM"/>
@@ -346,7 +334,7 @@
             <objects>
                 <viewController id="HDp-QW-iT6" customClass="TrendingVC" customModule="MyMovieList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vt1-hj-Ak9">
-                        <rect key="frame" x="0.0" y="0.0" width="374" height="230"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Trending" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="NLZ-dJ-0ac">
@@ -356,17 +344,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tle-OJ-7ey">
-                                <rect key="frame" x="0.0" y="32" width="374" height="198"/>
+                                <rect key="frame" x="0.0" y="32" width="374" height="218"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="20" id="mTx-Yd-Yqz">
                                     <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeaturedCell" id="RJj-QU-uDE" customClass="FeaturedCell" customModule="MyMovieList" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="35" width="49.5" height="128"/>
+                                        <rect key="frame" x="50" y="45" width="49.5" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iSD-dN-1jl">
                                             <rect key="frame" x="0.0" y="0.0" width="49.5" height="128"/>
@@ -400,6 +388,26 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="HeaderView" id="m5W-IA-gk9" customClass="landingHeaderView" customModule="MyMovieList" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="218"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7q-H6-s7X">
+                                            <rect key="frame" x="8" y="94.5" width="34" height="29"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="S7q-H6-s7X" secondAttribute="trailing" id="9Dm-Ok-YPO"/>
+                                        <constraint firstItem="S7q-H6-s7X" firstAttribute="centerY" secondItem="m5W-IA-gk9" secondAttribute="centerY" id="UW1-Xv-4JU"/>
+                                        <constraint firstItem="S7q-H6-s7X" firstAttribute="leading" secondItem="m5W-IA-gk9" secondAttribute="leadingMargin" id="mxx-Bb-b0E"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="headerTitle" destination="S7q-H6-s7X" id="gA8-gM-bAa"/>
+                                    </connections>
+                                </collectionReusableView>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="y9E-fX-bqe"/>
@@ -420,12 +428,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cqW-Lv-12f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-65" y="678"/>
+            <point key="canvasLocation" x="-65.217391304347828" y="677.67857142857144"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="Fbe-eJ-JqB"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">

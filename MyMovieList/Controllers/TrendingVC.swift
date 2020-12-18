@@ -26,13 +26,13 @@ class TrendingVC: UIViewController {
         configureCollectionView()
         getTrendingMovies()
         
-        let movie1 = MovieSearchResult(id: 123, title: "Hey there", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
+        let movie1 = MovieSearchResult(id: 123, title: "Generic 1", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
         
-        let movie2 = MovieSearchResult(id: 123, title: "Hey there", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
+        let movie2 = MovieSearchResult(id: 123, title: "Generic 2", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
         
-        let movie3 = MovieSearchResult(id: 123, title: "Hey there", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
+        let movie3 = MovieSearchResult(id: 123, title: "Generic 3", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
         
-        let movie4 = MovieSearchResult(id: 123, title: "Hey there", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
+        let movie4 = MovieSearchResult(id: 123, title: "Generic 4", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
         genericArray.append(movie1)
         genericArray.append(movie2)
         genericArray.append(movie3)
@@ -93,9 +93,10 @@ class TrendingVC: UIViewController {
 }
 
 extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return moviesArray.count
+        return moviesArray.count - 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -103,14 +104,15 @@ extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeaturedCell", for: indexPath) as! FeaturedCell
         
         var posterImage = UIImage()
+        var title = String()
         
         if let posterPath = self.moviesArray[indexPath.item].poster_path {
-            
+
             let endpoint = self.photoBaseURL + posterPath
             let posterImageURL = URL(string: endpoint)!
-            
+
             let cacheKey = NSString(string: endpoint)
-            
+
             if let image = cache.object(forKey: cacheKey) {
                 posterImage = image
             } else {
@@ -121,7 +123,7 @@ extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
             }
         }
         
-        let title = moviesArray[indexPath.item].title
+        title = moviesArray[indexPath.item].title
         
         cell.configureCell(title: title, image: posterImage)
          
@@ -130,8 +132,6 @@ extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        print("which \(which)")
         
         let destVC = storyboard?.instantiateViewController(identifier: "MovieDetailView") as! DetailVC
         
@@ -174,6 +174,7 @@ extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
         flowLayout.scrollDirection = .horizontal
         
         trendingCollectionView.collectionViewLayout = flowLayout
+
         
     }
     
