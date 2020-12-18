@@ -9,7 +9,7 @@ class TrendingVC: UIViewController {
     var hmmArray = [MovieSearchResult]()
     
     var moviesArray = [MovieSearchResult]()
-    let baseURL = "https://api.themoviedb.org/3/trending/movie/week?api_key=65db6bef59bff99c6a4504f0ce877ade"
+    let trendingURL = "https://api.themoviedb.org/3/trending/movie/week?api_key=65db6bef59bff99c6a4504f0ce877ade"
     let cache = NSCache<NSString, UIImage>()
     private let photoBaseURL = "https://image.tmdb.org/t/p/original"
     
@@ -24,7 +24,7 @@ class TrendingVC: UIViewController {
         trendingCollectionView.delegate = self
         
         configureCollectionView()
-        getTrendingMovies()
+        getTrendingMovies(movieURL: trendingURL)
         
         let movie1 = MovieSearchResult(id: 123, title: "Generic 1", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
         
@@ -39,9 +39,9 @@ class TrendingVC: UIViewController {
         genericArray.append(movie4)
     }
     
-    func getTrendingMovies() {
+    func getTrendingMovies(movieURL: String) {
         
-        let url = URL(string: baseURL)
+        let url = URL(string: movieURL)
         
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             

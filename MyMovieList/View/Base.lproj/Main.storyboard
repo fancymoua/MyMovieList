@@ -422,10 +422,10 @@
             </objects>
             <point key="canvasLocation" x="-633" y="634"/>
         </scene>
-        <!--TrendingVC-->
+        <!--Special ListVC-->
         <scene sceneID="GD0-h7-Ifk">
             <objects>
-                <viewController id="e3D-wy-uin" customClass="TrendingVC" customModule="MyMovieList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="e3D-wy-uin" customClass="SpecialListVC" customModule="MyMovieList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2mU-MI-uUE">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -483,6 +483,7 @@
                                 </cells>
                             </collectionView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="3yf-aB-xOW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Cbw-cY-cTJ" firstAttribute="leading" secondItem="2mU-MI-uUE" secondAttribute="leading" id="13L-kI-bNh"/>
