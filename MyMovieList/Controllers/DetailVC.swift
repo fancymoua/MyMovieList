@@ -18,6 +18,7 @@ class DetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        configureUI()
         getMovieDetails()
     }
     
@@ -77,5 +78,11 @@ class DetailVC: UIViewController {
             }
             task.resume()
         }
+    }
+}
+
+extension DetailVC {
+    private func configureUI() {
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
