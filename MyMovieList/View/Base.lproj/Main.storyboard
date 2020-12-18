@@ -98,7 +98,16 @@
                                     <constraint firstAttribute="height" constant="230" id="e8C-r4-i2m"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="HDp-QW-iT6" kind="embed" id="o9Y-yN-1Oe"/>
+                                    <segue destination="HDp-QW-iT6" kind="embed" identifier="FirstSegue" id="o9Y-yN-1Oe"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f1w-dv-9vz">
+                                <rect key="frame" x="20" y="483" width="374" height="230"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="qms-et-LvL"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="HDp-QW-iT6" kind="embed" identifier="SecondSegue" id="Fbe-eJ-JqB"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -109,11 +118,14 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="v6d-9U-zCj" secondAttribute="trailing" constant="20" id="Bnw-DS-zhg"/>
                             <constraint firstItem="v6d-9U-zCj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="N0p-NO-7Lb"/>
                             <constraint firstItem="vly-Vf-DKB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="OnY-ZG-BLD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="f1w-dv-9vz" secondAttribute="trailing" constant="20" id="PO5-87-IzB"/>
+                            <constraint firstItem="f1w-dv-9vz" firstAttribute="top" secondItem="vly-Vf-DKB" secondAttribute="bottom" constant="25" id="UMm-zp-5V1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vly-Vf-DKB" secondAttribute="trailing" constant="20" id="XmS-dx-NzY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SaR-U0-LbZ" secondAttribute="trailing" constant="20" id="bGW-uz-0su"/>
                             <constraint firstItem="vly-Vf-DKB" firstAttribute="top" secondItem="SaR-U0-LbZ" secondAttribute="bottom" constant="20" id="dNJ-lE-GW5"/>
                             <constraint firstItem="SaR-U0-LbZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="eeJ-uT-yaA"/>
                             <constraint firstItem="SaR-U0-LbZ" firstAttribute="top" secondItem="v6d-9U-zCj" secondAttribute="bottom" constant="20" id="xLb-GJ-Yem"/>
+                            <constraint firstItem="f1w-dv-9vz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="xkf-al-vpx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5wm-UN-icM"/>
@@ -125,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-64" y="133"/>
+            <point key="canvasLocation" x="-65.217391304347828" y="132.58928571428572"/>
         </scene>
         <!--Search ResultsVC-->
         <scene sceneID="ytr-mn-FMY">
@@ -390,6 +402,7 @@
                                 </cells>
                             </collectionView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="y9E-fX-bqe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NLZ-dJ-0ac" firstAttribute="leading" secondItem="vt1-hj-Ak9" secondAttribute="leading" id="4Ou-mm-8vS"/>
@@ -407,9 +420,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cqW-Lv-12f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-65.217391304347828" y="635.49107142857144"/>
+            <point key="canvasLocation" x="-65" y="678"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Fbe-eJ-JqB"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">

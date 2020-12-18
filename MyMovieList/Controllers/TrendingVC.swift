@@ -6,10 +6,16 @@ class TrendingVC: UIViewController {
     
     @IBOutlet weak var trendingCollectionView: UICollectionView!
     
+    var hmmArray = [MovieSearchResult]()
+    
     var moviesArray = [MovieSearchResult]()
     let baseURL = "https://api.themoviedb.org/3/trending/movie/week?api_key=65db6bef59bff99c6a4504f0ce877ade"
     let cache = NSCache<NSString, UIImage>()
     private let photoBaseURL = "https://image.tmdb.org/t/p/original"
+    
+    var which: String?
+    
+    var genericArray = [MovieSearchResult]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +26,17 @@ class TrendingVC: UIViewController {
         configureCollectionView()
         getTrendingMovies()
         
-
+        let movie1 = MovieSearchResult(id: 123, title: "Hey there", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
+        
+        let movie2 = MovieSearchResult(id: 123, title: "Hey there", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
+        
+        let movie3 = MovieSearchResult(id: 123, title: "Hey there", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
+        
+        let movie4 = MovieSearchResult(id: 123, title: "Hey there", release_date: "2018", poster_path: "/ljxeeVQJra8O4slFsmmnf5NgFx4.jpg")
+        genericArray.append(movie1)
+        genericArray.append(movie2)
+        genericArray.append(movie3)
+        genericArray.append(movie4)
     }
     
     func getTrendingMovies() {
@@ -78,7 +94,8 @@ class TrendingVC: UIViewController {
 
 extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return moviesArray.count - 10
+        
+        return moviesArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -113,6 +130,8 @@ extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        print("which \(which)")
         
         let destVC = storyboard?.instantiateViewController(identifier: "MovieDetailView") as! DetailVC
         
