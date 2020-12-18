@@ -112,6 +112,31 @@ extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let destVC = storyboard?.instantiateViewController(identifier: "MovieDetailView") as! DetailVC
+        
+        var posterImage = UIImage()
+        
+        if let posterPath = self.moviesArray[indexPath.item].poster_path {
+            
+            let endpoint = self.photoBaseURL + posterPath
+            
+            let cacheKey = NSString(string: endpoint)
+            
+            if let image = cache.object(forKey: cacheKey) {
+                posterImage = image
+            } else {
+                posterImage = #imageLiteral(resourceName: "question-mark")
+            }
+        }
+        
+        destVC.movieTitle = moviesArray[indexPath.item].title
+        destVC.posterImage = posterImage
+        
+        show(destVC, sender: self)
+    }
+    
     func configureCollectionView() {
         
         let flowLayout = UICollectionViewFlowLayout()
