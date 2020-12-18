@@ -10,7 +10,7 @@ class LandingVC: UIViewController {
         super.viewDidLoad()
         
         configureUI()
-        createDismissKeyboardTapGesture()
+//        createDismissKeyboardTapGesture()
         configureSearchTextField()
     }
     
@@ -70,7 +70,6 @@ extension LandingVC: UITextFieldDelegate {
 extension LandingVC {
     
     func configureUI() {
-        navigationItem
     }
     
     func configureSearchTextField() {
