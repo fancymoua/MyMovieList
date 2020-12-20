@@ -29,6 +29,7 @@
 		B189BE9B258BFAD400422624 /* TrendingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B189BE9A258BFAD400422624 /* TrendingVC.swift */; };
 		B1E8BCBE258FDA38009F8FB2 /* WatchProviderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */; };
 		B1E8BCC3258FEEBB009F8FB2 /* WatchProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */; };
+		B1E8BCC8258FF5AF009F8FB2 /* WatchProviderBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		B189BE9A258BFAD400422624 /* TrendingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingVC.swift; sourceTree = "<group>"; };
 		B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderAPI.swift; sourceTree = "<group>"; };
 		B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderModel.swift; sourceTree = "<group>"; };
+		B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderBlock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				B189BE8D258BE30500422624 /* CustomKeywordButton.swift */,
+				B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			files = (
 				B14DF2EF258982D100FF8819 /* SearchResultCell.swift in Sources */,
 				B14DF2902589536000FF8819 /* LandingVC.swift in Sources */,
+				B1E8BCC8258FF5AF009F8FB2 /* WatchProviderBlock.swift in Sources */,
 				B14DF2E72589712100FF8819 /* MovieDataAPI.swift in Sources */,
 				B189BE8E258BE30500422624 /* CustomKeywordButton.swift in Sources */,
 				B14DF2CE25895F6500FF8819 /* SearchResultsVC.swift in Sources */,

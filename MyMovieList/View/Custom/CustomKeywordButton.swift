@@ -18,9 +18,7 @@ class CustomKeywordButton: UIButton {
         backgroundColor = .systemOrange
         layer.cornerRadius = 8
         titleLabel?.font = UIFont(name: "Avenir Next", size: 15)
-        
-        
-        
+    
     }
 
 }

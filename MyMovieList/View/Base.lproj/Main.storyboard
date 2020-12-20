@@ -289,6 +289,13 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xhg-m2-Vcz">
+                                <rect key="frame" x="25" y="760" width="364" height="82"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="82" id="Xm7-dU-aFf"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5gn-oy-ygg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -301,13 +308,16 @@
                             <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="G1s-RW-eMu" secondAttribute="trailing" constant="25" id="Dwq-BH-Lqx"/>
                             <constraint firstItem="Veo-lz-yON" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" id="FZE-ed-pZO"/>
                             <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="pmf-JK-5ZT" secondAttribute="trailing" constant="25" id="HHD-kn-jSa"/>
+                            <constraint firstItem="xhg-m2-Vcz" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" constant="25" id="PJO-fb-Qfx"/>
                             <constraint firstAttribute="trailing" secondItem="5AU-xv-BuE" secondAttribute="trailing" constant="25" id="TUW-6A-PPy"/>
                             <constraint firstItem="tnM-H1-qX5" firstAttribute="top" secondItem="G1s-RW-eMu" secondAttribute="bottom" constant="15" id="Vgu-bd-aTM"/>
                             <constraint firstItem="pmf-JK-5ZT" firstAttribute="top" secondItem="Veo-lz-yON" secondAttribute="bottom" constant="20" id="d0T-zs-uPk"/>
+                            <constraint firstItem="5gn-oy-ygg" firstAttribute="bottom" secondItem="xhg-m2-Vcz" secondAttribute="bottom" constant="20" id="jJi-lr-12v"/>
                             <constraint firstItem="5AU-xv-BuE" firstAttribute="top" secondItem="tnM-H1-qX5" secondAttribute="bottom" constant="8" symbolic="YES" id="nWY-ue-2v8"/>
                             <constraint firstItem="tnM-H1-qX5" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" constant="25" id="nof-nN-l3A"/>
                             <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="tnM-H1-qX5" secondAttribute="trailing" constant="25" id="oQY-ef-0IZ"/>
                             <constraint firstItem="G1s-RW-eMu" firstAttribute="top" secondItem="pmf-JK-5ZT" secondAttribute="bottom" constant="10" id="u1z-hw-uuE"/>
+                            <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="xhg-m2-Vcz" secondAttribute="trailing" constant="25" id="u24-EZ-veE"/>
                         </constraints>
                     </view>
                     <connections>
@@ -316,6 +326,7 @@
                         <outlet property="posterImageView" destination="Veo-lz-yON" id="WC1-vU-sr9"/>
                         <outlet property="starsLabel" destination="XFv-ZE-7jg" id="rgm-Dj-XpY"/>
                         <outlet property="titleLabel" destination="RzF-rX-Wv4" id="LEh-Iz-B8U"/>
+                        <outlet property="watchProvidersView" destination="xhg-m2-Vcz" id="mz4-L6-pVB"/>
                         <outlet property="yearLabel" destination="Urc-Ay-5Dm" id="Ncg-Zh-4Jr"/>
                     </connections>
                 </viewController>

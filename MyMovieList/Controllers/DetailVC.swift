@@ -10,6 +10,7 @@ class DetailVC: UIViewController {
     @IBOutlet weak var plotLabel: UILabel!
     @IBOutlet weak var directorLabel: UILabel!
     @IBOutlet weak var starsLabel: UILabel!
+    @IBOutlet weak var watchProvidersView: UIView!
     
     var movieTitle: String?
     var imdbID: String?
