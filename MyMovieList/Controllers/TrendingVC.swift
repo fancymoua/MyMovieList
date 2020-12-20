@@ -88,8 +88,6 @@ class TrendingVC: UIViewController {
         task.resume()
         
     }
-    
-
 }
 
 extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
