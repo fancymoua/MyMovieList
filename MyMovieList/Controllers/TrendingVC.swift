@@ -168,7 +168,7 @@ extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         let itemWidth = availableWidth / 4
         
-        flowLayout.itemSize = CGSize(width: itemWidth + 25, height: itemWidth + 80)
+        flowLayout.itemSize = CGSize(width: itemWidth + 35, height: itemWidth + 100)
         flowLayout.minimumLineSpacing = 20
         flowLayout.minimumInteritemSpacing = 5
         flowLayout.scrollDirection = .horizontal
