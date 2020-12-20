@@ -150,6 +150,7 @@ extension TrendingVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         destVC.movieTitle = moviesArray[indexPath.item].title
         destVC.posterImage = posterImage
+        destVC.tmdbID = moviesArray[indexPath.item].id
         
         show(destVC, sender: self)
     }

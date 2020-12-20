@@ -14,12 +14,15 @@ class DetailVC: UIViewController {
     var movieTitle: String?
     var imdbID: String?
     var posterImage = UIImage()
+    var tmdbID: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         configureUI()
         getMovieDetails()
+        getWatchProviders()
+        print("tmdbID \(tmdbID)")
     }
     
     func getMovieDetails() {
@@ -78,6 +81,55 @@ class DetailVC: UIViewController {
             }
             task.resume()
         }
+    }
+    
+    func getWatchProviders() {
+        
+        if let id = tmdbID {
+            let endpoint = "https://api.themoviedb.org/3/movie/" + "\(id)" + "/watch/providers?api_key=65db6bef59bff99c6a4504f0ce877ade"
+            
+            print("baseURLWatch \(endpoint)")
+            
+            guard let url = URL(string: endpoint) else {
+                print("bad URL")
+                return
+            }
+            
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                
+                if let _ = error {
+                    print("Error making call to watch provider endpoint")
+                }
+                
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    print("Something other than 200 returned from watch provider endpoint")
+                    return
+                }
+                
+                guard let data = data else {
+                    print("No data from watch provider endpoint")
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let allData = try decoder.decode(WatchProviderAPI.self, from: data)
+                    
+                    print("results: \(allData.results.US)")
+            
+//                    for item in allData.results.US.flatrate! {
+//                        print("Item is \(item)")
+//                    }
+                    
+                } catch {
+                    print("Could not decode watch provider data")
+                }
+            }
+            
+            task.resume()
+            
+        }
+        
     }
 }
 
