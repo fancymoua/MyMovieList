@@ -289,8 +289,8 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="nk7-TC-R4o">
-                                <rect key="frame" x="45" y="759" width="324" height="88"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nk7-TC-R4o">
+                                <rect key="frame" x="60" y="779" width="294" height="88"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="UhU-eD-Xl3"/>
@@ -301,6 +301,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="pmf-JK-5ZT" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" constant="25" id="1cx-kR-VUo"/>
+                            <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="nk7-TC-R4o" secondAttribute="trailing" constant="60" id="36P-LH-MX8"/>
                             <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="Veo-lz-yON" secondAttribute="trailing" id="3DZ-Gn-FK3"/>
                             <constraint firstItem="G1s-RW-eMu" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" constant="25" id="3Gy-8K-6tx"/>
                             <constraint firstItem="5AU-xv-BuE" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" constant="25" id="7kc-J0-5qW"/>
@@ -308,15 +309,15 @@
                             <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="G1s-RW-eMu" secondAttribute="trailing" constant="25" id="Dwq-BH-Lqx"/>
                             <constraint firstItem="Veo-lz-yON" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" id="FZE-ed-pZO"/>
                             <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="pmf-JK-5ZT" secondAttribute="trailing" constant="25" id="HHD-kn-jSa"/>
-                            <constraint firstItem="nk7-TC-R4o" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" constant="45" id="JZq-Dj-YqY"/>
+                            <constraint firstItem="nk7-TC-R4o" firstAttribute="centerX" secondItem="1ko-1D-A3l" secondAttribute="centerX" id="HcK-Ku-geg"/>
                             <constraint firstAttribute="trailing" secondItem="5AU-xv-BuE" secondAttribute="trailing" constant="25" id="TUW-6A-PPy"/>
                             <constraint firstItem="tnM-H1-qX5" firstAttribute="top" secondItem="G1s-RW-eMu" secondAttribute="bottom" constant="15" id="Vgu-bd-aTM"/>
-                            <constraint firstItem="nk7-TC-R4o" firstAttribute="bottom" secondItem="5gn-oy-ygg" secondAttribute="bottom" constant="-15" id="ZG2-Ad-7Ba"/>
+                            <constraint firstItem="nk7-TC-R4o" firstAttribute="bottom" secondItem="5gn-oy-ygg" secondAttribute="bottom" constant="5" id="ZG2-Ad-7Ba"/>
                             <constraint firstItem="pmf-JK-5ZT" firstAttribute="top" secondItem="Veo-lz-yON" secondAttribute="bottom" constant="20" id="d0T-zs-uPk"/>
-                            <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="nk7-TC-R4o" secondAttribute="trailing" constant="45" id="jMl-st-cwL"/>
                             <constraint firstItem="5AU-xv-BuE" firstAttribute="top" secondItem="tnM-H1-qX5" secondAttribute="bottom" constant="8" symbolic="YES" id="nWY-ue-2v8"/>
                             <constraint firstItem="tnM-H1-qX5" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" constant="25" id="nof-nN-l3A"/>
                             <constraint firstItem="5gn-oy-ygg" firstAttribute="trailing" secondItem="tnM-H1-qX5" secondAttribute="trailing" constant="25" id="oQY-ef-0IZ"/>
+                            <constraint firstItem="nk7-TC-R4o" firstAttribute="leading" secondItem="5gn-oy-ygg" secondAttribute="leading" constant="60" id="rj1-4y-soI"/>
                             <constraint firstItem="G1s-RW-eMu" firstAttribute="top" secondItem="pmf-JK-5ZT" secondAttribute="bottom" constant="10" id="u1z-hw-uuE"/>
                         </constraints>
                     </view>

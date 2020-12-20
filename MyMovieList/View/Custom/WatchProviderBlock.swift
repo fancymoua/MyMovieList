@@ -26,14 +26,16 @@ class WatchProviderBlock: UIView {
     }
     
     func configure() {
-        addSubview(smallView)
         
-        smallView.addSubview(logoImageView)
-        smallView.addSubview(rateLabel)
+        addSubview(logoImageView)
+        addSubview(rateLabel)
         
-        smallView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         rateLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        logoImageView.layer.cornerRadius = 8
+        logoImageView.clipsToBounds = true
+
         
         rateLabel.textAlignment = .center
         rateLabel.textColor = .black
@@ -42,18 +44,13 @@ class WatchProviderBlock: UIView {
         
         NSLayoutConstraint.activate([
             
-            smallView.widthAnchor.constraint(equalToConstant: 50),
-            smallView.heightAnchor.constraint(equalToConstant: 70),
-            
-            logoImageView.topAnchor.constraint(equalTo: smallView.topAnchor),
-            logoImageView.leadingAnchor.constraint(equalTo: smallView.leadingAnchor),
-            logoImageView.trailingAnchor.constraint(equalTo: smallView.trailingAnchor),
+            logoImageView.topAnchor.constraint(equalTo: topAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 50),
+            logoImageView.widthAnchor.constraint(equalToConstant: 50),
             
             rateLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor),
-            rateLabel.leadingAnchor.constraint(equalTo: smallView.leadingAnchor, constant: 5),
-            rateLabel.trailingAnchor.constraint(equalTo: smallView.trailingAnchor, constant: -5),
-            rateLabel.bottomAnchor.constraint(equalTo: smallView.bottomAnchor)
+            rateLabel.widthAnchor.constraint(equalToConstant: 50),
+            rateLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
 
