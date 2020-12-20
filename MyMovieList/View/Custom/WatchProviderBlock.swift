@@ -38,17 +38,17 @@ class WatchProviderBlock: UIView {
         rateLabel.textAlignment = .center
         rateLabel.textColor = .black
         rateLabel.numberOfLines = 1
-        rateLabel.font = UIFont(name: "Avenir Next", size: 14)
+        rateLabel.font = UIFont(name: "Avenir Next", size: 11)
         
         NSLayoutConstraint.activate([
             
-            smallView.heightAnchor.constraint(equalToConstant: 60),
-            smallView.widthAnchor.constraint(equalToConstant: 60),
+            smallView.widthAnchor.constraint(equalToConstant: 50),
+            smallView.heightAnchor.constraint(equalToConstant: 70),
             
             logoImageView.topAnchor.constraint(equalTo: smallView.topAnchor),
             logoImageView.leadingAnchor.constraint(equalTo: smallView.leadingAnchor),
             logoImageView.trailingAnchor.constraint(equalTo: smallView.trailingAnchor),
-            logoImageView.heightAnchor.constraint(equalToConstant: 40),
+            logoImageView.heightAnchor.constraint(equalToConstant: 50),
             
             rateLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor),
             rateLabel.leadingAnchor.constraint(equalTo: smallView.leadingAnchor, constant: 5),

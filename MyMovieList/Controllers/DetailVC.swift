@@ -10,7 +10,7 @@ class DetailVC: UIViewController {
     @IBOutlet weak var plotLabel: UILabel!
     @IBOutlet weak var directorLabel: UILabel!
     @IBOutlet weak var starsLabel: UILabel!
-    @IBOutlet weak var watchProvidersView: UIView!
+    @IBOutlet weak var watchProviderStackView: UIStackView!
     
     var movieTitle: String?
     var imdbID: String?
@@ -28,6 +28,15 @@ class DetailVC: UIViewController {
         getMovieDetails()
         getWatchProviders()
         print("tmdbID \(tmdbID)")
+        
+//        let Netflix = WatchProviderBlock(title: "Netflix", image: #imageLiteral(resourceName: "netflix logo"), rate: "Free")
+//        let Netflix2 = WatchProviderBlock(title: "Netflix", image: #imageLiteral(resourceName: "netflix logo"), rate: "Free")
+//        let Netflix3 = WatchProviderBlock(title: "Netflix", image: #imageLiteral(resourceName: "netflix logo"), rate: "Free")
+//        let Netflix4 = WatchProviderBlock(title: "Netflix", image: #imageLiteral(resourceName: "netflix logo"), rate: "Free")
+//        watchProviderStackView.addArrangedSubview(Netflix)
+//        watchProviderStackView.addArrangedSubview(Netflix2)
+////        watchProviderStackView.addArrangedSubview(Netflix3)
+////        watchProviderStackView.addArrangedSubview(Netflix4)
     }
     
     func getMovieDetails() {
@@ -121,26 +130,85 @@ class DetailVC: UIViewController {
                     let allData = try decoder.decode(WatchProviderAPI.self, from: data)
                     
                     let results = allData.results.US
-                    let providersAds = results.ads
+                    
                     let providersRent = results.rent
                     let providersBuy = results.buy
                     let providersFlaterate = results.flatrate
                     
-                    print("providersFlaterate: \(providersFlaterate)")
+                    if let safeFlatrate = providersFlaterate {
+                        for item in safeFlatrate {
+                            let name = item.provider_name
+                            let id = item.provider_id
+                            let logoPath = item.logo_path
+                            let displayPriority = item.display_priority
+                            
+                            if item.provider_name == "Netflix" {
+                                print("Yeah it's Netflix")
+                                let newProvider = WatchProviderModel(name: name, providerID: id, displayPriority: displayPriority, logoPath: logoPath)
+                                self.netflix = newProvider
+                                DispatchQueue.main.sync {
+                                    let netBlock = WatchProviderBlock(title: "Netflix", image: #imageLiteral(resourceName: "Netflix-icon"), rate: "Free")
+                                    self.watchProviderStackView.addArrangedSubview(netBlock)
+                                }
+                            }
+                            
+                            if item.provider_name == "Disney Plus" {
+                                print("Yeah it's Netflix")
+                                let newProvider = WatchProviderModel(name: name, providerID: id, displayPriority: displayPriority, logoPath: logoPath)
+                                self.netflix = newProvider
+                                DispatchQueue.main.sync {
+                                    let netBlock = WatchProviderBlock(title: "Disney Plus", image: #imageLiteral(resourceName: "Disney-Plus-icon"), rate: "Free")
+                                    self.watchProviderStackView.addArrangedSubview(netBlock)
+                                }
+                            }
+                            
+                            if item.provider_name == "Hulu" {
+                                print("Yeah it's Netflix")
+                                let newProvider = WatchProviderModel(name: name, providerID: id, displayPriority: displayPriority, logoPath: logoPath)
+                                self.netflix = newProvider
+                                DispatchQueue.main.sync {
+                                    let netBlock = WatchProviderBlock(title: "Hulu", image: #imageLiteral(resourceName: "Hulu-icon"), rate: "Free")
+                                    self.watchProviderStackView.addArrangedSubview(netBlock)
+                                }
+                            }
+                        }
+                    }
                     
-                    self.flatrateArray = [WatchProviderModel]()
+                    if let safeRent = providersRent {
+                        for item in safeRent {
+                            let name = item.provider_name
+                            let id = item.provider_id
+                            let logoPath = item.logo_path
+                            let displayPriority = item.display_priority
+                            
+                            if item.provider_name == "Amazon Video" {
+                                print("Yeah it's Amazon")
+                                let newProvider = WatchProviderModel(name: name, providerID: id, displayPriority: displayPriority, logoPath: logoPath)
+                                self.netflix = newProvider
+                                DispatchQueue.main.sync {
+                                    let netBlock = WatchProviderBlock(title: "Amazon", image: #imageLiteral(resourceName: "Amazon-prime-icon"), rate: "Rent")
+                                    self.watchProviderStackView.addArrangedSubview(netBlock)
+                                }
+                            }
+                        }
+                    }
                     
-                    for item in providersFlaterate! {
-                        let name = item.provider_name
-                        let id = item.provider_id
-                        let logoPath = item.logo_path
-                        let displayPriority = item.display_priority
-                        
-                        if item.provider_name == "Netflix" {
-                            print("Yeah it's Netflix")
-                            let newProvider = WatchProviderModel(name: name, providerID: id, displayPriority: displayPriority, logoPath: logoPath)
-                            self.netflix = newProvider
-                            print("this is netflix \(self.netflix)")
+                    if let safeBuy = providersBuy {
+                        for item in safeBuy {
+                            let name = item.provider_name
+                            let id = item.provider_id
+                            let logoPath = item.logo_path
+                            let displayPriority = item.display_priority
+                            
+                            if item.provider_name == "Amazon Video" {
+                                print("Yeah it's Amazon")
+                                let newProvider = WatchProviderModel(name: name, providerID: id, displayPriority: displayPriority, logoPath: logoPath)
+                                self.netflix = newProvider
+                                DispatchQueue.main.sync {
+                                    let netBlock = WatchProviderBlock(title: "Amazon", image: #imageLiteral(resourceName: "Amazon-prime-icon"), rate: "Buy")
+                                    self.watchProviderStackView.addArrangedSubview(netBlock)
+                                }
+                            }
                         }
                     }
                 } catch {

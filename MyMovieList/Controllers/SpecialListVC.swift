@@ -8,7 +8,7 @@ class SpecialListVC: TrendingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        getTrendingMovies(movieURL: keywordURL)
+//        getTrendingMovies(movieURL: keywordURL)
     }
     
 
