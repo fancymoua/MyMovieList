@@ -28,6 +28,7 @@
 		B189BE96258BF8EC00422624 /* FeaturedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B189BE95258BF8EC00422624 /* FeaturedCell.swift */; };
 		B189BE9B258BFAD400422624 /* TrendingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B189BE9A258BFAD400422624 /* TrendingVC.swift */; };
 		B1E8BCBE258FDA38009F8FB2 /* WatchProviderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */; };
+		B1E8BCC3258FEEBB009F8FB2 /* WatchProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		B189BE95258BF8EC00422624 /* FeaturedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCell.swift; sourceTree = "<group>"; };
 		B189BE9A258BFAD400422624 /* TrendingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingVC.swift; sourceTree = "<group>"; };
 		B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderAPI.swift; sourceTree = "<group>"; };
+		B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 				B146128D258A8F960030859B /* MovieIDAPI.swift */,
 				B1461292258A931B0030859B /* MovieDetailModel.swift */,
 				B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */,
+				B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				B1E8BCBE258FDA38009F8FB2 /* WatchProviderAPI.swift in Sources */,
 				B1749775258D258B00B428F3 /* landingHeaderView.swift in Sources */,
 				B174977A258D5A1D00B428F3 /* SpecialListVC.swift in Sources */,
+				B1E8BCC3258FEEBB009F8FB2 /* WatchProviderModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

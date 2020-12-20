@@ -16,6 +16,10 @@ class DetailVC: UIViewController {
     var posterImage = UIImage()
     var tmdbID: Int?
     
+    var flatrateArray: [WatchProviderModel]?
+    
+    var netflix: WatchProviderModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -115,12 +119,29 @@ class DetailVC: UIViewController {
                     let decoder = JSONDecoder()
                     let allData = try decoder.decode(WatchProviderAPI.self, from: data)
                     
-                    print("results: \(allData.results.US)")
-            
-//                    for item in allData.results.US.flatrate! {
-//                        print("Item is \(item)")
-//                    }
+                    let results = allData.results.US
+                    let providersAds = results.ads
+                    let providersRent = results.rent
+                    let providersBuy = results.buy
+                    let providersFlaterate = results.flatrate
                     
+                    print("providersFlaterate: \(providersFlaterate)")
+                    
+                    self.flatrateArray = [WatchProviderModel]()
+                    
+                    for item in providersFlaterate! {
+                        let name = item.provider_name
+                        let id = item.provider_id
+                        let logoPath = item.logo_path
+                        let displayPriority = item.display_priority
+                        
+                        if item.provider_name == "Netflix" {
+                            print("Yeah it's Netflix")
+                            let newProvider = WatchProviderModel(name: name, providerID: id, displayPriority: displayPriority, logoPath: logoPath)
+                            self.netflix = newProvider
+                            print("this is netflix \(self.netflix)")
+                        }
+                    }
                 } catch {
                     print("Could not decode watch provider data")
                 }
