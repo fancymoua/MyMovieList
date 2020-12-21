@@ -444,21 +444,8 @@
                     <view key="view" contentMode="scaleToFill" id="2mU-MI-uUE">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="250"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Holidays" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Zuq-dU-oJX">
-                                <rect key="frame" x="0.0" y="0.0" width="374" height="25"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="3yf-aB-xOW"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Zuq-dU-oJX" firstAttribute="leading" secondItem="2mU-MI-uUE" secondAttribute="leading" id="68N-6c-3pw"/>
-                            <constraint firstItem="Zuq-dU-oJX" firstAttribute="top" secondItem="2mU-MI-uUE" secondAttribute="top" id="Tos-RQ-pkO"/>
-                            <constraint firstAttribute="trailing" secondItem="Zuq-dU-oJX" secondAttribute="trailing" id="yCx-to-c3X"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="svT-7u-Ssl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

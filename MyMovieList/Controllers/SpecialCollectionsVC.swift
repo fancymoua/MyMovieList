@@ -4,7 +4,7 @@ import UIKit
 
 class SpecialCollectionsVC: UIViewController {
     
-    let collectionView:UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     var moviesArray = [MovieSearchResult]()
     
@@ -112,9 +112,9 @@ extension SpecialCollectionsVC {
     func configureCollectionView() {
         view.addSubview(collectionView)
         
-        collectionView.backgroundColor = .clear
-        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        collectionView.backgroundColor = .clear
         
         collectionView.register(FeaturedMovieCell.self, forCellWithReuseIdentifier: "FeaturedMovieCell")
         
@@ -140,7 +140,7 @@ extension SpecialCollectionsVC {
         
         let itemWidth = availableWidth / 4
         
-        flowLayout.itemSize = CGSize(width: itemWidth + 35, height: itemWidth + 100)
+        flowLayout.itemSize = CGSize(width: itemWidth + 35, height: itemWidth + 110)
         flowLayout.minimumLineSpacing = 20
         flowLayout.minimumInteritemSpacing = 5
         flowLayout.scrollDirection = .horizontal
