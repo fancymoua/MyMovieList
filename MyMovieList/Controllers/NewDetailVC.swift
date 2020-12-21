@@ -4,27 +4,45 @@ import UIKit
 
 class NewDetailVC: UIViewController {
     
+    // primary views
     let posterImageView = UIImageView()
     let detailsBackgroundView = UIView()
+    
+    // goes inside detailsBackgroundView
     let titleLabel = MovieTitleLabel()
     
     let ratingStackView = UIStackView()
     let imdbLogo = UIImageView()
     let ratingLabel = UILabel()
     
+    let plotLabel = MoviePlotLabel()
+    
+    let yearAndGenreStack = UIStackView()
+    let yearView = SmallDetailBlock(icon: #imageLiteral(resourceName: "Hulu-icon"), text: "2006")
+    let genreView = SmallDetailBlock(icon: #imageLiteral(resourceName: "HBO-icon"), text: "Sci-fi/Drama")
+    
     let padding: CGFloat = 25
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setDetails()
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
     }
     
+    func setDetails() {
+        titleLabel.text = "Arrival"
+        ratingLabel.text = "7.5"
+        imdbLogo.image = #imageLiteral(resourceName: "imdb-square-icon")
+//        plotLabel.text = "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecrafts appear around the world."
+        plotLabel.text = "Ryan Bingham enjoys living out of a suitcase for his job, travelling around the country firing people, but finds that lifestyle threatened by the presence of a potential love interest, and a new hire presenting a new business model."
+    }
+    
     func addSubviews() {
         let mainViews = [posterImageView, detailsBackgroundView]
-        let detailViews = [titleLabel, ratingStackView]
+        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndGenreStack]
         
         for view in mainViews {
             self.view.addSubview(view)
@@ -63,10 +81,6 @@ class NewDetailVC: UIViewController {
     
     func configureMovieDetailViews() {
         
-        titleLabel.text = "Tenet"
-        ratingLabel.text = "7.5"
-        imdbLogo.image = #imageLiteral(resourceName: "imdb-square-icon")
-        
         ratingLabel.font = UIFont(name: "Avenir Next", size: 18)
         ratingLabel.textColor = UIColor.black
         
@@ -75,6 +89,12 @@ class NewDetailVC: UIViewController {
         ratingStackView.distribution = .fillEqually
         ratingStackView.axis = .horizontal
         ratingStackView.spacing = 8
+        
+        yearAndGenreStack.addArrangedSubview(yearView)
+        yearAndGenreStack.addArrangedSubview(genreView)
+        yearAndGenreStack.distribution = .fillEqually
+        yearAndGenreStack.axis = .horizontal
+        yearAndGenreStack.spacing = 0
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
@@ -86,7 +106,16 @@ class NewDetailVC: UIViewController {
             ratingStackView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
             ratingStackView.widthAnchor.constraint(equalToConstant: 70),
             ratingStackView.heightAnchor.constraint(equalToConstant: 25),
-
+            
+            plotLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            plotLabel.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
+            plotLabel.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
+            plotLabel.heightAnchor.constraint(equalToConstant: 140),
+            
+            yearAndGenreStack.topAnchor.constraint(equalTo: plotLabel.bottomAnchor, constant: 10),
+            yearAndGenreStack.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
+            yearAndGenreStack.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
+            yearAndGenreStack.heightAnchor.constraint(equalToConstant: 50)
         ])
         
     }
