@@ -140,7 +140,6 @@ class DetailVC: UIViewController {
                             let name = item.provider_name
                             let id = item.provider_id
                             let logoPath = item.logo_path
-                            let displayPriority = item.display_priority
                             
                             if item.provider_name == "Netflix" {
                                 print("Yeah it's Netflix")
@@ -179,7 +178,6 @@ class DetailVC: UIViewController {
                             let name = item.provider_name
                             let id = item.provider_id
                             let logoPath = item.logo_path
-                            let displayPriority = item.display_priority
                             
                             if item.provider_name == "Amazon Video" {
                                 print("Yeah it's Amazon")
@@ -198,7 +196,6 @@ class DetailVC: UIViewController {
                             let name = item.provider_name
                             let id = item.provider_id
                             let logoPath = item.logo_path
-                            let displayPriority = item.display_priority
                             
                             if item.provider_name == "Amazon Video" {
                                 print("Yeah it's Amazon")
