@@ -17,9 +17,16 @@ class DetailVC: UIViewController {
     var posterImage = UIImage()
     var tmdbID: Int?
     
-    var flatrateArray: [WatchProviderModel]?
-    
-    var netflix: WatchProviderModel?
+    enum WatchProviders {
+        case AppleITunes
+        case AmazonVideoRent
+        case AmazonVideoBuy
+        case Netflix
+        case Hulu
+        case HBONow
+        case DisneyPlus
+        case AmazonPrime
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,99 +136,76 @@ class DetailVC: UIViewController {
                     let allData = try decoder.decode(WatchProviderAPI.self, from: data)
                     
                     let results = allData.results.US
-
-                    let providersRent = results.rent
-                    let providersBuy = results.buy
-                    let providersFlatrate = results.flatrate
                     
-                    if let safeFlatrate = providersFlatrate {
+                    if let safeFlatrate = results.flatrate {
                         for item in safeFlatrate {
-                            
-                            if item.provider_id == 8 {
-                                print("Provider: Netflix")
-                                DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "Netflix-icon"), rate: "Free")
-                                    self.watchProviderStackView.addArrangedSubview(netBlock)
-                                }
-                            }
-                            
-                            if item.provider_id == 337 {
-                                print("Provider: DisneyPlus")
-                                DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "Disney-Plus-icon"), rate: "Free")
-                                    self.watchProviderStackView.addArrangedSubview(netBlock)
-                                }
-                            }
-                            
-                            if item.provider_id == 15 {
-                                print("Provider: Hulu")
-                                DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "Hulu-icon"), rate: "Free")
-                                    self.watchProviderStackView.addArrangedSubview(netBlock)
-                                }
-                            }
-                            
-                            if item.provider_id == 9 {
-                                print("Provider: Amazon Prime")
-                                DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "Amazon-prime-icon"), rate: "Free")
-                                    self.watchProviderStackView.addArrangedSubview(netBlock)
-                                }
-                            }
-                            
-                            if item.provider_id == 27 {
-                                print("Provider: HBO Now")
-                                DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "HBO-icon"), rate: "Free")
-                                    self.watchProviderStackView.addArrangedSubview(netBlock)
-                                }
-                            }
+                            if item.provider_id == 8 { self.addWatchProvider(.Netflix) }
+                            if item.provider_id == 337 { self.addWatchProvider(.DisneyPlus) }
+                            if item.provider_id == 15 { self.addWatchProvider(.Hulu) }
+                            if item.provider_id == 9 { self.addWatchProvider(.AmazonPrime) }
+                            if item.provider_id == 27 { self.addWatchProvider(.HBONow) }
                         }
                     }
                     
-                    if let safeRent = providersRent {
+                    if let safeRent = results.rent {
                         for item in safeRent {
-                            
-                            if item.provider_id == 10 {
-                                print("Provider: Amazon Video")
-                                DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "Amazon-prime-icon"), rate: "Rent")
-                                    self.watchProviderStackView.addArrangedSubview(netBlock)
-                                }
-                            }
+                            if item.provider_id == 10 { self.addWatchProvider(.AmazonVideoRent) }
                         }
                     }
                     
-                    if let safeBuy = providersBuy {
+                    if let safeBuy = results.buy {
                         for item in safeBuy {
                             
-                            if item.provider_id == 10 {
-                                print("Provider: Amazon Video")
-                                DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "Amazon-prime-icon"), rate: "Buy")
-                                    self.watchProviderStackView.addArrangedSubview(netBlock)
-                                }
-                            }
-                            
-                            if item.provider_id == 2 {
-                                print("Provider: Apple iTunes")
-                                DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "Apple-TV-icon"), rate: "Buy")
-                                    self.watchProviderStackView.addArrangedSubview(netBlock)
-                                }
-                            }
+                            if item.provider_id == 10 { self.addWatchProvider(.AmazonVideoBuy) }
+                            if item.provider_id == 2 { self.addWatchProvider(.AppleITunes) }
                         }
                     }
                 } catch {
                     print("Could not decode watch provider data")
                 }
             }
-            
             task.resume()
-            
+        }
+    }
+    
+    func addWatchProvider(_ provider: WatchProviders) {
+        
+        var rate = String()
+        var logo = UIImage()
+        
+        switch provider {
+        case .AppleITunes:
+            rate = "Buy"
+            logo = #imageLiteral(resourceName: "Apple-TV-icon")
+        case .AmazonVideoRent:
+            rate = "Rent"
+            logo = #imageLiteral(resourceName: "Amazon-prime-icon")
+        case .AmazonVideoBuy:
+            rate = "Buy"
+            logo = #imageLiteral(resourceName: "Amazon-prime-icon")
+        case .Netflix:
+            rate = "Free"
+            logo = #imageLiteral(resourceName: "Netflix-icon")
+        case .Hulu:
+            rate = "Free"
+            logo = #imageLiteral(resourceName: "Hulu-icon")
+        case .HBONow:
+            rate = "Free"
+            logo = #imageLiteral(resourceName: "HBO-icon")
+        case .DisneyPlus:
+            rate = "Free"
+            logo = #imageLiteral(resourceName: "Disney-Plus-icon")
+        case .AmazonPrime:
+            rate = "Free"
+            logo = #imageLiteral(resourceName: "Amazon-prime-icon")
         }
         
+        DispatchQueue.main.sync {
+            let netBlock = WatchProviderBlock(image: logo, rate: rate)
+            watchProviderStackView.addArrangedSubview(netBlock)
+        }
     }
+
 }
 
 extension DetailVC {
@@ -229,3 +213,5 @@ extension DetailVC {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
+
+

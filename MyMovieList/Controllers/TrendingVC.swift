@@ -4,6 +4,7 @@ import UIKit
 
 class TrendingVC: UIViewController {
     
+    
     @IBOutlet weak var trendingCollectionView: UICollectionView!
     
     var hmmArray = [MovieSearchResult]()
