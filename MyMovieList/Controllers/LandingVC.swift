@@ -16,16 +16,6 @@ class LandingVC: UIViewController {
         
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "FirstSegue" {
-            let destVC = segue.destination as! TrendingVC
-            destVC.which = "First"
-        } else if segue.identifier == "SecondSegue" {
-            let destVC = segue.destination as! TrendingVC
-            destVC.which = "Second"
-        }
-    }
-    
     var userEnteredText: Bool {
         return !searchTextField.text!.isEmpty
     }

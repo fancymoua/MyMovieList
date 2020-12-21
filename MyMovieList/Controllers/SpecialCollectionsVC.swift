@@ -113,6 +113,32 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
          
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let destVC = storyboard?.instantiateViewController(identifier: "MovieDetailView") as! DetailVC
+        
+        var posterImage = UIImage()
+        
+        if let posterPath = self.moviesArray[indexPath.item].poster_path {
+            
+            let endpoint = self.photoBaseURL + posterPath
+            
+            let cacheKey = NSString(string: endpoint)
+            
+            if let image = cache.object(forKey: cacheKey) {
+                posterImage = image
+            } else {
+                posterImage =  #imageLiteral(resourceName: "question-mark")
+            }
+        }
+        
+        destVC.movieTitle = moviesArray[indexPath.item].title
+        destVC.posterImage = posterImage
+        destVC.tmdbID = moviesArray[indexPath.item].id
+        
+        show(destVC, sender: self)
+    }
 }
 
 extension SpecialCollectionsVC {
