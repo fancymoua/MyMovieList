@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VRg-4v-iJX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vmy-de-RTt">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
@@ -335,10 +335,10 @@
             </objects>
             <point key="canvasLocation" x="1895.6521739130437" y="137.94642857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--New DetailVC-->
         <scene sceneID="ej1-Ft-4Kf">
             <objects>
-                <viewController storyboardIdentifier="NewDetailView" id="vmy-de-RTt" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewDetailView" id="vmy-de-RTt" customClass="NewDetailVC" customModule="MyMovieList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zZN-gQ-Phe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
