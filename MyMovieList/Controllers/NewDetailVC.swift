@@ -6,7 +6,7 @@ class NewDetailVC: UIViewController {
     
     let posterImageView = UIImageView()
     let detailsBackgroundView = UIView()
-    let titleLabel = UILabel()
+    let titleLabel = MovieTitleLabel()
     
     let ratingStackView = UIStackView()
     let imdbLogo = UIImageView()
@@ -39,6 +39,8 @@ class NewDetailVC: UIViewController {
 
     func configureMainViews() {
         
+        titleLabel.text = "Tenet"
+        
         posterImageView.image = #imageLiteral(resourceName: "tenet")
         posterImageView.contentMode = .scaleAspectFill
         
@@ -61,16 +63,6 @@ class NewDetailVC: UIViewController {
     }
     
     func configureMovieDetailViews() {
-        
-        titleLabel.text = "Tenet"
-//        titleLabel.text = "The Irishman"
-//        titleLabel.text = "Once Upon a Time in Hollywood"
-        titleLabel.font = UIFont(name: "Avenir Next Demi Bold", size: 22)
-        titleLabel.textColor = UIColor.black
-        titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.minimumScaleFactor = 0.9
-        titleLabel.lineBreakMode = .byTruncatingTail
-        titleLabel.numberOfLines = 2
         
         ratingLabel.text = "7.5"
         ratingLabel.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
