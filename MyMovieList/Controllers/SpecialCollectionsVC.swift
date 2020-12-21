@@ -180,7 +180,7 @@ extension SpecialCollectionsVC {
         
         let itemWidth = availableWidth / 4
         
-        flowLayout.itemSize = CGSize(width: itemWidth + 35, height: itemWidth + 110)
+        flowLayout.itemSize = CGSize(width: itemWidth + 35, height: itemWidth + 100)
         flowLayout.minimumLineSpacing = 20
         flowLayout.minimumInteritemSpacing = 5
         flowLayout.scrollDirection = .horizontal

@@ -27,7 +27,7 @@ class FeaturedMovieCell: UICollectionViewCell {
         addSubview(titleLabel)
         
         movieImageView.image = image
-        titleLabel.text = title
+//        titleLabel.text = title
         
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -45,13 +45,13 @@ class FeaturedMovieCell: UICollectionViewCell {
             movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 //            movieImageView.heightAnchor.constraint(equalToConstant: 120),
-            movieImageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -60),
+            movieImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-//            titleLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
-            titleLabel.heightAnchor.constraint(equalToConstant: 50),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
+////            titleLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 20),
+//            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+//            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+//            titleLabel.heightAnchor.constraint(equalToConstant: 50),
+//            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
         
         ])
     }
