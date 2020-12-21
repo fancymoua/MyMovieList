@@ -38,7 +38,7 @@ class SmallDetailBlock: UIView {
         
         NSLayoutConstraint.activate([
             iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             iconImageView.widthAnchor.constraint(equalToConstant: 25),
             iconImageView.heightAnchor.constraint(equalToConstant: 25),
             
