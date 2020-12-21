@@ -335,6 +335,21 @@
             </objects>
             <point key="canvasLocation" x="1895.6521739130437" y="137.94642857142856"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="ej1-Ft-4Kf">
+            <objects>
+                <viewController storyboardIdentifier="NewDetailView" id="vmy-de-RTt" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zZN-gQ-Phe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="mCg-Jn-5kD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxV-ae-hd4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1190" y="850"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="MWD-44-nWi">
             <objects>

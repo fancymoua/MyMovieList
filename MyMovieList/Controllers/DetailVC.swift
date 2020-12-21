@@ -87,6 +87,8 @@ class DetailVC: UIViewController {
                     let plot = result.Plot
                     let director = result.Director
                     let stars = result.Actors
+                    let rating = result.imdbRating
+                    let genres = result.Genre
                     
                     DispatchQueue.main.async {
                         self.titleLabel.text = title

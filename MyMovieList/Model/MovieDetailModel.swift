@@ -1,5 +1,7 @@
 import UIKit
 
+// OMDB API
+
 struct MovieDetailModel: Codable {
     var imdbID: String?
     var Title: String?
@@ -8,4 +10,6 @@ struct MovieDetailModel: Codable {
     var Director: String?
     var Actors: String?
     var Poster: String?
+    var Genre: String?
+    var imdbRating: String?
 }
