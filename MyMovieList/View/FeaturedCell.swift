@@ -12,7 +12,7 @@ class FeaturedCell: UICollectionViewCell {
         self.layer.cornerRadius = 4
         self.layer.masksToBounds = true
         
-        titleLabel.text = title
+//        titleLabel.text = title
         movieImageView.image = image
     }
     
