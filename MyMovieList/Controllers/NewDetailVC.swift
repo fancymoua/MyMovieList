@@ -39,13 +39,12 @@ class NewDetailVC: UIViewController {
 
     func configureMainViews() {
         
-        titleLabel.text = "Tenet"
-        
         posterImageView.image = #imageLiteral(resourceName: "tenet")
         posterImageView.contentMode = .scaleAspectFill
         
         detailsBackgroundView.backgroundColor = .white
         detailsBackgroundView.layer.cornerRadius = 30
+        
         view.sendSubviewToBack(detailsBackgroundView)
         view.sendSubviewToBack(posterImageView)
         
@@ -64,17 +63,18 @@ class NewDetailVC: UIViewController {
     
     func configureMovieDetailViews() {
         
+        titleLabel.text = "Tenet"
         ratingLabel.text = "7.5"
-        ratingLabel.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
-        ratingLabel.textColor = UIColor.black
-        
         imdbLogo.image = #imageLiteral(resourceName: "imdb-square-icon")
+        
+        ratingLabel.font = UIFont(name: "Avenir Next", size: 18)
+        ratingLabel.textColor = UIColor.black
         
         ratingStackView.addArrangedSubview(imdbLogo)
         ratingStackView.addArrangedSubview(ratingLabel)
         ratingStackView.distribution = .fillEqually
         ratingStackView.axis = .horizontal
-        ratingStackView.spacing = 5
+        ratingStackView.spacing = 8
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
