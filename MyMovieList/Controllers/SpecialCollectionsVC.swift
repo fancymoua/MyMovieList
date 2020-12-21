@@ -4,6 +4,7 @@ import UIKit
 
 class SpecialCollectionsVC: UIViewController {
     
+    let collectionTitle = UILabel()
     let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     var moviesArray = [MovieSearchResult]()
@@ -13,11 +14,17 @@ class SpecialCollectionsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configureCollectionView()
+        
+        collectionView.register(FeaturedMovieCell.self, forCellWithReuseIdentifier: "FeaturedMovieCell")
+        
+        configureView()
         collectionView.dataSource = self
         collectionView.delegate = self
         
+    }
+    
+    func setCollectionTitle(title: String) {
+        collectionTitle.text = title
     }
     
     func getTrendingMovies(movieURL: String) {
@@ -109,17 +116,24 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 extension SpecialCollectionsVC {
-    func configureCollectionView() {
+    func configureView() {
         view.addSubview(collectionView)
+        view.addSubview(collectionTitle)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionTitle.translatesAutoresizingMaskIntoConstraints = false
+        collectionTitle.textColor = .black
+        collectionTitle.font = UIFont(name: "Avenir Next Demi Bold", size: 16)
         
         collectionView.backgroundColor = .clear
         
-        collectionView.register(FeaturedMovieCell.self, forCellWithReuseIdentifier: "FeaturedMovieCell")
-        
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionTitle.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionTitle.heightAnchor.constraint(equalToConstant: 20),
+            
+            collectionView.topAnchor.constraint(equalTo: collectionTitle.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)

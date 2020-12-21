@@ -8,6 +8,7 @@ class SpecialListVC: SpecialCollectionsVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setCollectionTitle(title: "Holiday")
         getTrendingMovies(movieURL: keywordURL)
     }
     
