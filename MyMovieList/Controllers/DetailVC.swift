@@ -27,7 +27,7 @@ class DetailVC: UIViewController {
         configureUI()
         getMovieDetails()
         getWatchProviders()
-        print("tmdbID \(tmdbID)")
+        print("tmdbID \(tmdbID!)")
         
 //        let Netflix = WatchProviderBlock(title: "Netflix", image: #imageLiteral(resourceName: "Netflix-icon"), rate: "Free")
 //        let Netflix2 = WatchProviderBlock(title: "Netflix", image: #imageLiteral(resourceName: "Hulu-icon"), rate: "Free")
