@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B1286BE4259046650063AD70 /* SpecialCollectionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1286BE3259046650063AD70 /* SpecialCollectionsVC.swift */; };
 		B1461289258A87C80030859B /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1461288258A87C80030859B /* DetailVC.swift */; };
 		B146128E258A8F960030859B /* MovieIDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B146128D258A8F960030859B /* MovieIDAPI.swift */; };
 		B1461293258A931B0030859B /* MovieDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1461292258A931B0030859B /* MovieDetailModel.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B1286BE3259046650063AD70 /* SpecialCollectionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialCollectionsVC.swift; sourceTree = "<group>"; };
 		B1461288258A87C80030859B /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		B146128D258A8F960030859B /* MovieIDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieIDAPI.swift; sourceTree = "<group>"; };
 		B1461292258A931B0030859B /* MovieDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailModel.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				B1461288258A87C80030859B /* DetailVC.swift */,
 				B189BE9A258BFAD400422624 /* TrendingVC.swift */,
 				B1749779258D5A1D00B428F3 /* SpecialListVC.swift */,
+				B1286BE3259046650063AD70 /* SpecialCollectionsVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				B14DF28C2589536000FF8819 /* AppDelegate.swift in Sources */,
 				B146128E258A8F960030859B /* MovieIDAPI.swift in Sources */,
 				B1461289258A87C80030859B /* DetailVC.swift in Sources */,
+				B1286BE4259046650063AD70 /* SpecialCollectionsVC.swift in Sources */,
 				B14DF2DA25896AA400FF8819 /* MovieSearchResult.swift in Sources */,
 				B189BE96258BF8EC00422624 /* FeaturedCell.swift in Sources */,
 				B14DF28E2589536000FF8819 /* SceneDelegate.swift in Sources */,
