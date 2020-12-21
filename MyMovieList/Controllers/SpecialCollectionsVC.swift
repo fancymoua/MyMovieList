@@ -5,12 +5,19 @@ import UIKit
 class SpecialCollectionsVC: UIViewController {
     
     let collectionView = UICollectionView()
+    
+    let moviesArray = [MovieSearchResult]()
+    
+    let cache = NSCache<NSString, UIImage>()
+    private let photoBaseURL = "https://image.tmdb.org/t/p/original"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         configureCollectionView()
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     func configureCollectionView() {
@@ -43,10 +50,45 @@ class SpecialCollectionsVC: UIViewController {
         flowLayout.minimumInteritemSpacing = 5
         flowLayout.scrollDirection = .horizontal
         
-        trendingCollectionView.collectionViewLayout = flowLayout
-
-        
+        collectionView.collectionViewLayout = flowLayout
     }
     
+}
 
+extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return moviesArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeaturedCell", for: indexPath) as! FeaturedCell
+        
+        var posterImage = UIImage()
+        var title = String()
+        
+        if let posterPath = self.moviesArray[indexPath.item].poster_path {
+
+            let endpoint = self.photoBaseURL + posterPath
+            let posterImageURL = URL(string: endpoint)!
+
+            let cacheKey = NSString(string: endpoint)
+
+            if let image = cache.object(forKey: cacheKey) {
+                posterImage = image
+            } else {
+                if let data = try? Data(contentsOf: posterImageURL) {
+                    posterImage = UIImage(data: data) ?? #imageLiteral(resourceName: "question-mark")
+                    self.cache.setObject(posterImage, forKey: cacheKey)
+                }
+            }
+        }
+        
+        title = moviesArray[indexPath.item].title
+        
+        cell.configureCell(title: title, image: posterImage)
+         
+        return cell
+    }
+    
+    
 }
