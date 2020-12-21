@@ -23,6 +23,8 @@ class NewDetailVC: UIViewController {
     let directorView = LargeDetailBlock(icon: #imageLiteral(resourceName: "Netflix-icon"), header: "Director:", detail: "Denis Villeneuve")
     let actorsView = LargeDetailBlock(icon: #imageLiteral(resourceName: "Apple-TV-Icon"), header: "Starring:", detail: "Amy Adams, Jeremy Renner, Forest Whitaker")
     
+    let watchProvidersView = UIView()
+    
     let padding: CGFloat = 25
 
     override func viewDidLoad() {
@@ -44,7 +46,7 @@ class NewDetailVC: UIViewController {
     
     func addSubviews() {
         let mainViews = [posterImageView, detailsBackgroundView]
-        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndGenreStack, directorView, actorsView]
+        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndGenreStack, directorView, actorsView, watchProvidersView]
         
         for view in mainViews {
             self.view.addSubview(view)
@@ -98,6 +100,8 @@ class NewDetailVC: UIViewController {
         yearAndGenreStack.axis = .horizontal
         yearAndGenreStack.spacing = 0
         
+        watchProvidersView.backgroundColor = .systemPink
+        
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
             titleLabel.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
@@ -127,7 +131,12 @@ class NewDetailVC: UIViewController {
             actorsView.topAnchor.constraint(equalTo: directorView.bottomAnchor, constant: 0),
             actorsView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
             actorsView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
-            actorsView.heightAnchor.constraint(equalToConstant: 60)
+            actorsView.heightAnchor.constraint(equalToConstant: 60),
+            
+            watchProvidersView.topAnchor.constraint(equalTo: actorsView.bottomAnchor, constant: 15),
+            watchProvidersView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: 60),
+            watchProvidersView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -60),
+            watchProvidersView.heightAnchor.constraint(equalToConstant: 90)
         ])
         
     }
