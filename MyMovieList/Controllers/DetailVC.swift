@@ -102,10 +102,8 @@ class DetailVC: UIViewController {
         if let id = tmdbID {
             let endpoint = "https://api.themoviedb.org/3/movie/" + "\(id)" + "/watch/providers?api_key=65db6bef59bff99c6a4504f0ce877ade"
             
-            print("baseURLWatch \(endpoint)")
-            
             guard let url = URL(string: endpoint) else {
-                print("bad URL")
+                print("bad watch provider URL")
                 return
             }
             
@@ -137,36 +135,27 @@ class DetailVC: UIViewController {
                     
                     if let safeFlatrate = providersFlaterate {
                         for item in safeFlatrate {
-                            let name = item.provider_name
-                            let id = item.provider_id
-                            let logoPath = item.logo_path
                             
                             if item.provider_name == "Netflix" {
                                 print("Yeah it's Netflix")
-                                let newProvider = WatchProviderModel(name: name, providerID: id, logoPath: logoPath)
-                                self.netflix = newProvider
                                 DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(title: "Netflix", image: #imageLiteral(resourceName: "Netflix-icon"), rate: "Free")
+                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "Netflix-icon"), rate: "Free")
                                     self.watchProviderStackView.addArrangedSubview(netBlock)
                                 }
                             }
                             
                             if item.provider_name == "Disney Plus" {
                                 print("Yeah it's Netflix")
-                                let newProvider = WatchProviderModel(name: name, providerID: id, logoPath: logoPath)
-                                self.netflix = newProvider
                                 DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(title: "Disney Plus", image: #imageLiteral(resourceName: "Disney-Plus-icon"), rate: "Free")
+                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "Disney-Plus-icon"), rate: "Free")
                                     self.watchProviderStackView.addArrangedSubview(netBlock)
                                 }
                             }
                             
                             if item.provider_name == "Hulu" {
                                 print("Yeah it's Netflix")
-                                let newProvider = WatchProviderModel(name: name, providerID: id, logoPath: logoPath)
-                                self.netflix = newProvider
                                 DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(title: "Hulu", image: #imageLiteral(resourceName: "Hulu-icon"), rate: "Free")
+                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "Hulu-icon"), rate: "Free")
                                     self.watchProviderStackView.addArrangedSubview(netBlock)
                                 }
                             }
@@ -175,16 +164,11 @@ class DetailVC: UIViewController {
                     
                     if let safeRent = providersRent {
                         for item in safeRent {
-                            let name = item.provider_name
-                            let id = item.provider_id
-                            let logoPath = item.logo_path
                             
                             if item.provider_name == "Amazon Video" {
                                 print("Yeah it's Amazon")
-                                let newProvider = WatchProviderModel(name: name, providerID: id, logoPath: logoPath)
-                                self.netflix = newProvider
                                 DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(title: "Amazon", image: #imageLiteral(resourceName: "Amazon-prime-icon"), rate: "Rent")
+                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "Amazon-prime-icon"), rate: "Rent")
                                     self.watchProviderStackView.addArrangedSubview(netBlock)
                                 }
                             }
@@ -193,16 +177,10 @@ class DetailVC: UIViewController {
                     
                     if let safeBuy = providersBuy {
                         for item in safeBuy {
-                            let name = item.provider_name
-                            let id = item.provider_id
-                            let logoPath = item.logo_path
                             
                             if item.provider_name == "Amazon Video" {
-                                print("Yeah it's Amazon")
-                                let newProvider = WatchProviderModel(name: name, providerID: id, logoPath: logoPath)
-                                self.netflix = newProvider
                                 DispatchQueue.main.sync {
-                                    let netBlock = WatchProviderBlock(title: "Amazon", image: #imageLiteral(resourceName: "Amazon-prime-icon"), rate: "Buy")
+                                    let netBlock = WatchProviderBlock(image: #imageLiteral(resourceName: "Amazon-prime-icon"), rate: "Buy")
                                     self.watchProviderStackView.addArrangedSubview(netBlock)
                                 }
                             }

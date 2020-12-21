@@ -18,7 +18,7 @@ class WatchProviderBlock: UIView {
         configure()
     }
     
-    init(title: String, image: UIImage, rate: String) {
+    init(image: UIImage, rate: String) {
         super.init(frame: .zero)
         logoImageView.image = image
         rateLabel.text = rate
