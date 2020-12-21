@@ -176,7 +176,7 @@ class DetailVC: UIViewController {
         switch provider {
         case .AppleITunes:
             rate = "Buy"
-            logo = #imageLiteral(resourceName: "Apple-TV-icon")
+            logo = #imageLiteral(resourceName: "Apple-TV-Icon")
         case .AmazonVideoRent:
             rate = "Rent"
             logo = #imageLiteral(resourceName: "Amazon-prime-icon")
