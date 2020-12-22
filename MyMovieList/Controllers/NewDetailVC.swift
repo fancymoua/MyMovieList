@@ -42,21 +42,20 @@ class NewDetailVC: UIViewController {
         case DisneyPlus
         case AmazonPrime
     }
+    
+    var cowWidth: CGFloat = 50
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        movieTitle = "Up"
-//        posterImage = #imageLiteral(resourceName: "tenet")
-//        tmdbID = 329865
-
+        
         configureVC()
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
         getMovieDetails()
         getWatchProviders()
-        
+ 
     }
     
     func addSubviews() {
@@ -122,6 +121,8 @@ class NewDetailVC: UIViewController {
         watchProvidersStackView.axis = .horizontal
         watchProvidersStackView.spacing = 5
         
+        print(watchProvidersStackView.subviews.count)
+        
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
             titleLabel.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
@@ -154,8 +155,10 @@ class NewDetailVC: UIViewController {
             actorsView.heightAnchor.constraint(equalToConstant: 70),
             
             watchProvidersStackView.topAnchor.constraint(equalTo: actorsView.bottomAnchor, constant: 15),
-            watchProvidersStackView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: 60),
-            watchProvidersStackView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -60),
+            watchProvidersStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            watchProvidersStackView.widthAnchor.constraint(equalToConstant: 75),
+//            watchProvidersStackView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: 60),
+//            watchProvidersStackView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -60),
             watchProvidersStackView.heightAnchor.constraint(equalToConstant: 90)
         ])
         
@@ -325,6 +328,17 @@ extension NewDetailVC {
         DispatchQueue.main.sync {
             let netBlock = WatchProviderBlock(image: logo, rate: rate)
             watchProvidersStackView.addArrangedSubview(netBlock)
+            
+            cowWidth += 60
+            print("cowWidth is now \(self.cowWidth)")
+            
+            watchProvidersStackView.widthAnchor.constraint(equalToConstant: cowWidth).isActive = true
+            watchProvidersStackView.updateConstraints()
+            watchProvidersStackView.layoutIfNeeded()
+            detailsBackgroundView.updateConstraints()
+            detailsBackgroundView.layoutIfNeeded()
+            
+            print(watchProvidersStackView.bounds.width)
         }
     }
     
