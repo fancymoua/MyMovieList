@@ -42,7 +42,7 @@ class LargeDetailBlock: UIView {
         detailLabel.font = UIFont(name: "Avenir Next", size: 16)
         detailLabel.adjustsFontSizeToFitWidth = true
         detailLabel.minimumScaleFactor = 0.6
-        detailLabel.numberOfLines = 2
+        detailLabel.numberOfLines = 3
         detailLabel.lineBreakMode = .byTruncatingTail
         
         NSLayoutConstraint.activate([

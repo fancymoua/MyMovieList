@@ -18,8 +18,8 @@ class NewDetailVC: UIViewController {
     let plotLabel = MoviePlotLabel()
     
     let yearAndGenreStack = UIStackView()
-    let yearView = SmallDetailBlock(icon: #imageLiteral(resourceName: "Hulu-icon"), text: "2006")
-    let genreView = SmallDetailBlock(icon: #imageLiteral(resourceName: "HBO-icon"), text: "Sci-fi/Drama")
+    let yearView = SmallDetailBlock(icon: #imageLiteral(resourceName: "Hulu-icon"), text: "ddf")
+    let genreView = SmallDetailBlock(icon: #imageLiteral(resourceName: "HBO-icon"), text: "dfd")
     let directorView = LargeDetailBlock(icon: #imageLiteral(resourceName: "Netflix-icon"), header: "Director:", detail: "Denis Villeneuve")
     let actorsView = LargeDetailBlock(icon: #imageLiteral(resourceName: "Apple-TV-Icon"), header: "Starring:", detail: "Amy Adams, Jeremy Renner, Forest Whitaker")
     
@@ -121,9 +121,9 @@ class NewDetailVC: UIViewController {
         
         yearAndGenreStack.addArrangedSubview(yearView)
         yearAndGenreStack.addArrangedSubview(genreView)
-        yearAndGenreStack.distribution = .fillEqually
+        yearAndGenreStack.distribution = .fillProportionally
         yearAndGenreStack.axis = .horizontal
-        yearAndGenreStack.spacing = 0
+        yearAndGenreStack.spacing = 5
         
         watchProvidersStackView.backgroundColor = .clear
         watchProvidersStackView.distribution = .fillEqually
@@ -151,15 +151,15 @@ class NewDetailVC: UIViewController {
             yearAndGenreStack.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
             yearAndGenreStack.heightAnchor.constraint(equalToConstant: 50),
             
-            directorView.topAnchor.constraint(equalTo: yearAndGenreStack.bottomAnchor, constant: 0),
+            directorView.topAnchor.constraint(equalTo: yearAndGenreStack.bottomAnchor, constant: 5),
             directorView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
             directorView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
-            directorView.heightAnchor.constraint(equalToConstant: 60),
+            directorView.heightAnchor.constraint(equalToConstant: 70),
             
-            actorsView.topAnchor.constraint(equalTo: directorView.bottomAnchor, constant: 0),
+            actorsView.topAnchor.constraint(equalTo: directorView.bottomAnchor, constant: 5),
             actorsView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
             actorsView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
-            actorsView.heightAnchor.constraint(equalToConstant: 60),
+            actorsView.heightAnchor.constraint(equalToConstant: 70),
             
             watchProvidersStackView.topAnchor.constraint(equalTo: actorsView.bottomAnchor, constant: 15),
             watchProvidersStackView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: 60),
