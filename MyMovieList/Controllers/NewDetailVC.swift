@@ -32,6 +32,8 @@ class NewDetailVC: UIViewController {
     var posterImage = UIImage()
     var tmdbID: Int?
     
+    var hmm = NSLayoutConstraint()
+    
     enum WatchProviders {
         case AppleITunes
         case AmazonVideoRent
@@ -123,6 +125,10 @@ class NewDetailVC: UIViewController {
         
         print(watchProvidersStackView.subviews.count)
         
+        hmm = NSLayoutConstraint(item: watchProvidersStackView, attribute: .width, relatedBy: .equal, toItem: .none , attribute: .notAnAttribute, multiplier: 0, constant: 100)
+        
+        hmm.isActive = true
+        
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
             titleLabel.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
@@ -156,7 +162,7 @@ class NewDetailVC: UIViewController {
             
             watchProvidersStackView.topAnchor.constraint(equalTo: actorsView.bottomAnchor, constant: 15),
             watchProvidersStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            watchProvidersStackView.widthAnchor.constraint(equalToConstant: 75),
+//            watchProvidersStackView.widthAnchor.constraint(equalToConstant: 75),
 //            watchProvidersStackView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: 60),
 //            watchProvidersStackView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -60),
             watchProvidersStackView.heightAnchor.constraint(equalToConstant: 90)
@@ -332,7 +338,8 @@ extension NewDetailVC {
             cowWidth += 60
             print("cowWidth is now \(self.cowWidth)")
             
-            watchProvidersStackView.widthAnchor.constraint(equalToConstant: cowWidth).isActive = true
+            hmm.constant = cowWidth
+          
             watchProvidersStackView.updateConstraints()
             watchProvidersStackView.layoutIfNeeded()
             detailsBackgroundView.updateConstraints()
