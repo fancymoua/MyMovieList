@@ -320,10 +320,6 @@ extension NewDetailVC {
           
             watchProvidersStackView.updateConstraints()
             watchProvidersStackView.layoutIfNeeded()
-            detailsBackgroundView.updateConstraints()
-            detailsBackgroundView.layoutIfNeeded()
-            
-            print(watchProvidersStackView.bounds.width)
         }
     }
     
