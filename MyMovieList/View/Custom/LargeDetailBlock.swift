@@ -33,6 +33,8 @@ class LargeDetailBlock: UIView {
         
         backgroundColor = .systemGray6
         
+        iconImageView.tintColor = .label
+        
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         detailLabel.translatesAutoresizingMaskIntoConstraints = false

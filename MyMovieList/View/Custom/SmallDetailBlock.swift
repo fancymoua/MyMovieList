@@ -33,6 +33,8 @@ class SmallDetailBlock: UIView {
         addSubview(iconImageView)
         addSubview(textLabel)
         
+        iconImageView.tintColor = .label
+        
         textLabel.font = UIFont(name: "Avenir Next", size: 16)
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.minimumScaleFactor = 0.6

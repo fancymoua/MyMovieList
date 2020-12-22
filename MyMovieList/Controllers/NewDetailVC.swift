@@ -18,10 +18,10 @@ class NewDetailVC: UIViewController {
     let plotLabel = MoviePlotLabel()
     
     let yearAndGenreStack = UIStackView()
-    let yearView = SmallDetailBlock(icon: #imageLiteral(resourceName: "Hulu-icon"))
-    let genreView = SmallDetailBlock(icon: #imageLiteral(resourceName: "HBO-icon"))
-    let directorView = LargeDetailBlock(icon: #imageLiteral(resourceName: "Netflix-icon"), header: "Director:", detail: "Denis Villeneuve")
-    let actorsView = LargeDetailBlock(icon: #imageLiteral(resourceName: "Apple-TV-Icon"), header: "Starring:", detail: "Amy Adams, Jeremy Renner, Forest Whitaker")
+    let yearView = SmallDetailBlock(icon: UIImage(systemName: "calendar")!)
+    let genreView = SmallDetailBlock(icon: UIImage(systemName: "play.fill")!)
+    let directorView = LargeDetailBlock(icon: UIImage(systemName: "person.fill")!, header: "Director:", detail: "Denis Villeneuve")
+    let actorsView = LargeDetailBlock(icon: UIImage(systemName: "person.2.fill")!, header: "Starring:", detail: "Amy Adams, Jeremy Renner, Forest Whitaker")
     
     let watchProvidersStackView = UIStackView()
     
