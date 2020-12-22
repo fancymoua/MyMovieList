@@ -144,7 +144,7 @@ class NewDetailVC: UIViewController {
             plotLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             plotLabel.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
             plotLabel.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
-            plotLabel.heightAnchor.constraint(equalToConstant: 140),
+            plotLabel.heightAnchor.constraint(equalToConstant: 100),
             
             yearAndGenreStack.topAnchor.constraint(equalTo: plotLabel.bottomAnchor, constant: 10),
             yearAndGenreStack.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
