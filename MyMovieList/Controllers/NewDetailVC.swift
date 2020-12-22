@@ -7,6 +7,7 @@ class NewDetailVC: UIViewController {
     // primary views
     let posterImageView = UIImageView()
     let detailsBackgroundView = UIView()
+    let watchlistButton = UIButton()
     
     // goes inside detailsBackgroundView
     let titleLabel = MovieTitleLabel()
@@ -48,7 +49,7 @@ class NewDetailVC: UIViewController {
     }
     
     func addSubviews() {
-        let mainViews = [posterImageView, detailsBackgroundView]
+        let mainViews = [posterImageView, detailsBackgroundView, watchlistButton]
         let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndGenreStack, directorView, actorsView, watchProvidersStackView]
         
         for view in mainViews {
@@ -64,6 +65,16 @@ class NewDetailVC: UIViewController {
 
     func configureMainViews() {
         
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
+        
+        let heartImage = UIImage(systemName: "suit.heart", withConfiguration: largeConfig)
+        
+        watchlistButton.setImage(heartImage, for: .normal)
+//        watchlistButton.backgroundColor = .systemGray5
+//        watchlistButton.backgroundColor = UIColor(red: 220, green: 220, blue: 220, alpha: 0.1)
+        watchlistButton.backgroundColor = UIColor(white: 0.8, alpha: 0.9)
+        watchlistButton.tintColor = .red
+        
         posterImageView.contentMode = .scaleAspectFill
         
         detailsBackgroundView.backgroundColor = .white
@@ -78,7 +89,12 @@ class NewDetailVC: UIViewController {
             detailsBackgroundView.topAnchor.constraint(equalTo: posterImageView.bottomAnchor),
             detailsBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             detailsBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            detailsBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            detailsBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            watchlistButton.bottomAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: -10),
+            watchlistButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
+            watchlistButton.heightAnchor.constraint(equalToConstant: 40),
+            watchlistButton.widthAnchor.constraint(equalToConstant: 40)
         ])
     }
     
