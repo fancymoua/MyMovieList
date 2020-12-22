@@ -19,9 +19,9 @@ class NewDetailVC: UIViewController {
     
     let yearAndGenreStack = UIStackView()
     let yearView = SmallDetailBlock(icon: UIImage(systemName: "calendar")!)
-    let genreView = SmallDetailBlock(icon: UIImage(systemName: "play.fill")!)
+    let ratedView = SmallDetailBlock(icon: UIImage(systemName: "pencil.tip.crop.circle")!)
     let directorView = LargeDetailBlock(icon: UIImage(systemName: "person.fill")!, header: "Director:")
-    let actorsView = LargeDetailBlock(icon: UIImage(systemName: "person.2.fill")!, header: "Starring:")
+    let actorsView = LargeDetailBlock(icon: UIImage(systemName: "person.2.square.stack")!, header: "Starring:")
     
     let watchProvidersStackView = UIStackView()
     
@@ -96,7 +96,7 @@ class NewDetailVC: UIViewController {
         ratingStackView.spacing = 8
         
         yearAndGenreStack.addArrangedSubview(yearView)
-        yearAndGenreStack.addArrangedSubview(genreView)
+        yearAndGenreStack.addArrangedSubview(ratedView)
         yearAndGenreStack.distribution = .fillEqually
         yearAndGenreStack.axis = .horizontal
         yearAndGenreStack.spacing = 5
@@ -193,16 +193,16 @@ extension NewDetailVC {
                     let plot = result.Plot
                     let director = result.Director
                     let stars = result.Actors
-                    let rating = result.imdbRating
-                    let genres = result.Genre
+                    let imdbRating = result.imdbRating
+                    let rated = result.Rated
                     
                     DispatchQueue.main.async {
                         self.titleLabel.text = title
-                        self.ratingLabel.text = rating
+                        self.ratingLabel.text = imdbRating
                         self.plotLabel.text = plot
                         self.posterImageView.image = self.posterImage   // passed from previous VC
                         self.yearView.setText(text: year ?? "n/a")
-                        self.genreView.setText(text: genres ?? "n/a")
+                        self.ratedView.setText(text: rated ?? "n/a")
                         self.directorView.setText(text: director ?? "n/a")
                         self.actorsView.setText(text: stars ?? "n/a")
                     }

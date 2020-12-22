@@ -12,4 +12,5 @@ struct MovieDetailModel: Codable {
     var Poster: String?
     var Genre: String?
     var imdbRating: String?
+    var Rated: String?
 }
