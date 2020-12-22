@@ -32,7 +32,8 @@ class NewDetailVC: UIViewController {
     var posterImage = UIImage()
     var tmdbID: Int?
     
-    var hmm = NSLayoutConstraint()
+    var providersStackViewWidthConstraint = NSLayoutConstraint()
+    var providersWidth: CGFloat = 0
     
     enum WatchProviders {
         case AppleITunes
@@ -44,20 +45,17 @@ class NewDetailVC: UIViewController {
         case DisneyPlus
         case AmazonPrime
     }
-    
-    var cowWidth: CGFloat = 50
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        getMovieDetails()
+        getWatchProviders()
         configureVC()
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
-        getMovieDetails()
-        getWatchProviders()
- 
+        
     }
     
     func addSubviews() {
@@ -121,13 +119,14 @@ class NewDetailVC: UIViewController {
         watchProvidersStackView.backgroundColor = .clear
         watchProvidersStackView.distribution = .fillEqually
         watchProvidersStackView.axis = .horizontal
-        watchProvidersStackView.spacing = 5
+        watchProvidersStackView.spacing = 10
         
-        print(watchProvidersStackView.subviews.count)
+//        watchProvidersStackView.backgroundColor = .systemTeal
         
-        hmm = NSLayoutConstraint(item: watchProvidersStackView, attribute: .width, relatedBy: .equal, toItem: .none , attribute: .notAnAttribute, multiplier: 0, constant: 100)
+        // if there is a provider, constant is increased below. Otherwise, constant is 0.
+        providersStackViewWidthConstraint = NSLayoutConstraint(item: watchProvidersStackView, attribute: .width, relatedBy: .equal, toItem: .none , attribute: .notAnAttribute, multiplier: 0, constant: providersWidth)
         
-        hmm.isActive = true
+        providersStackViewWidthConstraint.isActive = true
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
@@ -162,14 +161,9 @@ class NewDetailVC: UIViewController {
             
             watchProvidersStackView.topAnchor.constraint(equalTo: actorsView.bottomAnchor, constant: 15),
             watchProvidersStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            watchProvidersStackView.widthAnchor.constraint(equalToConstant: 75),
-//            watchProvidersStackView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: 60),
-//            watchProvidersStackView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -60),
             watchProvidersStackView.heightAnchor.constraint(equalToConstant: 90)
         ])
-        
     }
-    
 }
 
 extension NewDetailVC {
@@ -335,10 +329,9 @@ extension NewDetailVC {
             let netBlock = WatchProviderBlock(image: logo, rate: rate)
             watchProvidersStackView.addArrangedSubview(netBlock)
             
-            cowWidth += 60
-            print("cowWidth is now \(self.cowWidth)")
+            providersWidth += 60
             
-            hmm.constant = cowWidth
+            providersStackViewWidthConstraint.constant = providersWidth
           
             watchProvidersStackView.updateConstraints()
             watchProvidersStackView.layoutIfNeeded()
