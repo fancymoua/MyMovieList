@@ -46,10 +46,11 @@ class NewDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        movieTitle = "Up"
-        posterImage = #imageLiteral(resourceName: "tenet")
-        tmdbID = 329865
+//        movieTitle = "Up"
+//        posterImage = #imageLiteral(resourceName: "tenet")
+//        tmdbID = 329865
 
+        configureVC()
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
@@ -129,7 +130,7 @@ class NewDetailVC: UIViewController {
             
             ratingStackView.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
             ratingStackView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
-            ratingStackView.widthAnchor.constraint(equalToConstant: 70),
+            ratingStackView.widthAnchor.constraint(equalToConstant: 90),
             ratingStackView.heightAnchor.constraint(equalToConstant: 25),
             
             plotLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
@@ -328,5 +329,9 @@ extension NewDetailVC {
             let netBlock = WatchProviderBlock(image: logo, rate: rate)
             watchProvidersStackView.addArrangedSubview(netBlock)
         }
+    }
+    
+    func configureVC() {
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }

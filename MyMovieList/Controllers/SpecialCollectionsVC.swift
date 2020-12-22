@@ -116,7 +116,7 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let destVC = storyboard?.instantiateViewController(identifier: "MovieDetailView") as! DetailVC
+        let destVC = NewDetailVC()
         
         var posterImage = UIImage()
         
