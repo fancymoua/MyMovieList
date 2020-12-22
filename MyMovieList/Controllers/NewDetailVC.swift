@@ -208,18 +208,15 @@ extension NewDetailVC {
                     let rating = result.imdbRating
                     let genres = result.Genre
                     
-                    print("Title is \(title)")
-                    print("Plot is \(plot)")
-                    
                     DispatchQueue.main.async {
                         self.titleLabel.text = title
                         self.ratingLabel.text = rating
                         self.plotLabel.text = plot
                         self.posterImageView.image = self.posterImage   // passed from previous VC
-                        self.yearView.setText(text: year!)
-                        self.genreView.setText(text: genres!)
-                        self.directorView.setText(text: director!)
-                        self.actorsView.setText(text: stars!)
+                        self.yearView.setText(text: year ?? "n/a")
+                        self.genreView.setText(text: genres ?? "n/a")
+                        self.directorView.setText(text: director ?? "n/a")
+                        self.actorsView.setText(text: stars ?? "n/a")
                     }
                 } catch {
                     print("Error getting movie details")
