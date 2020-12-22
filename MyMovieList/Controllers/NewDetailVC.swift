@@ -18,8 +18,8 @@ class NewDetailVC: UIViewController {
     let plotLabel = MoviePlotLabel()
     
     let yearAndGenreStack = UIStackView()
-    let yearView = SmallDetailBlock(icon: #imageLiteral(resourceName: "Hulu-icon"), text: "ddf")
-    let genreView = SmallDetailBlock(icon: #imageLiteral(resourceName: "HBO-icon"), text: "dfd")
+    let yearView = SmallDetailBlock(icon: #imageLiteral(resourceName: "Hulu-icon"))
+    let genreView = SmallDetailBlock(icon: #imageLiteral(resourceName: "HBO-icon"))
     let directorView = LargeDetailBlock(icon: #imageLiteral(resourceName: "Netflix-icon"), header: "Director:", detail: "Denis Villeneuve")
     let actorsView = LargeDetailBlock(icon: #imageLiteral(resourceName: "Apple-TV-Icon"), header: "Starring:", detail: "Amy Adams, Jeremy Renner, Forest Whitaker")
     
@@ -50,21 +50,12 @@ class NewDetailVC: UIViewController {
         posterImage = #imageLiteral(resourceName: "tenet")
         tmdbID = 329865
 
-//        setDetails()
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
         getMovieDetails()
         getWatchProviders()
         
-    }
-    
-    func setDetails() {
-        titleLabel.text = "Up"
-        ratingLabel.text = "7.5"
-        imdbLogo.image = #imageLiteral(resourceName: "imdb-square-icon")
-//        plotLabel.text = "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecrafts appear around the world."
-        plotLabel.text = "Ryan Bingham enjoys living out of a suitcase for his job, travelling around the country firing people, but finds that lifestyle threatened by the presence of a potential love interest, and a new hire presenting a new business model."
     }
     
     func addSubviews() {
@@ -121,7 +112,7 @@ class NewDetailVC: UIViewController {
         
         yearAndGenreStack.addArrangedSubview(yearView)
         yearAndGenreStack.addArrangedSubview(genreView)
-        yearAndGenreStack.distribution = .fillProportionally
+        yearAndGenreStack.distribution = .fillEqually
         yearAndGenreStack.axis = .horizontal
         yearAndGenreStack.spacing = 5
         

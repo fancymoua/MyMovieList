@@ -18,10 +18,9 @@ class SmallDetailBlock: UIView {
         super.init(coder: aDecoder)
     }
     
-    init(icon: UIImage, text: String) {
+    init(icon: UIImage) {
         super.init(frame: .zero)
         self.iconImageView.image = icon
-        self.textLabel.text = text
         configure()
     }
     
