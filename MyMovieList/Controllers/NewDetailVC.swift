@@ -23,7 +23,7 @@ class NewDetailVC: UIViewController {
     let directorView = LargeDetailBlock(icon: #imageLiteral(resourceName: "Netflix-icon"), header: "Director:", detail: "Denis Villeneuve")
     let actorsView = LargeDetailBlock(icon: #imageLiteral(resourceName: "Apple-TV-Icon"), header: "Starring:", detail: "Amy Adams, Jeremy Renner, Forest Whitaker")
     
-    let watchProvidersView = UIView()
+    let watchProvidersStackView = UIStackView()
     
     let padding: CGFloat = 25
     
@@ -48,12 +48,14 @@ class NewDetailVC: UIViewController {
         
         movieTitle = "Up"
         posterImage = #imageLiteral(resourceName: "tenet")
+        tmdbID = 329865
 
 //        setDetails()
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
         getMovieDetails()
+        getWatchProviders()
         
     }
     
@@ -67,7 +69,7 @@ class NewDetailVC: UIViewController {
     
     func addSubviews() {
         let mainViews = [posterImageView, detailsBackgroundView]
-        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndGenreStack, directorView, actorsView, watchProvidersView]
+        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndGenreStack, directorView, actorsView, watchProvidersStackView]
         
         for view in mainViews {
             self.view.addSubview(view)
@@ -123,7 +125,10 @@ class NewDetailVC: UIViewController {
         yearAndGenreStack.axis = .horizontal
         yearAndGenreStack.spacing = 0
         
-        watchProvidersView.backgroundColor = .systemPink
+        watchProvidersStackView.backgroundColor = .clear
+        watchProvidersStackView.distribution = .fillEqually
+        watchProvidersStackView.axis = .horizontal
+        watchProvidersStackView.spacing = 5
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
@@ -156,10 +161,10 @@ class NewDetailVC: UIViewController {
             actorsView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
             actorsView.heightAnchor.constraint(equalToConstant: 60),
             
-            watchProvidersView.topAnchor.constraint(equalTo: actorsView.bottomAnchor, constant: 15),
-            watchProvidersView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: 60),
-            watchProvidersView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -60),
-            watchProvidersView.heightAnchor.constraint(equalToConstant: 90)
+            watchProvidersStackView.topAnchor.constraint(equalTo: actorsView.bottomAnchor, constant: 15),
+            watchProvidersStackView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: 60),
+            watchProvidersStackView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -60),
+            watchProvidersStackView.heightAnchor.constraint(equalToConstant: 90)
         ])
         
     }
@@ -229,6 +234,108 @@ extension NewDetailVC {
                 }
             }
             task.resume()
+        }
+    }
+    
+    func getWatchProviders() {
+        
+        if let id = tmdbID {
+            let endpoint = "https://api.themoviedb.org/3/movie/" + "\(id)" + "/watch/providers?api_key=65db6bef59bff99c6a4504f0ce877ade"
+            
+            guard let url = URL(string: endpoint) else {
+                print("bad watch provider URL")
+                return
+            }
+            
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                
+                if let _ = error {
+                    print("Error making call to watch provider endpoint")
+                }
+                
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    print("Something other than 200 returned from watch provider endpoint")
+                    return
+                }
+                
+                guard let data = data else {
+                    print("No data from watch provider endpoint")
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    
+                    let allData = try decoder.decode(WatchProviderAPI.self, from: data)
+                    
+                    let results = allData.results.US
+                    
+                    if let safeFlatrate = results.flatrate {
+                        for item in safeFlatrate {
+                            if item.provider_id == 8 { self.addWatchProvider(.Netflix) }
+                            if item.provider_id == 337 { self.addWatchProvider(.DisneyPlus) }
+                            if item.provider_id == 15 { self.addWatchProvider(.Hulu) }
+                            if item.provider_id == 9 { self.addWatchProvider(.AmazonPrime) }
+                            if item.provider_id == 27 { self.addWatchProvider(.HBONow) }
+                        }
+                    }
+                    
+                    if let safeRent = results.rent {
+                        for item in safeRent {
+                            if item.provider_id == 10 { self.addWatchProvider(.AmazonVideoRent) }
+                        }
+                    }
+                    
+                    if let safeBuy = results.buy {
+                        for item in safeBuy {
+                            
+                            if item.provider_id == 10 { self.addWatchProvider(.AmazonVideoBuy) }
+                            if item.provider_id == 2 { self.addWatchProvider(.AppleITunes) }
+                        }
+                    }
+                } catch {
+                    print("Could not decode watch provider data")
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    func addWatchProvider(_ provider: WatchProviders) {
+        
+        var rate = String()
+        var logo = UIImage()
+        
+        switch provider {
+        case .AppleITunes:
+            rate = "Buy"
+            logo = #imageLiteral(resourceName: "Apple-TV-Icon")
+        case .AmazonVideoRent:
+            rate = "Rent"
+            logo = #imageLiteral(resourceName: "Amazon-prime-icon")
+        case .AmazonVideoBuy:
+            rate = "Buy"
+            logo = #imageLiteral(resourceName: "Amazon-prime-icon")
+        case .Netflix:
+            rate = "Free"
+            logo = #imageLiteral(resourceName: "Netflix-icon")
+        case .Hulu:
+            rate = "Free"
+            logo = #imageLiteral(resourceName: "Hulu-icon")
+        case .HBONow:
+            rate = "Free"
+            logo = #imageLiteral(resourceName: "HBO-icon")
+        case .DisneyPlus:
+            rate = "Free"
+            logo = #imageLiteral(resourceName: "Disney-Plus-icon")
+        case .AmazonPrime:
+            rate = "Free"
+            logo = #imageLiteral(resourceName: "Amazon-prime-icon")
+        }
+        
+        DispatchQueue.main.sync {
+            let netBlock = WatchProviderBlock(image: logo, rate: rate)
+            watchProvidersStackView.addArrangedSubview(netBlock)
         }
     }
 }
