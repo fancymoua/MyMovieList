@@ -48,11 +48,8 @@ class SmallDetailBlock: UIView {
             
             textLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             textLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 15),
-//            textLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-            textLabel.widthAnchor.constraint(equalToConstant: 120),
+            textLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             textLabel.heightAnchor.constraint(equalToConstant: 50)
-            
-            
         ])
     }
     

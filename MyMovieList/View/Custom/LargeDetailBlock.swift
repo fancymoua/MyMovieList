@@ -60,7 +60,7 @@ class LargeDetailBlock: UIView {
             
             detailLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             detailLabel.leadingAnchor.constraint(equalTo: headerLabel.trailingAnchor, constant: 15),
-            detailLabel.widthAnchor.constraint(equalToConstant: 180),
+            detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             detailLabel.heightAnchor.constraint(equalToConstant: 70),
         ])
     }
