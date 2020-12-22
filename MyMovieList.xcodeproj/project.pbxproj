@@ -14,6 +14,7 @@
 		B1286C0425915DFF0063AD70 /* MoviePlotLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1286C0325915DFF0063AD70 /* MoviePlotLabel.swift */; };
 		B1286C0925915F460063AD70 /* SmallDetailBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1286C0825915F460063AD70 /* SmallDetailBlock.swift */; };
 		B1286C0E259168790063AD70 /* LargeDetailBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1286C0D259168790063AD70 /* LargeDetailBlock.swift */; };
+		B1286C172592863A0063AD70 /* WatchProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1286C162592863A0063AD70 /* WatchProviders.swift */; };
 		B1461289258A87C80030859B /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1461288258A87C80030859B /* DetailVC.swift */; };
 		B146128E258A8F960030859B /* MovieIDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B146128D258A8F960030859B /* MovieIDAPI.swift */; };
 		B1461293258A931B0030859B /* MovieDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1461292258A931B0030859B /* MovieDetailModel.swift */; };
@@ -62,6 +63,7 @@
 		B1286C0325915DFF0063AD70 /* MoviePlotLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePlotLabel.swift; sourceTree = "<group>"; };
 		B1286C0825915F460063AD70 /* SmallDetailBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallDetailBlock.swift; sourceTree = "<group>"; };
 		B1286C0D259168790063AD70 /* LargeDetailBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeDetailBlock.swift; sourceTree = "<group>"; };
+		B1286C162592863A0063AD70 /* WatchProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviders.swift; sourceTree = "<group>"; };
 		B1461288258A87C80030859B /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		B146128D258A8F960030859B /* MovieIDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieIDAPI.swift; sourceTree = "<group>"; };
 		B1461292258A931B0030859B /* MovieDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailModel.swift; sourceTree = "<group>"; };
@@ -116,6 +118,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B1286C15259286280063AD70 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B1286C162592863A0063AD70 /* WatchProviders.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		B14DF27F2589536000FF8819 = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +149,7 @@
 		B14DF28A2589536000FF8819 /* MyMovieList */ = {
 			isa = PBXGroup;
 			children = (
+				B1286C15259286280063AD70 /* Utilities */,
 				B14DF28B2589536000FF8819 /* AppDelegate.swift */,
 				B14DF28D2589536000FF8819 /* SceneDelegate.swift */,
 				B14DF2D825896A9100FF8819 /* Model */,
@@ -370,6 +381,7 @@
 				B1461293258A931B0030859B /* MovieDetailModel.swift in Sources */,
 				B189BE9B258BFAD400422624 /* TrendingVC.swift in Sources */,
 				B1E8BCBE258FDA38009F8FB2 /* WatchProviderAPI.swift in Sources */,
+				B1286C172592863A0063AD70 /* WatchProviders.swift in Sources */,
 				B174977A258D5A1D00B428F3 /* SpecialListVC.swift in Sources */,
 				B1286C0925915F460063AD70 /* SmallDetailBlock.swift in Sources */,
 				B1E8BCC3258FEEBB009F8FB2 /* WatchProviderModel.swift in Sources */,

@@ -17,11 +17,10 @@ class LargeDetailBlock: UIView {
         super.init(coder: aDecoder)
     }
     
-    init(icon: UIImage, header: String, detail: String) {
+    init(icon: UIImage, header: String) {
         super.init(frame: .zero)
         self.iconImageView.image = icon
         self.headerLabel.text = header
-        self.detailLabel.text = detail
         configure()
     }
     

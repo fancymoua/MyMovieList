@@ -20,8 +20,8 @@ class NewDetailVC: UIViewController {
     let yearAndGenreStack = UIStackView()
     let yearView = SmallDetailBlock(icon: UIImage(systemName: "calendar")!)
     let genreView = SmallDetailBlock(icon: UIImage(systemName: "play.fill")!)
-    let directorView = LargeDetailBlock(icon: UIImage(systemName: "person.fill")!, header: "Director:", detail: "Denis Villeneuve")
-    let actorsView = LargeDetailBlock(icon: UIImage(systemName: "person.2.fill")!, header: "Starring:", detail: "Amy Adams, Jeremy Renner, Forest Whitaker")
+    let directorView = LargeDetailBlock(icon: UIImage(systemName: "person.fill")!, header: "Director:")
+    let actorsView = LargeDetailBlock(icon: UIImage(systemName: "person.2.fill")!, header: "Starring:")
     
     let watchProvidersStackView = UIStackView()
     
@@ -35,27 +35,16 @@ class NewDetailVC: UIViewController {
     var providersStackViewWidthConstraint = NSLayoutConstraint()
     var providersWidth: CGFloat = 0
     
-    enum WatchProviders {
-        case AppleITunes
-        case AmazonVideoRent
-        case AmazonVideoBuy
-        case Netflix
-        case Hulu
-        case HBONow
-        case DisneyPlus
-        case AmazonPrime
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getMovieDetails()
         getWatchProviders()
+        
         configureVC()
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
-        
     }
     
     func addSubviews() {
@@ -75,14 +64,10 @@ class NewDetailVC: UIViewController {
 
     func configureMainViews() {
         
-        posterImageView.image = #imageLiteral(resourceName: "tenet")
         posterImageView.contentMode = .scaleAspectFill
         
         detailsBackgroundView.backgroundColor = .white
         detailsBackgroundView.layer.cornerRadius = 30
-        
-        view.sendSubviewToBack(detailsBackgroundView)
-        view.sendSubviewToBack(posterImageView)
         
         NSLayoutConstraint.activate([
             posterImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -60),
