@@ -49,5 +49,9 @@ class SmallDetailBlock: UIView {
             textLabel.heightAnchor.constraint(equalToConstant: 25)
         ])
     }
+    
+    func setText(text: String) {
+        textLabel.text = text
+    }
 
 }

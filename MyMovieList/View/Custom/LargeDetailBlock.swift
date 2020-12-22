@@ -61,8 +61,10 @@ class LargeDetailBlock: UIView {
             detailLabel.widthAnchor.constraint(equalToConstant: 180),
             detailLabel.heightAnchor.constraint(equalToConstant: 70),
         ])
-       
-        
+    }
+    
+    func setText(text: String) {
+        detailLabel.text = text
     }
 
 }

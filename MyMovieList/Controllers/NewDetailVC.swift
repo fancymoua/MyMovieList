@@ -26,18 +26,39 @@ class NewDetailVC: UIViewController {
     let watchProvidersView = UIView()
     
     let padding: CGFloat = 25
+    
+    var movieTitle: String?
+    var imdbID: String?
+    var posterImage = UIImage()
+    var tmdbID: Int?
+    
+    enum WatchProviders {
+        case AppleITunes
+        case AmazonVideoRent
+        case AmazonVideoBuy
+        case Netflix
+        case Hulu
+        case HBONow
+        case DisneyPlus
+        case AmazonPrime
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        movieTitle = "Up"
+        posterImage = #imageLiteral(resourceName: "tenet")
 
-        setDetails()
+//        setDetails()
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
+        getMovieDetails()
+        
     }
     
     func setDetails() {
-        titleLabel.text = "Arrival"
+        titleLabel.text = "Up"
         ratingLabel.text = "7.5"
         imdbLogo.image = #imageLiteral(resourceName: "imdb-square-icon")
 //        plotLabel.text = "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecrafts appear around the world."
@@ -84,6 +105,8 @@ class NewDetailVC: UIViewController {
     }
     
     func configureMovieDetailViews() {
+        
+        imdbLogo.image = #imageLiteral(resourceName: "imdb-square-icon")
         
         ratingLabel.font = UIFont(name: "Avenir Next", size: 18)
         ratingLabel.textColor = UIColor.black
@@ -141,5 +164,71 @@ class NewDetailVC: UIViewController {
         
     }
     
+}
 
+extension NewDetailVC {
+    func getMovieDetails() {
+        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&t="
+        
+        var movieEndpoint = String()
+        
+        if let title = movieTitle {
+            let query = title.replacingOccurrences(of: " ", with: "+")
+            movieEndpoint = baseURL + query
+            
+            print("This is movieEndpoint \(movieEndpoint)")
+            
+            guard let url = URL(string: movieEndpoint) else {
+                print("Bad movieEndpoint")
+                return
+            }
+            
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                
+                if let _ = error {
+                    print("error making call to OMDB")
+                }
+                
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    print("Something other than 200 from OMDB")
+                    return
+                }
+                
+                guard let data = data else {
+                    print("No data from OMDB")
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let result = try decoder.decode(MovieDetailModel.self, from: data)
+                    
+                    let title = result.Title
+                    let year = result.Year
+                    let plot = result.Plot
+                    let director = result.Director
+                    let stars = result.Actors
+                    let rating = result.imdbRating
+                    let genres = result.Genre
+                    
+                    print("Title is \(title)")
+                    print("Plot is \(plot)")
+                    
+                    DispatchQueue.main.async {
+                        self.titleLabel.text = title
+                        self.ratingLabel.text = rating
+                        self.plotLabel.text = plot
+                        self.posterImageView.image = self.posterImage   // passed from previous VC
+                        self.yearView.setText(text: year!)
+                        self.genreView.setText(text: genres!)
+                        self.directorView.setText(text: director!)
+                        self.actorsView.setText(text: stars!)
+                    }
+                } catch {
+                    print("Error getting movie details")
+                }
+            }
+            task.resume()
+        }
+    }
 }
