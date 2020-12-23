@@ -12,26 +12,22 @@ class WatchlistVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        setTestData()
         addSubviews()
         configureUI()
-        retrieveWatchlist()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         retrieveWatchlist()
+        watchlistTableView.reloadData()
     }
     
     func retrieveWatchlist() {
         let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data
-        print("watchlistRaw: \(watchlistRaw)")
         
         do {
             let decoder = JSONDecoder()
             watchlistItemsArray = try decoder.decode([WatchItem].self, from: watchlistRaw!)
-            print("watchlist2: \(watchlistItemsArray)")
         } catch {
             print("Couldn't decode watchlistItem")
         }
