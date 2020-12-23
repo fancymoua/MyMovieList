@@ -11,16 +11,16 @@ class NewDetailVC: UIViewController {
     
     // goes inside detailsBackgroundView
     let titleLabel = MovieTitleLabel()
-    let ratingStackView = UIStackView()
     let imdbLogo = UIImageView()
     let ratingLabel = UILabel()
+    lazy var ratingStackView = horizontalStackView(subviews: [imdbLogo, ratingLabel], spacing: 12)
     let plotLabel = MoviePlotLabel()
-    let yearAndRatedStack = UIStackView()
+    lazy var yearAndRatedStack = horizontalStackView(subviews: [yearView, ratedView], spacing: 5)
     let yearView = SmallDetailBlock(icon: IconImages.movieDetailDate.image)
     let ratedView = SmallDetailBlock(icon: IconImages.movieDetailRated.image)
     let directorView = LargeDetailBlock(icon: IconImages.movieDetailDirector.image, header: "Director")
     let actorsView = LargeDetailBlock(icon: IconImages.movieDetailActors.image, header: "Starring")
-    let watchProvidersStackView = UIStackView()
+    lazy var watchProvidersStackView = horizontalStackView(subviews: [], spacing: 10)
     
     // variables populated from previous view
     var movieTitle: String?
@@ -110,23 +110,6 @@ class NewDetailVC: UIViewController {
         
         ratingLabel.font = UIFont(name: "Avenir Next", size: 18)
         ratingLabel.textColor = UIColor.black
-        
-        ratingStackView.addArrangedSubview(imdbLogo)
-        ratingStackView.addArrangedSubview(ratingLabel)
-        ratingStackView.distribution = .fillEqually
-        ratingStackView.axis = .horizontal
-        ratingStackView.spacing = 8
-        
-        yearAndRatedStack.addArrangedSubview(yearView)
-        yearAndRatedStack.addArrangedSubview(ratedView)
-        yearAndRatedStack.distribution = .fillEqually
-        yearAndRatedStack.axis = .horizontal
-        yearAndRatedStack.spacing = 5
-        
-        watchProvidersStackView.backgroundColor = .clear
-        watchProvidersStackView.distribution = .fillEqually
-        watchProvidersStackView.axis = .horizontal
-        watchProvidersStackView.spacing = 10
         
         // if there is a provider, constant is increased below. Otherwise, constant is 0.
         providersStackViewWidthConstraint = NSLayoutConstraint(item: watchProvidersStackView, attribute: .width, relatedBy: .equal, toItem: .none , attribute: .notAnAttribute, multiplier: 0, constant: providersWidth)
