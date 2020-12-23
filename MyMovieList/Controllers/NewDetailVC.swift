@@ -321,35 +321,8 @@ extension NewDetailVC {
     
     func addWatchProvider(_ provider: WatchProviders) {
         
-        var rate = String()
-        var logo = UIImage()
-        
-        switch provider {
-        case .AppleITunes:
-            rate = "Buy"
-            logo = #imageLiteral(resourceName: "Apple-TV-Icon")
-        case .AmazonVideoRent:
-            rate = "Rent"
-            logo = #imageLiteral(resourceName: "Amazon-prime-icon")
-        case .AmazonVideoBuy:
-            rate = "Buy"
-            logo = #imageLiteral(resourceName: "Amazon-prime-icon")
-        case .Netflix:
-            rate = "Free"
-            logo = #imageLiteral(resourceName: "Netflix-icon")
-        case .Hulu:
-            rate = "Free"
-            logo = #imageLiteral(resourceName: "Hulu-icon")
-        case .HBONow:
-            rate = "Free"
-            logo = #imageLiteral(resourceName: "HBO-icon")
-        case .DisneyPlus:
-            rate = "Free"
-            logo = #imageLiteral(resourceName: "Disney-Plus-icon")
-        case .AmazonPrime:
-            rate = "Free"
-            logo = #imageLiteral(resourceName: "Amazon-prime-icon")
-        }
+        let rate = provider.rate
+        let logo = provider.logo
         
         DispatchQueue.main.sync {
             let netBlock = WatchProviderBlock(image: logo, rate: rate)
