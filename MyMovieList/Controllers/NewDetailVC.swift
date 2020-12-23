@@ -32,6 +32,7 @@ class NewDetailVC: UIViewController {
     var imdbID: String?
     var posterImage = UIImage()
     var tmdbID: Int?
+    var posterPath: String?
     
     var providersStackViewWidthConstraint = NSLayoutConstraint()
     var providersWidth: CGFloat = 0
@@ -58,14 +59,16 @@ class NewDetailVC: UIViewController {
     
     
     func retrieveWatchlist() {
-        let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data
-        
-        do {
-            let decoder = JSONDecoder()
-            currentWatchlist = try decoder.decode([WatchItem].self, from: watchlistRaw!)
-            print("currentWatchlist: \(currentWatchlist)")
-        } catch {
-            print("Couldn't decode watchlistItem")
+        if let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data {
+            do {
+                let decoder = JSONDecoder()
+                currentWatchlist = try decoder.decode([WatchItem].self, from: watchlistRaw)
+                print("currentWatchlist: \(currentWatchlist)")
+            } catch {
+                print("Couldn't decode watchlistItem")
+            }
+        } else {
+            print("Watchlist empty")
         }
     }
     
@@ -125,7 +128,8 @@ class NewDetailVC: UIViewController {
         print("Added to watchlist: \(movieTitle)")
         addToWatchlistButton.setImage(heartImageFilled, for: .normal)
         
-        let newWatchItem = WatchItem(title: movieTitle!)
+        
+        let newWatchItem = WatchItem(title: movieTitle!, tmdbID: tmdbID!, posterPath: posterPath ?? "")
         currentWatchlist.append(newWatchItem)
         
         do {

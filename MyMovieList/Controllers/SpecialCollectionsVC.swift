@@ -138,6 +138,7 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
         destVC.movieTitle = moviesArray[indexPath.item].title
         destVC.posterImage = posterImage
         destVC.tmdbID = moviesArray[indexPath.item].id
+        destVC.posterPath = moviesArray[indexPath.item].poster_path
         
         show(destVC, sender: self)
     }

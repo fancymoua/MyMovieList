@@ -167,6 +167,7 @@ extension SearchResultsVC: UICollectionViewDelegate {
         destVC.movieTitle = searchResultsArray[indexPath.item].title
         destVC.posterImage = posterImage
         destVC.tmdbID = searchResultsArray[indexPath.item].id
+        destVC.posterPath = searchResultsArray[indexPath.item].poster_path
         
         show(destVC, sender: self)
     }

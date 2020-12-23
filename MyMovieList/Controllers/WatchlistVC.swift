@@ -14,6 +14,7 @@ class WatchlistVC: UIViewController {
 
         addSubviews()
         configureUI()
+        print(NSHomeDirectory())
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -23,13 +24,15 @@ class WatchlistVC: UIViewController {
     }
     
     func retrieveWatchlist() {
-        let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data
-        
-        do {
-            let decoder = JSONDecoder()
-            watchlistItemsArray = try decoder.decode([WatchItem].self, from: watchlistRaw!)
-        } catch {
-            print("Couldn't decode watchlistItem")
+        if let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data {
+            do {
+                let decoder = JSONDecoder()
+                watchlistItemsArray = try decoder.decode([WatchItem].self, from: watchlistRaw)
+            } catch {
+                print("Couldn't decode watchlistItem")
+            }
+        } else {
+            print("watchlist is empty!")
         }
     }
     
@@ -43,19 +46,19 @@ class WatchlistVC: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    func setTestData() {
-        let movie1 = WatchItem(title: "Arrival")
-        let movie2 = WatchItem(title: "The Nightmare Before Christmas")
-        let movie3 = WatchItem(title: "Home Alone 3")
-        let movie4 = WatchItem(title: "Up")
-        let movie5 = WatchItem(title: "Die Hard")
-        
-        let testArray = [movie1, movie2, movie3, movie4, movie5]
-        
-        for movie in testArray {
-            watchlistItemsArray.append(movie)
-        }
-    }
+//    func setTestData() {
+//        let movie1 = WatchItem(title: "Arrival")
+//        let movie2 = WatchItem(title: "The Nightmare Before Christmas")
+//        let movie3 = WatchItem(title: "Home Alone 3")
+//        let movie4 = WatchItem(title: "Up")
+//        let movie5 = WatchItem(title: "Die Hard")
+//        
+//        let testArray = [movie1, movie2, movie3, movie4, movie5]
+//        
+//        for movie in testArray {
+//            watchlistItemsArray.append(movie)
+//        }
+//    }
     
     func addSubviews() {
         let views = [header, watchlistTableView]
@@ -117,6 +120,11 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
         
         destVC.movieTitle = watchlistItemsArray[indexPath.item].title
         destVC.posterImage = #imageLiteral(resourceName: "tenet")
+        destVC.tmdbID = watchlistItemsArray[indexPath.item].tmdbID
+        
+        let posterPath = watchlistItemsArray[indexPath.item].posterPath
+        
+        print("posterPath: \(posterPath)")
         
         show(destVC, sender: self)
     }
