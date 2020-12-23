@@ -56,25 +56,9 @@ class NewDetailVC: UIViewController {
         checkIfAlreadyOnWatchlist()
     }
     
-    func checkIfAlreadyOnWatchlist() {
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
-        let heartImageUnfilled = UIImage(systemName: "suit.heart", withConfiguration: largeConfig)
-        let heartImageFilled = UIImage(systemName: "suit.heart.fill", withConfiguration: largeConfig)
-        
-        let filterForCurrentMovie = currentWatchlist.filter { $0.title == movieTitle }
-        if filterForCurrentMovie.isEmpty {
-            addToWatchlistButton.setImage(heartImageUnfilled, for: .normal)
-            onWatchlist = true
-        } else if !filterForCurrentMovie.isEmpty {
-            addToWatchlistButton.setImage(heartImageFilled, for: .normal)
-            onWatchlist = false
-        }
-
-    }
     
     func retrieveWatchlist() {
         let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data
-        print("watchlistRaw: \(watchlistRaw)")
         
         do {
             let decoder = JSONDecoder()
@@ -138,14 +122,8 @@ class NewDetailVC: UIViewController {
         let heartImageFilled = UIImage(systemName: "suit.heart.fill", withConfiguration: largeConfig)
         let heartImage = UIImage(systemName: "suit.heart", withConfiguration: largeConfig)
         
-        print("Add to watchlist: \(movieTitle)")
-        if onWatchlist == false {
-            addToWatchlistButton.setImage(heartImageFilled, for: .normal)
-            onWatchlist = true
-        } else if onWatchlist == true {
-            addToWatchlistButton.setImage(heartImage, for: .normal)
-            onWatchlist = false
-        }
+        print("Added to watchlist: \(movieTitle)")
+        addToWatchlistButton.setImage(heartImageFilled, for: .normal)
         
         let newWatchItem = WatchItem(title: movieTitle!)
         currentWatchlist.append(newWatchItem)
@@ -157,6 +135,8 @@ class NewDetailVC: UIViewController {
         } catch {
             print("Could not set encodedWatchlist to userDefaults")
         }
+        
+        addToWatchlistButton.removeTarget(self, action: nil, for: .touchUpInside)
     }
     
     func configureMovieDetailViews() {
@@ -402,5 +382,24 @@ extension NewDetailVC {
     
     func configureVC() {
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+}
+
+extension NewDetailVC {
+    func checkIfAlreadyOnWatchlist() {
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
+        let heartImageUnfilled = UIImage(systemName: "suit.heart", withConfiguration: largeConfig)
+        let heartImageFilled = UIImage(systemName: "suit.heart.fill", withConfiguration: largeConfig)
+        
+        let filterForCurrentMovie = currentWatchlist.filter { $0.title == movieTitle }
+        if filterForCurrentMovie.isEmpty {
+            addToWatchlistButton.setImage(heartImageUnfilled, for: .normal)
+            onWatchlist = true
+        } else if !filterForCurrentMovie.isEmpty {
+            addToWatchlistButton.setImage(heartImageFilled, for: .normal)
+            onWatchlist = false
+            addToWatchlistButton.removeTarget(self, action: nil, for: .touchUpInside)
+        }
+
     }
 }
