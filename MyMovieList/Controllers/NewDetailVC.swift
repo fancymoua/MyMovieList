@@ -208,23 +208,17 @@ extension NewDetailVC {
                     let decoder = JSONDecoder()
                     let result = try decoder.decode(MovieDetailModel.self, from: data)
                     
-                    let title = result.Title
-                    let year = result.Year
-                    let plot = result.Plot
-                    let director = result.Director
-                    let stars = result.Actors
-                    let imdbRating = result.imdbRating
-                    let rated = result.Rated
+                    let thisMovie = MovieDetailModel(imdbID: result.imdbID, Title: result.Title, Year: result.Year, Plot: result.Plot, Director: result.Director, Actors: result.Actors, Poster: result.Poster, Genre: result.Genre, imdbRating: result.imdbRating, Rated: result.Rated)
                     
                     DispatchQueue.main.async {
-                        self.titleLabel.text = title
-                        self.ratingLabel.text = imdbRating
-                        self.plotLabel.text = plot
+                        self.titleLabel.text = thisMovie.Title
+                        self.ratingLabel.text = thisMovie.imdbRating
+                        self.plotLabel.text = thisMovie.Plot
                         self.posterImageView.image = self.posterImage  // passed from previous VC
-                        self.yearView.setText(text: year ?? "n/a")
-                        self.ratedView.setText(text: rated ?? "n/a")
-                        self.directorView.setText(text: director ?? "n/a")
-                        self.actorsView.setText(text: stars ?? "n/a")
+                        self.yearView.setText(text: thisMovie.Year ?? "n/a")
+                        self.ratedView.setText(text: thisMovie.Rated ?? "n/a")
+                        self.directorView.setText(text: thisMovie.Director ?? "n/a")
+                        self.actorsView.setText(text: thisMovie.Actors ?? "n/a")
                     }
                 } catch {
                     print("Error getting movie details")
@@ -248,6 +242,7 @@ extension NewDetailVC {
                 
                 if let _ = error {
                     print("Error making call to watch provider endpoint")
+                    return
                 }
                 
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {

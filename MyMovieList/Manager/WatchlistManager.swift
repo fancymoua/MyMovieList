@@ -55,4 +55,14 @@ struct WatchlistManager {
         
         return image
     }
+    
+    static func updateWatchlistAfterDeletion(watchlist: [WatchItem]) {
+        do {
+            let encoder = JSONEncoder()
+            let encodedWatchlist = try encoder.encode(watchlist)
+            UserDefaults.standard.setValue(encodedWatchlist, forKey: "Watchlist")
+        } catch {
+            print("Could not set encodedWatchlist to userDefaults")
+        }
+    }
 }
