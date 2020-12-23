@@ -242,7 +242,7 @@ extension NewDetailVC {
                 
                 if let _ = error {
                     print("Error making call to watch provider endpoint")
-                    return
+                    return 
                 }
                 
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {

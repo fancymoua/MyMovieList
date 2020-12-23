@@ -143,6 +143,33 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		B143E3A92593FA190063BD8F /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				B189BE8D258BE30500422624 /* CustomKeywordButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		B143E3AD2593FA270063BD8F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */,
+				B1286C0825915F460063AD70 /* SmallDetailBlock.swift */,
+				B1286C0D259168790063AD70 /* LargeDetailBlock.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B143E3B12593FA370063BD8F /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				B1286BFE259159530063AD70 /* MovieTitleLabel.swift */,
+				B1286C0325915DFF0063AD70 /* MoviePlotLabel.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
 		B14DF27F2589536000FF8819 = {
 			isa = PBXGroup;
 			children = (
@@ -241,12 +268,9 @@
 		B189BE8C258BE2E600422624 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				B189BE8D258BE30500422624 /* CustomKeywordButton.swift */,
-				B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */,
-				B1286BFE259159530063AD70 /* MovieTitleLabel.swift */,
-				B1286C0325915DFF0063AD70 /* MoviePlotLabel.swift */,
-				B1286C0825915F460063AD70 /* SmallDetailBlock.swift */,
-				B1286C0D259168790063AD70 /* LargeDetailBlock.swift */,
+				B143E3A92593FA190063BD8F /* Buttons */,
+				B143E3AD2593FA270063BD8F /* Views */,
+				B143E3B12593FA370063BD8F /* Labels */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
