@@ -11,54 +11,46 @@ class NewDetailVC: UIViewController {
     
     // goes inside detailsBackgroundView
     let titleLabel = MovieTitleLabel()
-    
     let ratingStackView = UIStackView()
     let imdbLogo = UIImageView()
     let ratingLabel = UILabel()
-    
     let plotLabel = MoviePlotLabel()
-    
-    let yearAndGenreStack = UIStackView()
+    let yearAndRatedStack = UIStackView()
     let yearView = SmallDetailBlock(icon: UIImage(systemName: "calendar")!)
     let ratedView = SmallDetailBlock(icon: UIImage(systemName: "pencil.tip.crop.circle")!)
     let directorView = LargeDetailBlock(icon: UIImage(systemName: "person.fill")!, header: "Director:")
     let actorsView = LargeDetailBlock(icon: UIImage(systemName: "person.2.square.stack")!, header: "Starring:")
-    
     let watchProvidersStackView = UIStackView()
     
-    let padding: CGFloat = 25
-    
+    // variables populated from previous view
     var movieTitle: String?
     var imdbID: String?
     var posterImage = UIImage()
     var tmdbID: Int?
     var posterPath: String?
     
-    var providersStackViewWidthConstraint = NSLayoutConstraint()
-    var providersWidth: CGFloat = 0
-    
-    var onWatchlist: Bool = false
-    
     var currentWatchlist = [WatchItem]()
+    var onWatchlist: Bool = false
+    let padding: CGFloat = 25
+    var providersWidth: CGFloat = 0
+    var providersStackViewWidthConstraint = NSLayoutConstraint()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        retrieveWatchlist()
+        configureVC()
+        
+        retrieveUserWatchlist()
+        checkIfAlreadyOnWatchlist()
         getMovieDetails()
         getWatchProviders()
         
-//        posterImageView.image = #imageLiteral(resourceName: "tenet")
-        
-        configureVC()
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
-        checkIfAlreadyOnWatchlist()
     }
     
-    
-    func retrieveWatchlist() {
+    func retrieveUserWatchlist() {
         if let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data {
             do {
                 let decoder = JSONDecoder()
@@ -74,7 +66,7 @@ class NewDetailVC: UIViewController {
     
     func addSubviews() {
         let mainViews = [posterImageView, detailsBackgroundView, addToWatchlistButton]
-        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndGenreStack, directorView, actorsView, watchProvidersStackView]
+        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndRatedStack, directorView, actorsView, watchProvidersStackView]
         
         for view in mainViews {
             self.view.addSubview(view)
@@ -88,11 +80,6 @@ class NewDetailVC: UIViewController {
     }
 
     func configureMainViews() {
-        
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
-        let heartImage = UIImage(systemName: "suit.heart", withConfiguration: largeConfig)
-        
-        addToWatchlistButton.setImage(heartImage, for: .normal)
         addToWatchlistButton.backgroundColor = UIColor(white: 0.8, alpha: 0.9)
         addToWatchlistButton.tintColor = .red
         addToWatchlistButton.addTarget(self, action: #selector(watchlistButtonTapped), for: .touchUpInside)
@@ -121,13 +108,8 @@ class NewDetailVC: UIViewController {
     }
     
     @objc func watchlistButtonTapped() {
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
-        let heartImageFilled = UIImage(systemName: "suit.heart.fill", withConfiguration: largeConfig)
-        let heartImage = UIImage(systemName: "suit.heart", withConfiguration: largeConfig)
         
-        print("Added to watchlist: \(movieTitle)")
-        addToWatchlistButton.setImage(heartImageFilled, for: .normal)
-        
+        addToWatchlistButton.setImage(IconImages.heartFilled.image, for: .normal)
         
         let newWatchItem = WatchItem(title: movieTitle!, tmdbID: tmdbID!, posterPath: posterPath ?? "")
         currentWatchlist.append(newWatchItem)
@@ -156,18 +138,16 @@ class NewDetailVC: UIViewController {
         ratingStackView.axis = .horizontal
         ratingStackView.spacing = 8
         
-        yearAndGenreStack.addArrangedSubview(yearView)
-        yearAndGenreStack.addArrangedSubview(ratedView)
-        yearAndGenreStack.distribution = .fillEqually
-        yearAndGenreStack.axis = .horizontal
-        yearAndGenreStack.spacing = 5
+        yearAndRatedStack.addArrangedSubview(yearView)
+        yearAndRatedStack.addArrangedSubview(ratedView)
+        yearAndRatedStack.distribution = .fillEqually
+        yearAndRatedStack.axis = .horizontal
+        yearAndRatedStack.spacing = 5
         
         watchProvidersStackView.backgroundColor = .clear
         watchProvidersStackView.distribution = .fillEqually
         watchProvidersStackView.axis = .horizontal
         watchProvidersStackView.spacing = 10
-        
-//        watchProvidersStackView.backgroundColor = .systemTeal
         
         // if there is a provider, constant is increased below. Otherwise, constant is 0.
         providersStackViewWidthConstraint = NSLayoutConstraint(item: watchProvidersStackView, attribute: .width, relatedBy: .equal, toItem: .none , attribute: .notAnAttribute, multiplier: 0, constant: providersWidth)
@@ -190,12 +170,12 @@ class NewDetailVC: UIViewController {
             plotLabel.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
             plotLabel.heightAnchor.constraint(equalToConstant: 100),
             
-            yearAndGenreStack.topAnchor.constraint(equalTo: plotLabel.bottomAnchor, constant: 10),
-            yearAndGenreStack.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
-            yearAndGenreStack.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
-            yearAndGenreStack.heightAnchor.constraint(equalToConstant: 40),
+            yearAndRatedStack.topAnchor.constraint(equalTo: plotLabel.bottomAnchor, constant: 10),
+            yearAndRatedStack.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
+            yearAndRatedStack.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
+            yearAndRatedStack.heightAnchor.constraint(equalToConstant: 40),
             
-            directorView.topAnchor.constraint(equalTo: yearAndGenreStack.bottomAnchor, constant: 5),
+            directorView.topAnchor.constraint(equalTo: yearAndRatedStack.bottomAnchor, constant: 5),
             directorView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
             directorView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
             directorView.heightAnchor.constraint(equalToConstant: 60),
@@ -207,7 +187,6 @@ class NewDetailVC: UIViewController {
             
             watchProvidersStackView.topAnchor.constraint(equalTo: actorsView.bottomAnchor, constant: 15),
             watchProvidersStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            watchProvidersStackView.heightAnchor.constraint(equalToConstant: 90)
             watchProvidersStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
     }
@@ -392,16 +371,13 @@ extension NewDetailVC {
 
 extension NewDetailVC {
     func checkIfAlreadyOnWatchlist() {
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
-        let heartImageUnfilled = UIImage(systemName: "suit.heart", withConfiguration: largeConfig)
-        let heartImageFilled = UIImage(systemName: "suit.heart.fill", withConfiguration: largeConfig)
         
         let filterForCurrentMovie = currentWatchlist.filter { $0.title == movieTitle }
         if filterForCurrentMovie.isEmpty {
-            addToWatchlistButton.setImage(heartImageUnfilled, for: .normal)
+            addToWatchlistButton.setImage(IconImages.heartUnfilled.image, for: .normal)
             onWatchlist = true
         } else if !filterForCurrentMovie.isEmpty {
-            addToWatchlistButton.setImage(heartImageFilled, for: .normal)
+            addToWatchlistButton.setImage(IconImages.heartFilled.image, for: .normal)
             onWatchlist = false
             addToWatchlistButton.removeTarget(self, action: nil, for: .touchUpInside)
         }
