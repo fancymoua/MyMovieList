@@ -16,15 +16,24 @@ class WatchlistVC: UIViewController {
         addSubviews()
         configureUI()
         
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func setTestData() {
         let movie1 = WatchItem(title: "Arrival")
-        let movie2 = WatchItem(title: "Once Upon a time...in Hollywood")
+        let movie2 = WatchItem(title: "The Nightmare Before Christmas")
         let movie3 = WatchItem(title: "Home Alone 3")
         let movie4 = WatchItem(title: "Up")
-        let movie5 = WatchItem(title: "Die Hard with a Vengeance")
+        let movie5 = WatchItem(title: "Die Hard")
         
         let testArray = [movie1, movie2, movie3, movie4, movie5]
         
@@ -45,14 +54,14 @@ class WatchlistVC: UIViewController {
     func configureUI() {
         
         header.text = "Watchlist"
-        header.font = UIFont(name: "Avenir Next Medium", size: 20)
+        header.font = UIFont(name: "Avenir Next Regular", size: 18)
         
         watchlistTableView.register(WatchItemCell.self, forCellReuseIdentifier: WatchItemCell.reuseID)
         watchlistTableView.delegate = self
         watchlistTableView.dataSource = self
         
         NSLayoutConstraint.activate([
-            header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
+            header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             header.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             header.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             header.heightAnchor.constraint(equalToConstant: 25),
@@ -62,7 +71,6 @@ class WatchlistVC: UIViewController {
             watchlistTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             watchlistTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
         ])
-        
         
     }
 }
@@ -87,5 +95,12 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
         return 80
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let destVC = NewDetailVC()
+        
+        destVC.movieTitle = watchlistItemsArray[indexPath.item].title
+        destVC.posterImage = #imageLiteral(resourceName: "tenet")
+        
+        show(destVC, sender: self)
+    }
 }

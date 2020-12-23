@@ -11,6 +11,7 @@ class WatchItemCell: UITableViewCell {
     func configureCell(_ title: String) {
         self.title.text = title
         accessoryType = .disclosureIndicator
+        selectionStyle = .none
         
 //        backgroundColor = .systemGray4
     }
@@ -20,8 +21,7 @@ class WatchItemCell: UITableViewCell {
         title.translatesAutoresizingMaskIntoConstraints = false
         
         title.textColor = .black
-//        title.font = UIFont(name: "Avenir Next Medium", size: 20)
-//        title.backgroundColor = .systemPink
+        title.font = UIFont(name: "Avenir Next Medium", size: 20)
         
         NSLayoutConstraint.activate([
             title.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),

@@ -42,6 +42,8 @@ class NewDetailVC: UIViewController {
         getMovieDetails()
         getWatchProviders()
         
+//        posterImageView.image = #imageLiteral(resourceName: "tenet")
+        
         configureVC()
         addSubviews()
         configureMainViews()
@@ -213,7 +215,7 @@ extension NewDetailVC {
                         self.titleLabel.text = title
                         self.ratingLabel.text = imdbRating
                         self.plotLabel.text = plot
-                        self.posterImageView.image = self.posterImage   // passed from previous VC
+                        self.posterImageView.image = self.posterImage  // passed from previous VC
                         self.yearView.setText(text: year ?? "n/a")
                         self.ratedView.setText(text: rated ?? "n/a")
                         self.directorView.setText(text: director ?? "n/a")
