@@ -39,8 +39,8 @@ class NewDetailVC: UIViewController {
         super.viewDidLoad()
         
         configureVC()
-        
-        retrieveUserWatchlist()
+        currentWatchlist = WatchlistManager.retrieveWatchlist()
+
         checkIfAlreadyOnWatchlist()
         getMovieDetails()
         getWatchProviders()
@@ -48,20 +48,6 @@ class NewDetailVC: UIViewController {
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
-    }
-    
-    func retrieveUserWatchlist() {
-        if let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data {
-            do {
-                let decoder = JSONDecoder()
-                currentWatchlist = try decoder.decode([WatchItem].self, from: watchlistRaw)
-                print("currentWatchlist: \(currentWatchlist)")
-            } catch {
-                print("Couldn't decode watchlistItem")
-            }
-        } else {
-            print("Watchlist empty")
-        }
     }
     
     func addSubviews() {

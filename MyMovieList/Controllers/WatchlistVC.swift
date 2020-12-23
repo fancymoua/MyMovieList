@@ -23,22 +23,22 @@ class WatchlistVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        retrieveWatchlist()
+        watchlistItemsArray = WatchlistManager.retrieveWatchlist()
         watchlistTableView.reloadData()
     }
     
-    func retrieveWatchlist() {
-        if let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data {
-            do {
-                let decoder = JSONDecoder()
-                watchlistItemsArray = try decoder.decode([WatchItem].self, from: watchlistRaw)
-            } catch {
-                print("Couldn't decode watchlistItem")
-            }
-        } else {
-            print("watchlist is empty!")
-        }
-    }
+//    func retrieveWatchlist() {
+//        if let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data {
+//            do {
+//                let decoder = JSONDecoder()
+//                watchlistItemsArray = try decoder.decode([WatchItem].self, from: watchlistRaw)
+//            } catch {
+//                print("Couldn't decode watchlistItem")
+//            }
+//        } else {
+//            print("watchlist is empty!")
+//        }
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -49,20 +49,6 @@ class WatchlistVC: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
-//    func setTestData() {
-//        let movie1 = WatchItem(title: "Arrival")
-//        let movie2 = WatchItem(title: "The Nightmare Before Christmas")
-//        let movie3 = WatchItem(title: "Home Alone 3")
-//        let movie4 = WatchItem(title: "Up")
-//        let movie5 = WatchItem(title: "Die Hard")
-//        
-//        let testArray = [movie1, movie2, movie3, movie4, movie5]
-//        
-//        for movie in testArray {
-//            watchlistItemsArray.append(movie)
-//        }
-//    }
     
     func addSubviews() {
         let views = [header, watchlistTableView]
@@ -182,7 +168,7 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
                 print("Could not set encodedWatchlist to userDefaults")
             }
             
-            self.retrieveWatchlist()
+            self.watchlistItemsArray = WatchlistManager.retrieveWatchlist()
             self.watchlistTableView.reloadData()
         }
         
