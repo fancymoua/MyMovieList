@@ -41,7 +41,6 @@ class NewDetailVC: UIViewController {
         configureVC()
         currentWatchlist = WatchlistManager.retrieveWatchlist()
 
-        checkIfAlreadyOnWatchlist()
         getMovieDetails()
         getWatchProviders()
         
@@ -68,7 +67,11 @@ class NewDetailVC: UIViewController {
     func configureMainViews() {
         addToWatchlistButton.backgroundColor = UIColor(white: 0.8, alpha: 0.9)
         addToWatchlistButton.tintColor = .red
-        addToWatchlistButton.addTarget(self, action: #selector(watchlistButtonTapped), for: .touchUpInside)
+        addToWatchlistButton.setImage(WatchlistManager.checkIfAlreadyOnWatchlist(title: movieTitle!), for: .normal)
+        
+        if addToWatchlistButton.image(for: .normal) == IconImages.heartUnfilled.image {
+            addToWatchlistButton.addTarget(self, action: #selector(watchlistButtonTapped), for: .touchUpInside)
+        }
         
         posterImageView.contentMode = .scaleAspectFill
         
@@ -96,19 +99,9 @@ class NewDetailVC: UIViewController {
     @objc func watchlistButtonTapped() {
         
         addToWatchlistButton.setImage(IconImages.heartFilled.image, for: .normal)
-        
-        let newWatchItem = WatchItem(title: movieTitle!, tmdbID: tmdbID!, posterPath: posterPath ?? "")
-        currentWatchlist.append(newWatchItem)
-        
-        do {
-            let encoder = JSONEncoder()
-            let encodedWatchlist = try encoder.encode(currentWatchlist)
-            UserDefaults.standard.setValue(encodedWatchlist, forKey: "Watchlist")
-        } catch {
-            print("Could not set encodedWatchlist to userDefaults")
-        }
-        
         addToWatchlistButton.removeTarget(self, action: nil, for: .touchUpInside)
+        
+        WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: posterPath ?? "")
     }
     
     func configureMovieDetailViews() {
@@ -324,20 +317,5 @@ extension NewDetailVC {
     
     func configureVC() {
         navigationController?.navigationBar.prefersLargeTitles = true
-    }
-}
-
-extension NewDetailVC {
-    func checkIfAlreadyOnWatchlist() {
-        
-        let filterForCurrentMovie = currentWatchlist.filter { $0.title == movieTitle }
-        if filterForCurrentMovie.isEmpty {
-            addToWatchlistButton.setImage(IconImages.heartUnfilled.image, for: .normal)
-            onWatchlist = true
-        } else if !filterForCurrentMovie.isEmpty {
-            addToWatchlistButton.setImage(IconImages.heartFilled.image, for: .normal)
-            onWatchlist = false
-            addToWatchlistButton.removeTarget(self, action: nil, for: .touchUpInside)
-        }
     }
 }
