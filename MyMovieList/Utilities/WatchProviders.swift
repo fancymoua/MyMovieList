@@ -12,6 +12,28 @@ enum WatchProviders {
     case DisneyPlus
     case AmazonPrime
     
+    // tmdb's provider ID
+    var id: Int {
+        switch self {
+        case .AppleITunes:
+            return 2
+        case .AmazonVideoRent:
+            return 10
+        case .AmazonVideoBuy:
+            return 10
+        case .Netflix:
+            return 8
+        case .Hulu:
+            return 15
+        case .HBONow:
+            return 27
+        case .DisneyPlus:
+            return 337
+        case .AmazonPrime:
+            return 9
+        }
+    }
+    
     var logo: UIImage {
         switch self {
         case .AppleITunes:

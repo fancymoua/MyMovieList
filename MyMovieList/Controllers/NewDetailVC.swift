@@ -290,25 +290,24 @@ extension NewDetailVC {
                     
                     if let safeFlatrate = results.flatrate {
                         for item in safeFlatrate {
-                            if item.provider_id == 8 { self.addWatchProvider(.Netflix) }
-                            if item.provider_id == 337 { self.addWatchProvider(.DisneyPlus) }
-                            if item.provider_id == 15 { self.addWatchProvider(.Hulu) }
-                            if item.provider_id == 9 { self.addWatchProvider(.AmazonPrime) }
-                            if item.provider_id == 27 { self.addWatchProvider(.HBONow) }
+                            if item.provider_id == WatchProviders.Netflix.id { self.addWatchProvider(.Netflix) }
+                            if item.provider_id == WatchProviders.DisneyPlus.id { self.addWatchProvider(.DisneyPlus) }
+                            if item.provider_id == WatchProviders.Hulu.id { self.addWatchProvider(.Hulu) }
+                            if item.provider_id == WatchProviders.AmazonPrime.id { self.addWatchProvider(.AmazonPrime) }
+                            if item.provider_id == WatchProviders.HBONow.id { self.addWatchProvider(.HBONow) }
                         }
                     }
                     
                     if let safeRent = results.rent {
                         for item in safeRent {
-                            if item.provider_id == 10 { self.addWatchProvider(.AmazonVideoRent) }
+                            if item.provider_id == WatchProviders.AmazonVideoRent.id { self.addWatchProvider(.AmazonVideoRent) }
                         }
                     }
                     
                     if let safeBuy = results.buy {
                         for item in safeBuy {
-                            
-                            if item.provider_id == 10 { self.addWatchProvider(.AmazonVideoBuy) }
-                            if item.provider_id == 2 { self.addWatchProvider(.AppleITunes) }
+                            if item.provider_id == WatchProviders.AmazonVideoBuy.id { self.addWatchProvider(.AmazonVideoBuy) }
+                            if item.provider_id == WatchProviders.AppleITunes.id { self.addWatchProvider(.AppleITunes) }
                         }
                     }
                 } catch {
@@ -354,6 +353,5 @@ extension NewDetailVC {
             onWatchlist = false
             addToWatchlistButton.removeTarget(self, action: nil, for: .touchUpInside)
         }
-
     }
 }
