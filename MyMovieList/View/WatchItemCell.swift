@@ -26,6 +26,9 @@ class WatchItemCell: UITableViewCell {
         
         title.textColor = .black
         title.font = UIFont(name: "Avenir Next Medium", size: 20)
+        title.numberOfLines = 2
+        title.adjustsFontSizeToFitWidth = true
+        title.minimumScaleFactor = 0.9
         
         NSLayoutConstraint.activate([
             posterImage.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -35,7 +38,8 @@ class WatchItemCell: UITableViewCell {
             
             title.leadingAnchor.constraint(equalTo: posterImage.trailingAnchor, constant: 15),
             title.centerYAnchor.constraint(equalTo: centerYAnchor),
-            title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+            title.heightAnchor.constraint(equalToConstant: 70),
+            title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25)
         ])
         
     }
