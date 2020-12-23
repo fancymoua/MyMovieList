@@ -53,6 +53,23 @@ class NewDetailVC: UIViewController {
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
+        checkIfAlreadyOnWatchlist()
+    }
+    
+    func checkIfAlreadyOnWatchlist() {
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
+        let heartImageUnfilled = UIImage(systemName: "suit.heart", withConfiguration: largeConfig)
+        let heartImageFilled = UIImage(systemName: "suit.heart.fill", withConfiguration: largeConfig)
+        
+        let filterForCurrentMovie = currentWatchlist.filter { $0.title == movieTitle }
+        if filterForCurrentMovie.isEmpty {
+            addToWatchlistButton.setImage(heartImageUnfilled, for: .normal)
+            onWatchlist = true
+        } else if !filterForCurrentMovie.isEmpty {
+            addToWatchlistButton.setImage(heartImageFilled, for: .normal)
+            onWatchlist = false
+        }
+
     }
     
     func retrieveWatchlist() {
