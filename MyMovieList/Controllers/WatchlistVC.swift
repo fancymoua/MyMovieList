@@ -120,4 +120,25 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
         
         show(destVC, sender: self)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+            print("delete this")
+            let title = self.watchlistItemsArray[indexPath.item].title
+            self.watchlistItemsArray.removeAll { $0.title == title }
+            
+            do {
+                let encoder = JSONEncoder()
+                let encodedWatchlist = try encoder.encode(self.watchlistItemsArray)
+                UserDefaults.standard.setValue(encodedWatchlist, forKey: "Watchlist")
+            } catch {
+                print("Could not set encodedWatchlist to userDefaults")
+            }
+            
+            self.retrieveWatchlist()
+            self.watchlistTableView.reloadData()
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }
