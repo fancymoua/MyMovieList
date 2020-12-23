@@ -7,7 +7,7 @@ class NewDetailVC: UIViewController {
     // primary views
     let posterImageView = UIImageView()
     let detailsBackgroundView = UIView()
-    let watchlistButton = UIButton()
+    let addToWatchlistButton = UIButton()
     
     // goes inside detailsBackgroundView
     let titleLabel = MovieTitleLabel()
@@ -36,6 +36,8 @@ class NewDetailVC: UIViewController {
     var providersStackViewWidthConstraint = NSLayoutConstraint()
     var providersWidth: CGFloat = 0
     
+    var onWatchlist: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,7 +53,7 @@ class NewDetailVC: UIViewController {
     }
     
     func addSubviews() {
-        let mainViews = [posterImageView, detailsBackgroundView, watchlistButton]
+        let mainViews = [posterImageView, detailsBackgroundView, addToWatchlistButton]
         let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndGenreStack, directorView, actorsView, watchProvidersStackView]
         
         for view in mainViews {
@@ -70,9 +72,10 @@ class NewDetailVC: UIViewController {
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
         let heartImage = UIImage(systemName: "suit.heart", withConfiguration: largeConfig)
         
-        watchlistButton.setImage(heartImage, for: .normal)
-        watchlistButton.backgroundColor = UIColor(white: 0.8, alpha: 0.9)
-        watchlistButton.tintColor = .red
+        addToWatchlistButton.setImage(heartImage, for: .normal)
+        addToWatchlistButton.backgroundColor = UIColor(white: 0.8, alpha: 0.9)
+        addToWatchlistButton.tintColor = .red
+        addToWatchlistButton.addTarget(self, action: #selector(watchlistButtonTapped), for: .touchUpInside)
         
         posterImageView.contentMode = .scaleAspectFill
         
@@ -90,11 +93,27 @@ class NewDetailVC: UIViewController {
             detailsBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             detailsBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            watchlistButton.bottomAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: -10),
-            watchlistButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
-            watchlistButton.heightAnchor.constraint(equalToConstant: 40),
-            watchlistButton.widthAnchor.constraint(equalToConstant: 40)
+            addToWatchlistButton.bottomAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: -10),
+            addToWatchlistButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
+            addToWatchlistButton.heightAnchor.constraint(equalToConstant: 40),
+            addToWatchlistButton.widthAnchor.constraint(equalToConstant: 40)
         ])
+    }
+    
+    @objc func watchlistButtonTapped() {
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
+        let heartImageFilled = UIImage(systemName: "suit.heart.fill", withConfiguration: largeConfig)
+        let heartImage = UIImage(systemName: "suit.heart", withConfiguration: largeConfig)
+        
+        print("Add to watchlist: \(movieTitle)")
+        if onWatchlist == false {
+            addToWatchlistButton.setImage(heartImageFilled, for: .normal)
+            onWatchlist = true
+        } else if onWatchlist == true {
+            addToWatchlistButton.setImage(heartImage, for: .normal)
+            onWatchlist = false
+        }
+    
     }
     
     func configureMovieDetailViews() {
