@@ -12,10 +12,10 @@ class WatchlistVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setTestData()
+//        setTestData()
         addSubviews()
         configureUI()
-        
+        retrieveWatchlist()
         
     }
     
@@ -30,8 +30,8 @@ class WatchlistVC: UIViewController {
         
         do {
             let decoder = JSONDecoder()
-            let watchlist = try decoder.decode([WatchItem].self, from: watchlistRaw!)
-            print("watchlist2: \(watchlist)")
+            watchlistItemsArray = try decoder.decode([WatchItem].self, from: watchlistRaw!)
+            print("watchlist2: \(watchlistItemsArray)")
         } catch {
             print("Couldn't decode watchlistItem")
         }
