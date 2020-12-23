@@ -38,9 +38,12 @@ class NewDetailVC: UIViewController {
     
     var onWatchlist: Bool = false
     
+    var currentWatchlist = [WatchItem]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        retrieveWatchlist()
         getMovieDetails()
         getWatchProviders()
         
@@ -50,6 +53,19 @@ class NewDetailVC: UIViewController {
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
+    }
+    
+    func retrieveWatchlist() {
+        let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data
+        print("watchlistRaw: \(watchlistRaw)")
+        
+        do {
+            let decoder = JSONDecoder()
+            currentWatchlist = try decoder.decode([WatchItem].self, from: watchlistRaw!)
+            print("currentWatchlist: \(currentWatchlist)")
+        } catch {
+            print("Couldn't decode watchlistItem")
+        }
     }
     
     func addSubviews() {
@@ -113,7 +129,17 @@ class NewDetailVC: UIViewController {
             addToWatchlistButton.setImage(heartImage, for: .normal)
             onWatchlist = false
         }
-    
+        
+        let newWatchItem = WatchItem(title: movieTitle!)
+        currentWatchlist.append(newWatchItem)
+        
+        do {
+            let encoder = JSONEncoder()
+            let encodedWatchlist = try encoder.encode(currentWatchlist)
+            UserDefaults.standard.setValue(encodedWatchlist, forKey: "Watchlist")
+        } catch {
+            print("Could not set encodedWatchlist to userDefaults")
+        }
     }
     
     func configureMovieDetailViews() {

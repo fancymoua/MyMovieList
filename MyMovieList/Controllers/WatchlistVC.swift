@@ -16,6 +16,25 @@ class WatchlistVC: UIViewController {
         addSubviews()
         configureUI()
         
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        retrieveWatchlist()
+    }
+    
+    func retrieveWatchlist() {
+        let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data
+        print("watchlistRaw: \(watchlistRaw)")
+        
+        do {
+            let decoder = JSONDecoder()
+            let watchlist = try decoder.decode([WatchItem].self, from: watchlistRaw!)
+            print("watchlist2: \(watchlist)")
+        } catch {
+            print("Couldn't decode watchlistItem")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

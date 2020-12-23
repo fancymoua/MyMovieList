@@ -2,7 +2,7 @@
 
 import UIKit
 
-struct WatchItem {
+struct WatchItem: Codable {
     
     var title: String
     
