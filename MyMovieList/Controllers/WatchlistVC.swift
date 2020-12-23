@@ -8,6 +8,10 @@ class WatchlistVC: UIViewController {
     let watchlistTableView = UITableView()
     
     var watchlistItemsArray = [WatchItem]()
+    
+    let cache = NSCache<NSString, UIImage>()
+    
+    private let photoBaseURL = "https://image.tmdb.org/t/p/original"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +83,7 @@ class WatchlistVC: UIViewController {
         watchlistTableView.dataSource = self
         
         NSLayoutConstraint.activate([
-            header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             header.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             header.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             header.heightAnchor.constraint(equalToConstant: 25),
@@ -103,14 +107,33 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
         
         let title = watchlistItemsArray[indexPath.item].title
         
-        cell.configureCell(title)
+        var posterImage = UIImage()
+        
+        if let posterPath = self.watchlistItemsArray[indexPath.item].posterPath {
+
+            let endpoint = self.photoBaseURL + posterPath
+            let posterImageURL = URL(string: endpoint)!
+
+            let cacheKey = NSString(string: endpoint)
+
+            if let image = cache.object(forKey: cacheKey) {
+                posterImage = image
+            } else {
+                if let data = try? Data(contentsOf: posterImageURL) {
+                    posterImage = UIImage(data: data) ?? #imageLiteral(resourceName: "question-mark")
+                    self.cache.setObject(posterImage, forKey: cacheKey)
+                }
+            }
+        }
+        
+        cell.configureCell(title, posterImage: posterImage)
         cell.configureConstraints()
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 90
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -118,11 +141,27 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
         
         destVC.hidesBottomBarWhenPushed = true
         
+        let posterPath = watchlistItemsArray[indexPath.item].posterPath
+        
+        var posterImage = UIImage()
+        
+        if let posterPath = self.watchlistItemsArray[indexPath.item].posterPath {
+            
+            let endpoint = self.photoBaseURL + posterPath
+            
+            let cacheKey = NSString(string: endpoint)
+            
+            if let image = cache.object(forKey: cacheKey) {
+                posterImage = image
+            } else {
+                posterImage = #imageLiteral(resourceName: "question-mark")
+            }
+        }
+        
         destVC.movieTitle = watchlistItemsArray[indexPath.item].title
         destVC.posterImage = #imageLiteral(resourceName: "tenet")
         destVC.tmdbID = watchlistItemsArray[indexPath.item].tmdbID
-        
-        let posterPath = watchlistItemsArray[indexPath.item].posterPath
+        destVC.posterImage = posterImage
         
         print("posterPath: \(posterPath)")
         
