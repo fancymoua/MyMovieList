@@ -66,12 +66,9 @@ class NewDetailVC: UIViewController {
     func configureMainViews() {
         
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
-        
         let heartImage = UIImage(systemName: "suit.heart", withConfiguration: largeConfig)
         
         watchlistButton.setImage(heartImage, for: .normal)
-//        watchlistButton.backgroundColor = .systemGray5
-//        watchlistButton.backgroundColor = UIColor(red: 220, green: 220, blue: 220, alpha: 0.1)
         watchlistButton.backgroundColor = UIColor(white: 0.8, alpha: 0.9)
         watchlistButton.tintColor = .red
         
