@@ -16,10 +16,10 @@ class NewDetailVC: UIViewController {
     let ratingLabel = UILabel()
     let plotLabel = MoviePlotLabel()
     let yearAndRatedStack = UIStackView()
-    let yearView = SmallDetailBlock(icon: UIImage(systemName: "calendar")!)
-    let ratedView = SmallDetailBlock(icon: UIImage(systemName: "pencil.tip.crop.circle")!)
-    let directorView = LargeDetailBlock(icon: UIImage(systemName: "person.fill")!, header: "Director:")
-    let actorsView = LargeDetailBlock(icon: UIImage(systemName: "person.2.square.stack")!, header: "Starring:")
+    let yearView = SmallDetailBlock(icon: IconImages.movieDetailDate.image)
+    let ratedView = SmallDetailBlock(icon: IconImages.movieDetailRated.image)
+    let directorView = LargeDetailBlock(icon: IconImages.movieDetailDirector.image, header: "Director")
+    let actorsView = LargeDetailBlock(icon: IconImages.movieDetailActors.image, header: "Starring")
     let watchProvidersStackView = UIStackView()
     
     // variables populated from previous view
