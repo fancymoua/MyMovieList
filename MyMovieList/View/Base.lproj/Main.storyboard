@@ -142,13 +142,13 @@
         <!--Search ResultsVC-->
         <scene sceneID="ytr-mn-FMY">
             <objects>
-                <viewController storyboardIdentifier="SearchResultsView" id="KbG-bt-k5X" customClass="SearchResultsVC" customModule="MyMovieList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchResultsView" hidesBottomBarWhenPushed="YES" id="KbG-bt-k5X" customClass="SearchResultsVC" customModule="MyMovieList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zLh-qi-HUa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7ge-Ql-Kb6">
-                                <rect key="frame" x="30" y="103" width="356" height="710"/>
+                                <rect key="frame" x="30" y="103" width="356" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="15" minimumInteritemSpacing="5" id="9TJ-Pa-aVg">
                                     <size key="itemSize" width="128" height="128"/>
@@ -338,7 +338,7 @@
         <!--New DetailVC-->
         <scene sceneID="ej1-Ft-4Kf">
             <objects>
-                <viewController storyboardIdentifier="NewDetailView" id="vmy-de-RTt" customClass="NewDetailVC" customModule="MyMovieList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewDetailView" hidesBottomBarWhenPushed="YES" id="vmy-de-RTt" customClass="NewDetailVC" customModule="MyMovieList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zZN-gQ-Phe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -421,6 +421,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ifL-gU-StE" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s0T-7C-3OY">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" systemColor="systemGreenColor"/>

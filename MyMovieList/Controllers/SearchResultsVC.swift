@@ -147,6 +147,8 @@ extension SearchResultsVC: UICollectionViewDelegate {
         
         let destVC = NewDetailVC()
         
+        destVC.hidesBottomBarWhenPushed = true
+        
         var posterImage = UIImage()
         
         if let posterPath = self.searchResultsArray[indexPath.item].poster_path {

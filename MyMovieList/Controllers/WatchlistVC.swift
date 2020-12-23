@@ -98,6 +98,8 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destVC = NewDetailVC()
         
+        destVC.hidesBottomBarWhenPushed = true
+        
         destVC.movieTitle = watchlistItemsArray[indexPath.item].title
         destVC.posterImage = #imageLiteral(resourceName: "tenet")
         

@@ -118,6 +118,8 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
         
         let destVC = NewDetailVC()
         
+        destVC.hidesBottomBarWhenPushed = true
+        
         var posterImage = UIImage()
         
         if let posterPath = self.moviesArray[indexPath.item].poster_path {
