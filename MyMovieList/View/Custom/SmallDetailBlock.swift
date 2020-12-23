@@ -35,7 +35,7 @@ class SmallDetailBlock: UIView {
         
         iconImageView.tintColor = .label
         
-        textLabel.font = UIFont(name: "Avenir Next", size: 16)
+        textLabel.font = UIFont(name: "Avenir Next", size: 15)
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.minimumScaleFactor = 0.6
         textLabel.numberOfLines = 3
@@ -43,8 +43,8 @@ class SmallDetailBlock: UIView {
         NSLayoutConstraint.activate([
             iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            iconImageView.widthAnchor.constraint(equalToConstant: 25),
-            iconImageView.heightAnchor.constraint(equalToConstant: 25),
+            iconImageView.widthAnchor.constraint(equalToConstant: 20),
+            iconImageView.heightAnchor.constraint(equalToConstant: 20),
             
             textLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             textLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 15),

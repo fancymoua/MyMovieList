@@ -178,12 +178,12 @@ class NewDetailVC: UIViewController {
             titleLabel.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
             titleLabel.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
             titleLabel.trailingAnchor.constraint(equalTo: ratingStackView.leadingAnchor, constant: -15),
-            titleLabel.heightAnchor.constraint(equalToConstant: 25),
+            titleLabel.heightAnchor.constraint(equalToConstant: 20),
             
             ratingStackView.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
             ratingStackView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
             ratingStackView.widthAnchor.constraint(equalToConstant: 90),
-            ratingStackView.heightAnchor.constraint(equalToConstant: 25),
+            ratingStackView.heightAnchor.constraint(equalToConstant: 20),
             
             plotLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             plotLabel.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
@@ -193,21 +193,22 @@ class NewDetailVC: UIViewController {
             yearAndGenreStack.topAnchor.constraint(equalTo: plotLabel.bottomAnchor, constant: 10),
             yearAndGenreStack.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
             yearAndGenreStack.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
-            yearAndGenreStack.heightAnchor.constraint(equalToConstant: 50),
+            yearAndGenreStack.heightAnchor.constraint(equalToConstant: 40),
             
             directorView.topAnchor.constraint(equalTo: yearAndGenreStack.bottomAnchor, constant: 5),
             directorView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
             directorView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
-            directorView.heightAnchor.constraint(equalToConstant: 70),
+            directorView.heightAnchor.constraint(equalToConstant: 60),
             
             actorsView.topAnchor.constraint(equalTo: directorView.bottomAnchor, constant: 5),
             actorsView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
             actorsView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
-            actorsView.heightAnchor.constraint(equalToConstant: 70),
+            actorsView.heightAnchor.constraint(equalToConstant: 60),
             
             watchProvidersStackView.topAnchor.constraint(equalTo: actorsView.bottomAnchor, constant: 15),
             watchProvidersStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            watchProvidersStackView.heightAnchor.constraint(equalToConstant: 90)
+//            watchProvidersStackView.heightAnchor.constraint(equalToConstant: 90)
+            watchProvidersStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
     }
 }
