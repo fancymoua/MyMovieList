@@ -50,22 +50,6 @@ class NewDetailVC: UIViewController {
         configureMovieDetailViews()
     }
     
-    func getMovieDetails() {
-        MovieDetailsManager.getMovieDetails(movieTitle: movieTitle) { (daMovie) in
-            let thisMovie = daMovie
-            DispatchQueue.main.async {
-                self.titleLabel.text = thisMovie.Title
-                self.ratingLabel.text = thisMovie.imdbRating
-                self.plotLabel.text = thisMovie.Plot
-                self.posterImageView.image = self.posterImage  // passed from previous VC
-                self.yearView.setText(text: thisMovie.Year ?? "n/a")
-                self.ratedView.setText(text: thisMovie.Rated ?? "n/a")
-                self.directorView.setText(text: thisMovie.Director ?? "n/a")
-                self.actorsView.setText(text: thisMovie.Actors ?? "n/a")
-            }
-        }
-    }
-    
     func addSubviews() {
         let mainViews = [posterImageView, detailsBackgroundView, addToWatchlistButton]
         let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndRatedStack, directorView, actorsView, watchProvidersStackView]
@@ -111,14 +95,6 @@ class NewDetailVC: UIViewController {
             addToWatchlistButton.heightAnchor.constraint(equalToConstant: 40),
             addToWatchlistButton.widthAnchor.constraint(equalToConstant: 40)
         ])
-    }
-    
-    @objc func watchlistButtonTapped() {
-        
-        addToWatchlistButton.setImage(IconImages.heartFilled.image, for: .normal)
-        addToWatchlistButton.removeTarget(self, action: nil, for: .touchUpInside)
-        
-        WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: posterPath ?? "")
     }
     
     func configureMovieDetailViews() {
@@ -169,89 +145,55 @@ class NewDetailVC: UIViewController {
             watchProvidersStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
     }
+    
+    @objc func watchlistButtonTapped() {
+        
+        addToWatchlistButton.setImage(IconImages.heartFilled.image, for: .normal)
+        addToWatchlistButton.removeTarget(self, action: nil, for: .touchUpInside)
+        
+        WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: posterPath ?? "")
+    }
 }
 
 extension NewDetailVC {
     
-    func getWatchProviders() {
-        
-        if let id = tmdbID {
-            let endpoint = "https://api.themoviedb.org/3/movie/" + "\(id)" + "/watch/providers?api_key=65db6bef59bff99c6a4504f0ce877ade"
-            
-            guard let url = URL(string: endpoint) else {
-                print("bad watch provider URL")
-                return
+    func getMovieDetails() {
+        MovieDetailsManager.getMovieDetails(movieTitle: movieTitle) { (daMovie) in
+            let thisMovie = daMovie
+            DispatchQueue.main.async {
+                self.titleLabel.text = thisMovie.Title
+                self.ratingLabel.text = thisMovie.imdbRating
+                self.plotLabel.text = thisMovie.Plot
+                self.posterImageView.image = self.posterImage  // passed from previous VC
+                self.yearView.setText(text: thisMovie.Year ?? "n/a")
+                self.ratedView.setText(text: thisMovie.Rated ?? "n/a")
+                self.directorView.setText(text: thisMovie.Director ?? "n/a")
+                self.actorsView.setText(text: thisMovie.Actors ?? "n/a")
             }
-            
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                
-                if let _ = error {
-                    print("Error making call to watch provider endpoint")
-                    return 
-                }
-                
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    print("Something other than 200 returned from watch provider endpoint")
-                    return
-                }
-                
-                guard let data = data else {
-                    print("No data from watch provider endpoint")
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    
-                    let allData = try decoder.decode(WatchProviderAPI.self, from: data)
-                    
-                    let results = allData.results.US
-                    
-                    if let safeFlatrate = results.flatrate {
-                        for item in safeFlatrate {
-                            if item.provider_id == WatchProviders.Netflix.id { self.addWatchProvider(.Netflix) }
-                            if item.provider_id == WatchProviders.DisneyPlus.id { self.addWatchProvider(.DisneyPlus) }
-                            if item.provider_id == WatchProviders.Hulu.id { self.addWatchProvider(.Hulu) }
-                            if item.provider_id == WatchProviders.AmazonPrime.id { self.addWatchProvider(.AmazonPrime) }
-                            if item.provider_id == WatchProviders.HBONow.id { self.addWatchProvider(.HBONow) }
-                        }
-                    }
-                    
-                    if let safeRent = results.rent {
-                        for item in safeRent {
-                            if item.provider_id == WatchProviders.AmazonVideoRent.id { self.addWatchProvider(.AmazonVideoRent) }
-                        }
-                    }
-                    
-                    if let safeBuy = results.buy {
-                        for item in safeBuy {
-                            if item.provider_id == WatchProviders.AmazonVideoBuy.id { self.addWatchProvider(.AmazonVideoBuy) }
-                            if item.provider_id == WatchProviders.AppleITunes.id { self.addWatchProvider(.AppleITunes) }
-                        }
-                    }
-                } catch {
-                    print("Could not decode watch provider data")
-                }
-            }
-            task.resume()
         }
     }
     
-    func addWatchProvider(_ provider: WatchProviders) {
+    func getWatchProviders() {
         
-        let rate = provider.rate
-        let logo = provider.logo
-        
-        DispatchQueue.main.sync {
-            let netBlock = WatchProviderBlock(image: logo, rate: rate)
-            watchProvidersStackView.addArrangedSubview(netBlock)
+        MovieDetailsManager.getWatchProviders(tmdbID: tmdbID) { [self] (providersArray) in
+            print("providersArray: \(providersArray)")
             
-            providersWidth += 60
-            
-            providersStackViewWidthConstraint.constant = providersWidth
-          
-            watchProvidersStackView.updateConstraints()
-            watchProvidersStackView.layoutIfNeeded()
+            for provider in providersArray {
+                let rate = provider.rate
+                let logo = provider.logo
+                
+                DispatchQueue.main.sync {
+                    let netBlock = WatchProviderBlock(image: logo, rate: rate)
+                    watchProvidersStackView.addArrangedSubview(netBlock)
+                    
+                    providersWidth += 60
+                    
+                    providersStackViewWidthConstraint.constant = providersWidth
+                  
+                    watchProvidersStackView.updateConstraints()
+                    watchProvidersStackView.layoutIfNeeded()
+                }
+            }
         }
     }
     
