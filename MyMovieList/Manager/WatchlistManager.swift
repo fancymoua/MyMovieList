@@ -4,7 +4,7 @@ import UIKit
 
 struct WatchlistManager {
     
-    static func retrieveWatchlist() -> [WatchItem] {
+    static func retrieveWatchlist(completed: @escaping ([WatchItem])->Void){
         
         var itemsArray = [WatchItem]()
         
@@ -12,47 +12,51 @@ struct WatchlistManager {
             do {
                 let decoder = JSONDecoder()
                 itemsArray = try decoder.decode([WatchItem].self, from: watchlistRaw)
+                completed(itemsArray)
             } catch {
                 print("Couldn't decode watchlistItem")
             }
         } else {
             print("watchlist is empty!")
             itemsArray = []
+            completed(itemsArray)
         }
-        
-        return itemsArray
     }
     
     static func addToWatchlist(title: String, tmdbID: Int, posterPath: String, rating: String) {
         
-        var currentWatchlist = retrieveWatchlist()
-        
-        let newWatchItem = WatchItem(title: title, tmdbID: tmdbID, posterPath: posterPath, rating: rating)
-        currentWatchlist.append(newWatchItem)
-        
-        do {
-            let encoder = JSONEncoder()
-            let encodedWatchlist = try encoder.encode(currentWatchlist)
-            UserDefaults.standard.setValue(encodedWatchlist, forKey: "Watchlist")
-        } catch {
-            print("Could not set encodedWatchlist to userDefaults")
+        var currentWatchlist = [WatchItem]()
+        retrieveWatchlist { (watchlist) in
+            currentWatchlist = watchlist
+            
+            let newWatchItem = WatchItem(title: title, tmdbID: tmdbID, posterPath: posterPath, rating: rating)
+            currentWatchlist.append(newWatchItem)
+            
+            do {
+                let encoder = JSONEncoder()
+                let encodedWatchlist = try encoder.encode(currentWatchlist)
+                UserDefaults.standard.setValue(encodedWatchlist, forKey: "Watchlist")
+            } catch {
+                print("Could not set encodedWatchlist to userDefaults")
+            }
         }
     }
     
     static func checkIfAlreadyOnWatchlist(title: String) -> UIImage {
         
-        let currentWatchlist = retrieveWatchlist()
-        
         var image = UIImage()
-        
-        let filterForCurrentMovie = currentWatchlist.filter { $0.title == title }
-        
-        if filterForCurrentMovie.isEmpty {
-            image = IconImages.heartUnfilled.image
-        } else if !filterForCurrentMovie.isEmpty {
-            image = IconImages.heartFilled.image
+        var currentWatchlist = [WatchItem]()
+        retrieveWatchlist { (watchlist) in
+            currentWatchlist = watchlist
+            
+            let filterForCurrentMovie = currentWatchlist.filter { $0.title == title }
+            
+            if filterForCurrentMovie.isEmpty {
+                image = IconImages.heartUnfilled.image
+            } else if !filterForCurrentMovie.isEmpty {
+                image = IconImages.heartFilled.image
+            }
         }
-        
         return image
     }
     

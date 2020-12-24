@@ -40,7 +40,9 @@ class NewDetailVC: UIViewController {
         super.viewDidLoad()
         
         configureVC()
-        currentWatchlist = WatchlistManager.retrieveWatchlist()
+        WatchlistManager.retrieveWatchlist { (watchlist) in
+            self.currentWatchlist = watchlist
+        }
         
         getMovieDetails()
         getWatchProviders()

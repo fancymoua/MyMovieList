@@ -40,8 +40,11 @@ class WatchlistVC: UIViewController {
     fileprivate var cowTimer: Timer!
     
     func getWatchlist() {
-        watchlistItemsArray = WatchlistManager.retrieveWatchlist()
-        watchlistTableView.reloadData()
+        
+        WatchlistManager.retrieveWatchlist { (watchlist) in
+            self.watchlistItemsArray = watchlist
+            self.watchlistTableView.reloadData()
+        }
     }
     
     func addSubviews() {
@@ -152,8 +155,10 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
             self.watchlistItemsArray.removeAll { $0.title == title }
             
             WatchlistManager.updateWatchlistAfterDeletion(watchlist: self.watchlistItemsArray)
-            self.watchlistItemsArray = WatchlistManager.retrieveWatchlist()
-            self.watchlistTableView.reloadData()
+            WatchlistManager.retrieveWatchlist { (watchlist) in
+                self.watchlistItemsArray = watchlist
+                self.watchlistTableView.reloadData()
+            }
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
