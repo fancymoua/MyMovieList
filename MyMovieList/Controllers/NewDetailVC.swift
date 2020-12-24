@@ -40,13 +40,30 @@ class NewDetailVC: UIViewController {
         
         configureVC()
         currentWatchlist = WatchlistManager.retrieveWatchlist()
-
+        
         getMovieDetails()
         getWatchProviders()
         
         addSubviews()
+        
         configureMainViews()
         configureMovieDetailViews()
+    }
+    
+    func getMovieDetails() {
+        MovieDetailsManager.getMovieDetails(movieTitle: movieTitle) { (daMovie) in
+            let thisMovie = daMovie
+            DispatchQueue.main.async {
+                self.titleLabel.text = thisMovie.Title
+                self.ratingLabel.text = thisMovie.imdbRating
+                self.plotLabel.text = thisMovie.Plot
+                self.posterImageView.image = self.posterImage  // passed from previous VC
+                self.yearView.setText(text: thisMovie.Year ?? "n/a")
+                self.ratedView.setText(text: thisMovie.Rated ?? "n/a")
+                self.directorView.setText(text: thisMovie.Director ?? "n/a")
+                self.actorsView.setText(text: thisMovie.Actors ?? "n/a")
+            }
+        }
     }
     
     func addSubviews() {
@@ -155,61 +172,6 @@ class NewDetailVC: UIViewController {
 }
 
 extension NewDetailVC {
-    func getMovieDetails() {
-        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&t="
-        
-        var movieEndpoint = String()
-        
-        if let title = movieTitle {
-            let query = title.replacingOccurrences(of: " ", with: "+")
-            movieEndpoint = baseURL + query
-            
-            print("This is movieEndpoint \(movieEndpoint)")
-            
-            guard let url = URL(string: movieEndpoint) else {
-                print("Bad movieEndpoint")
-                return
-            }
-            
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                
-                if let _ = error {
-                    print("error making call to OMDB")
-                }
-                
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    print("Something other than 200 from OMDB")
-                    return
-                }
-                
-                guard let data = data else {
-                    print("No data from OMDB")
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let result = try decoder.decode(MovieDetailModel.self, from: data)
-                    
-                    let thisMovie = MovieDetailModel(imdbID: result.imdbID, Title: result.Title, Year: result.Year, Plot: result.Plot, Director: result.Director, Actors: result.Actors, Poster: result.Poster, Genre: result.Genre, imdbRating: result.imdbRating, Rated: result.Rated)
-                    
-                    DispatchQueue.main.async {
-                        self.titleLabel.text = thisMovie.Title
-                        self.ratingLabel.text = thisMovie.imdbRating
-                        self.plotLabel.text = thisMovie.Plot
-                        self.posterImageView.image = self.posterImage  // passed from previous VC
-                        self.yearView.setText(text: thisMovie.Year ?? "n/a")
-                        self.ratedView.setText(text: thisMovie.Rated ?? "n/a")
-                        self.directorView.setText(text: thisMovie.Director ?? "n/a")
-                        self.actorsView.setText(text: thisMovie.Actors ?? "n/a")
-                    }
-                } catch {
-                    print("Error getting movie details")
-                }
-            }
-            task.resume()
-        }
-    }
     
     func getWatchProviders() {
         
