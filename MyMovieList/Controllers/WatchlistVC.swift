@@ -23,8 +23,8 @@ class WatchlistVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        watchlistItemsArray = WatchlistManager.retrieveWatchlist()
-        watchlistTableView.reloadData()
+        
+        getWatchlist()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +35,13 @@ class WatchlistVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    fileprivate var cowTimer: Timer!
+    
+    func getWatchlist() {
+        watchlistItemsArray = WatchlistManager.retrieveWatchlist()
+        watchlistTableView.reloadData()
     }
     
     func addSubviews() {

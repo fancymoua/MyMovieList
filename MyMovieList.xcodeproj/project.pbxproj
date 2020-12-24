@@ -39,6 +39,7 @@
 		B189BE8E258BE30500422624 /* CustomKeywordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B189BE8D258BE30500422624 /* CustomKeywordButton.swift */; };
 		B189BE9B258BFAD400422624 /* TrendingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B189BE9A258BFAD400422624 /* TrendingVC.swift */; };
 		B1C8115225944CA00084635F /* MovieDetailsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C8115125944CA00084635F /* MovieDetailsManager.swift */; };
+		B1C81164259532EC0084635F /* UIViewController+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C81163259532EC0084635F /* UIViewController+ext.swift */; };
 		B1E8BCBE258FDA38009F8FB2 /* WatchProviderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */; };
 		B1E8BCC3258FEEBB009F8FB2 /* WatchProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */; };
 		B1E8BCC8258FF5AF009F8FB2 /* WatchProviderBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */; };
@@ -100,6 +101,7 @@
 		B189BE8D258BE30500422624 /* CustomKeywordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeywordButton.swift; sourceTree = "<group>"; };
 		B189BE9A258BFAD400422624 /* TrendingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingVC.swift; sourceTree = "<group>"; };
 		B1C8115125944CA00084635F /* MovieDetailsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsManager.swift; sourceTree = "<group>"; };
+		B1C81163259532EC0084635F /* UIViewController+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ext.swift"; sourceTree = "<group>"; };
 		B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderAPI.swift; sourceTree = "<group>"; };
 		B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderModel.swift; sourceTree = "<group>"; };
 		B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderBlock.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				B1286BE3259046650063AD70 /* SpecialCollectionsVC.swift */,
 				B1286BF92591349D0063AD70 /* NewDetailVC.swift */,
 				B1286C242592DEE70063AD70 /* WatchlistVC.swift */,
+				B1C81163259532EC0084635F /* UIViewController+ext.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				B1286BFF259159530063AD70 /* MovieTitleLabel.swift in Sources */,
 				B1461293258A931B0030859B /* MovieDetailModel.swift in Sources */,
 				B189BE9B258BFAD400422624 /* TrendingVC.swift in Sources */,
+				B1C81164259532EC0084635F /* UIViewController+ext.swift in Sources */,
 				B1E8BCBE258FDA38009F8FB2 /* WatchProviderAPI.swift in Sources */,
 				B1286C172592863A0063AD70 /* WatchProviders.swift in Sources */,
 				B174977A258D5A1D00B428F3 /* SpecialListVC.swift in Sources */,
