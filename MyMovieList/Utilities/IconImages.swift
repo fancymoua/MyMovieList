@@ -12,6 +12,7 @@ enum IconImages {
     case movieDetailRated
     case movieDetailDirector
     case movieDetailActors
+    case ratingStar
     
     var image: UIImage {
         switch self {
@@ -27,6 +28,8 @@ enum IconImages {
             return UIImage(systemName: "person.fill")!
         case .movieDetailActors:
             return UIImage(systemName: "person.2.square.stack")!
+        case .ratingStar:
+            return UIImage(systemName: "star.fill")!
         }
     }
 }

@@ -79,6 +79,7 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: WatchItemCell.reuseID) as! WatchItemCell
         
         let title = watchlistItemsArray[indexPath.item].title
+        let rating = watchlistItemsArray[indexPath.item].rating
         
         var posterImage = UIImage()
         
@@ -99,7 +100,7 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
             }
         }
         
-        cell.configureCell(title, posterImage: posterImage)
+        cell.configureCell(title, posterImage: posterImage, rating: rating ?? "n/a" )
         cell.configureConstraints()
         
         return cell

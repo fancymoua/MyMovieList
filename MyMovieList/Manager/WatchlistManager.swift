@@ -23,11 +23,11 @@ struct WatchlistManager {
         return itemsArray
     }
     
-    static func addToWatchlist(title: String, tmdbID: Int, posterPath: String) {
+    static func addToWatchlist(title: String, tmdbID: Int, posterPath: String, rating: String) {
         
         var currentWatchlist = retrieveWatchlist()
         
-        let newWatchItem = WatchItem(title: title, tmdbID: tmdbID, posterPath: posterPath)
+        let newWatchItem = WatchItem(title: title, tmdbID: tmdbID, posterPath: posterPath, rating: rating)
         currentWatchlist.append(newWatchItem)
         
         do {
