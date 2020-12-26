@@ -60,12 +60,19 @@ class SpecialCollectionsVC: UIViewController {
                     let releaseDate = item.release_date
                     let posterPath = item.poster_path
                     
-                    let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath)
+                    var imdbID = String()
                     
-                    self.moviesArray.append(movie)
-                    
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
+                    self.getIMDBID(id: id) { (cowID) in
+                        imdbID = cowID
+                        
+                        print("Yo \(imdbID)")
+                        let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
+                        
+                        self.moviesArray.append(movie)
+                        
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                        }
                     }
                 }
             } catch {
@@ -74,7 +81,47 @@ class SpecialCollectionsVC: UIViewController {
         }
         
         task.resume()
+    }
+    
+    func getIMDBID(id: Int, completion: @escaping (String)->Void) {
         
+        // get IMDB ID
+        let convertURL = "https://api.themoviedb.org/3/movie/" + "\(id)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
+        print(convertURL)
+        
+        guard let url = URL(string: convertURL) else {
+            print("Bad convert URL")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let _ = error {
+                print("Cow -- error making call")
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                print("Cow -- something other than 200")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(MovieIDAPI.self, from: data)
+                let daID = result.imdb_id
+                print("daID \(daID)")
+                completion(daID)
+            } catch {
+                print("Couldn't get IMDB ID")
+            }
+            
+        }
+        task.resume()
     }
     
 }
@@ -139,6 +186,7 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
         destVC.posterImage = posterImage
         destVC.tmdbID = moviesArray[indexPath.item].id
         destVC.posterPath = moviesArray[indexPath.item].poster_path
+        destVC.imdbID = moviesArray[indexPath.item].imdbID
         
         show(destVC, sender: self)
     }

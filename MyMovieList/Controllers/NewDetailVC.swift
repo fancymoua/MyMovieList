@@ -39,6 +39,8 @@ class NewDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("DetailView imdbID \(imdbID)")
+        
         configureVC()
         WatchlistManager.retrieveWatchlist { (watchlist) in
             self.currentWatchlist = watchlist
@@ -163,7 +165,7 @@ class NewDetailVC: UIViewController {
 extension NewDetailVC {
     
     func getMovieDetails() {
-        MovieDetailsManager.getMovieDetails(movieTitle: movieTitle) { (daMovie) in
+        MovieDetailsManager.getMovieDetails(imdbID: imdbID) { (daMovie) in
             let thisMovie = daMovie
             self.rating = daMovie.imdbRating
             DispatchQueue.main.async {

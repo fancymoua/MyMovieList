@@ -6,14 +6,13 @@ class MovieDetailsManager {
     static var thisMovie = MovieDetailModel()
 //    static var providerArray = [WatchProviders]()
     
-    static func getMovieDetails(movieTitle: String?, completed: @escaping (MovieDetailModel) -> Void) {
-        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&t="
+    static func getMovieDetails(imdbID: String?, completed: @escaping (MovieDetailModel) -> Void) {
+        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&i="
         
         var movieEndpoint = String()
         
-        if let title = movieTitle {
-            let query = title.replacingOccurrences(of: " ", with: "+")
-            movieEndpoint = baseURL + query
+        if let imdbID = imdbID {
+            movieEndpoint = baseURL + imdbID
             
             print("This is movieEndpoint \(movieEndpoint)")
             
