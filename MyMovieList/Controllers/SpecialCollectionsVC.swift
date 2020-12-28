@@ -87,7 +87,6 @@ class SpecialCollectionsVC: UIViewController {
         
         // get IMDB ID
         let convertURL = "https://api.themoviedb.org/3/movie/" + "\(id)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
-        print(convertURL)
         
         guard let url = URL(string: convertURL) else {
             print("Bad convert URL")

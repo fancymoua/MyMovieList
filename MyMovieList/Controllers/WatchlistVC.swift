@@ -18,7 +18,6 @@ class WatchlistVC: UIViewController {
 
         addSubviews()
         configureUI()
-        print(NSHomeDirectory())
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -90,6 +89,8 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
         
         let title = watchlistItemsArray[indexPath.item].title
         let rating = watchlistItemsArray[indexPath.item].rating
+        let year = watchlistItemsArray[indexPath.item].year
+        let rated = watchlistItemsArray[indexPath.item].rated
         
         var posterImage = UIImage()
         
@@ -110,7 +111,7 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
             }
         }
         
-        cell.configureCell(title, posterImage: posterImage, rating: rating ?? "n/a" )
+        cell.configureCell(title, posterImage: posterImage, rating: rating ?? "n/a", year: year ?? "n/a", rated: rated ?? "n/a")
         cell.configureConstraints()
         
         return cell

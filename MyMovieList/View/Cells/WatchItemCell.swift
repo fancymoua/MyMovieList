@@ -15,12 +15,13 @@ class WatchItemCell: UITableViewCell {
     let yearLabel = UILabel()
     let ratedLabel = UILabel()
     
-    func configureCell(_ title: String, posterImage: UIImage, rating: String) {
+    func configureCell(_ title: String, posterImage: UIImage, rating: String, year: String, rated: String) {
         self.title.text = title
         self.posterImage.image = posterImage
         self.ratingLabel.text = rating
+        self.yearLabel.text = year
+        self.ratedLabel.text = rated
         
-//        accessoryType = .disclosureIndicator
         selectionStyle = .none
     }
     
@@ -30,9 +31,6 @@ class WatchItemCell: UITableViewCell {
         addSubview(ratingStack)
         addSubview(otherInfoStackView)
         
-        yearLabel.text = "2005"
-        ratedLabel.text = "PG-13"
-        
         posterImage.translatesAutoresizingMaskIntoConstraints = false
         title.translatesAutoresizingMaskIntoConstraints = false
         ratingStack.translatesAutoresizingMaskIntoConstraints = false
@@ -40,12 +38,9 @@ class WatchItemCell: UITableViewCell {
         
         title.textColor = .black
         title.font = UIFont(name: "Avenir Next Medium", size: 19)
-//        title.adjustsFontSizeToFitWidth = true
         title.numberOfLines = 1
         title.lineBreakMode = .byTruncatingTail
         title.textAlignment = .left
-//        title.minimumScaleFactor = 0.8
-//        title.backgroundColor = .systemPink
         
         ratingLabel.font = UIFont(name: "Avenir Next", size: 16)
         ratingLabel.textColor = .darkGray

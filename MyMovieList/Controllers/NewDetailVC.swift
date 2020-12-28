@@ -29,6 +29,8 @@ class NewDetailVC: UIViewController {
     var tmdbID: Int?
     var posterPath: String?
     var rating: String?
+    var year: String?
+    var rated: String?
     
     var currentWatchlist = [WatchItem]()
     var onWatchlist: Bool = false
@@ -156,7 +158,7 @@ class NewDetailVC: UIViewController {
         addToWatchlistButton.setImage(IconImages.heartFilled.image, for: .normal)
         addToWatchlistButton.removeTarget(self, action: nil, for: .touchUpInside)
         
-        WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: posterPath ?? "", rating: rating ?? "n/a" )
+        WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: posterPath ?? "", rating: rating ?? "n/a", year: year ?? "n/a", rated: rated ?? "n/a" )
     }
     
     
@@ -165,9 +167,11 @@ class NewDetailVC: UIViewController {
 extension NewDetailVC {
     
     func getMovieDetails() {
-        MovieDetailsManager.getMovieDetails(imdbID: imdbID) { (daMovie) in
+        MovieDetailsManager.getMovieDetails(imdbID: imdbID) { [self] (daMovie) in
             let thisMovie = daMovie
             self.rating = daMovie.imdbRating
+            self.year = daMovie.Year
+            self.rated = daMovie.Rated
             DispatchQueue.main.async {
                 self.titleLabel.text = thisMovie.Title
                 self.ratingLabel.text = thisMovie.imdbRating
