@@ -58,7 +58,8 @@ class WatchlistVC: UIViewController {
     func configureUI() {
         
         header.text = "Watchlist"
-        header.font = UIFont(name: "Avenir Next Regular", size: 18)
+        header.font = UIFont(name: "Avenir Next Regular", size: 30)
+        header.textColor = .label
         
         watchlistTableView.register(WatchItemCell.self, forCellReuseIdentifier: WatchItemCell.reuseID)
         watchlistTableView.delegate = self
@@ -70,7 +71,7 @@ class WatchlistVC: UIViewController {
             header.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             header.heightAnchor.constraint(equalToConstant: 25),
             
-            watchlistTableView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 10),
+            watchlistTableView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 20),
             watchlistTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             watchlistTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             watchlistTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)

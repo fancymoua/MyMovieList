@@ -36,14 +36,14 @@ class WatchItemCell: UITableViewCell {
         ratingStack.translatesAutoresizingMaskIntoConstraints = false
         otherInfoStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        title.textColor = .black
+        title.textColor = .label
         title.font = UIFont(name: "Avenir Next Medium", size: 19)
         title.numberOfLines = 1
         title.lineBreakMode = .byTruncatingTail
         title.textAlignment = .left
         
         ratingLabel.font = UIFont(name: "Avenir Next", size: 16)
-        ratingLabel.textColor = .darkGray
+        ratingLabel.textColor = .label
         
         starIcon.tintColor = .systemYellow
         

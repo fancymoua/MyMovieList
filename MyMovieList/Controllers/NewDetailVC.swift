@@ -83,7 +83,7 @@ class NewDetailVC: UIViewController {
         
         posterImageView.contentMode = .scaleAspectFill
         
-        detailsBackgroundView.backgroundColor = .white
+        detailsBackgroundView.backgroundColor = .systemBackground
         detailsBackgroundView.layer.cornerRadius = 30
         
         NSLayoutConstraint.activate([
@@ -109,7 +109,7 @@ class NewDetailVC: UIViewController {
         imdbLogo.image = #imageLiteral(resourceName: "imdb-square-icon")
         
         ratingLabel.font = UIFont(name: "Avenir Next", size: 18)
-        ratingLabel.textColor = UIColor.black
+        ratingLabel.textColor = .label
         
         // if there is a provider, constant is increased below. Otherwise, constant is 0.
         providersStackViewWidthConstraint = NSLayoutConstraint(item: watchProvidersStackView, attribute: .width, relatedBy: .equal, toItem: .none , attribute: .notAnAttribute, multiplier: 0, constant: providersWidth)

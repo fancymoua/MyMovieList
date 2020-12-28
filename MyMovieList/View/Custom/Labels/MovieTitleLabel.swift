@@ -15,7 +15,7 @@ class MovieTitleLabel: UILabel {
     
     private func configure() {
         font = UIFont(name: "Avenir Next Demi Bold", size: 20)
-        textColor = UIColor.black
+        textColor = .label
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9
         lineBreakMode = .byTruncatingTail

@@ -72,11 +72,12 @@ extension LandingVC: UITextFieldDelegate {
 extension LandingVC {
     
     func configureUI() {
+        view.backgroundColor = .systemBackground
     }
     
     func configureSearchTextField() {
         searchTextField.delegate = self
-        searchTextField.textColor = .darkGray
+        searchTextField.textColor = .label
         searchTextField.font = UIFont.preferredFont(forTextStyle: .title2)
     }
     

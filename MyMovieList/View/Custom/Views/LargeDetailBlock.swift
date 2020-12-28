@@ -30,7 +30,7 @@ class LargeDetailBlock: UIView {
         addSubview(headerLabel)
         addSubview(detailLabel)
         
-        backgroundColor = .systemGray6
+        backgroundColor = .systemGray5
         
         iconImageView.tintColor = .label
         

@@ -25,7 +25,7 @@ class SmallDetailBlock: UIView {
     }
     
     func configure() {
-        backgroundColor = .systemGray6
+        backgroundColor = .systemGray5
         
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         textLabel.translatesAutoresizingMaskIntoConstraints = false

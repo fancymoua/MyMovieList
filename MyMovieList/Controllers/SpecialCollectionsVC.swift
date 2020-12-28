@@ -25,6 +25,8 @@ class SpecialCollectionsVC: UIViewController {
     
     func setCollectionTitle(title: String) {
         collectionTitle.text = title
+        collectionTitle.textColor = .label
+        collectionTitle.backgroundColor = .systemBackground
     }
     
     func getTrendingMovies(movieURL: String) {
@@ -200,7 +202,7 @@ extension SpecialCollectionsVC {
         collectionTitle.textColor = .black
         collectionTitle.font = UIFont(name: "Avenir Next Demi Bold", size: 16)
         
-        collectionView.backgroundColor = .clear
+        collectionView.backgroundColor = .systemBackground
         
         NSLayoutConstraint.activate([
             collectionTitle.topAnchor.constraint(equalTo: view.topAnchor),

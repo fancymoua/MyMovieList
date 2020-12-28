@@ -38,7 +38,7 @@ class WatchProviderBlock: UIView {
 
         
         rateLabel.textAlignment = .center
-        rateLabel.textColor = .black
+        rateLabel.textColor = .label
         rateLabel.numberOfLines = 1
         rateLabel.font = UIFont(name: "Avenir Next", size: 11)
         
