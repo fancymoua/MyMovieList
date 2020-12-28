@@ -29,7 +29,7 @@ class SpecialCollectionsVC: UIViewController {
         collectionTitle.backgroundColor = .systemBackground
     }
     
-    func getTrendingMovies(movieURL: String) {
+    func getTrendingMovies(movieURL: String, type: String) {
         
         let url = URL(string: movieURL)
         
@@ -49,46 +49,85 @@ class SpecialCollectionsVC: UIViewController {
                 return
             }
             
-            do {
-                let decoder = JSONDecoder()
-                let allData = try decoder.decode(MovieDataAPI.self, from: data)
-                
-                self.moviesArray = []
-                
-                for item in allData.results {
+            if type == "Movie" {
+                do {
+                    let decoder = JSONDecoder()
+                    let allData = try decoder.decode(MovieDataAPI.self, from: data)
                     
-                    let id = item.id
-                    let title = item.title
-                    let releaseDate = item.release_date
-                    let posterPath = item.poster_path
+                    self.moviesArray = []
                     
-                    var imdbID = String()
-                    
-                    self.getIMDBID(id: id) { (cowID) in
-                        imdbID = cowID
+                    for item in allData.results {
                         
-                        print("Yo \(imdbID)")
-                        let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
+                        let id = item.id
+                        let title = item.title
+                        let releaseDate = item.release_date
+                        let posterPath = item.poster_path
                         
-                        self.moviesArray.append(movie)
+                        var imdbID = String()
                         
-                        DispatchQueue.main.async {
-                            self.collectionView.reloadData()
+                        self.getIMDBID(id: id, type: "Movie") { (cowID) in
+                            imdbID = cowID
+                            
+                            let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
+                            
+                            self.moviesArray.append(movie)
+                            
+                            DispatchQueue.main.async {
+                                self.collectionView.reloadData()
+                            }
                         }
                     }
+                } catch {
+                    print("Couldn't do it")
                 }
-            } catch {
-                print("Couldn't do it")
+            } else if type == "TV" {
+                do {
+                    let decoder = JSONDecoder()
+                    let allData = try decoder.decode(TVDataAPI.self, from: data)
+                    
+                    self.moviesArray = []
+                    
+                    for item in allData.results {
+                        
+                        let id = item.id
+//                        print("dis is id \(id)")
+                        let title = item.name
+                        let releaseDate = "boo"
+                        let posterPath = item.poster_path
+                        
+                        var imdbID = String()
+                        
+                        self.getIMDBID(id: id, type: "TV") { (cowID) in
+                            imdbID = cowID
+                            
+                            let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
+                            
+                            self.moviesArray.append(movie)
+                            
+                            DispatchQueue.main.async {
+                                self.collectionView.reloadData()
+                            }
+                        }
+                    }
+                } catch {
+                    print("couldn't do it")
+                }
             }
         }
         
         task.resume()
     }
     
-    func getIMDBID(id: Int, completion: @escaping (String)->Void) {
+    func getIMDBID(id: Int, type: String, completion: @escaping (String)->Void) {
+        
+        var convertURL = String()
         
         // get IMDB ID
-        let convertURL = "https://api.themoviedb.org/3/movie/" + "\(id)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
+        if type == "Movie" {
+            convertURL = "https://api.themoviedb.org/3/movie/" + "\(id)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
+        } else if type == "TV" {
+            convertURL = "https://api.themoviedb.org/3/tv/" + "\(id)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
+        }
         
         guard let url = URL(string: convertURL) else {
             print("Bad convert URL")
@@ -115,7 +154,6 @@ class SpecialCollectionsVC: UIViewController {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(MovieIDAPI.self, from: data)
                 let daID = result.imdb_id
-                print("daID \(daID)")
                 completion(daID)
             } catch {
                 print("Couldn't get IMDB ID")

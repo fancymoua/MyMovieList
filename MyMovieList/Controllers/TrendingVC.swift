@@ -10,7 +10,7 @@ class TrendingVC: SpecialCollectionsVC {
         super.viewDidLoad()
 
         setCollectionTitle(title: "Trending")
-        getTrendingMovies(movieURL: trendingURL)
+        getTrendingMovies(movieURL: trendingURL, type: "Movie")
     }
     
 }

@@ -3,10 +3,10 @@
 import UIKit
 
 struct MovieDataAPI: Codable {
-    var results: [Result]
+    var results: [MovieResult]
 }
 
-struct Result: Codable {
+struct MovieResult: Codable {
     var id: Int
     var title: String
     var release_date: String?
