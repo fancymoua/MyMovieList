@@ -42,33 +42,28 @@ class NewDetailVC: UIViewController {
         super.viewDidLoad()
         
         configureVC()
-        WatchlistManager.retrieveWatchlist { (watchlist) in
-            self.currentWatchlist = watchlist
-        }
-        
-        
+        WatchlistManager.retrieveWatchlist { (watchlist) in self.currentWatchlist = watchlist }
+     
         getWatchProviders()
-        
         addSubviews()
-        
         configureMainViews()
         configureMovieDetailViews()
-        
         getMovieDetails()
-        
+        addTapGestureToPosterImageView()
+    }
+    
+    func addTapGestureToPosterImageView() {
         posterImageView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(openNewImageView))
         posterImageView.addGestureRecognizer(tap)
     }
     
     @objc func openNewImageView() {
-        print("Supthere")
         let destVC = FullSizePosterVC()
-//        show(destVC, sender: self)
+        destVC.posterImage = posterImage
         destVC.modalPresentationStyle = .fullScreen
         destVC.modalTransitionStyle = .crossDissolve
         present(destVC, animated: true, completion: nil)
-        
     }
     
     func addSubviews() {

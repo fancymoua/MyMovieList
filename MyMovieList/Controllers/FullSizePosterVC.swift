@@ -6,6 +6,7 @@ class FullSizePosterVC: UIViewController {
     
     let posterImageView = UIImageView()
     let closeButton = UIButton()
+    var posterImage = UIImage()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,7 @@ class FullSizePosterVC: UIViewController {
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         
         posterImageView.contentMode = .scaleAspectFit
-        posterImageView.image = #imageLiteral(resourceName: "Arrival poster")
+        posterImageView.image = posterImage
         
         closeButton.setTitle("Close", for: .normal)
         closeButton.setTitleColor(.label, for: .normal)
