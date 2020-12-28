@@ -7,12 +7,19 @@ class LandingVC: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     
+    let cowButton = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
 //        createDismissKeyboardTapGesture()
         configureSearchTextField()
+        
+        cowButton.setImage(IconImages.searchGlass.image, for: .normal)
+        cowButton.addTarget(self, action: #selector(pushSearchResultsVC), for: .touchUpInside)
+        searchTextField.rightView = cowButton
+        searchTextField.rightViewMode = .always
         
     }
     
@@ -35,7 +42,7 @@ class LandingVC: UIViewController {
         dismissKeyboardAndClearSearchTextField()
     }
     
-    func pushSearchResultsVC() {
+    @objc func pushSearchResultsVC() {
         let destVC = storyboard?.instantiateViewController(withIdentifier: "SearchResultsView") as! SearchResultsVC
         
         guard userEnteredText else {

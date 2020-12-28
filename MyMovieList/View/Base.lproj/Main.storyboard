@@ -17,35 +17,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="v6d-9U-zCj" userLabel="Searchbar Stack">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="v6d-9U-zCj" userLabel="Searchbar Stack">
                                 <rect key="frame" x="20" y="103" width="374" height="45"/>
                                 <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="z6i-Y0-Qmg">
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="HEC-8n-m9E"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Movie"/>
+                                            <segment title="TV"/>
+                                        </segments>
+                                    </segmentedControl>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8EQ-YZ-ez4">
-                                        <rect key="frame" x="0.0" y="0.0" width="319" height="45"/>
+                                        <rect key="frame" x="95" y="0.0" width="279" height="45"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IxN-d1-cyJ">
-                                        <rect key="frame" x="329" y="0.0" width="45" height="45"/>
-                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="45" id="KbJ-ez-J7Q"/>
-                                        </constraints>
-                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="magnifyingglass" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="regular"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="22"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="searchButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BSp-Hl-3tn"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="7bl-8L-R4M"/>
@@ -130,7 +121,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="5wm-UN-icM"/>
                     <connections>
-                        <outlet property="searchButton" destination="IxN-d1-cyJ" id="Pk2-8I-9g5"/>
                         <outlet property="searchTextField" destination="8EQ-YZ-ez4" id="fqZ-fc-WYo"/>
                         <segue destination="KbG-bt-k5X" kind="show" identifier="SegueToSearchResults" id="eNV-Xj-i9U"/>
                     </connections>
@@ -337,15 +327,11 @@
     <resources>
         <image name="house.fill" catalog="system" width="128" height="106"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
