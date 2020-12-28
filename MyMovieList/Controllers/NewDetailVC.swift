@@ -55,6 +55,20 @@ class NewDetailVC: UIViewController {
         configureMovieDetailViews()
         
         getMovieDetails()
+        
+        posterImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(openNewImageView))
+        posterImageView.addGestureRecognizer(tap)
+    }
+    
+    @objc func openNewImageView() {
+        print("Supthere")
+        let destVC = FullSizePosterVC()
+//        show(destVC, sender: self)
+        destVC.modalPresentationStyle = .fullScreen
+        destVC.modalTransitionStyle = .crossDissolve
+        present(destVC, animated: true, completion: nil)
+        
     }
     
     func addSubviews() {
@@ -160,8 +174,6 @@ class NewDetailVC: UIViewController {
         
         WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: posterPath ?? "", rating: rating ?? "n/a", year: year ?? "n/a", rated: rated ?? "n/a" )
     }
-    
-    
 }
 
 extension NewDetailVC {
