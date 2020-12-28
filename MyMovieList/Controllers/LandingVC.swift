@@ -5,9 +5,9 @@ import UIKit
 class LandingVC: UIViewController {
     
     @IBOutlet weak var searchTextField: UITextField!
-    @IBOutlet weak var searchButton: UIButton!
     
-    let cowButton = UIButton()
+    let searchButton = UIButton()
+    let mediaTypePicker = UISegmentedControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,12 +15,6 @@ class LandingVC: UIViewController {
         configureUI()
 //        createDismissKeyboardTapGesture()
         configureSearchTextField()
-        
-        cowButton.setImage(IconImages.searchGlass.image, for: .normal)
-        cowButton.addTarget(self, action: #selector(pushSearchResultsVC), for: .touchUpInside)
-        searchTextField.rightView = cowButton
-        searchTextField.rightViewMode = .always
-        
     }
     
     var userEnteredText: Bool {
@@ -86,7 +80,18 @@ extension LandingVC {
         searchTextField.delegate = self
         searchTextField.textColor = .label
         searchTextField.font = UIFont.preferredFont(forTextStyle: .title2)
+    
+        mediaTypePicker.insertSegment(withTitle: "Movie", at: 0, animated: false)
+        mediaTypePicker.insertSegment(withTitle: "Show", at: 1, animated: false)
+    
+        mediaTypePicker.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        mediaTypePicker.selectedSegmentIndex = 0
+        
+        searchButton.setImage(IconImages.searchGlass.image, for: .normal)
+        searchButton.addTarget(self, action: #selector(pushSearchResultsVC), for: .touchUpInside)
+        searchTextField.rightView = searchButton
+        searchTextField.rightViewMode = .always
+        searchTextField.leftView = mediaTypePicker
+        searchTextField.leftViewMode = .always
     }
-    
-    
 }

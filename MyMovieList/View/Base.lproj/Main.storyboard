@@ -20,18 +20,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="v6d-9U-zCj" userLabel="Searchbar Stack">
                                 <rect key="frame" x="20" y="103" width="374" height="45"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="z6i-Y0-Qmg">
-                                        <rect key="frame" x="0.0" y="0.0" width="90" height="46"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="90" id="HEC-8n-m9E"/>
-                                        </constraints>
-                                        <segments>
-                                            <segment title="Movie"/>
-                                            <segment title="TV"/>
-                                        </segments>
-                                    </segmentedControl>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8EQ-YZ-ez4">
-                                        <rect key="frame" x="95" y="0.0" width="279" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
