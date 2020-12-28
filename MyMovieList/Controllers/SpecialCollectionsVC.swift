@@ -29,7 +29,7 @@ class SpecialCollectionsVC: UIViewController {
         collectionTitle.backgroundColor = .systemBackground
     }
     
-    func getTrendingMovies(movieURL: String, type: String) {
+    func getTrendingMovies(movieURL: String, type: MediaType) {
         
         let url = URL(string: movieURL)
         
@@ -49,7 +49,7 @@ class SpecialCollectionsVC: UIViewController {
                 return
             }
             
-            if type == "Movie" {
+            if type == .Movie {
                 do {
                     let decoder = JSONDecoder()
                     let allData = try decoder.decode(MovieDataAPI.self, from: data)
@@ -80,7 +80,7 @@ class SpecialCollectionsVC: UIViewController {
                 } catch {
                     print("Couldn't do it")
                 }
-            } else if type == "TV" {
+            } else if type == .TV {
                 do {
                     let decoder = JSONDecoder()
                     let allData = try decoder.decode(TVDataAPI.self, from: data)

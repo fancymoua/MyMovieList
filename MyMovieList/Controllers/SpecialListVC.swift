@@ -9,10 +9,6 @@ class SpecialListVC: SpecialCollectionsVC {
         super.viewDidLoad()
 
         setCollectionTitle(title: "Popular Shows")
-        getTrendingMovies(movieURL: keywordURL, type: "TV")
+        getTrendingMovies(movieURL: MediaType.TV.trendingURL, type: .TV)
     }
-    
-
-    
-
 }
