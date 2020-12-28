@@ -39,20 +39,20 @@ class NewDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("DetailView imdbID \(imdbID)")
-        
         configureVC()
         WatchlistManager.retrieveWatchlist { (watchlist) in
             self.currentWatchlist = watchlist
         }
         
-        getMovieDetails()
+        
         getWatchProviders()
         
         addSubviews()
         
         configureMainViews()
         configureMovieDetailViews()
+        
+        getMovieDetails()
     }
     
     func addSubviews() {

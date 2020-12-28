@@ -123,7 +123,6 @@ class SpecialCollectionsVC: UIViewController {
         }
         task.resume()
     }
-    
 }
 
 extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSource {

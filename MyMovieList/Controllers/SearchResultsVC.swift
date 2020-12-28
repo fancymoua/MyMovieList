@@ -30,7 +30,6 @@ class SearchResultsVC: UIViewController {
         configDataSource()
 
         getResults()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -249,8 +248,6 @@ extension SearchResultsVC {
                 }
     
             }
-        
             task.resume()
-
         }
 }
