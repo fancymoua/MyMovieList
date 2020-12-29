@@ -47,19 +47,19 @@ class LandingVC: UIViewController {
         }
         
         var searchBaseURL = String()
-        var mediaType: MediaType!
+        var mediaSearchType: MediaType!
         
         if mediaTypeSelection == 0 {
             searchBaseURL = MediaType.Movie.searchBaseURL
-            mediaType = .Movie
+            mediaSearchType = .Movie
         } else if mediaTypeSelection == 1 {
             searchBaseURL = MediaType.TV.searchBaseURL
-            mediaType = .TV
+            mediaSearchType = .TV
         }
         
         destVC.searchText = searchTextField.text
         destVC.searchBaseURL = searchBaseURL
-        destVC.mediaType = mediaType
+        destVC.mediaType = mediaSearchType
         
         show(destVC, sender: self)
     }

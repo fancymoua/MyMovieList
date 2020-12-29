@@ -46,14 +46,16 @@ class NewDetailVC: UIViewController {
             directorView.headerLabel.text = "Writer(s)"
         }
         
+        getMovieDetails()
         configureVC()
+        
         WatchlistManager.retrieveWatchlist { (watchlist) in self.currentWatchlist = watchlist }
      
         getWatchProviders()
         addSubviews()
         configureMainViews()
         configureMovieDetailViews()
-        getMovieDetails()
+        
         addTapGestureToPosterImageView()
         
     }
@@ -181,23 +183,22 @@ extension NewDetailVC {
     
     func getMovieDetails() {
         MovieDetailsManager.getMovieDetails(imdbID: imdbID) { [self] (daMovie) in
-            let thisMovie = daMovie
             self.rating = daMovie.imdbRating
             self.year = daMovie.Year
             self.rated = daMovie.Rated
             DispatchQueue.main.async {
-                self.titleLabel.text = thisMovie.Title
-                self.ratingLabel.text = thisMovie.imdbRating
-                self.plotLabel.text = thisMovie.Plot
+                self.titleLabel.text = daMovie.Title
+                self.ratingLabel.text = daMovie.imdbRating
+                self.plotLabel.text = daMovie.Plot
                 self.posterImageView.image = self.posterImage  // passed from previous VC
-                self.yearView.setText(text: thisMovie.Year ?? "n/a")
-                self.ratedView.setText(text: thisMovie.Rated ?? "n/a")
-                self.actorsView.setText(text: thisMovie.Actors ?? "n/a")
+                self.yearView.setText(text: daMovie.Year ?? "n/a")
+                self.ratedView.setText(text: daMovie.Rated ?? "n/a")
+                self.actorsView.setText(text: daMovie.Actors ?? "n/a")
                 
                 if mediaType == .Movie {
-                    self.directorView.setText(text: thisMovie.Director ?? "n/a")
+                    self.directorView.setText(text: daMovie.Director ?? "n/a")
                 } else if mediaType == .TV {
-                    self.directorView.setText(text: thisMovie.Writer ?? "n/a")
+                    self.directorView.setText(text: daMovie.Writer ?? "n/a")
                 }
             }
         }

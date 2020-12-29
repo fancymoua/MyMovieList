@@ -119,7 +119,6 @@ class SearchResultsVC: UIViewController {
                     print("Could not parse data")
                 }
             }
-            
         }
         task.resume()
     }
@@ -166,9 +165,7 @@ class SearchResultsVC: UIViewController {
         DispatchQueue.main.async {
             self.datasource.apply(snapshot, animatingDifferences: true)
         }
-        
     }
-    
 }
 
 extension SearchResultsVC: UICollectionViewDelegate {
