@@ -72,7 +72,7 @@ class WatchItemCell: UITableViewCell {
             otherInfoStackView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
             otherInfoStackView.heightAnchor.constraint(equalToConstant: 20),
             otherInfoStackView.leadingAnchor.constraint(equalTo: posterImage.trailingAnchor, constant: 15),
-            otherInfoStackView.widthAnchor.constraint(equalToConstant: 100)
+            otherInfoStackView.widthAnchor.constraint(equalToConstant: 170)
         ])
         
     }

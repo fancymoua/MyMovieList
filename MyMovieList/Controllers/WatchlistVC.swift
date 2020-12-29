@@ -110,7 +110,7 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
             }
         }
         
-        cell.configureCell(title, posterImage: posterImage, rating: rating ?? "n/a", year: year ?? "n/a", rated: rated ?? "n/a")
+        cell.configureCell(title, posterImage: posterImage, rating: rating ?? "n/a", year: year ?? "n/a", rated: rated ?? "...")
         cell.configureConstraints()
         
         return cell
