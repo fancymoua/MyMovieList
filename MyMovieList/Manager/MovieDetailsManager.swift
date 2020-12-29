@@ -41,7 +41,7 @@ class MovieDetailsManager {
                     let decoder = JSONDecoder()
                     let result = try decoder.decode(MovieDetailModel.self, from: data)
                     
-                    thisMovie = MovieDetailModel(imdbID: result.imdbID, Title: result.Title, Year: result.Year, Plot: result.Plot, Director: result.Director, Actors: result.Actors, Poster: result.Poster, Genre: result.Genre, imdbRating: result.imdbRating, Rated: result.Rated)
+                    thisMovie = MovieDetailModel(imdbID: result.imdbID, Title: result.Title, Year: result.Year, Plot: result.Plot, Writer: result.Writer, Director: result.Director, Actors: result.Actors, Poster: result.Poster, Genre: result.Genre, imdbRating: result.imdbRating, Rated: result.Rated)
                     
                     completed(thisMovie)
          

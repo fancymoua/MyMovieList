@@ -23,6 +23,7 @@ class NewDetailVC: UIViewController {
     lazy var watchProvidersStackView = horizontalStackView(subviews: [], spacing: 10)
     
     // variables populated from previous view
+    var mediaType: MediaType!
     var movieTitle: String?
     var imdbID: String?
     var posterImage = UIImage()
@@ -40,6 +41,10 @@ class NewDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        if mediaType == .TV {
+            directorView.headerLabel.text = "Writer(s)"
+        }
         
         configureVC()
         WatchlistManager.retrieveWatchlist { (watchlist) in self.currentWatchlist = watchlist }
@@ -50,6 +55,7 @@ class NewDetailVC: UIViewController {
         configureMovieDetailViews()
         getMovieDetails()
         addTapGestureToPosterImageView()
+        
     }
     
     func addTapGestureToPosterImageView() {
@@ -186,8 +192,13 @@ extension NewDetailVC {
                 self.posterImageView.image = self.posterImage  // passed from previous VC
                 self.yearView.setText(text: thisMovie.Year ?? "n/a")
                 self.ratedView.setText(text: thisMovie.Rated ?? "n/a")
-                self.directorView.setText(text: thisMovie.Director ?? "n/a")
                 self.actorsView.setText(text: thisMovie.Actors ?? "n/a")
+                
+                if mediaType == .Movie {
+                    self.directorView.setText(text: thisMovie.Director ?? "n/a")
+                } else if mediaType == .TV {
+                    self.directorView.setText(text: thisMovie.Writer ?? "n/a")
+                }
             }
         }
     }

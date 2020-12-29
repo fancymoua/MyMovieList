@@ -204,6 +204,7 @@ extension SearchResultsVC: UICollectionViewDelegate {
         destVC.tmdbID = searchResultsArray[indexPath.item].id
         destVC.posterPath = searchResultsArray[indexPath.item].poster_path
         destVC.imdbID = searchResultsArray[indexPath.item].imdbID
+        destVC.mediaType = mediaType
         
         show(destVC, sender: self)
     }

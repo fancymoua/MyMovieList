@@ -7,6 +7,7 @@ struct MovieDetailModel: Codable {
     var Title: String?
     var Year: String?
     var Plot: String?
+    var Writer: String?
     var Director: String?
     var Actors: String?
     var Poster: String?

@@ -8,6 +8,7 @@ class SpecialCollectionsVC: UIViewController {
     let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     var moviesArray = [MovieSearchResult]()
+    var mediaType: MediaType!
     
     let cache = NSCache<NSString, UIImage>()
     private let photoBaseURL = "https://image.tmdb.org/t/p/original"
@@ -63,6 +64,12 @@ class SpecialCollectionsVC: UIViewController {
                         let releaseDate = item.release_date
                         let posterPath = item.poster_path
                         
+                        if item.media_type == "tv" {
+                            self.mediaType = .TV
+                        } else if item.media_type == "movie" {
+                            self.mediaType = .Movie
+                        }
+                        
                         var imdbID = String()
                         
                         IDsManager.getIMDBID(id: id, type: .Movie) { (cowID) in
@@ -94,6 +101,12 @@ class SpecialCollectionsVC: UIViewController {
                         let title = item.name
                         let releaseDate = "boo"
                         let posterPath = item.poster_path
+                        
+                        if item.media_type == "tv" {
+                            self.mediaType = .TV
+                        } else if item.media_type == "movie" {
+                            self.mediaType = .Movie
+                        }
                         
                         var imdbID = String()
                         
@@ -180,6 +193,7 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
         destVC.tmdbID = moviesArray[indexPath.item].id
         destVC.posterPath = moviesArray[indexPath.item].poster_path
         destVC.imdbID = moviesArray[indexPath.item].imdbID
+        destVC.mediaType = mediaType
         
         show(destVC, sender: self)
     }
