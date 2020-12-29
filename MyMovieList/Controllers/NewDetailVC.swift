@@ -175,7 +175,15 @@ class NewDetailVC: UIViewController {
         addToWatchlistButton.setImage(IconImages.heartFilled.image, for: .normal)
         addToWatchlistButton.removeTarget(self, action: nil, for: .touchUpInside)
         
-        WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: posterPath ?? "", rating: rating ?? "n/a", year: year ?? "n/a", rated: rated ?? "n/a" )
+        var cowMediaType = String()
+        
+        if mediaType == .Movie {
+            cowMediaType = "Movie"
+        } else if mediaType == .TV {
+            cowMediaType = "TV"
+        }
+        
+        WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: posterPath ?? "", rating: rating ?? "n/a", year: year ?? "n/a", rated: rated ?? "n/a", imdbID: imdbID!, mediaType: cowMediaType )
     }
 }
 

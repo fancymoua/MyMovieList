@@ -36,8 +36,6 @@ class WatchlistVC: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    fileprivate var cowTimer: Timer!
-    
     func getWatchlist() {
         
         WatchlistManager.retrieveWatchlist { (watchlist) in
@@ -142,10 +140,20 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
             }
         }
         
+        var mediaType: MediaType!
+        
+        if watchlistItemsArray[indexPath.item].mediaType == "Movie" {
+            mediaType = .Movie
+        } else if watchlistItemsArray[indexPath.item].mediaType == "TV" {
+            mediaType = .TV
+        }
+        
         destVC.movieTitle = watchlistItemsArray[indexPath.item].title
         destVC.posterImage = #imageLiteral(resourceName: "tenet")
         destVC.tmdbID = watchlistItemsArray[indexPath.item].tmdbID
         destVC.posterImage = posterImage
+        destVC.imdbID = watchlistItemsArray[indexPath.item].imdbID
+        destVC.mediaType = mediaType
         
         show(destVC, sender: self)
     }
