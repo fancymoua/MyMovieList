@@ -3,14 +3,14 @@
 import UIKit
 
 struct IDsManager {
-    static func getIMDBID(id: Int, type: String, completion: @escaping (String)->Void) {
+    static func getIMDBID(id: Int, type: MediaType, completion: @escaping (String)->Void) {
         
         var convertURL = String()
         
         // get IMDB ID
-        if type == "Movie" {
+        if type == .Movie {
             convertURL = "https://api.themoviedb.org/3/movie/" + "\(id)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
-        } else if type == "TV" {
+        } else if type == .TV {
             convertURL = "https://api.themoviedb.org/3/tv/" + "\(id)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
         }
         

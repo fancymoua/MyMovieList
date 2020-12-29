@@ -29,7 +29,6 @@ class SearchResultsVC: UIViewController {
         configureUI()
         configDataSource()
 
-        print("mediaType is \(mediaType)")
         getResults()
     }
     
@@ -80,7 +79,7 @@ class SearchResultsVC: UIViewController {
 
                         var imdbID = String()
                         
-                        IDsManager.getIMDBID(id: id, type: "Movie") { (cowID) in
+                        IDsManager.getIMDBID(id: id, type: .Movie) { (cowID) in
                             imdbID = cowID
                         
                             let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
@@ -108,7 +107,7 @@ class SearchResultsVC: UIViewController {
 
                         var imdbID = String()
                         
-                        IDsManager.getIMDBID(id: id, type: "TV") { (cowID) in
+                        IDsManager.getIMDBID(id: id, type: .TV) { (cowID) in
                             imdbID = cowID
                             
                             let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
