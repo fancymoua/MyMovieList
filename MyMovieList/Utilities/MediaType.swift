@@ -14,4 +14,13 @@ enum MediaType {
             return "https://api.themoviedb.org/3/trending/tv/day?api_key=65db6bef59bff99c6a4504f0ce877ade"
         }
     }
+    
+    var searchBaseURL: String {
+        switch self {
+        case .Movie:
+            return "https://api.themoviedb.org/3/search/movie?api_key=65db6bef59bff99c6a4504f0ce877ade&query="
+        case .TV:
+            return "https://api.themoviedb.org/3/search/tv?api_key=65db6bef59bff99c6a4504f0ce877ade&query="
+        }
+    }
 }

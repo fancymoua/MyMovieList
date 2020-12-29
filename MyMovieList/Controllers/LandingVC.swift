@@ -9,12 +9,16 @@ class LandingVC: UIViewController {
     let searchButton = UIButton()
     let mediaTypePicker = UISegmentedControl()
     
+    var mediaTypeSelection = Int()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
 //        createDismissKeyboardTapGesture()
         configureSearchTextField()
+        mediaTypeSelection = mediaTypePicker.selectedSegmentIndex
+        print(mediaTypeSelection)
     }
     
     var userEnteredText: Bool {
@@ -45,7 +49,20 @@ class LandingVC: UIViewController {
             return
         }
         
+        var searchBaseURL = String()
+        var mediaType: MediaType!
+        
+        if mediaTypeSelection == 0 {
+            searchBaseURL = MediaType.Movie.searchBaseURL
+            mediaType = .Movie
+        } else if mediaTypeSelection == 1 {
+            searchBaseURL = MediaType.TV.searchBaseURL
+            mediaType = .TV
+        }
+        
         destVC.searchText = searchTextField.text
+        destVC.searchBaseURL = searchBaseURL
+        destVC.mediaType = mediaType
         
         show(destVC, sender: self)
     }
@@ -83,6 +100,7 @@ extension LandingVC {
     
         mediaTypePicker.insertSegment(withTitle: "Movie", at: 0, animated: false)
         mediaTypePicker.insertSegment(withTitle: "Show", at: 1, animated: false)
+        mediaTypePicker.addTarget(self, action: #selector(mediaTypeChanged(segmentedControl:)), for: .valueChanged)
     
         mediaTypePicker.heightAnchor.constraint(equalToConstant: 45).isActive = true
         mediaTypePicker.selectedSegmentIndex = 0
@@ -93,5 +111,16 @@ extension LandingVC {
         searchTextField.rightViewMode = .always
         searchTextField.leftView = mediaTypePicker
         searchTextField.leftViewMode = .always
+    }
+    
+    @objc func mediaTypeChanged(segmentedControl: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            mediaTypeSelection = 0
+        case 1:
+            mediaTypeSelection = 1
+        default:
+            mediaTypeSelection = 0
+        }
     }
 }

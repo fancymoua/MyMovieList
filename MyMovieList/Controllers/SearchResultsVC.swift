@@ -12,8 +12,8 @@ class SearchResultsVC: UIViewController {
     
     var searchText: String!
     var searchResultsArray = [MovieSearchResult]()
-    
-    private let baseURL = "https://api.themoviedb.org/3/search/movie?api_key=65db6bef59bff99c6a4504f0ce877ade&query="
+    var mediaType: MediaType!
+    var searchBaseURL = String()
     private let photoBaseURL = "https://image.tmdb.org/t/p/original"
     
     var datasource: UICollectionViewDiffableDataSource<Section, MovieSearchResult>!
@@ -29,6 +29,7 @@ class SearchResultsVC: UIViewController {
         configureUI()
         configDataSource()
 
+        print("mediaType is \(mediaType)")
         getResults()
     }
     
@@ -41,7 +42,7 @@ class SearchResultsVC: UIViewController {
         
         let query = searchText.replacingOccurrences(of: " ", with: "+")
         
-        let endpoint = baseURL + "\(query)"
+        let endpoint = searchBaseURL + "\(query)"
         
         guard let url = URL(string: endpoint) else {
             print("Bad URL")
@@ -64,34 +65,64 @@ class SearchResultsVC: UIViewController {
                 return
             }
             
-            do {
-                let decoder = JSONDecoder()
-                let allData = try decoder.decode(MovieDataAPI.self, from: data)
-                
-                self.searchResultsArray = []
-            
-                for item in allData.results {
-                    let id = item.id
-                    let title = item.title
-                    let releaseDate = item.release_date
-                    let posterPath = item.poster_path
-
-                    var imdbID = String()
+            if self.mediaType == .Movie {
+                do {
+                    let decoder = JSONDecoder()
+                    let allData = try decoder.decode(MovieDataAPI.self, from: data)
                     
-                    IDsManager.getIMDBID(id: id, type: "Movie") { (cowID) in
-                        imdbID = cowID
+                    self.searchResultsArray = []
+                
+                    for item in allData.results {
+                        let id = item.id
+                        let title = item.title
+                        let releaseDate = item.release_date
+                        let posterPath = item.poster_path
+
+                        var imdbID = String()
                         
-                        print("Yo \(imdbID)")
-                        let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
+                        IDsManager.getIMDBID(id: id, type: "Movie") { (cowID) in
+                            imdbID = cowID
                         
-                        self.searchResultsArray.append(movie)
-                        
-                        self.updateData(on: self.searchResultsArray)
+                            let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
+                            
+                            self.searchResultsArray.append(movie)
+                            
+                            self.updateData(on: self.searchResultsArray)
+                        }
                     }
+                } catch {
+                    print("Could not parse data")
                 }
-            } catch {
-                print("Could not parse data")
+            } else if self.mediaType == .TV {
+                do {
+                    let decoder = JSONDecoder()
+                    let allData = try decoder.decode(TVDataAPI.self, from: data)
+                    
+                    self.searchResultsArray = []
+                
+                    for item in allData.results {
+                        let id = item.id
+                        let title = item.name
+                        let releaseDate = ""
+                        let posterPath = item.poster_path
+
+                        var imdbID = String()
+                        
+                        IDsManager.getIMDBID(id: id, type: "TV") { (cowID) in
+                            imdbID = cowID
+                            
+                            let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
+                            
+                            self.searchResultsArray.append(movie)
+                            
+                            self.updateData(on: self.searchResultsArray)
+                        }
+                    }
+                } catch {
+                    print("Could not parse data")
+                }
             }
+            
         }
         task.resume()
     }
