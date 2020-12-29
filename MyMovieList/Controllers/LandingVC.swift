@@ -8,17 +8,14 @@ class LandingVC: UIViewController {
     
     let searchButton = UIButton()
     let mediaTypePicker = UISegmentedControl()
-    
     var mediaTypeSelection = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
-//        createDismissKeyboardTapGesture()
         configureSearchTextField()
         mediaTypeSelection = mediaTypePicker.selectedSegmentIndex
-        print(mediaTypeSelection)
     }
     
     var userEnteredText: Bool {
@@ -66,30 +63,11 @@ class LandingVC: UIViewController {
         
         show(destVC, sender: self)
     }
-
-}
-
-extension LandingVC: UITextFieldDelegate {
-    func createDismissKeyboardTapGesture() {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        pushSearchResultsVC()
-        dismissKeyboardAndClearSearchTextField()
-        return true
-    }
-    
-    func dismissKeyboardAndClearSearchTextField() {
-        searchTextField.endEditing(true)
-        searchTextField.text = ""
-    }
 }
 
 extension LandingVC {
     
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .systemBackground
     }
     
@@ -122,5 +100,23 @@ extension LandingVC {
         default:
             mediaTypeSelection = 0
         }
+    }
+}
+
+extension LandingVC: UITextFieldDelegate {
+    func createDismissKeyboardTapGesture() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pushSearchResultsVC()
+        dismissKeyboardAndClearSearchTextField()
+        return true
+    }
+    
+    func dismissKeyboardAndClearSearchTextField() {
+        searchTextField.endEditing(true)
+        searchTextField.text = ""
     }
 }
