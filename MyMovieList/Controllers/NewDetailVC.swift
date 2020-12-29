@@ -206,7 +206,7 @@ extension NewDetailVC {
     
     func getWatchProviders() {
         
-        MovieDetailsManager.getWatchProviders(tmdbID: tmdbID) { [self] (providersArray) in
+        MovieDetailsManager.getWatchProviders(tmdbID: tmdbID, mediaType: mediaType) { [self] (providersArray) in
             print("providersArray: \(providersArray)")
             
             for provider in providersArray {

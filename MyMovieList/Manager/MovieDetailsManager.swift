@@ -4,7 +4,6 @@ import UIKit
 
 class MovieDetailsManager {
     static var thisMovie = MovieDetailModel()
-//    static var providerArray = [WatchProviders]()
     
     static func getMovieDetails(imdbID: String?, completed: @escaping (MovieDetailModel) -> Void) {
         let baseURL = "https://www.omdbapi.com/?apikey=1383769a&i="
@@ -53,12 +52,19 @@ class MovieDetailsManager {
         }
     }
     
-    static func getWatchProviders(tmdbID: Int?, completed: @escaping ([WatchProviders]) -> Void) {
+    static func getWatchProviders(tmdbID: Int?, mediaType: MediaType, completed: @escaping ([WatchProviders]) -> Void) {
         
         var providerArray = [WatchProviders]()
         
         if let id = tmdbID {
-            let endpoint = "https://api.themoviedb.org/3/movie/" + "\(id)" + "/watch/providers?api_key=65db6bef59bff99c6a4504f0ce877ade"
+            
+            var endpoint = String()
+            
+            if mediaType == .Movie {
+                endpoint = MediaType.Movie.watchProvidersBaseURL + "\(id)" + "/watch/providers?api_key=65db6bef59bff99c6a4504f0ce877ade"
+            } else if mediaType == .TV {
+                endpoint = MediaType.TV.watchProvidersBaseURL + "\(id)" + "/watch/providers?api_key=65db6bef59bff99c6a4504f0ce877ade"
+            }
             
             guard let url = URL(string: endpoint) else {
                 print("bad watch provider URL")
