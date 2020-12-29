@@ -30,9 +30,9 @@ class SpecialCollectionsVC: UIViewController {
         collectionTitle.backgroundColor = .systemBackground
     }
     
-    func getTrendingMovies(movieURL: String, type: MediaType) {
+    func getTrendingItems(trendingURL: String, type: MediaType) {
         
-        let url = URL(string: movieURL)
+        let url = URL(string: trendingURL)
         
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
@@ -61,7 +61,6 @@ class SpecialCollectionsVC: UIViewController {
                         
                         let id = item.id
                         let title = item.title
-                        let releaseDate = item.release_date
                         let posterPath = item.poster_path
                         
                         if item.media_type == "tv" {
@@ -75,7 +74,7 @@ class SpecialCollectionsVC: UIViewController {
                         IDsManager.getIMDBID(id: id, type: .Movie) { (cowID) in
                             imdbID = cowID
                             
-                            let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
+                            let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
                             
                             self.moviesArray.append(movie)
                             
@@ -97,9 +96,7 @@ class SpecialCollectionsVC: UIViewController {
                     for item in allData.results {
                         
                         let id = item.id
-//                        print("dis is id \(id)")
                         let title = item.name
-                        let releaseDate = "boo"
                         let posterPath = item.poster_path
                         
                         if item.media_type == "tv" {
@@ -113,7 +110,7 @@ class SpecialCollectionsVC: UIViewController {
                         IDsManager.getIMDBID(id: id, type: .TV) { (cowID) in
                             imdbID = cowID
                             
-                            let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
+                            let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
                             
                             self.moviesArray.append(movie)
                             

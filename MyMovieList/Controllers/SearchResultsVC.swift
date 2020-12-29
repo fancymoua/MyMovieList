@@ -74,7 +74,6 @@ class SearchResultsVC: UIViewController {
                     for item in allData.results {
                         let id = item.id
                         let title = item.title
-                        let releaseDate = item.release_date
                         let posterPath = item.poster_path
 
                         var imdbID = String()
@@ -82,7 +81,7 @@ class SearchResultsVC: UIViewController {
                         IDsManager.getIMDBID(id: id, type: .Movie) { (cowID) in
                             imdbID = cowID
                         
-                            let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
+                            let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
                             
                             self.searchResultsArray.append(movie)
                             
@@ -102,7 +101,6 @@ class SearchResultsVC: UIViewController {
                     for item in allData.results {
                         let id = item.id
                         let title = item.name
-                        let releaseDate = ""
                         let posterPath = item.poster_path
 
                         var imdbID = String()
@@ -110,7 +108,7 @@ class SearchResultsVC: UIViewController {
                         IDsManager.getIMDBID(id: id, type: .TV) { (cowID) in
                             imdbID = cowID
                             
-                            let movie = MovieSearchResult(id: id, title: title, release_date: releaseDate, poster_path: posterPath, imdbID: imdbID)
+                            let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
                             
                             self.searchResultsArray.append(movie)
                             

@@ -272,14 +272,8 @@
 		B14DF2D825896A9100FF8819 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B14DF2D925896AA400FF8819 /* MovieSearchResult.swift */,
-				B14DF2E62589712100FF8819 /* MovieDataAPI.swift */,
-				B146128D258A8F960030859B /* MovieIDAPI.swift */,
-				B1461292258A931B0030859B /* MovieDetailModel.swift */,
-				B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */,
-				B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */,
-				B1286C2E2592E2B10063AD70 /* WatchItem.swift */,
-				B160A12D259A8582004AC722 /* TVDataAPI.swift */,
+				B1D1AD81259BA67000B76567 /* Object models */,
+				B1D1AD7D259BA66300B76567 /* API */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -302,6 +296,28 @@
 				B143E3B12593FA370063BD8F /* Labels */,
 			);
 			path = Custom;
+			sourceTree = "<group>";
+		};
+		B1D1AD7D259BA66300B76567 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B14DF2E62589712100FF8819 /* MovieDataAPI.swift */,
+				B146128D258A8F960030859B /* MovieIDAPI.swift */,
+				B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */,
+				B160A12D259A8582004AC722 /* TVDataAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		B1D1AD81259BA67000B76567 /* Object models */ = {
+			isa = PBXGroup;
+			children = (
+				B14DF2D925896AA400FF8819 /* MovieSearchResult.swift */,
+				B1461292258A931B0030859B /* MovieDetailModel.swift */,
+				B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */,
+				B1286C2E2592E2B10063AD70 /* WatchItem.swift */,
+			);
+			path = "Object models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
