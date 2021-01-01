@@ -10,6 +10,7 @@ class NewDetailVC: UIViewController {
     let addToWatchlistButton = UIButton()
     
     // goes inside detailsBackgroundView
+    let segmentedControl = UISegmentedControl()
     let titleLabel = MovieTitleLabel()
     let imdbLogo = UIImageView()
     let ratingLabel = UILabel()
@@ -75,8 +76,8 @@ class NewDetailVC: UIViewController {
     }
     
     func addSubviews() {
-        let mainViews = [posterImageView, detailsBackgroundView, addToWatchlistButton]
-        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndRatedStack, directorView, actorsView, watchProvidersStackView]
+        let mainViews = [posterImageView, detailsBackgroundView, addToWatchlistButton, ]
+        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndRatedStack, directorView, actorsView, watchProvidersStackView, segmentedControl]
         
         for view in mainViews {
             self.view.addSubview(view)
@@ -123,6 +124,12 @@ class NewDetailVC: UIViewController {
     
     func configureMovieDetailViews() {
         
+        segmentedControl.insertSegment(withTitle: "Details", at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: "Cast", at: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: "Others", at: 2, animated: false)
+        segmentedControl.backgroundColor = .systemGray
+        segmentedControl.selectedSegmentIndex = 0
+        
         imdbLogo.image = #imageLiteral(resourceName: "imdb-square-icon")
         
         ratingLabel.font = UIFont(name: "Avenir Next", size: 18)
@@ -134,12 +141,17 @@ class NewDetailVC: UIViewController {
         providersStackViewWidthConstraint.isActive = true
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
+            segmentedControl.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
+            segmentedControl.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
+            segmentedControl.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
+            segmentedControl.heightAnchor.constraint(equalToConstant: 30),
+            
+            titleLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
             titleLabel.trailingAnchor.constraint(equalTo: ratingStackView.leadingAnchor, constant: -15),
             titleLabel.heightAnchor.constraint(equalToConstant: 20),
             
-            ratingStackView.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
+            ratingStackView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20),
             ratingStackView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
             ratingStackView.widthAnchor.constraint(equalToConstant: 90),
             ratingStackView.heightAnchor.constraint(equalToConstant: 20),
