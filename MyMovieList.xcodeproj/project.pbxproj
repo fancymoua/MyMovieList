@@ -48,6 +48,8 @@
 		B1E254E925A02C7D000F94ED /* CastCrewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E254E825A02C7D000F94ED /* CastCrewVC.swift */; };
 		B1E254EE25A03055000F94ED /* Detail+CastCrewCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E254ED25A03055000F94ED /* Detail+CastCrewCellCollectionViewCell.swift */; };
 		B1E254F325A03DE4000F94ED /* CastCrewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E254F225A03DE4000F94ED /* CastCrewSectionHeader.swift */; };
+		B1E254F825A13A4D000F94ED /* CastCrewAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E254F725A13A4D000F94ED /* CastCrewAPI.swift */; };
+		B1E254FD25A13A67000F94ED /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E254FC25A13A67000F94ED /* PersonModel.swift */; };
 		B1E8BCBE258FDA38009F8FB2 /* WatchProviderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */; };
 		B1E8BCC3258FEEBB009F8FB2 /* WatchProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */; };
 		B1E8BCC8258FF5AF009F8FB2 /* WatchProviderBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */; };
@@ -118,6 +120,8 @@
 		B1E254E825A02C7D000F94ED /* CastCrewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastCrewVC.swift; sourceTree = "<group>"; };
 		B1E254ED25A03055000F94ED /* Detail+CastCrewCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detail+CastCrewCellCollectionViewCell.swift"; sourceTree = "<group>"; };
 		B1E254F225A03DE4000F94ED /* CastCrewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastCrewSectionHeader.swift; sourceTree = "<group>"; };
+		B1E254F725A13A4D000F94ED /* CastCrewAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastCrewAPI.swift; sourceTree = "<group>"; };
+		B1E254FC25A13A67000F94ED /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderAPI.swift; sourceTree = "<group>"; };
 		B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderModel.swift; sourceTree = "<group>"; };
 		B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderBlock.swift; sourceTree = "<group>"; };
@@ -328,6 +332,8 @@
 				B1461292258A931B0030859B /* MovieDetailModel.swift */,
 				B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */,
 				B1286C2E2592E2B10063AD70 /* WatchItem.swift */,
+				B1E254F725A13A4D000F94ED /* CastCrewAPI.swift */,
+				B1E254FC25A13A67000F94ED /* PersonModel.swift */,
 			);
 			path = "Object models";
 			sourceTree = "<group>";
@@ -482,12 +488,14 @@
 				B143E3BA25940C6E0063BD8F /* horizontalStackView.swift in Sources */,
 				B1286C0E259168790063AD70 /* LargeDetailBlock.swift in Sources */,
 				B1286BE4259046650063AD70 /* SpecialCollectionsVC.swift in Sources */,
+				B1E254FD25A13A67000F94ED /* PersonModel.swift in Sources */,
 				B160A133259A8FA9004AC722 /* IDsManager.swift in Sources */,
 				B1E254E925A02C7D000F94ED /* CastCrewVC.swift in Sources */,
 				B143E3992593E2DC0063BD8F /* IconImages.swift in Sources */,
 				B160A138259A90F5004AC722 /* MediaType.swift in Sources */,
 				B1286C2A2592E15B0063AD70 /* WatchItemCell.swift in Sources */,
 				B14DF2DA25896AA400FF8819 /* MovieSearchResult.swift in Sources */,
+				B1E254F825A13A4D000F94ED /* CastCrewAPI.swift in Sources */,
 				B14DF28E2589536000FF8819 /* SceneDelegate.swift in Sources */,
 				B14FF278259A70C800C72DE7 /* FullSizePosterVC.swift in Sources */,
 				B1286BFF259159530063AD70 /* MovieTitleLabel.swift in Sources */,

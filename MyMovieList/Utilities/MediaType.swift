@@ -32,4 +32,13 @@ enum MediaType {
             return "https://api.themoviedb.org/3/tv/"
         }
     }
+    
+    var castCrewBaseURL: String {
+        switch self {
+        case .Movie:
+            return "https://api.themoviedb.org/3/movie/329865/credits?"
+        case .TV:
+            return "https://api.themoviedb.org/3/tv/329865/credits?"
+        }
+    }
 }

@@ -159,12 +159,6 @@ class NewDetailVC: UIViewController {
             containerView.addSubview(castCrewVC.view)
             castCrewVC.didMove(toParent: self)
             constraintAgain(childView: castCrewVC.view)
-//        case 2:
-//            addChild(threeVC)
-//            containerView.addSubview(threeVC.view)
-//            threeVC.didMove(toParent: self)
-//            constraintAgain(childView: threeVC.view)
-//            print("three selected")
         default:
             return
         }

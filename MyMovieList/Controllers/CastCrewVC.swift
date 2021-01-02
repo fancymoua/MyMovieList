@@ -6,8 +6,10 @@ class CastCrewVC: UIViewController {
     
     var mainCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
-    var testDirectorArray = [String]()
-    var testActorsArray = [String]()
+    var directorArray = [String]()
+    var actorsArray = [String]()
+    
+    let searchEndURL = "api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +23,11 @@ class CastCrewVC: UIViewController {
         mainCollectionView.dataSource = self
         mainCollectionView.delegate = self
         
-        testDirectorArray.append("Denis Vilenueve")
+        directorArray.append("Denis Vilenueve")
         
-        testActorsArray.append("Amy Adams")
-        testActorsArray.append("Jeremy Renner")
-        testActorsArray.append("Forrest Whitaker")
+        actorsArray.append("Amy Adams")
+        actorsArray.append("Jeremy Renner")
+        actorsArray.append("Forrest Whitaker")
     }
     
     private func addSubviews() {
@@ -52,6 +54,11 @@ class CastCrewVC: UIViewController {
         
         configureLayout()
     }
+    
+    func getCastCrew() {
+        
+    }
+    
 }
 
 extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -64,9 +71,9 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         var count = Int()
         
         if section == 0 {
-            count = testDirectorArray.count
+            count = directorArray.count
         } else if section == 1 {
-            count = testActorsArray.count
+            count = actorsArray.count
         }
         
         return count
@@ -78,9 +85,9 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         var name = String()
         
         if indexPath.section == 0 {
-            name = testDirectorArray[indexPath.item]
+            name = directorArray[indexPath.item]
         } else if indexPath.section == 1 {
-            name = testActorsArray[indexPath.item]
+            name = actorsArray[indexPath.item]
         }
         
         cell.configure(name: name)
@@ -109,7 +116,7 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         if indexPath.section == 0 {
             sectionTitle = "Director(s):"
         } else if indexPath.section == 1 {
-            sectionTitle = "Actors:"
+            sectionTitle = "Starring:"
         }
         
         headerView.configureHeader(title: sectionTitle)
