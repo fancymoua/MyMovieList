@@ -133,6 +133,12 @@ class NewDetailVC: UIViewController {
         segmentedControl.insertSegment(withTitle: "Others", at: 2, animated: false)
         segmentedControl.backgroundColor = .systemGray
         segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.addTarget(self, action: #selector(switchView), for: .valueChanged)
+        
+        addChild(titlePlotVC)
+        containerView.addSubview(titlePlotVC.view)
+        titlePlotVC.didMove(toParent: self)
+        constraintAgain(childView: titlePlotVC.view)
         
         containerView.backgroundColor = .systemPink
         
@@ -192,6 +198,44 @@ class NewDetailVC: UIViewController {
             watchProvidersStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             watchProvidersStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
+    }
+    
+    func constraintAgain(childView: UIView) {
+        
+        childView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            childView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            childView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            childView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            childView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+        ])
+        
+    }
+    
+    @objc func switchView(segmentedControl: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            addChild(titlePlotVC)
+            containerView.addSubview(titlePlotVC.view)
+            titlePlotVC.didMove(toParent: self)
+            constraintAgain(childView: titlePlotVC.view)
+            print("One selected")
+//        case 1:
+//            addChild(twoVC)
+//            containerView.addSubview(twoVC.view)
+//            twoVC.didMove(toParent: self)
+//            constraintAgain(childView: twoVC.view)
+//            print("two selected")
+//        case 2:
+//            addChild(threeVC)
+//            containerView.addSubview(threeVC.view)
+//            threeVC.didMove(toParent: self)
+//            constraintAgain(childView: threeVC.view)
+//            print("three selected")
+        default:
+            return
+        }
     }
     
     @objc func watchlistButtonTapped() {
