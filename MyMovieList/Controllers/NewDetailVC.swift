@@ -5,6 +5,7 @@ import UIKit
 class NewDetailVC: UIViewController {
     
     let titlePlotVC = TitlePlotVC()
+    let castCrewVC = CastCrewVC()
     
     // primary views
     let posterImageView = UIImageView()
@@ -36,7 +37,7 @@ class NewDetailVC: UIViewController {
         titlePlotVC.imdbID = imdbID
         titlePlotVC.mediaType = mediaType
         titlePlotVC.tmdbID = tmdbID
-
+ 
         configureVC()
         
         WatchlistManager.retrieveWatchlist { (watchlist) in self.currentWatchlist = watchlist }
@@ -153,16 +154,11 @@ class NewDetailVC: UIViewController {
             containerView.addSubview(titlePlotVC.view)
             titlePlotVC.didMove(toParent: self)
             constraintAgain(childView: titlePlotVC.view)
-            
-            titlePlotVC.imdbID = imdbID
-            
-            print("One selected")
-//        case 1:
-//            addChild(twoVC)
-//            containerView.addSubview(twoVC.view)
-//            twoVC.didMove(toParent: self)
-//            constraintAgain(childView: twoVC.view)
-//            print("two selected")
+        case 1:
+            addChild(castCrewVC)
+            containerView.addSubview(castCrewVC.view)
+            castCrewVC.didMove(toParent: self)
+            constraintAgain(childView: castCrewVC.view)
 //        case 2:
 //            addChild(threeVC)
 //            containerView.addSubview(threeVC.view)
