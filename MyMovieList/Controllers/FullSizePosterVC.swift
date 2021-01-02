@@ -16,6 +16,8 @@ class FullSizePosterVC: UIViewController {
     }
     
     private func configure() {
+        view.backgroundColor = .systemBackground
+        
         view.addSubview(posterImageView)
         view.addSubview(closeButton)
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
