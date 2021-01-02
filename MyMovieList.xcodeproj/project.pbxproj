@@ -317,6 +317,7 @@
 		B1D1AD7D259BA66300B76567 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				B1E254F725A13A4D000F94ED /* CastCrewAPI.swift */,
 				B14DF2E62589712100FF8819 /* MovieDataAPI.swift */,
 				B146128D258A8F960030859B /* MovieIDAPI.swift */,
 				B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */,
@@ -332,7 +333,6 @@
 				B1461292258A931B0030859B /* MovieDetailModel.swift */,
 				B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */,
 				B1286C2E2592E2B10063AD70 /* WatchItem.swift */,
-				B1E254F725A13A4D000F94ED /* CastCrewAPI.swift */,
 				B1E254FC25A13A67000F94ED /* PersonModel.swift */,
 			);
 			path = "Object models";
