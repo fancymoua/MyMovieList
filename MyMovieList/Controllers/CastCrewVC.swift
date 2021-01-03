@@ -83,7 +83,7 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         var count = Int()
         
         if section == 0 {
-            count = directorArray.count
+            count = directorArray.count > 4 ? 4 : directorArray.count
         } else if section == 1 {
             count = actorsArray.count
         }

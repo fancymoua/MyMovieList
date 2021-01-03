@@ -47,19 +47,24 @@ struct PersonManager {
                 var directorArray = [PersonModel]()
                 
                 for item in result.cast {
-                    if item.order <= 3 {         // give me top 5
+                    if item.order <= 3 {         // give me top
                         let person = PersonModel(tmdbID: item.id, name: item.name, profilePath: item.profile_path)
                         castArray.append(person)
                     }
                 }
                 
                 for item in result.crew {
-                    if item.job == "Director" {
-                        let person = PersonModel(tmdbID: item.id, name: item.name, profilePath: item.profile_path)
-                        directorArray.append(person)
-                    } else if item.job == "Executive Producer" {
-                        let person = PersonModel(tmdbID: item.id, name: item.name, profilePath: item.profile_path)
-                        directorArray.append(person)
+                    switch mediaType {
+                    case .Movie:
+                        if item.job == "Director" {
+                            let person = PersonModel(tmdbID: item.id, name: item.name, profilePath: item.profile_path)
+                            directorArray.append(person)
+                        }
+                    case .TV:
+                        if item.job == "Executive Producer" {
+                            let person = PersonModel(tmdbID: item.id, name: item.name, profilePath: item.profile_path)
+                            directorArray.append(person)
+                        }
                     }
                 }
                 completed(castArray, directorArray)
