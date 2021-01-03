@@ -36,9 +36,9 @@ enum MediaType {
     var castCrewBaseURL: String {
         switch self {
         case .Movie:
-            return "https://api.themoviedb.org/3/movie/329865/credits?"
+            return "https://api.themoviedb.org/3/movie/"
         case .TV:
-            return "https://api.themoviedb.org/3/tv/329865/credits?"
+            return "https://api.themoviedb.org/3/tv/"
         }
     }
 }

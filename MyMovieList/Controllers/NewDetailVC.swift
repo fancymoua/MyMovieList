@@ -37,6 +37,9 @@ class NewDetailVC: UIViewController {
         titlePlotVC.imdbID = imdbID
         titlePlotVC.mediaType = mediaType
         titlePlotVC.tmdbID = tmdbID
+        
+        castCrewVC.tmdbID = tmdbID!
+        castCrewVC.mediaType = mediaType
  
         configureVC()
         

@@ -6,8 +6,11 @@ class CastCrewVC: UIViewController {
     
     var mainCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
-    var directorArray = [String]()
-    var actorsArray = [String]()
+    var directorArray = [PersonModel]()
+    var actorsArray = [PersonModel]()
+    
+    var tmdbID = Int()
+    var mediaType: MediaType!
     
     let searchEndURL = "api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
 
@@ -23,11 +26,13 @@ class CastCrewVC: UIViewController {
         mainCollectionView.dataSource = self
         mainCollectionView.delegate = self
         
-        directorArray.append("Denis Vilenueve")
+        getCastCrew()
         
-        actorsArray.append("Amy Adams")
-        actorsArray.append("Jeremy Renner")
-        actorsArray.append("Forrest Whitaker")
+//        directorArray.append("Denis Vilenueve")
+//        
+//        actorsArray.append("Amy Adams")
+//        actorsArray.append("Jeremy Renner")
+//        actorsArray.append("Forrest Whitaker")
     }
     
     private func addSubviews() {
@@ -56,7 +61,16 @@ class CastCrewVC: UIViewController {
     }
     
     func getCastCrew() {
-        
+        PersonManager.getCastCrewInfo(tmdbiD: tmdbID, mediaType: mediaType) { (castArray, directorArray) in
+            print("this is castArray \(castArray)")
+            print("this is directorArray \(directorArray)")
+            self.directorArray = directorArray
+            self.actorsArray = castArray
+            
+            DispatchQueue.main.async {
+                self.mainCollectionView.reloadData()
+            }
+        }
     }
     
 }
@@ -85,9 +99,9 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         var name = String()
         
         if indexPath.section == 0 {
-            name = directorArray[indexPath.item]
+            name = directorArray[indexPath.item].name!
         } else if indexPath.section == 1 {
-            name = actorsArray[indexPath.item]
+            name = actorsArray[indexPath.item].name!
         }
         
         cell.configure(name: name)

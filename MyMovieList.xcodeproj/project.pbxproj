@@ -50,6 +50,7 @@
 		B1E254F325A03DE4000F94ED /* CastCrewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E254F225A03DE4000F94ED /* CastCrewSectionHeader.swift */; };
 		B1E254F825A13A4D000F94ED /* CastCrewAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E254F725A13A4D000F94ED /* CastCrewAPI.swift */; };
 		B1E254FD25A13A67000F94ED /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E254FC25A13A67000F94ED /* PersonModel.swift */; };
+		B1E2550525A13C69000F94ED /* PersonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E2550425A13C69000F94ED /* PersonManager.swift */; };
 		B1E8BCBE258FDA38009F8FB2 /* WatchProviderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */; };
 		B1E8BCC3258FEEBB009F8FB2 /* WatchProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */; };
 		B1E8BCC8258FF5AF009F8FB2 /* WatchProviderBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */; };
@@ -122,6 +123,7 @@
 		B1E254F225A03DE4000F94ED /* CastCrewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastCrewSectionHeader.swift; sourceTree = "<group>"; };
 		B1E254F725A13A4D000F94ED /* CastCrewAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastCrewAPI.swift; sourceTree = "<group>"; };
 		B1E254FC25A13A67000F94ED /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
+		B1E2550425A13C69000F94ED /* PersonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonManager.swift; sourceTree = "<group>"; };
 		B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderAPI.swift; sourceTree = "<group>"; };
 		B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderModel.swift; sourceTree = "<group>"; };
 		B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderBlock.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				B143E3A42593E92C0063BD8F /* WatchlistManager.swift */,
 				B1C8115125944CA00084635F /* MovieDetailsManager.swift */,
 				B160A132259A8FA9004AC722 /* IDsManager.swift */,
+				B1E2550425A13C69000F94ED /* PersonManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				B1286BFA2591349D0063AD70 /* NewDetailVC.swift in Sources */,
 				B14DF28C2589536000FF8819 /* AppDelegate.swift in Sources */,
 				B143E3A52593E92C0063BD8F /* WatchlistManager.swift in Sources */,
+				B1E2550525A13C69000F94ED /* PersonManager.swift in Sources */,
 				B146128E258A8F960030859B /* MovieIDAPI.swift in Sources */,
 				B143E3BA25940C6E0063BD8F /* horizontalStackView.swift in Sources */,
 				B1286C0E259168790063AD70 /* LargeDetailBlock.swift in Sources */,

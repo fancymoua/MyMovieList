@@ -15,6 +15,7 @@ struct Cast: Codable {
 }
 
 struct Crew: Codable {
+    var id: Int
     var name: String
     var job: String?
     var profile_path: String?

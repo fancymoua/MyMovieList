@@ -3,5 +3,7 @@
 import UIKit
 
 struct PersonModel {
-    var name: String
+    var tmdbID: Int?
+    var name: String?
+    var profilePath: String?
 }
