@@ -34,6 +34,8 @@ class NewDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(tmdbID)
+        
         titlePlotVC.imdbID = imdbID
         titlePlotVC.mediaType = mediaType
         titlePlotVC.tmdbID = tmdbID

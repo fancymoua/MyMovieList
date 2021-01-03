@@ -43,15 +43,11 @@ struct PersonManager {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(CastCrewAPI.self, from: data)
                 
-                print("result cast is \(result.cast)")
-                print("result crew is \(result.crew)")
-                
                 var castArray = [PersonModel]()
                 var directorArray = [PersonModel]()
                 
                 for item in result.cast {
                     if item.order <= 3 {         // give me top 5
-                        print(item.name)
                         let person = PersonModel(tmdbID: item.id, name: item.name, profilePath: item.profile_path)
                         castArray.append(person)
                     }
@@ -59,12 +55,13 @@ struct PersonManager {
                 
                 for item in result.crew {
                     if item.job == "Director" {
-                        print(item.name)
+                        let person = PersonModel(tmdbID: item.id, name: item.name, profilePath: item.profile_path)
+                        directorArray.append(person)
+                    } else if item.job == "Executive Producer" {
                         let person = PersonModel(tmdbID: item.id, name: item.name, profilePath: item.profile_path)
                         directorArray.append(person)
                     }
                 }
-
                 completed(castArray, directorArray)
             } catch {
                 print("Something went wrong getting castCrew")
