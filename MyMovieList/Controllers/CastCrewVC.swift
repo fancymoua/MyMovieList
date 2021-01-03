@@ -11,8 +11,6 @@ class CastCrewVC: UIViewController {
     
     var tmdbID = Int()
     var mediaType: MediaType!
-    
-    let searchEndURL = "api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +37,6 @@ class CastCrewVC: UIViewController {
     }
     
     private func configure() {
-        view.backgroundColor = .systemOrange
         
         mainCollectionView.backgroundColor = .systemBackground
         mainCollectionView.isScrollEnabled = true
