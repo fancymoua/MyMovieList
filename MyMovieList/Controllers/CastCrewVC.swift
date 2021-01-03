@@ -27,12 +27,6 @@ class CastCrewVC: UIViewController {
         mainCollectionView.delegate = self
         
         getCastCrew()
-        
-//        directorArray.append("Denis Vilenueve")
-//        
-//        actorsArray.append("Amy Adams")
-//        actorsArray.append("Jeremy Renner")
-//        actorsArray.append("Forrest Whitaker")
     }
     
     private func addSubviews() {
@@ -82,10 +76,13 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var count = Int()
         
-        if section == 0 {
+        switch section {
+        case 0:
             count = directorArray.count > 4 ? 4 : directorArray.count
-        } else if section == 1 {
+        case 1:
             count = actorsArray.count
+        default:
+            count = 0
         }
         
         return count
@@ -96,10 +93,13 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         
         var name = String()
         
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             name = directorArray[indexPath.item].name!
-        } else if indexPath.section == 1 {
+        case 1:
             name = actorsArray[indexPath.item].name!
+        default:
+            name = ""
         }
         
         cell.configure(name: name)
@@ -125,10 +125,20 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         
         var sectionTitle = String()
         
-        if indexPath.section == 0 {
-            sectionTitle = "Director(s):"
-        } else if indexPath.section == 1 {
+        switch indexPath.section {
+        case 0:
+            switch mediaType {
+            case .Movie:
+                sectionTitle = "Director(s)"
+            case .TV:
+                sectionTitle = "Executive Producer(s)"
+            case .none:
+                sectionTitle = ""
+            }
+        case 1:
             sectionTitle = "Starring:"
+        default:
+            sectionTitle = ""
         }
         
         headerView.configureHeader(title: sectionTitle)
@@ -139,6 +149,4 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
            return CGSize(width: collectionView.frame.width, height: 60)
        }
-    
-    
 }
