@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B100618525A3B4A5004715C4 /* TVDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100618425A3B4A5004715C4 /* TVDetailModel.swift */; };
 		B1286BE4259046650063AD70 /* SpecialCollectionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1286BE3259046650063AD70 /* SpecialCollectionsVC.swift */; };
 		B1286BE925904BA10063AD70 /* FeaturedMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1286BE825904BA10063AD70 /* FeaturedMovieCell.swift */; };
 		B1286BFA2591349D0063AD70 /* NewDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1286BF92591349D0063AD70 /* NewDetailVC.swift */; };
@@ -77,6 +78,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B100618425A3B4A5004715C4 /* TVDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVDetailModel.swift; sourceTree = "<group>"; };
 		B1286BE3259046650063AD70 /* SpecialCollectionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialCollectionsVC.swift; sourceTree = "<group>"; };
 		B1286BE825904BA10063AD70 /* FeaturedMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedMovieCell.swift; sourceTree = "<group>"; };
 		B1286BF92591349D0063AD70 /* NewDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDetailVC.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */,
 				B1286C2E2592E2B10063AD70 /* WatchItem.swift */,
 				B1E254FC25A13A67000F94ED /* PersonModel.swift */,
+				B100618425A3B4A5004715C4 /* TVDetailModel.swift */,
 			);
 			path = "Object models";
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				B189BE9B258BFAD400422624 /* TrendingVC.swift in Sources */,
 				B1E254F325A03DE4000F94ED /* CastCrewSectionHeader.swift in Sources */,
 				B1C81164259532EC0084635F /* UIViewController+ext.swift in Sources */,
+				B100618525A3B4A5004715C4 /* TVDetailModel.swift in Sources */,
 				B1E8BCBE258FDA38009F8FB2 /* WatchProviderAPI.swift in Sources */,
 				B1286C172592863A0063AD70 /* WatchProviders.swift in Sources */,
 				B174977A258D5A1D00B428F3 /* SpecialListVC.swift in Sources */,

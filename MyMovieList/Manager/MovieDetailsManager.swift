@@ -3,51 +3,106 @@
 import UIKit
 
 class MovieDetailsManager {
-    static var thisMovie = MovieDetailModel()
+//    static var thisMovie = MovieDetailModel()
     
-    static func getMovieDetails(imdbID: String?, completed: @escaping (MovieDetailModel) -> Void) {
-        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&i="
+    static func getMovieDetails(tmdbID: Int, mediaType: MediaType, completed: @escaping (MovieDetailModel) -> Void) {
+        //        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&i="
         
-        var movieEndpoint = String()
+        var mediaTypeBase = String()
         
-        if let imdbID = imdbID {
-            movieEndpoint = baseURL + imdbID
+        if mediaType == .Movie {
+            mediaTypeBase = MediaType.Movie.detailBaseURL
+        } else if mediaType == .TV {
+            mediaTypeBase = MediaType.TV.detailBaseURL
+        }
+        
+        let baseURL = mediaTypeBase + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
+        
+        guard let url = URL(string: baseURL) else {
+            print("Bad movieEndpoint")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
-            guard let url = URL(string: movieEndpoint) else {
-                print("Bad movieEndpoint")
+            if let _ = error {
+                print("error making call to OMDB")
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                print("Something other than 200 from OMDB")
                 return
             }
             
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                
-                if let _ = error {
-                    print("error making call to OMDB")
-                }
-                
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    print("Something other than 200 from OMDB")
-                    return
-                }
-                
-                guard let data = data else {
-                    print("No data from OMDB")
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let result = try decoder.decode(MovieDetailModel.self, from: data)
-                    
-                    thisMovie = MovieDetailModel(imdbID: result.imdbID, Title: result.Title, Year: result.Year, Plot: result.Plot, Writer: result.Writer, Director: result.Director, Actors: result.Actors, Poster: result.Poster, Genre: result.Genre, imdbRating: result.imdbRating, Rated: result.Rated)
-                    
-                    completed(thisMovie)
-         
-                } catch {
-                    print("Error getting movie details")
-                }
+            guard let data = data else {
+                print("No data from OMDB")
+                return
             }
-            task.resume()
+            
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(MovieDetailModel.self, from: data)
+                
+                
+                let thisMovie = MovieDetailModel(imdbID: result.imdbID, title: result.title, release_date: result.release_date, overview: result.overview, poster_path: result.poster_path)
+                
+                completed(thisMovie)
+                
+            } catch {
+                print("Error getting movie details")
+            }
         }
+        task.resume()
+    }
+    
+    static func getTVDetails(tmdbID: Int, mediaType: MediaType, completed: @escaping (TVDetailModel) -> Void) {
+        //        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&i="
+        
+        var mediaTypeBase = String()
+        
+        if mediaType == .Movie {
+            mediaTypeBase = MediaType.Movie.detailBaseURL
+        } else if mediaType == .TV {
+            mediaTypeBase = MediaType.TV.detailBaseURL
+        }
+        
+        let baseURL = mediaTypeBase + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
+        
+        guard let url = URL(string: baseURL) else {
+            print("Bad movieEndpoint")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let _ = error {
+                print("error making call to OMDB")
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                print("Something other than 200 from OMDB")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data from OMDB")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(TVDetailModel.self, from: data)
+                
+                
+                let thisMovie = TVDetailModel(name: result.name, first_air_date: result.first_air_date, last_air_date: result.last_air_date, overview: result.overview, poster_path: result.poster_path)
+                
+                completed(thisMovie)
+                
+            } catch {
+                print("Error getting movie details")
+            }
+        }
+        task.resume()
     }
     
     static func getWatchProviders(tmdbID: Int?, mediaType: MediaType, completed: @escaping ([WatchProviders]) -> Void) {

@@ -107,22 +107,38 @@ class TitlePlotVC: UIViewController {
     }
     
     func getMovieDetails() {
-        MovieDetailsManager.getMovieDetails(imdbID: imdbID) { [self] (daMovie) in
-            self.rating = daMovie.imdbRating
-            self.year = daMovie.Year
-            self.rated = daMovie.Rated
-            DispatchQueue.main.async {
-                self.titleLabel.text = daMovie.Title
-                self.ratingLabel.text = daMovie.imdbRating
-                self.plotLabel.text = daMovie.Plot
-                self.yearView.setText(text: daMovie.Year ?? "n/a")
-                self.ratedView.setText(text: daMovie.Rated ?? "n/a")
-                self.actorsView.setText(text: daMovie.Actors ?? "n/a")
-                
-                if mediaType == .Movie {
-                    self.directorView.setText(text: daMovie.Director ?? "n/a")
-                } else if mediaType == .TV {
-                    self.directorView.setText(text: daMovie.Writer ?? "n/a")
+        if mediaType == .Movie {
+            MovieDetailsManager.getMovieDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
+                DispatchQueue.main.async {
+                    self.titleLabel.text = daMovie.title
+                    self.ratingLabel.text = "hold"
+                    self.plotLabel.text = daMovie.overview
+                    self.yearView.setText(text: daMovie.release_date ?? "n/a")
+                    self.ratedView.setText(text: "hold")
+                    self.actorsView.setText(text: "hold")
+                    
+                    if mediaType == .Movie {
+                        self.directorView.setText(text: "hold")
+                    } else if mediaType == .TV {
+                        self.directorView.setText(text: "hold")
+                    }
+                }
+            }
+        } else if mediaType == .TV {
+            MovieDetailsManager.getTVDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
+                DispatchQueue.main.async {
+                    self.titleLabel.text = daMovie.name
+                    self.ratingLabel.text = "hold"
+                    self.plotLabel.text = daMovie.overview
+                    self.yearView.setText(text: daMovie.first_air_date ?? "n/a")
+                    self.ratedView.setText(text: "hold")
+                    self.actorsView.setText(text: "hold")
+                    
+                    if mediaType == .Movie {
+                        self.directorView.setText(text: "hold")
+                    } else if mediaType == .TV {
+                        self.directorView.setText(text: "hold")
+                    }
                 }
             }
         }

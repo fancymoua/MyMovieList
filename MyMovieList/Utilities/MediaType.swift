@@ -24,6 +24,15 @@ enum MediaType {
         }
     }
     
+    var detailBaseURL: String {
+        switch self {
+        case .Movie:
+            return "https://api.themoviedb.org/3/movie/"
+        case .TV :
+            return "https://api.themoviedb.org/3/tv/"
+        }
+    }
+    
     var watchProvidersBaseURL: String {
         switch self {
         case .Movie:

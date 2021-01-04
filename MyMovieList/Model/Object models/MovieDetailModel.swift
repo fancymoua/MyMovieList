@@ -1,17 +1,11 @@
 import UIKit
 
-// OMDB API
+// TMDB API
 
 struct MovieDetailModel: Codable {
     var imdbID: String?
-    var Title: String?
-    var Year: String?
-    var Plot: String?
-    var Writer: String?
-    var Director: String?
-    var Actors: String?
-    var Poster: String?
-    var Genre: String?
-    var imdbRating: String?
-    var Rated: String?
+    var title: String?
+    var release_date: String?
+    var overview: String?
+    var poster_path: String?
 }
