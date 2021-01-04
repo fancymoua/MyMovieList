@@ -55,6 +55,7 @@
 		B1E8BCBE258FDA38009F8FB2 /* WatchProviderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */; };
 		B1E8BCC3258FEEBB009F8FB2 /* WatchProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */; };
 		B1E8BCC8258FF5AF009F8FB2 /* WatchProviderBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */; };
+		B1F2562C25A2AE9E0019D9FF /* PersonCreditedWorkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F2562B25A2AE9E0019D9FF /* PersonCreditedWorkAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,7 @@
 		B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderAPI.swift; sourceTree = "<group>"; };
 		B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderModel.swift; sourceTree = "<group>"; };
 		B1E8BCC7258FF5AF009F8FB2 /* WatchProviderBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchProviderBlock.swift; sourceTree = "<group>"; };
+		B1F2562B25A2AE9E0019D9FF /* PersonCreditedWorkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCreditedWorkAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +330,7 @@
 				B146128D258A8F960030859B /* MovieIDAPI.swift */,
 				B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */,
 				B160A12D259A8582004AC722 /* TVDataAPI.swift */,
+				B1F2562B25A2AE9E0019D9FF /* PersonCreditedWorkAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				B14DF2DA25896AA400FF8819 /* MovieSearchResult.swift in Sources */,
 				B1E254F825A13A4D000F94ED /* CastCrewAPI.swift in Sources */,
 				B14DF28E2589536000FF8819 /* SceneDelegate.swift in Sources */,
+				B1F2562C25A2AE9E0019D9FF /* PersonCreditedWorkAPI.swift in Sources */,
 				B14FF278259A70C800C72DE7 /* FullSizePosterVC.swift in Sources */,
 				B1286BFF259159530063AD70 /* MovieTitleLabel.swift in Sources */,
 				B1461293258A931B0030859B /* MovieDetailModel.swift in Sources */,
