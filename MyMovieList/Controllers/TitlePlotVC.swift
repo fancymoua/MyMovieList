@@ -36,9 +36,6 @@ class TitlePlotVC: UIViewController {
 
         view.backgroundColor = .systemBackground
         
-        print("bamama \(tmdbID)")
-        print("mediaType is \(mediaType)")
-        
         if mediaType == .TV {
             directorView.headerLabel.text = "Writer(s)"
         }
@@ -46,7 +43,7 @@ class TitlePlotVC: UIViewController {
         addSubviews()
         configureMovieDetailViews()
         getMovieDetails()
-//        getWatchProviders()
+        getWatchProviders()
     }
     
     func addSubviews() {
@@ -150,7 +147,6 @@ class TitlePlotVC: UIViewController {
     func getWatchProviders() {
         
         MovieDetailsManager.getWatchProviders(tmdbID: tmdbID, mediaType: mediaType) { [self] (providersArray) in
-            print("providersArray: \(providersArray)")
             
             for provider in providersArray {
                 let rate = provider.rate

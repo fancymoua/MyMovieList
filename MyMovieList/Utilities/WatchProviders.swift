@@ -9,6 +9,7 @@ enum WatchProviders {
     case Netflix
     case Hulu
     case HBONow
+    case HBOMax
     case DisneyPlus
     case AmazonPrime
     
@@ -31,6 +32,8 @@ enum WatchProviders {
             return 337
         case .AmazonPrime:
             return 9
+        case .HBOMax:
+            return 384
         }
     }
     
@@ -52,6 +55,8 @@ enum WatchProviders {
             return #imageLiteral(resourceName: "Disney-Plus-icon")
         case .AmazonPrime:
             return #imageLiteral(resourceName: "Amazon-prime-icon")
+        case .HBOMax:
+            return #imageLiteral(resourceName: "HBOMax-icon")
         }
     }
     
@@ -72,6 +77,8 @@ enum WatchProviders {
         case .DisneyPlus:
             return "Free"
         case .AmazonPrime:
+            return "Free"
+        case .HBOMax:
             return "Free"
         }
     }

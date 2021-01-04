@@ -137,6 +137,7 @@ class MovieDetailsManager {
                             if item.provider_id == WatchProviders.Hulu.id { providerArray.append(.Hulu) }
                             if item.provider_id == WatchProviders.AmazonPrime.id { providerArray.append(.AmazonPrime) }
                             if item.provider_id == WatchProviders.HBONow.id { providerArray.append(.HBONow) }
+                            if item.provider_id == WatchProviders.HBOMax.id { providerArray.append(.HBOMax) }
                         }
                     }
                     
