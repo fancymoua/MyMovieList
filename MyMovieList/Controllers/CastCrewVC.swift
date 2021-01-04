@@ -107,6 +107,19 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destVC = PersonDetailVC()
         
+        var tmdbID = Int()
+        
+        switch indexPath.section {
+        case 0:
+            tmdbID = directorArray[indexPath.item].id!
+        case 1:
+            tmdbID = actorsArray[indexPath.item].id!
+        default:
+            print("Nada")
+        }
+        
+        destVC.tmdbID = tmdbID
+        
         show(destVC, sender: self)
     }
     

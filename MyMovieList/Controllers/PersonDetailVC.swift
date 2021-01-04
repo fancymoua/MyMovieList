@@ -8,6 +8,10 @@ class PersonDetailVC: UIViewController {
     let nameLabel = UILabel()
     let bioLabel = UILabel()
     
+    private let photoBaseURL = "https://image.tmdb.org/t/p/original"
+    
+    var tmdbID = Int()
+    
     let creditedCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
 
     override func viewDidLoad() {
@@ -19,6 +23,28 @@ class PersonDetailVC: UIViewController {
 
         addSubviews()
         constrainSubviews()
+        
+        getDetails()
+    }
+    
+    private func getDetails() {
+        PersonManager.getPersonDetail(tmdbID: tmdbID) { (personModel) in
+            DispatchQueue.main.async {
+                self.nameLabel.text = personModel.name
+                self.bioLabel.text = personModel.biography
+                
+                if let posterPath = personModel.profile_path {
+                    let posterURLString = self.photoBaseURL + "\(posterPath)"
+                    
+                    guard let posterURL = URL(string: posterURLString) else { return }
+                    
+                    if let data = try? Data(contentsOf: posterURL) {
+                        let posterImage = UIImage(data: data)
+                        self.avatarImageView.image = posterImage
+                    }
+                }
+            }
+        }
     }
     
     private func addSubviews() {
@@ -33,9 +59,9 @@ class PersonDetailVC: UIViewController {
     
     private func constrainSubviews() {
         
-        avatarImageView.image = #imageLiteral(resourceName: "Pedro Pascal")
-        nameLabel.text = "Pedro Pascal"
-        bioLabel.text = "A Chilean-born Amercian stage and screen director and actor, best known for his character in HBO's \"Game of Thrones\" and the title role in the popular Disney+ series “Star Wars: The Mandalorian”. Pedro studied acting at the Orange County High School of the Arts and New York University's Tisch School of the Arts."
+//        avatarImageView.image = #imageLiteral(resourceName: "Pedro Pascal")
+//        nameLabel.text = "Pedro Pascal"
+//        bioLabel.text = "A Chilean-born Amercian stage and screen director and actor, best known for his character in HBO's \"Game of Thrones\" and the title role in the popular Disney+ series “Star Wars: The Mandalorian”. Pedro studied acting at the Orange County High School of the Arts and New York University's Tisch School of the Arts."
         
         nameLabel.font = UIFont(name: "Avenir Next Medium", size: 18)
         nameLabel.textAlignment = .left

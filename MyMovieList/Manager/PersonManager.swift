@@ -16,8 +16,6 @@ struct PersonManager {
             baseURL = MediaType.TV.castCrewBaseURL + "\(tmdbiD)" + "/credits?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
         }
         
-        print("baseURL is \(baseURL)")
-        
         guard let url = URL(string: baseURL) else {
             print("getCastCrew: bad URL")
             return
@@ -48,7 +46,7 @@ struct PersonManager {
                 
                 for item in result.cast {
                     if item.order <= 3 {         // give me top
-                        let person = PersonModel(tmdbID: item.id, name: item.name, profilePath: item.profile_path)
+                        let person = PersonModel(id: item.id, name: item.name, profile_path: item.profile_path)
                         castArray.append(person)
                     }
                 }
@@ -57,12 +55,12 @@ struct PersonManager {
                     switch mediaType {
                     case .Movie:
                         if item.job == "Director" {
-                            let person = PersonModel(tmdbID: item.id, name: item.name, profilePath: item.profile_path)
+                            let person = PersonModel(id: item.id, name: item.name, profile_path: item.profile_path)
                             directorArray.append(person)
                         }
                     case .TV:
                         if item.job == "Executive Producer" {
-                            let person = PersonModel(tmdbID: item.id, name: item.name, profilePath: item.profile_path)
+                            let person = PersonModel(id: item.id, name: item.name, profile_path: item.profile_path)
                             directorArray.append(person)
                         }
                     }
@@ -75,6 +73,46 @@ struct PersonManager {
         }
         
         task.resume()
+    }
+    
+    static func getPersonDetail(tmdbID: Int, completed: @escaping (PersonModel)-> Void) {
+        
+        let endpoint = "https://api.themoviedb.org/3/person/" + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
+        
+        guard let url = URL(string: endpoint) else {
+            print("Bad person detail url")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let _ = error {
+                print("Error making call - getPersonDetail")
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                print("Get person detail -- something other than 200")
+                return
+            }
+            
+            guard let data = data else {
+                print("getPersonDetail -- no data")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(PersonModel.self, from: data)
+                
+                completed(result)
+            } catch {
+                print("Error decoding personDetail")
+            }
+            
+        }
+        
+        task.resume()
+    
     }
     
 }

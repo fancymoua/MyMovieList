@@ -2,8 +2,9 @@
 
 import UIKit
 
-struct PersonModel {
-    var tmdbID: Int?
+struct PersonModel: Codable {
+    var id: Int?
     var name: String?
-    var profilePath: String?
+    var biography: String?
+    var profile_path: String?
 }
