@@ -156,8 +156,9 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         let title = creditedWorkArray[indexPath.item].title
         let character = creditedWorkArray[indexPath.item].character
+        let job = creditedWorkArray[indexPath.item].job
         
-        cell.configureCell(title: title, image: posterImage, character: character ?? "none")
+        cell.configureCell(title: title, image: posterImage, character: character ?? job ?? "none")
          
         return cell
         

@@ -16,4 +16,5 @@ struct WorkItem: Codable {
     var media_type: String?      // movie or tv
     var poster_path: String?
     var character: String?
+    var job: String?
 }

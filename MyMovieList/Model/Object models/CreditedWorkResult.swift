@@ -8,4 +8,5 @@ struct CreditedWorkResult: Codable, Hashable {
     var popularity: Float?
     var media_type: String?
     var character: String?
+    var job: String?
 }
