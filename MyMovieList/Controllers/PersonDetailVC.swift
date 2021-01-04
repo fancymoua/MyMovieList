@@ -154,6 +154,45 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let destVC = NewDetailVC()
+        
+        destVC.hidesBottomBarWhenPushed = true
+        
+        var posterImage = UIImage()
+        
+        if let posterPath = self.creditedWorkArray[indexPath.item].poster_path {
+            
+            let endpoint = self.photoBaseURL + posterPath
+            
+            let cacheKey = NSString(string: endpoint)
+            
+            if let image = cache.object(forKey: cacheKey) {
+                posterImage = image
+            } else {
+                posterImage =  #imageLiteral(resourceName: "question-mark")
+            }
+        }
+        
+        var mediaType: MediaType!
+        
+        if creditedWorkArray[indexPath.item].media_type == "movie" {
+            mediaType = .Movie
+        } else if creditedWorkArray[indexPath.item].media_type == "tv" {
+            mediaType = .TV
+        }
+        
+        destVC.movieTitle = creditedWorkArray[indexPath.item].title
+        destVC.posterImage = posterImage
+        destVC.tmdbID = creditedWorkArray[indexPath.item].id
+        destVC.posterPath = creditedWorkArray[indexPath.item].poster_path
+        destVC.imdbID = creditedWorkArray[indexPath.item].imdbID
+        destVC.mediaType = mediaType
+        
+        show(destVC, sender: self)
+    }
+    
     func configureCollectionView() {
         
         let flowLayout = UICollectionViewFlowLayout()

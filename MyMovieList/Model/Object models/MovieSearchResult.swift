@@ -8,4 +8,5 @@ struct MovieSearchResult: Codable, Hashable {
     var poster_path: String?
     var imdbID: String?
     var popularity: Float?
+    var media_type: String?
 }

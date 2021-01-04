@@ -79,7 +79,7 @@ class SearchResultsVC: UIViewController {
                         var imdbID = String()
                         
                         IDsManager.getIMDBID(id: id, type: .Movie) { (cowID) in
-                            imdbID = cowID
+                            imdbID = "TT"
                         
                             let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
                             
@@ -106,7 +106,7 @@ class SearchResultsVC: UIViewController {
                         var imdbID = String()
                         
                         IDsManager.getIMDBID(id: id, type: .TV) { (cowID) in
-                            imdbID = cowID
+                            imdbID = "TT"
                             
                             let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
                             

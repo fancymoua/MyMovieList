@@ -35,6 +35,7 @@ class NewDetailVC: UIViewController {
         super.viewDidLoad()
         
         print(tmdbID)
+        print("corn \(mediaType)")
         
         titlePlotVC.imdbID = imdbID
         titlePlotVC.mediaType = mediaType
