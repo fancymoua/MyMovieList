@@ -13,6 +13,7 @@ class SmallMediaCardCell: UICollectionViewCell {
     
     var movieImageView = UIImageView()
     var titleLabel = UILabel()
+    var characterLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,20 +23,23 @@ class SmallMediaCardCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(title: String, image: UIImage) {
+    func configureCell(title: String, image: UIImage, character: String) {
         
-        self.backgroundColor = .white
+        self.backgroundColor = .systemGray6
         self.layer.cornerRadius = 4
         self.layer.masksToBounds = true
         
         addSubview(movieImageView)
         addSubview(titleLabel)
+        addSubview(characterLabel)
         
         movieImageView.image = image
         titleLabel.text = title
+        characterLabel.text = character
         
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        characterLabel.translatesAutoresizingMaskIntoConstraints = false
         
         movieImageView.contentMode = .scaleAspectFill
         
@@ -43,6 +47,13 @@ class SmallMediaCardCell: UICollectionViewCell {
         titleLabel.numberOfLines = 2
         titleLabel.minimumScaleFactor = 0.5
         titleLabel.lineBreakMode = .byTruncatingTail
+        titleLabel.font = UIFont(name: "Avenir Next Medium", size: 17)
+        
+        characterLabel.textAlignment = .center
+        characterLabel.numberOfLines = 1
+        characterLabel.minimumScaleFactor = 0.5
+        characterLabel.lineBreakMode = .byTruncatingTail
+        characterLabel.font = UIFont(name: "Avenir Next Italic", size: 14)
         
         NSLayoutConstraint.activate([
             
@@ -51,10 +62,15 @@ class SmallMediaCardCell: UICollectionViewCell {
             movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             movieImageView.heightAnchor.constraint(equalToConstant: 200),
             
+            characterLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            characterLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            characterLabel.heightAnchor.constraint(equalToConstant: 20),
+            characterLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
+            titleLabel.bottomAnchor.constraint(equalTo: characterLabel.topAnchor, constant: -5),
         
         ])
     }

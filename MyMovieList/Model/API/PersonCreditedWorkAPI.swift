@@ -15,4 +15,5 @@ struct WorkItem: Codable {
     var popularity: Float?
     var media_type: String?      // movie or tv
     var poster_path: String?
+    var character: String?
 }

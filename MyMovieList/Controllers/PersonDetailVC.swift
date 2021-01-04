@@ -7,6 +7,7 @@ class PersonDetailVC: UIViewController {
     let avatarImageView = UIImageView()
     let nameLabel = UILabel()
     let bioLabel = UILabel()
+    let creditedWorkLabel = UILabel()
     
     private let photoBaseURL = "https://image.tmdb.org/t/p/original"
     
@@ -16,7 +17,7 @@ class PersonDetailVC: UIViewController {
     
     let creditedCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
-    var creditedWorkArray = [MovieSearchResult]()
+    var creditedWorkArray = [CreditedWorkResult]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +71,7 @@ class PersonDetailVC: UIViewController {
     
     private func addSubviews() {
         
-        let subviews = [avatarImageView, nameLabel, bioLabel, creditedCollectionView]
+        let subviews = [avatarImageView, nameLabel, bioLabel, creditedCollectionView, creditedWorkLabel]
         
         for view in subviews {
             self.view.addSubview(view)
@@ -89,6 +90,9 @@ class PersonDetailVC: UIViewController {
         bioLabel.lineBreakMode = .byWordWrapping
         bioLabel.minimumScaleFactor = 0.7
         bioLabel.textAlignment = .left
+        
+        creditedWorkLabel.text = "Most Popular:"
+        creditedWorkLabel.font = UIFont(name: "Avenir Next Medium", size: 18)
         
         creditedCollectionView.backgroundColor = .white
         configureCollectionView()
@@ -109,7 +113,12 @@ class PersonDetailVC: UIViewController {
             bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             bioLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
             
-            creditedCollectionView.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 15),
+            creditedWorkLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 30),
+            creditedWorkLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            creditedWorkLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            creditedWorkLabel.heightAnchor.constraint(equalToConstant: 20),
+            
+            creditedCollectionView.topAnchor.constraint(equalTo: creditedWorkLabel.bottomAnchor, constant: 15),
             creditedCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             creditedCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             creditedCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5)
@@ -127,7 +136,6 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallMediaCardCell.reuseID, for: indexPath) as! SmallMediaCardCell
         
         var posterImage = UIImage()
-        var title = String()
         
         if let posterPath = self.creditedWorkArray[indexPath.item].poster_path {
 
@@ -146,9 +154,10 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
             }
         }
         
-        title = creditedWorkArray[indexPath.item].title
+        let title = creditedWorkArray[indexPath.item].title
+        let character = creditedWorkArray[indexPath.item].character
         
-        cell.configureCell(title: title, image: posterImage)
+        cell.configureCell(title: title, image: posterImage, character: character ?? "none")
          
         return cell
         
@@ -205,7 +214,7 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         let itemWidth = availableWidth / 3
         
-        flowLayout.itemSize = CGSize(width: itemWidth + 30, height: 280)
+        flowLayout.itemSize = CGSize(width: itemWidth + 30, height: 300)
         flowLayout.minimumLineSpacing = 20
         flowLayout.minimumInteritemSpacing = 5
         

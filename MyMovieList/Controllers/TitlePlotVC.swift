@@ -66,7 +66,6 @@ class TitlePlotVC: UIViewController {
         providersStackViewWidthConstraint = NSLayoutConstraint(item: watchProvidersStackView, attribute: .width, relatedBy: .equal, toItem: .none , attribute: .notAnAttribute, multiplier: 0, constant: providersWidth)
         
         providersStackViewWidthConstraint.isActive = true
-    
         
         NSLayoutConstraint.activate([
             
