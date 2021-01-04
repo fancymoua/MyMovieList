@@ -1,6 +1,8 @@
 
 import UIKit
 
+// get cast & crew for a single movie or show
+
 struct CastCrewAPI: Codable {
     var cast: [Cast]
     var crew: [Crew]

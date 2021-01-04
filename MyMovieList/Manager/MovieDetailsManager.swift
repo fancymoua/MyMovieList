@@ -3,7 +3,6 @@
 import UIKit
 
 class MovieDetailsManager {
-//    static var thisMovie = MovieDetailModel()
     
     static func getMovieDetails(tmdbID: Int, mediaType: MediaType, completed: @escaping (MovieDetailModel) -> Void) {
         

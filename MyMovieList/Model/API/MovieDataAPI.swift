@@ -2,6 +2,8 @@
 
 import UIKit
 
+// used in user's search results + special collection results
+
 struct MovieDataAPI: Codable {
     var results: [MovieResult]
 }

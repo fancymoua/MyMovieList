@@ -332,9 +332,9 @@
 			children = (
 				B1E254F725A13A4D000F94ED /* CastCrewAPI.swift */,
 				B14DF2E62589712100FF8819 /* MovieDataAPI.swift */,
+				B160A12D259A8582004AC722 /* TVDataAPI.swift */,
 				B146128D258A8F960030859B /* MovieIDAPI.swift */,
 				B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */,
-				B160A12D259A8582004AC722 /* TVDataAPI.swift */,
 				B1F2562B25A2AE9E0019D9FF /* PersonCreditedWorkAPI.swift */,
 			);
 			path = API;
@@ -345,10 +345,10 @@
 			children = (
 				B14DF2D925896AA400FF8819 /* MovieSearchResult.swift */,
 				B1461292258A931B0030859B /* MovieDetailModel.swift */,
+				B100618425A3B4A5004715C4 /* TVDetailModel.swift */,
 				B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */,
 				B1286C2E2592E2B10063AD70 /* WatchItem.swift */,
 				B1E254FC25A13A67000F94ED /* PersonModel.swift */,
-				B100618425A3B4A5004715C4 /* TVDetailModel.swift */,
 			);
 			path = "Object models";
 			sourceTree = "<group>";
