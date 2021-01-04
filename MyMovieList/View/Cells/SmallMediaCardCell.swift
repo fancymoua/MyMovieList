@@ -1,10 +1,15 @@
-
+//
+//  SmallMediaCardCell.swift
+//  MyMovieList
+//
+//  Created by Fancy on 1/4/21.
+//
 
 import UIKit
 
-class FeaturedMovieCell: UICollectionViewCell {
+class SmallMediaCardCell: UICollectionViewCell {
     
-    static let reuseID = "FeaturedMovieCell"
+    static let reuseID = "SmallMediaCardCell"
     
     var movieImageView = UIImageView()
     var titleLabel = UILabel()
@@ -19,7 +24,7 @@ class FeaturedMovieCell: UICollectionViewCell {
     
     func configureCell(title: String, image: UIImage) {
         
-        self.backgroundColor = #colorLiteral(red: 0.8470588235, green: 0.8470588235, blue: 0.8470588235, alpha: 1)
+        self.backgroundColor = .white
         self.layer.cornerRadius = 4
         self.layer.masksToBounds = true
         
@@ -27,7 +32,7 @@ class FeaturedMovieCell: UICollectionViewCell {
         addSubview(titleLabel)
         
         movieImageView.image = image
-//        titleLabel.text = title
+        titleLabel.text = title
         
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -44,14 +49,13 @@ class FeaturedMovieCell: UICollectionViewCell {
             movieImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            movieImageView.heightAnchor.constraint(equalToConstant: 100),
-            movieImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            movieImageView.heightAnchor.constraint(equalToConstant: 200),
             
-//            titleLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 30),
-//            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-//            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
-//            titleLabel.heightAnchor.constraint(equalToConstant: 50),
-//            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
+//            titleLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 40),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            titleLabel.heightAnchor.constraint(equalToConstant: 50),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
         
         ])
     }

@@ -25,7 +25,7 @@ class PersonDetailVC: UIViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = false
         
-        creditedCollectionView.register(FeaturedMovieCell.self, forCellWithReuseIdentifier: FeaturedMovieCell.reuseID)
+        creditedCollectionView.register(SmallMediaCardCell.self, forCellWithReuseIdentifier: SmallMediaCardCell.reuseID)
         
         creditedCollectionView.delegate = self
         creditedCollectionView.dataSource = self
@@ -89,7 +89,7 @@ class PersonDetailVC: UIViewController {
         bioLabel.minimumScaleFactor = 0.7
         bioLabel.textAlignment = .left
         
-        creditedCollectionView.backgroundColor = .systemGray5
+        creditedCollectionView.backgroundColor = .white
         configureCollectionView()
         
         NSLayoutConstraint.activate([
@@ -123,7 +123,7 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedMovieCell.reuseID, for: indexPath) as! FeaturedMovieCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallMediaCardCell.reuseID, for: indexPath) as! SmallMediaCardCell
         
         var posterImage = UIImage()
         var title = String()
@@ -165,7 +165,7 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         let itemWidth = availableWidth / 3
         
-        flowLayout.itemSize = CGSize(width: itemWidth + 30, height: itemWidth + 90)
+        flowLayout.itemSize = CGSize(width: itemWidth + 30, height: 280)
         flowLayout.minimumLineSpacing = 20
         flowLayout.minimumInteritemSpacing = 5
         
