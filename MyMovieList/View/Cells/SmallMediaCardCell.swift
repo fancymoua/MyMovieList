@@ -51,7 +51,6 @@ class SmallMediaCardCell: UICollectionViewCell {
             movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             movieImageView.heightAnchor.constraint(equalToConstant: 200),
             
-//            titleLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 40),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
             titleLabel.heightAnchor.constraint(equalToConstant: 50),

@@ -27,7 +27,6 @@ class FeaturedMovieCell: UICollectionViewCell {
         addSubview(titleLabel)
         
         movieImageView.image = image
-//        titleLabel.text = title
         
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -44,15 +43,7 @@ class FeaturedMovieCell: UICollectionViewCell {
             movieImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            movieImageView.heightAnchor.constraint(equalToConstant: 100),
             movieImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
-//            titleLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 30),
-//            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-//            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
-//            titleLabel.heightAnchor.constraint(equalToConstant: 50),
-//            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
-        
         ])
     }
 }

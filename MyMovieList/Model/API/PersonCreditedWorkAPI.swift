@@ -11,6 +11,7 @@ struct PersonCreditedWorkAPI: Codable {
 struct WorkItem: Codable {
     var id: Int
     var title: String?
+    var name: String?
     var media_type: String?      // movie or tv
     var poster_path: String?
 }

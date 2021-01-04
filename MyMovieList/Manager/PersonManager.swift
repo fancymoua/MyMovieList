@@ -151,12 +151,14 @@ struct PersonManager {
                     for item in castArray {
                         var imdbID = String()
                         
-                        IDsManager.getIMDBID(id: item.id, type: .Movie) { (id) in
-                            imdbID = id
+                        if item.poster_path != nil {
+                            IDsManager.getIMDBID(id: item.id, type: .Movie) { (id) in
+                                imdbID = id
+                            }
+                            
+                            let newItem = MovieSearchResult(id: item.id, title: item.title ?? item.name ?? "no title", poster_path: item.poster_path, imdbID: imdbID)
+                            sumArray.append(newItem)
                         }
-                        
-                        let newItem = MovieSearchResult(id: item.id, title: item.title ?? "no title", poster_path: item.poster_path, imdbID: imdbID)
-                        sumArray.append(newItem)
                     }
                 }
                 
