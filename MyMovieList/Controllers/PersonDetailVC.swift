@@ -10,9 +10,13 @@ class PersonDetailVC: UIViewController {
     
     private let photoBaseURL = "https://image.tmdb.org/t/p/original"
     
+    let cache = NSCache<NSString, UIImage>()
+    
     var tmdbID = Int()
     
     let creditedCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    
+    var creditedWorkArray = [MovieSearchResult]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +24,11 @@ class PersonDetailVC: UIViewController {
         view.backgroundColor = .systemBackground
         
         navigationController?.navigationBar.prefersLargeTitles = false
+        
+        creditedCollectionView.register(FeaturedMovieCell.self, forCellWithReuseIdentifier: FeaturedMovieCell.reuseID)
+        
+        creditedCollectionView.delegate = self
+        creditedCollectionView.dataSource = self
 
         addSubviews()
         constrainSubviews()
@@ -51,6 +60,10 @@ class PersonDetailVC: UIViewController {
     private func getCreditedWork() {
         PersonManager.getPersonCreditedWork(tmdbID: tmdbID) { (meArray) in
             print("meArray is \(meArray)")
+            self.creditedWorkArray = meArray
+            DispatchQueue.main.async {
+                self.creditedCollectionView.reloadData()
+            }
         }
     }
     
@@ -66,10 +79,6 @@ class PersonDetailVC: UIViewController {
     
     private func constrainSubviews() {
         
-//        avatarImageView.image = #imageLiteral(resourceName: "Pedro Pascal")
-//        nameLabel.text = "Pedro Pascal"
-//        bioLabel.text = "A Chilean-born Amercian stage and screen director and actor, best known for his character in HBO's \"Game of Thrones\" and the title role in the popular Disney+ series “Star Wars: The Mandalorian”. Pedro studied acting at the Orange County High School of the Arts and New York University's Tisch School of the Arts."
-        
         nameLabel.font = UIFont(name: "Avenir Next Medium", size: 18)
         nameLabel.textAlignment = .left
         
@@ -81,6 +90,7 @@ class PersonDetailVC: UIViewController {
         bioLabel.textAlignment = .left
         
         creditedCollectionView.backgroundColor = .systemGray5
+        configureCollectionView()
         
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -105,7 +115,63 @@ class PersonDetailVC: UIViewController {
         ])
        
     }
+}
 
+extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return creditedWorkArray.count
+    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedMovieCell.reuseID, for: indexPath) as! FeaturedMovieCell
+        
+        var posterImage = UIImage()
+        var title = String()
+        
+        if let posterPath = self.creditedWorkArray[indexPath.item].poster_path {
 
+            let endpoint = self.photoBaseURL + posterPath
+            let posterImageURL = URL(string: endpoint)!
+
+            let cacheKey = NSString(string: endpoint)
+
+            if let image = cache.object(forKey: cacheKey) {
+                posterImage = image
+            } else {
+                if let data = try? Data(contentsOf: posterImageURL) {
+                    posterImage = UIImage(data: data) ?? #imageLiteral(resourceName: "question-mark")
+                    self.cache.setObject(posterImage, forKey: cacheKey)
+                }
+            }
+        }
+        
+        title = creditedWorkArray[indexPath.item].title
+        
+        cell.configureCell(title: title, image: posterImage)
+         
+        return cell
+        
+    }
+    
+    func configureCollectionView() {
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        
+        let width = view.bounds.width
+        let padding: CGFloat = 5
+        let minimumSpacing: CGFloat = 5
+        
+        let availableWidth = width - (padding * 2) - (minimumSpacing * 1)
+        
+        let itemWidth = availableWidth / 3
+        
+        flowLayout.itemSize = CGSize(width: itemWidth + 30, height: itemWidth + 90)
+        flowLayout.minimumLineSpacing = 20
+        flowLayout.minimumInteritemSpacing = 5
+        
+        creditedCollectionView.collectionViewLayout = flowLayout
+        
+    }
+    
+    
 }
