@@ -115,4 +115,73 @@ struct PersonManager {
     
     }
     
+    static func getPersonCreditedWork(tmdbID: Int, completed: @escaping ([MovieSearchResult])->Void) {
+        
+        let endpoint = "https://api.themoviedb.org/3/person/" + "\(tmdbID)" + "/combined_credits?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
+        
+        guard let url = URL(string: endpoint) else {
+            print("getPersonCreditedWork -- bad url")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let _ = error {
+                print("Error making call -- get credited work")
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                print("Something other than 200 -- get credited work")
+                return
+            }
+            
+            guard let data = data else {
+                print("get credited -- no data")
+                return
+            }
+            
+            do {
+                var sumArray = [MovieSearchResult]()
+                
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(PersonCreditedWorkAPI.self, from: data)
+                
+                if let castArray = result.cast {
+                    
+                    for item in castArray {
+                        var imdbID = String()
+                        
+                        IDsManager.getIMDBID(id: item.id, type: .Movie) { (id) in
+                            imdbID = id
+                        }
+                        
+                        let newItem = MovieSearchResult(id: item.id, title: item.title ?? "no title", poster_path: item.poster_path, imdbID: imdbID)
+                        sumArray.append(newItem)
+                    }
+                }
+                
+                if let crewArray = result.crew {
+                    
+                    for item in crewArray {
+                        var imdbID = String()
+                        
+                        IDsManager.getIMDBID(id: item.id, type: .Movie) { (id) in
+                            imdbID = id
+                        }
+                        
+                        let newItem = MovieSearchResult(id: item.id, title: item.title ?? "no title", poster_path: item.poster_path, imdbID: imdbID)
+                        sumArray.append(newItem)
+                    }
+                }
+                
+                completed(sumArray)
+            } catch {
+                print("nah")
+            }
+            
+        }
+        
+        task.resume()
+    }
+    
 }

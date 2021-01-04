@@ -25,6 +25,7 @@ class PersonDetailVC: UIViewController {
         constrainSubviews()
         
         getDetails()
+        getCreditedWork()
     }
     
     private func getDetails() {
@@ -44,6 +45,12 @@ class PersonDetailVC: UIViewController {
                     }
                 }
             }
+        }
+    }
+    
+    private func getCreditedWork() {
+        PersonManager.getPersonCreditedWork(tmdbID: tmdbID) { (meArray) in
+            print("meArray is \(meArray)")
         }
     }
     

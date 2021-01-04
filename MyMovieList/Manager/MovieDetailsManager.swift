@@ -13,8 +13,6 @@ class MovieDetailsManager {
         if let imdbID = imdbID {
             movieEndpoint = baseURL + imdbID
             
-            print("This is movieEndpoint \(movieEndpoint)")
-            
             guard let url = URL(string: movieEndpoint) else {
                 print("Bad movieEndpoint")
                 return
