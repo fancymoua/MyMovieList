@@ -179,7 +179,15 @@ struct PersonManager {
                 }
                 
                 let sortedByPop = sumArray.sorted(by: { $0.popularity! > $1.popularity! })
-                completed(sortedByPop)
+                var noRepeats = [MovieSearchResult]()
+                
+                for item in sortedByPop {
+                    if !noRepeats.contains(item) {
+                        noRepeats.append(item)
+                    }
+                }
+
+                completed(noRepeats)
             } catch {
                 print("nah")
             }
