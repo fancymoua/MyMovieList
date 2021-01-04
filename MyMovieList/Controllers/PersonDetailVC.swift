@@ -156,9 +156,8 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         let title = creditedWorkArray[indexPath.item].title
         let character = creditedWorkArray[indexPath.item].character
-        let job = creditedWorkArray[indexPath.item].job
         
-        cell.configureCell(title: title, image: posterImage, character: character ?? job ?? "none")
+        cell.configureCell(title: title, image: posterImage, character: character ?? "")
          
         return cell
         
@@ -215,7 +214,7 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         let itemWidth = availableWidth / 3
         
-        flowLayout.itemSize = CGSize(width: itemWidth + 30, height: 300)
+        flowLayout.itemSize = CGSize(width: itemWidth + 30, height: 280)
         flowLayout.minimumLineSpacing = 20
         flowLayout.minimumInteritemSpacing = 5
         
