@@ -104,6 +104,12 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let destVC = PersonDetailVC()
+        
+        show(destVC, sender: self)
+    }
+    
     func configureLayout() {
         
         let flowLayout = UICollectionViewFlowLayout()
