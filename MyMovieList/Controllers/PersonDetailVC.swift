@@ -21,6 +21,8 @@ class PersonDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(tmdbID)
+        
         view.backgroundColor = .systemBackground
         
         navigationController?.navigationBar.prefersLargeTitles = false
@@ -59,7 +61,6 @@ class PersonDetailVC: UIViewController {
     
     private func getCreditedWork() {
         PersonManager.getPersonCreditedWork(tmdbID: tmdbID) { (meArray) in
-            print("meArray is \(meArray)")
             self.creditedWorkArray = meArray
             DispatchQueue.main.async {
                 self.creditedCollectionView.reloadData()
