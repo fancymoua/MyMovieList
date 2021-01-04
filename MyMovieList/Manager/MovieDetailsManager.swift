@@ -6,17 +6,8 @@ class MovieDetailsManager {
 //    static var thisMovie = MovieDetailModel()
     
     static func getMovieDetails(tmdbID: Int, mediaType: MediaType, completed: @escaping (MovieDetailModel) -> Void) {
-        //        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&i="
         
-        var mediaTypeBase = String()
-        
-        if mediaType == .Movie {
-            mediaTypeBase = MediaType.Movie.detailBaseURL
-        } else if mediaType == .TV {
-            mediaTypeBase = MediaType.TV.detailBaseURL
-        }
-        
-        let baseURL = mediaTypeBase + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
+        let baseURL = MediaType.Movie.detailBaseURL + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
         
         guard let url = URL(string: baseURL) else {
             print("Bad movieEndpoint")
@@ -56,17 +47,8 @@ class MovieDetailsManager {
     }
     
     static func getTVDetails(tmdbID: Int, mediaType: MediaType, completed: @escaping (TVDetailModel) -> Void) {
-        //        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&i="
         
-        var mediaTypeBase = String()
-        
-        if mediaType == .Movie {
-            mediaTypeBase = MediaType.Movie.detailBaseURL
-        } else if mediaType == .TV {
-            mediaTypeBase = MediaType.TV.detailBaseURL
-        }
-        
-        let baseURL = mediaTypeBase + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
+        let baseURL = MediaType.TV.detailBaseURL + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
         
         guard let url = URL(string: baseURL) else {
             print("Bad movieEndpoint")
