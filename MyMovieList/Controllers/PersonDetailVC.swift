@@ -194,8 +194,6 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         destVC.movieTitle = creditedWorkArray[indexPath.item].title
         destVC.posterImage = posterImage
         destVC.tmdbID = creditedWorkArray[indexPath.item].id
-        destVC.posterPath = creditedWorkArray[indexPath.item].poster_path
-        destVC.imdbID = creditedWorkArray[indexPath.item].imdbID
         destVC.mediaType = mediaType
         
         show(destVC, sender: self)

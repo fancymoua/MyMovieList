@@ -75,18 +75,13 @@ class SearchResultsVC: UIViewController {
                         let id = item.id
                         let title = item.title
                         let posterPath = item.poster_path
-
-                        var imdbID = String()
                         
-//                        IDsManager.getIMDBID(id: id, type: .Movie) { (cowID) in
-//                            imdbID = "TT"
-//
-//                            let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
-//
-//                            self.searchResultsArray.append(movie)
-//
-//                            self.updateData(on: self.searchResultsArray)
-//                        }
+                        let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath)
+
+                        self.searchResultsArray.append(movie)
+
+                        self.updateData(on: self.searchResultsArray)
+                    
                     }
                 } catch {
                     print("Could not parse data")
@@ -102,18 +97,12 @@ class SearchResultsVC: UIViewController {
                         let id = item.id
                         let title = item.name
                         let posterPath = item.poster_path
-
-                        var imdbID = String()
                         
-                        IDsManager.getIMDBID(id: id, type: .TV) { (cowID) in
-//                            imdbID = "TT"
-                            
-                            let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
-                            
-                            self.searchResultsArray.append(movie)
-                            
-                            self.updateData(on: self.searchResultsArray)
-                        }
+                        let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath)
+                        
+                        self.searchResultsArray.append(movie)
+                        
+                        self.updateData(on: self.searchResultsArray)
                     }
                 } catch {
                     print("Could not parse data")
@@ -197,8 +186,6 @@ extension SearchResultsVC: UICollectionViewDelegate {
         destVC.movieTitle = searchResultsArray[indexPath.item].title
         destVC.posterImage = posterImage
         destVC.tmdbID = searchResultsArray[indexPath.item].id
-        destVC.posterPath = searchResultsArray[indexPath.item].poster_path
-        destVC.imdbID = searchResultsArray[indexPath.item].imdbID
         destVC.mediaType = mediaType
         
         show(destVC, sender: self)

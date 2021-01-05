@@ -2,6 +2,10 @@
 
 import UIKit
 
+protocol PassMovieObject {
+    func updateMovieObject(movieObject: MovieDetailModel?, TVObject: TVDetailModel?)
+}
+
 class TitlePlotVC: UIViewController {
     
     let titleLabel = MovieTitleLabel()
@@ -33,6 +37,8 @@ class TitlePlotVC: UIViewController {
     
     var disMovie = MovieDetailModel()
     var disTV = TVDetailModel()
+    
+    var movieDetailDelegate: PassMovieObject?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,6 +120,8 @@ class TitlePlotVC: UIViewController {
         if mediaType == .Movie {
             MovieDetailsManager.getMovieDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
                 disMovie = daMovie
+                
+                movieDetailDelegate?.updateMovieObject(movieObject: daMovie, TVObject: nil)
                 
                 DispatchQueue.main.async {
                     self.titleLabel.text = daMovie.title

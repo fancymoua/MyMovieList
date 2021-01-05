@@ -69,18 +69,11 @@ class SpecialCollectionsVC: UIViewController {
                             self.mediaType = .Movie
                         }
                         
-                        var imdbID = String()
+                        let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath)
+                        self.moviesArray.append(movie)
 
-                        IDsManager.getIMDBID(id: id, type: .Movie) { (cowID) in
-//                            imdbID = "TT"
-
-                            let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
-
-                            self.moviesArray.append(movie)
-
-                            DispatchQueue.main.async {
-                                self.collectionView.reloadData()
-                            }
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
                         }
                     }
                 } catch {
@@ -105,18 +98,12 @@ class SpecialCollectionsVC: UIViewController {
                             self.mediaType = .Movie
                         }
                         
-                        var imdbID = String()
-                        
-                        IDsManager.getIMDBID(id: id, type: .TV) { (cowID) in
-//                            imdbID = "TT"
+                        let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath)
 
-                            let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
+                        self.moviesArray.append(movie)
 
-                            self.moviesArray.append(movie)
-
-                            DispatchQueue.main.async {
-                                self.collectionView.reloadData()
-                            }
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
                         }
                     }
                 } catch {
@@ -124,7 +111,6 @@ class SpecialCollectionsVC: UIViewController {
                 }
             }
         }
-        
         task.resume()
     }
 }
@@ -188,8 +174,6 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
         destVC.movieTitle = moviesArray[indexPath.item].title
         destVC.posterImage = posterImage
         destVC.tmdbID = moviesArray[indexPath.item].id
-        destVC.posterPath = moviesArray[indexPath.item].poster_path
-        destVC.imdbID = moviesArray[indexPath.item].imdbID
         destVC.mediaType = mediaType
         
         show(destVC, sender: self)

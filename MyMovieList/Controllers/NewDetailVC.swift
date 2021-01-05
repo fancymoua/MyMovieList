@@ -17,15 +17,13 @@ class NewDetailVC: UIViewController {
     var containerView = UIView()
       
     // variables populated from previous view
-    var mediaType: MediaType!
-    var movieTitle: String?
-    var imdbID: String?
-    var posterImage = UIImage()
     var tmdbID: Int?
-    var posterPath: String?
-    var rating: String?
-    var year: String?
-    var rated: String?
+    var mediaType: MediaType!
+    var posterImage = UIImage()
+    var movieTitle: String?
+    
+    var mainDetailObjectMovie = MovieDetailModel()
+    var mainDetailObjectTV = TVDetailModel()
     
     var currentWatchlist = [WatchItem]()
     var onWatchlist: Bool = false
@@ -37,9 +35,10 @@ class NewDetailVC: UIViewController {
         print("tmdbID \(tmdbID)")
         
         // passing info to child views
-        titlePlotVC.imdbID = imdbID
         titlePlotVC.mediaType = mediaType
         titlePlotVC.tmdbID = tmdbID
+        titlePlotVC.movieDetailDelegate = self
+//        titlePlotVC.tvDetailDelegate = self
         
         castCrewVC.tmdbID = tmdbID!
         castCrewVC.mediaType = mediaType
@@ -183,7 +182,19 @@ class NewDetailVC: UIViewController {
             cowMediaType = "TV"
         }
         
-        WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: posterPath ?? "", rating: rating ?? "n/a", year: year ?? "n/a", rated: rated ?? "n/a", imdbID: imdbID!, mediaType: cowMediaType )
+        WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: mainDetailObjectMovie.poster_path ?? "", rating: "oO" ?? "n/a", year: mainDetailObjectMovie.release_date ?? "n/a", rated: "oO" ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: cowMediaType )
+    }
+}
+
+extension NewDetailVC: PassMovieObject {
+    func updateMovieObject(movieObject: MovieDetailModel?, TVObject: TVDetailModel?) {
+        if let movieObject = movieObject {
+            mainDetailObjectMovie = movieObject
+        }
+        
+        if let TVObject = TVObject {
+            mainDetailObjectTV = TVObject
+        }
     }
 }
 

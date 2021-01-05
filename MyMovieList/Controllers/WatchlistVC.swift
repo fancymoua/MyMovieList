@@ -152,7 +152,6 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
         destVC.posterImage = #imageLiteral(resourceName: "tenet")
         destVC.tmdbID = watchlistItemsArray[indexPath.item].tmdbID
         destVC.posterImage = posterImage
-        destVC.imdbID = watchlistItemsArray[indexPath.item].imdbID
         destVC.mediaType = mediaType
         
         show(destVC, sender: self)
