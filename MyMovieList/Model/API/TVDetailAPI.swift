@@ -2,6 +2,7 @@
 import Foundation
 
 struct TVDetailAPI: Codable {
+    var id: Int?
     var name: String?
     var first_air_date: String?
     var last_air_date: String?

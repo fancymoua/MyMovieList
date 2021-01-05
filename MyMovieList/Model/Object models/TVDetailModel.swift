@@ -11,4 +11,5 @@ struct TVDetailModel: Codable {
     var genres: String?
     var seasonsCount: Int?
     var episodesCount: Int?
+    var imdbID: String?
 }

@@ -32,6 +32,7 @@ class TitlePlotVC: UIViewController {
     var providersStackViewWidthConstraint = NSLayoutConstraint()
     
     var disMovie = MovieDetailModel()
+    var disTV = TVDetailModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,9 +137,10 @@ class TitlePlotVC: UIViewController {
             }
         } else if mediaType == .TV {
             MovieDetailsManager.getTVDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
+                disTV = daMovie
+                
                 DispatchQueue.main.async {
                     self.titleLabel.text = daMovie.name
-                    self.ratingLabel.text = "hold"
                     self.plotLabel.text = daMovie.overview
                     self.ratedView.setText(text: daMovie.contentRating ?? "no rating")
                     self.genreView.setText(text: daMovie.genres ?? "no genres")
@@ -148,6 +150,8 @@ class TitlePlotVC: UIViewController {
                             self.runtimeOrSeasonsView.setText(text: "\(seasonsCount) seasons / \(episodesCount) episodes")
                         }
                     }
+                    
+                    getIMDBRating(imdbID: disTV.imdbID)
                     
                     var firstAirYear = String()
                     var lastAirYear = String()
