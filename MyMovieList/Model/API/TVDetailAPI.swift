@@ -9,6 +9,9 @@ struct TVDetailAPI: Codable {
     var poster_path: String?
     var status: String?         // either "Returning Series" or "Ended"
     var content_ratings: ContentResult?
+    var genres: [Genre]?
+    var number_of_seasons: Int?
+    var number_of_episodes: Int?
 }
 
 struct ContentResult: Codable {

@@ -101,9 +101,11 @@ class MovieDetailsManager {
                             thisRating = item.rating ?? "---"
                         }
                     }
+                } else {
+                    thisRating = "Not rated"
                 }
                 
-                let thisMovie = TVDetailModel(name: result.name, first_air_date: result.first_air_date, last_air_date: result.last_air_date, overview: result.overview, poster_path: result.poster_path, status: result.status, contentRating: thisRating)
+                let thisMovie = TVDetailModel(name: result.name, first_air_date: result.first_air_date, last_air_date: result.last_air_date, overview: result.overview, poster_path: result.poster_path, status: result.status, contentRating: thisRating, seasonsCount: result.number_of_seasons, episodesCount: result.number_of_episodes)
                 
                 completed(thisMovie)
                 
