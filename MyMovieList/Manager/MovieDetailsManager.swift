@@ -119,9 +119,13 @@ class MovieDetailsManager {
                 let genreJoined = genreNames.joined(separator: ", ")
                 
                 IDsManager.getIMDBID(id: result.id! , type: .TV) { (daIMDBID) in
-                    let thisMovie = TVDetailModel(name: result.name, first_air_date: result.first_air_date, last_air_date: result.last_air_date, overview: result.overview, poster_path: result.poster_path, status: result.status, contentRating: thisRating, genres: genreJoined, seasonsCount: result.number_of_seasons, episodesCount: result.number_of_episodes, imdbID: daIMDBID)
-                    
-                    completed(thisMovie)
+                    getIMDBRating(imdbID: daIMDBID) { (ratingModel) in
+                        let rating = ratingModel.imdbRating
+                        
+                        let thisMovie = TVDetailModel(name: result.name, first_air_date: result.first_air_date, last_air_date: result.last_air_date, overview: result.overview, poster_path: result.poster_path, status: result.status, contentRating: thisRating, genres: genreJoined, seasonsCount: result.number_of_seasons, episodesCount: result.number_of_episodes, imdbID: daIMDBID, imdbRating: rating)
+                        
+                        completed(thisMovie)
+                    }
                 }
             } catch {
                 print("Error getting movie details")

@@ -152,14 +152,13 @@ class TitlePlotVC: UIViewController {
                     self.plotLabel.text = daMovie.overview
                     self.ratedView.setText(text: daMovie.contentRating ?? "no rating")
                     self.genreView.setText(text: daMovie.genres ?? "no genres")
+                    self.ratingLabel.text = daMovie.imdbRating
                     
                     if let seasonsCount = daMovie.seasonsCount {
                         if let episodesCount = daMovie.episodesCount {
                             self.runtimeOrSeasonsView.setText(text: "\(seasonsCount) seasons / \(episodesCount) episodes")
                         }
                     }
-                    
-                    getIMDBRating(imdbID: disTV.imdbID)
                     
                     var firstAirYear = String()
                     var lastAirYear = String()

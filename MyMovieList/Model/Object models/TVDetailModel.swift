@@ -12,4 +12,5 @@ struct TVDetailModel: Codable {
     var seasonsCount: Int?
     var episodesCount: Int?
     var imdbID: String?
+    var imdbRating: String?
 }
