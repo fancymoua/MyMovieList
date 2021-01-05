@@ -105,7 +105,17 @@ class MovieDetailsManager {
                     thisRating = "Not rated"
                 }
                 
-                let thisMovie = TVDetailModel(name: result.name, first_air_date: result.first_air_date, last_air_date: result.last_air_date, overview: result.overview, poster_path: result.poster_path, status: result.status, contentRating: thisRating, seasonsCount: result.number_of_seasons, episodesCount: result.number_of_episodes)
+                var genreNames = [String]()
+                
+                if let genres = result.genres {
+                    for item in genres {
+                        genreNames.append(item.name)
+                    }
+                }
+                
+                let genreJoined = genreNames.joined(separator: ", ")
+                
+                let thisMovie = TVDetailModel(name: result.name, first_air_date: result.first_air_date, last_air_date: result.last_air_date, overview: result.overview, poster_path: result.poster_path, status: result.status, contentRating: thisRating, genres: genreJoined, seasonsCount: result.number_of_seasons, episodesCount: result.number_of_episodes)
                 
                 completed(thisMovie)
                 

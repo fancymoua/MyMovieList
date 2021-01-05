@@ -141,7 +141,7 @@ class TitlePlotVC: UIViewController {
                     self.ratingLabel.text = "hold"
                     self.plotLabel.text = daMovie.overview
                     self.ratedView.setText(text: daMovie.contentRating ?? "no rating")
-                    self.genreView.setText(text: "hold")
+                    self.genreView.setText(text: daMovie.genres ?? "no genres")
                     
                     if let seasonsCount = daMovie.seasonsCount {
                         if let episodesCount = daMovie.episodesCount {
