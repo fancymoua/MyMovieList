@@ -30,6 +30,8 @@ class TitlePlotVC: UIViewController {
     let padding: CGFloat = 25
     var providersWidth: CGFloat = 0
     var providersStackViewWidthConstraint = NSLayoutConstraint()
+    
+    var disMovie = MovieDetailModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,9 +112,10 @@ class TitlePlotVC: UIViewController {
     func getMovieDetails() {
         if mediaType == .Movie {
             MovieDetailsManager.getMovieDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
+                disMovie = daMovie
+                
                 DispatchQueue.main.async {
                     self.titleLabel.text = daMovie.title
-                    self.ratingLabel.text = "hold"
                     self.plotLabel.text = daMovie.overview
                     self.ratedView.setText(text: daMovie.rated ?? "not rated")
                     
@@ -131,6 +134,8 @@ class TitlePlotVC: UIViewController {
                     } else if mediaType == .TV {
                         self.genreView.setText(text: "hold")
                     }
+                    
+                    getIMDBRating(imdbID: daMovie.imdbID)
                 }
             }
         } else if mediaType == .TV {
@@ -153,6 +158,16 @@ class TitlePlotVC: UIViewController {
         }
     }
     
+    func getIMDBRating(imdbID: String?) {
+        if let imdbID = imdbID {
+            MovieDetailsManager.getIMDBRating(imdbID: imdbID) { (rating) in
+                DispatchQueue.main.async {
+                    self.ratingLabel.text = rating.imdbRating
+                }
+            }
+        }
+    }
+
     func getWatchProviders() {
         
         MovieDetailsManager.getWatchProviders(tmdbID: tmdbID, mediaType: mediaType) { [self] (providersArray) in

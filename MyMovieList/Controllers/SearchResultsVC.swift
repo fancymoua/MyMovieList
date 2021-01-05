@@ -78,15 +78,15 @@ class SearchResultsVC: UIViewController {
 
                         var imdbID = String()
                         
-                        IDsManager.getIMDBID(id: id, type: .Movie) { (cowID) in
-                            imdbID = "TT"
-                        
-                            let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
-                            
-                            self.searchResultsArray.append(movie)
-                            
-                            self.updateData(on: self.searchResultsArray)
-                        }
+//                        IDsManager.getIMDBID(id: id, type: .Movie) { (cowID) in
+//                            imdbID = "TT"
+//
+//                            let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
+//
+//                            self.searchResultsArray.append(movie)
+//
+//                            self.updateData(on: self.searchResultsArray)
+//                        }
                     }
                 } catch {
                     print("Could not parse data")
@@ -106,7 +106,7 @@ class SearchResultsVC: UIViewController {
                         var imdbID = String()
                         
                         IDsManager.getIMDBID(id: id, type: .TV) { (cowID) in
-                            imdbID = "TT"
+//                            imdbID = "TT"
                             
                             let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
                             

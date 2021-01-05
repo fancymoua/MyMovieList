@@ -53,7 +53,7 @@ class MovieDetailsManager {
                 
                 let genreJoined = genreNames.joined(separator: ", ")
                     
-                let thisMovie = MovieDetailModel(imdbID: result.imdbID, title: result.title, release_date: result.release_date, overview: result.overview, poster_path: result.poster_path, rated: rated, genres: genreJoined, runtime: result.runtime)
+                let thisMovie = MovieDetailModel(imdbID: result.imdb_id, title: result.title, release_date: result.release_date, overview: result.overview, poster_path: result.poster_path, rated: rated, genres: genreJoined, runtime: result.runtime)
   
                 completed(thisMovie)
                 
@@ -179,6 +179,44 @@ class MovieDetailsManager {
             }
             task.resume()
         }
+    }
+    
+    static func getIMDBRating(imdbID: String, completion: @escaping (RatingModel)->Void) {
+        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&i=" + "\(imdbID)"
+        
+        guard let url = URL(string: baseURL) else {
+            print("bad getIMDBRating URL")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let _ = error {
+                print("Error making call getIMDBRatingURL")
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                print("Something other than 200 -- getIMDBRating")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data -- get IMDBRating")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                
+                let result = try decoder.decode(RatingsAPI.self, from: data)
+                
+                let thisRating = RatingModel(imdbRating: result.imdbRating)
+                completion(thisRating)
+            } catch {
+                print("Catch: could not complete getIMDBRating")
+            }
+        }
+        task.resume()
     }
     
 }

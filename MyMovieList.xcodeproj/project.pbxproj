@@ -43,6 +43,8 @@
 		B160A133259A8FA9004AC722 /* IDsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B160A132259A8FA9004AC722 /* IDsManager.swift */; };
 		B160A138259A90F5004AC722 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B160A137259A90F5004AC722 /* MediaType.swift */; };
 		B174977A258D5A1D00B428F3 /* SpecialListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1749779258D5A1D00B428F3 /* SpecialListVC.swift */; };
+		B1823FB925A4F012003A8DCC /* RatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1823FB825A4F012003A8DCC /* RatingsAPI.swift */; };
+		B1823FBE25A4F062003A8DCC /* RatingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1823FBD25A4F062003A8DCC /* RatingModel.swift */; };
 		B18532F825A38BB200449D4E /* SmallMediaCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18532F725A38BB200449D4E /* SmallMediaCardCell.swift */; };
 		B189BE8E258BE30500422624 /* CustomKeywordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B189BE8D258BE30500422624 /* CustomKeywordButton.swift */; };
 		B189BE9B258BFAD400422624 /* TrendingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B189BE9A258BFAD400422624 /* TrendingVC.swift */; };
@@ -122,6 +124,8 @@
 		B160A132259A8FA9004AC722 /* IDsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDsManager.swift; sourceTree = "<group>"; };
 		B160A137259A90F5004AC722 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		B1749779258D5A1D00B428F3 /* SpecialListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialListVC.swift; sourceTree = "<group>"; };
+		B1823FB825A4F012003A8DCC /* RatingsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsAPI.swift; sourceTree = "<group>"; };
+		B1823FBD25A4F062003A8DCC /* RatingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingModel.swift; sourceTree = "<group>"; };
 		B18532F725A38BB200449D4E /* SmallMediaCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallMediaCardCell.swift; sourceTree = "<group>"; };
 		B189BE8D258BE30500422624 /* CustomKeywordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeywordButton.swift; sourceTree = "<group>"; };
 		B189BE9A258BFAD400422624 /* TrendingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingVC.swift; sourceTree = "<group>"; };
@@ -341,6 +345,7 @@
 				B146128D258A8F960030859B /* MovieIDAPI.swift */,
 				B1E8BCBD258FDA38009F8FB2 /* WatchProviderAPI.swift */,
 				B1F2562B25A2AE9E0019D9FF /* PersonCreditedWorkAPI.swift */,
+				B1823FB825A4F012003A8DCC /* RatingsAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 				B1286C2E2592E2B10063AD70 /* WatchItem.swift */,
 				B1E254FC25A13A67000F94ED /* PersonModel.swift */,
 				B100618F25A3D818004715C4 /* CreditedWorkResult.swift */,
+				B1823FBD25A4F062003A8DCC /* RatingModel.swift */,
 			);
 			path = "Object models";
 			sourceTree = "<group>";
@@ -518,6 +524,7 @@
 				B143E3992593E2DC0063BD8F /* IconImages.swift in Sources */,
 				B160A138259A90F5004AC722 /* MediaType.swift in Sources */,
 				B1286C2A2592E15B0063AD70 /* WatchItemCell.swift in Sources */,
+				B1823FB925A4F012003A8DCC /* RatingsAPI.swift in Sources */,
 				B14DF2DA25896AA400FF8819 /* MovieSearchResult.swift in Sources */,
 				B1E254F825A13A4D000F94ED /* CastCrewAPI.swift in Sources */,
 				B14DF28E2589536000FF8819 /* SceneDelegate.swift in Sources */,
@@ -536,6 +543,7 @@
 				B151E41825A2989F008FA402 /* PersonDetailVC.swift in Sources */,
 				B1286C252592DEE70063AD70 /* WatchlistVC.swift in Sources */,
 				B1286C0925915F460063AD70 /* SmallDetailBlock.swift in Sources */,
+				B1823FBE25A4F062003A8DCC /* RatingModel.swift in Sources */,
 				B1E8BCC3258FEEBB009F8FB2 /* WatchProviderModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

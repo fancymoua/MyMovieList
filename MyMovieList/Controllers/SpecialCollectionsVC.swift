@@ -70,14 +70,14 @@ class SpecialCollectionsVC: UIViewController {
                         }
                         
                         var imdbID = String()
-                        
+
                         IDsManager.getIMDBID(id: id, type: .Movie) { (cowID) in
-                            imdbID = "TT"
-                            
+//                            imdbID = "TT"
+
                             let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
-                            
+
                             self.moviesArray.append(movie)
-                            
+
                             DispatchQueue.main.async {
                                 self.collectionView.reloadData()
                             }
@@ -108,12 +108,12 @@ class SpecialCollectionsVC: UIViewController {
                         var imdbID = String()
                         
                         IDsManager.getIMDBID(id: id, type: .TV) { (cowID) in
-                            imdbID = "TT"
-                            
+//                            imdbID = "TT"
+
                             let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath, imdbID: imdbID)
-                            
+
                             self.moviesArray.append(movie)
-                            
+
                             DispatchQueue.main.async {
                                 self.collectionView.reloadData()
                             }
