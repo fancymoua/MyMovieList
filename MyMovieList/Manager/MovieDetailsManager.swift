@@ -6,7 +6,7 @@ class MovieDetailsManager {
     
     static func getMovieDetails(tmdbID: Int, mediaType: MediaType, completed: @escaping (MovieDetailModel) -> Void) {
         
-        let baseURL = MediaType.Movie.detailBaseURL + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
+        let baseURL = MediaType.Movie.detailBaseURL + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US&append_to_response=releases"
         
         guard let url = URL(string: baseURL) else {
             print("Bad movieEndpoint")
@@ -29,12 +29,21 @@ class MovieDetailsManager {
                 return
             }
             
+            var rated = String()
+            
             do {
                 let decoder = JSONDecoder()
-                let result = try decoder.decode(MovieDetailModel.self, from: data)
+                let result = try decoder.decode(MovieDetailModelAPI.self, from: data)
                 
+                if let bacon = result.releases?.countries {
+                    for item in bacon {
+                        if item.iso_3166_1 == "US" {
+                            rated = item.certification ?? "no rated"
+                        }
+                    }
+                }
                 
-                let thisMovie = MovieDetailModel(imdbID: result.imdbID, title: result.title, release_date: result.release_date, overview: result.overview, poster_path: result.poster_path)
+                let thisMovie = MovieDetailModel(imdbID: result.imdbID, title: result.title, release_date: result.release_date, overview: result.overview, poster_path: result.poster_path, rated: rated)
                 
                 completed(thisMovie)
                 

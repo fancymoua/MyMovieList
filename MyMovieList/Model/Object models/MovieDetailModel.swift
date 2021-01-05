@@ -1,3 +1,4 @@
+
 import UIKit
 
 // TMDB API
@@ -8,4 +9,5 @@ struct MovieDetailModel: Codable {
     var release_date: String?
     var overview: String?
     var poster_path: String?
+    var rated: String?
 }

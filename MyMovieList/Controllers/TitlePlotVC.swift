@@ -113,7 +113,7 @@ class TitlePlotVC: UIViewController {
                     self.ratingLabel.text = "hold"
                     self.plotLabel.text = daMovie.overview
                     self.yearView.setText(text: daMovie.release_date ?? "n/a")
-                    self.ratedView.setText(text: "hold")
+                    self.ratedView.setText(text: daMovie.rated ?? "no rattedd")
                     self.actorsView.setText(text: "hold")
                     
                     if mediaType == .Movie {
