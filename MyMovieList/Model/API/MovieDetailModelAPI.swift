@@ -10,8 +10,10 @@ struct MovieDetailModelAPI: Codable {
     var poster_path: String?
     var releases: Countries?
     var genres: [Genre]?
+    var runtime: Int?
 }
 
+// ratings i.e. PG-13, R, etc.
 struct Countries: Codable {
     var countries: [Certification]
 }

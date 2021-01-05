@@ -13,7 +13,7 @@ class TitlePlotVC: UIViewController {
     let yearView = SmallDetailBlock(icon: IconImages.movieDetailDate.image)
     let ratedView = SmallDetailBlock(icon: IconImages.movieDetailRated.image)
     let genreView = LargeDetailBlock(icon: IconImages.movieDetailDirector.image, header: "Genres:")
-    let actorsView = LargeDetailBlock(icon: IconImages.movieDetailActors.image, header: "Starring:")
+    let runtimeOrSeasonsView = LargeDetailBlock(icon: IconImages.movieDetailActors.image, header: "Runtime:")
     lazy var watchProvidersStackView = horizontalStackView(subviews: [], spacing: 10)
     
     // variables populated from previous view
@@ -43,7 +43,7 @@ class TitlePlotVC: UIViewController {
     }
     
     func addSubviews() {
-        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndRatedStack, genreView, actorsView, watchProvidersStackView]
+        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndRatedStack, genreView, runtimeOrSeasonsView, watchProvidersStackView]
         
         for view in detailViews {
             self.view.addSubview(view)
@@ -52,6 +52,12 @@ class TitlePlotVC: UIViewController {
     }
     
     func configureMovieDetailViews() {
+        
+        if mediaType == .Movie {
+            runtimeOrSeasonsView.headerLabel.text = "Runtime:"
+        } else if mediaType == .TV {
+            runtimeOrSeasonsView.headerLabel.text = "Seasons:"
+        }
         
         imdbLogo.image = #imageLiteral(resourceName: "imdb-square-icon")
         
@@ -90,15 +96,19 @@ class TitlePlotVC: UIViewController {
             genreView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             genreView.heightAnchor.constraint(equalToConstant: 60),
             
-            actorsView.topAnchor.constraint(equalTo: genreView.bottomAnchor, constant: 5),
-            actorsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            actorsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            actorsView.heightAnchor.constraint(equalToConstant: 60),
+            runtimeOrSeasonsView.topAnchor.constraint(equalTo: genreView.bottomAnchor, constant: 5),
+            runtimeOrSeasonsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            runtimeOrSeasonsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            runtimeOrSeasonsView.heightAnchor.constraint(equalToConstant: 60),
             
-            watchProvidersStackView.topAnchor.constraint(equalTo: actorsView.bottomAnchor, constant: 15),
+            watchProvidersStackView.topAnchor.constraint(equalTo: runtimeOrSeasonsView.bottomAnchor, constant: 15),
             watchProvidersStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             watchProvidersStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
+    }
+    
+    func minutesToHoursAndMinutes (_ minutes : Int) -> (hours : Int , leftMinutes : Int) {
+        return (minutes / 60, (minutes % 60))
     }
     
     func getMovieDetails() {
@@ -110,8 +120,14 @@ class TitlePlotVC: UIViewController {
                     self.plotLabel.text = daMovie.overview
                     self.yearView.setText(text: daMovie.release_date ?? "n/a")
                     self.ratedView.setText(text: daMovie.rated ?? "not rated")
-                    self.actorsView.setText(text: "hold")
                     
+                    if let runtime = daMovie.runtime {
+                        
+                        let tuple = minutesToHoursAndMinutes(runtime)
+                        
+                        self.runtimeOrSeasonsView.setText(text: "\(tuple.hours) hr \(tuple.leftMinutes) mins")
+                    }
+            
                     if mediaType == .Movie {
                         self.genreView.setText(text: daMovie.genres ?? "no genres")
                     } else if mediaType == .TV {
@@ -127,7 +143,7 @@ class TitlePlotVC: UIViewController {
                     self.plotLabel.text = daMovie.overview
                     self.yearView.setText(text: daMovie.first_air_date ?? "n/a")
                     self.ratedView.setText(text: "hold")
-                    self.actorsView.setText(text: "hold")
+                    self.runtimeOrSeasonsView.setText(text: "hold")
                     
                     if mediaType == .Movie {
                         self.genreView.setText(text: "hold")
