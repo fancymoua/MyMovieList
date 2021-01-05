@@ -155,7 +155,11 @@ class TitlePlotVC: UIViewController {
                         lastAirYear = formatYear(dateString: lastAirDate)
                     } else {lastAirYear = ""}
                     
-                    self.yearView.setText(text: "\(firstAirYear)-\(lastAirYear)")
+                    if daMovie.status == "Ended" {
+                        self.yearView.setText(text: "\(firstAirYear) - \(lastAirYear)")
+                    } else if daMovie.status == "Returning Series" {
+                        self.yearView.setText(text: "\(firstAirYear) -")
+                    }
                 }
             }
         }

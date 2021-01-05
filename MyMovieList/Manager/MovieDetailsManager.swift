@@ -94,7 +94,7 @@ class MovieDetailsManager {
                 let result = try decoder.decode(TVDetailModel.self, from: data)
                 
                 
-                let thisMovie = TVDetailModel(name: result.name, first_air_date: result.first_air_date, last_air_date: result.last_air_date, overview: result.overview, poster_path: result.poster_path)
+                let thisMovie = TVDetailModel(name: result.name, first_air_date: result.first_air_date, last_air_date: result.last_air_date, overview: result.overview, poster_path: result.poster_path, status: result.status)
                 
                 completed(thisMovie)
                 
