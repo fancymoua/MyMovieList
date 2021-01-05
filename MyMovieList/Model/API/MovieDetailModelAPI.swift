@@ -9,6 +9,7 @@ struct MovieDetailModelAPI: Codable {
     var overview: String?
     var poster_path: String?
     var releases: Countries?
+    var genres: [Genre]?
 }
 
 struct Countries: Codable {
@@ -18,4 +19,9 @@ struct Countries: Codable {
 struct Certification: Codable {
     var certification: String?
     var iso_3166_1: String?     // country
+}
+
+struct Genre: Codable {
+    var id: Int
+    var name: String
 }

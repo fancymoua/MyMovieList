@@ -12,8 +12,8 @@ class TitlePlotVC: UIViewController {
     lazy var yearAndRatedStack = horizontalStackView(subviews: [yearView, ratedView], spacing: 5)
     let yearView = SmallDetailBlock(icon: IconImages.movieDetailDate.image)
     let ratedView = SmallDetailBlock(icon: IconImages.movieDetailRated.image)
-    let directorView = LargeDetailBlock(icon: IconImages.movieDetailDirector.image, header: "Director")
-    let actorsView = LargeDetailBlock(icon: IconImages.movieDetailActors.image, header: "Starring")
+    let genreView = LargeDetailBlock(icon: IconImages.movieDetailDirector.image, header: "Genres:")
+    let actorsView = LargeDetailBlock(icon: IconImages.movieDetailActors.image, header: "Starring:")
     lazy var watchProvidersStackView = horizontalStackView(subviews: [], spacing: 10)
     
     // variables populated from previous view
@@ -36,10 +36,6 @@ class TitlePlotVC: UIViewController {
 
         view.backgroundColor = .systemBackground
         
-        if mediaType == .TV {
-            directorView.headerLabel.text = "Writer(s)"
-        }
-        
         addSubviews()
         configureMovieDetailViews()
         getMovieDetails()
@@ -47,7 +43,7 @@ class TitlePlotVC: UIViewController {
     }
     
     func addSubviews() {
-        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndRatedStack, directorView, actorsView, watchProvidersStackView]
+        let detailViews = [titleLabel, ratingStackView, plotLabel, yearAndRatedStack, genreView, actorsView, watchProvidersStackView]
         
         for view in detailViews {
             self.view.addSubview(view)
@@ -89,12 +85,12 @@ class TitlePlotVC: UIViewController {
             yearAndRatedStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             yearAndRatedStack.heightAnchor.constraint(equalToConstant: 40),
             
-            directorView.topAnchor.constraint(equalTo: yearAndRatedStack.bottomAnchor, constant: 5),
-            directorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            directorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            directorView.heightAnchor.constraint(equalToConstant: 60),
+            genreView.topAnchor.constraint(equalTo: yearAndRatedStack.bottomAnchor, constant: 5),
+            genreView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            genreView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            genreView.heightAnchor.constraint(equalToConstant: 60),
             
-            actorsView.topAnchor.constraint(equalTo: directorView.bottomAnchor, constant: 5),
+            actorsView.topAnchor.constraint(equalTo: genreView.bottomAnchor, constant: 5),
             actorsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             actorsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             actorsView.heightAnchor.constraint(equalToConstant: 60),
@@ -113,13 +109,13 @@ class TitlePlotVC: UIViewController {
                     self.ratingLabel.text = "hold"
                     self.plotLabel.text = daMovie.overview
                     self.yearView.setText(text: daMovie.release_date ?? "n/a")
-                    self.ratedView.setText(text: daMovie.rated ?? "no rattedd")
+                    self.ratedView.setText(text: daMovie.rated ?? "not rated")
                     self.actorsView.setText(text: "hold")
                     
                     if mediaType == .Movie {
-                        self.directorView.setText(text: "hold")
+                        self.genreView.setText(text: daMovie.genres ?? "no genres")
                     } else if mediaType == .TV {
-                        self.directorView.setText(text: "hold")
+                        self.genreView.setText(text: "hold")
                     }
                 }
             }
@@ -134,9 +130,9 @@ class TitlePlotVC: UIViewController {
                     self.actorsView.setText(text: "hold")
                     
                     if mediaType == .Movie {
-                        self.directorView.setText(text: "hold")
+                        self.genreView.setText(text: "hold")
                     } else if mediaType == .TV {
-                        self.directorView.setText(text: "hold")
+                        self.genreView.setText(text: "hold")
                     }
                 }
             }

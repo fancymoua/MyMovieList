@@ -43,8 +43,18 @@ class MovieDetailsManager {
                     }
                 }
                 
-                let thisMovie = MovieDetailModel(imdbID: result.imdbID, title: result.title, release_date: result.release_date, overview: result.overview, poster_path: result.poster_path, rated: rated)
+                var genreNames = [String]()
                 
+                if let genres = result.genres {
+                    for item in genres {
+                        genreNames.append(item.name)
+                    }
+                }
+                
+                let genreJoined = genreNames.joined(separator: ", ")
+                    
+                let thisMovie = MovieDetailModel(imdbID: result.imdbID, title: result.title, release_date: result.release_date, overview: result.overview, poster_path: result.poster_path, rated: rated, genres: genreJoined)
+  
                 completed(thisMovie)
                 
             } catch {
