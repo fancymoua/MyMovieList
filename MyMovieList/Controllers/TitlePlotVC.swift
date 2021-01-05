@@ -129,11 +129,7 @@ class TitlePlotVC: UIViewController {
                         self.runtimeOrSeasonsView.setText(text: "\(tuple.hours) hr \(tuple.leftMinutes) mins")
                     }
             
-                    if mediaType == .Movie {
-                        self.genreView.setText(text: daMovie.genres ?? "no genres")
-                    } else if mediaType == .TV {
-                        self.genreView.setText(text: "hold")
-                    }
+                    self.genreView.setText(text: daMovie.genres ?? "no genres")
                     
                     getIMDBRating(imdbID: daMovie.imdbID)
                 }
@@ -144,15 +140,22 @@ class TitlePlotVC: UIViewController {
                     self.titleLabel.text = daMovie.name
                     self.ratingLabel.text = "hold"
                     self.plotLabel.text = daMovie.overview
-                    self.yearView.setText(text: daMovie.first_air_date ?? "n/a")
                     self.ratedView.setText(text: "hold")
                     self.runtimeOrSeasonsView.setText(text: "hold")
+                    self.genreView.setText(text: "hold")
                     
-                    if mediaType == .Movie {
-                        self.genreView.setText(text: "hold")
-                    } else if mediaType == .TV {
-                        self.genreView.setText(text: "hold")
-                    }
+                    var firstAirYear = String()
+                    var lastAirYear = String()
+                    
+                    if let firstAirDate = daMovie.first_air_date {
+                        firstAirYear = formatYear(dateString: firstAirDate)
+                    } else { firstAirYear = ""}
+                    
+                    if let lastAirDate = daMovie.last_air_date {
+                        lastAirYear = formatYear(dateString: lastAirDate)
+                    } else {lastAirYear = ""}
+                    
+                    self.yearView.setText(text: "\(firstAirYear)-\(lastAirYear)")
                 }
             }
         }
