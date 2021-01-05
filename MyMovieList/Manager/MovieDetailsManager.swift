@@ -66,7 +66,7 @@ class MovieDetailsManager {
     
     static func getTVDetails(tmdbID: Int, mediaType: MediaType, completed: @escaping (TVDetailModel) -> Void) {
         
-        let baseURL = MediaType.TV.detailBaseURL + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
+        let baseURL = MediaType.TV.detailBaseURL + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US&append_to_response=content_ratings"
         
         guard let url = URL(string: baseURL) else {
             print("Bad movieEndpoint")
@@ -91,10 +91,19 @@ class MovieDetailsManager {
             
             do {
                 let decoder = JSONDecoder()
-                let result = try decoder.decode(TVDetailModel.self, from: data)
+                let result = try decoder.decode(TVDetailAPI.self, from: data)
                 
+                var thisRating = String()
                 
-                let thisMovie = TVDetailModel(name: result.name, first_air_date: result.first_air_date, last_air_date: result.last_air_date, overview: result.overview, poster_path: result.poster_path, status: result.status)
+                if let contentRatings = result.content_ratings?.results {
+                    for item in contentRatings{
+                        if item.iso_3166_1 == "US" {
+                            thisRating = item.rating ?? "---"
+                        }
+                    }
+                }
+                
+                let thisMovie = TVDetailModel(name: result.name, first_air_date: result.first_air_date, last_air_date: result.last_air_date, overview: result.overview, poster_path: result.poster_path, status: result.status, contentRating: thisRating)
                 
                 completed(thisMovie)
                 
