@@ -182,7 +182,7 @@ class NewDetailVC: UIViewController {
             cowMediaType = "TV"
         }
         
-        WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: mainDetailObjectMovie.poster_path ?? "", rating: mainDetailObjectMovie.imdbRating ?? "n/a", year: mainDetailObjectMovie.release_date ?? "n/a", rated: "oO" ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: cowMediaType )
+        WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: mainDetailObjectMovie.poster_path ?? "", rating: mainDetailObjectMovie.imdbRating ?? "n/a", year: mainDetailObjectMovie.release_date ?? "n/a", rated: mainDetailObjectMovie.rated ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: cowMediaType )
     }
 }
 
