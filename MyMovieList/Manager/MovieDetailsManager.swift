@@ -52,11 +52,14 @@ class MovieDetailsManager {
                 }
                 
                 let genreJoined = genreNames.joined(separator: ", ")
-                    
-                let thisMovie = MovieDetailModel(imdbID: result.imdb_id, title: result.title, release_date: result.release_date, overview: result.overview, poster_path: result.poster_path, rated: rated, genres: genreJoined, runtime: result.runtime)
-  
-                completed(thisMovie)
                 
+                getIMDBRating(imdbID: result.imdb_id!) { (ratingModel) in
+                    let rating = ratingModel.imdbRating
+                    
+                    let thisMovie = MovieDetailModel(imdbID: result.imdb_id, title: result.title, release_date: result.release_date, overview: result.overview, poster_path: result.poster_path, rated: rated, genres: genreJoined, runtime: result.runtime, imdbRating: rating)
+      
+                    completed(thisMovie)
+                }
             } catch {
                 print("Error getting movie details")
             }

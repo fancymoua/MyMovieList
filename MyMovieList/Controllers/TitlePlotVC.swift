@@ -127,6 +127,7 @@ class TitlePlotVC: UIViewController {
                     self.titleLabel.text = daMovie.title
                     self.plotLabel.text = daMovie.overview
                     self.ratedView.setText(text: daMovie.rated ?? "not rated")
+                    self.ratingLabel.text = daMovie.imdbRating
                     
                     if let releaseDate = daMovie.release_date {
                         let year = formatYear(dateString: releaseDate)
@@ -139,8 +140,7 @@ class TitlePlotVC: UIViewController {
                     }
             
                     self.genreView.setText(text: daMovie.genres ?? "no genres")
-                    
-                    getIMDBRating(imdbID: daMovie.imdbID)
+            
                 }
             }
         } else if mediaType == .TV {
