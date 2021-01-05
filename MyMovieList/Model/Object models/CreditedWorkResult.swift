@@ -7,6 +7,6 @@ struct CreditedWorkResult: Codable, Hashable {
     var imdbID: String?
     var popularity: Float?
     var media_type: String?
-    var character: String?
-    var job: String?
+//    var character: String?
+//    var job: String?
 }

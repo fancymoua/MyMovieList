@@ -23,7 +23,7 @@ class SmallMediaCardCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(title: String, image: UIImage, character: String) {
+    func configureCell(title: String, image: UIImage) {
         
         self.backgroundColor = .systemGray6
         self.layer.cornerRadius = 4
