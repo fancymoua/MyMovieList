@@ -107,10 +107,6 @@ class TitlePlotVC: UIViewController {
         ])
     }
     
-    func minutesToHoursAndMinutes (_ minutes : Int) -> (hours : Int , leftMinutes : Int) {
-        return (minutes / 60, (minutes % 60))
-    }
-    
     func getMovieDetails() {
         if mediaType == .Movie {
             MovieDetailsManager.getMovieDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
@@ -118,13 +114,15 @@ class TitlePlotVC: UIViewController {
                     self.titleLabel.text = daMovie.title
                     self.ratingLabel.text = "hold"
                     self.plotLabel.text = daMovie.overview
-                    self.yearView.setText(text: daMovie.release_date ?? "n/a")
                     self.ratedView.setText(text: daMovie.rated ?? "not rated")
                     
+                    if let releaseDate = daMovie.release_date {
+                        let year = formatYear(dateString: releaseDate)
+                        self.yearView.setText(text: year)
+                    }
+                    
                     if let runtime = daMovie.runtime {
-                        
                         let tuple = minutesToHoursAndMinutes(runtime)
-                        
                         self.runtimeOrSeasonsView.setText(text: "\(tuple.hours) hr \(tuple.leftMinutes) mins")
                     }
             

@@ -40,4 +40,18 @@ extension UIViewController {
         }
     }
     
+    func minutesToHoursAndMinutes (_ minutes : Int) -> (hours : Int , leftMinutes : Int) {
+        return (minutes / 60, (minutes % 60))
+    }
+    
+    func formatYear(dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy-mm-dd"
+        guard let date = dateFormatter.date(from: dateString) else {return ""}
+        
+        dateFormatter.dateFormat = "yyyy"
+        let year = dateFormatter.string(from: date)
+        return year
+    }
 }
