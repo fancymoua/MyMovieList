@@ -147,6 +147,8 @@ class TitlePlotVC: UIViewController {
             MovieDetailsManager.getTVDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
                 disTV = daMovie
                 
+                movieDetailDelegate?.updateMovieObject(movieObject: nil, TVObject: daMovie)
+                
                 DispatchQueue.main.async {
                     self.titleLabel.text = daMovie.name
                     self.plotLabel.text = daMovie.overview

@@ -178,11 +178,12 @@ class NewDetailVC: UIViewController {
         
         if mediaType == .Movie {
             cowMediaType = "Movie"
+            WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: mainDetailObjectMovie.poster_path ?? "", rating: mainDetailObjectMovie.imdbRating ?? "n/a", year: mainDetailObjectMovie.release_date ?? "n/a", rated: mainDetailObjectMovie.rated ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: cowMediaType )
         } else if mediaType == .TV {
             cowMediaType = "TV"
+            WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: mainDetailObjectTV.poster_path ?? "", rating: mainDetailObjectTV.imdbRating ?? "n/a", year: mainDetailObjectTV.first_air_date ?? "n/a", rated: mainDetailObjectTV.contentRating ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: cowMediaType )
         }
         
-        WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: mainDetailObjectMovie.poster_path ?? "", rating: mainDetailObjectMovie.imdbRating ?? "n/a", year: mainDetailObjectMovie.release_date ?? "n/a", rated: mainDetailObjectMovie.rated ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: cowMediaType )
     }
 }
 
