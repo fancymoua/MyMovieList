@@ -227,7 +227,7 @@ extension SpecialCollectionsVC {
     }
     
     @objc func showMoreResults() {
-        let destVC = (storyboard?.instantiateViewController(identifier: "SearchResultsView") as? SearchResultsVC)!
+        let destVC = SearchResultsVC()
         
         destVC.cowEndpoint = dasURL
         destVC.mediaType = mediaType
