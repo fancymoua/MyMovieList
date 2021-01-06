@@ -9,7 +9,7 @@ protocol PassMovieObject {
 class TitlePlotVC: UIViewController {
     
     let titleLabel = MovieTitleLabel()
-    let imdbLogo = UIImageView()
+    let imdbLogo = UIImageView(image: #imageLiteral(resourceName: "imdb-square-icon"))
     let ratingLabel = UILabel()
     lazy var ratingStackView = horizontalStackView(subviews: [imdbLogo, ratingLabel], spacing: 12)
     let plotLabel = MoviePlotLabel()
@@ -67,8 +67,6 @@ class TitlePlotVC: UIViewController {
         } else if mediaType == .TV {
             runtimeOrSeasonsView.headerLabel.text = "Seasons:"
         }
-        
-        imdbLogo.image = #imageLiteral(resourceName: "imdb-square-icon")
         
         ratingLabel.font = UIFont(name: "Avenir Next", size: 18)
         ratingLabel.textColor = .label

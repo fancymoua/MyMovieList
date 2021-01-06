@@ -2,6 +2,8 @@
 
 import UIKit
 
+// Get movie/tv details, get watch providers, and get IMDB rating
+
 class MovieDetailsManager {
     
     static func getMovieDetails(tmdbID: Int, mediaType: MediaType, completed: @escaping (MovieDetailModel) -> Void) {
@@ -118,6 +120,7 @@ class MovieDetailsManager {
                 
                 let genreJoined = genreNames.joined(separator: ", ")
                 
+                // get IMDBId, then get IMDBRating, then create TVDetailModel object
                 IDsManager.getIMDBID(id: result.id! , type: .TV) { (daIMDBID) in
                     getIMDBRating(imdbID: daIMDBID) { (ratingModel) in
                         let rating = ratingModel.imdbRating

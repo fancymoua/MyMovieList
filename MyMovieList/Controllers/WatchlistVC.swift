@@ -89,7 +89,6 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
         let title = watchlistItemsArray[indexPath.item].title
         let rating = watchlistItemsArray[indexPath.item].rating
         let rated = watchlistItemsArray[indexPath.item].rated
-        let mediaType = watchlistItemsArray[indexPath.item].mediaType
         
         var year = String()
         

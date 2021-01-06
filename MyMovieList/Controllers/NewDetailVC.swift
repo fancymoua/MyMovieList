@@ -20,7 +20,7 @@ class NewDetailVC: UIViewController {
     var tmdbID: Int?
     var mediaType: MediaType!
     var posterImage = UIImage()
-    var movieTitle: String?
+    var movieTitle: String?   // used to check if title is on watchlist
     
     var mainDetailObjectMovie = MovieDetailModel()
     var mainDetailObjectTV = TVDetailModel()
@@ -32,13 +32,12 @@ class NewDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("tmdbID \(tmdbID)")
+        print("tmdbID \(tmdbID!)")
         
         // passing info to child views
         titlePlotVC.mediaType = mediaType
         titlePlotVC.tmdbID = tmdbID
         titlePlotVC.DetailDelegate = self
-//        titlePlotVC.tvDetailDelegate = self
         
         castCrewVC.tmdbID = tmdbID!
         castCrewVC.mediaType = mediaType
