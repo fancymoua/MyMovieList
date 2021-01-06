@@ -5,6 +5,7 @@ import UIKit
 class SpecialCollectionsVC: UIViewController {
     
     let collectionTitle = UILabel()
+    let viewMoreButton = UIButton()
     let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     var moviesArray = [MovieSearchResult]()
@@ -12,6 +13,8 @@ class SpecialCollectionsVC: UIViewController {
     
     let cache = NSCache<NSString, UIImage>()
     private let photoBaseURL = "https://image.tmdb.org/t/p/original"
+    
+    var dasURL = String()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +34,8 @@ class SpecialCollectionsVC: UIViewController {
     }
     
     func getTrendingItems(trendingURL: String, type: MediaType) {
+        
+        dasURL = trendingURL
         
         let url = URL(string: trendingURL)
         
@@ -184,19 +189,33 @@ extension SpecialCollectionsVC {
     func configureView() {
         view.addSubview(collectionView)
         view.addSubview(collectionTitle)
+        view.addSubview(viewMoreButton)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionTitle.translatesAutoresizingMaskIntoConstraints = false
+        viewMoreButton.translatesAutoresizingMaskIntoConstraints = false
         collectionTitle.textColor = .black
         collectionTitle.font = UIFont(name: "Avenir Next Demi Bold", size: 16)
+        
+        viewMoreButton.setTitle("View More", for: .normal)
+        viewMoreButton.setTitleColor(.blue, for: .normal)
+        viewMoreButton.titleLabel?.font = UIFont(name: "Avenir Next", size: 14)
+        viewMoreButton.titleLabel?.textAlignment = .right
+        viewMoreButton.addTarget(self, action: #selector(showMoreResults), for: .touchUpInside)
+//        viewMoreButton.backgroundColor = .red
         
         collectionView.backgroundColor = .systemBackground
         
         NSLayoutConstraint.activate([
             collectionTitle.topAnchor.constraint(equalTo: view.topAnchor),
             collectionTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionTitle.trailingAnchor.constraint(equalTo: viewMoreButton.leadingAnchor),
             collectionTitle.heightAnchor.constraint(equalToConstant: 20),
+            
+            viewMoreButton.topAnchor.constraint(equalTo: view.topAnchor),
+            viewMoreButton.widthAnchor.constraint(equalToConstant: 90),
+            viewMoreButton.heightAnchor.constraint(equalToConstant: 20),
+            viewMoreButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             collectionView.topAnchor.constraint(equalTo: collectionTitle.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -205,6 +224,15 @@ extension SpecialCollectionsVC {
         ])
         
         configureLayout()
+    }
+    
+    @objc func showMoreResults() {
+        let destVC = (storyboard?.instantiateViewController(identifier: "SearchResultsView") as? SearchResultsVC)!
+        
+        destVC.cowEndpoint = dasURL
+        destVC.mediaType = mediaType
+        
+        show(destVC, sender: self)
     }
     
     func configureLayout() {

@@ -24,6 +24,8 @@ class SearchResultsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("cowEndpoint \(cowEndpoint)")
+        
         resultsCollectionView.delegate = self
         
         configureCollectionView()
@@ -78,7 +80,6 @@ class SearchResultsVC: UIViewController {
                         self.searchResultsArray.append(movie)
 
                         self.updateData(on: self.searchResultsArray)
-                    
                     }
                 } catch {
                     print("Could not parse data")
