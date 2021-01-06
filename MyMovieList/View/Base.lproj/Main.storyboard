@@ -37,21 +37,6 @@
             </objects>
             <point key="canvasLocation" x="844.92753623188412" y="132.58928571428572"/>
         </scene>
-        <!--New DetailVC-->
-        <scene sceneID="ej1-Ft-4Kf">
-            <objects>
-                <viewController storyboardIdentifier="NewDetailView" hidesBottomBarWhenPushed="YES" id="vmy-de-RTt" customClass="NewDetailVC" customModule="MyMovieList" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zZN-gQ-Phe">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="mCg-Jn-5kD"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gxV-ae-hd4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1697.1014492753625" y="813.61607142857144"/>
-        </scene>
         <!--WatchlistVC-->
         <scene sceneID="xS7-Fn-t9O">
             <objects>
