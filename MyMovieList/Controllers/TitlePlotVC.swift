@@ -23,13 +23,9 @@ class TitlePlotVC: UIViewController {
     // variables populated from previous view
     var mediaType: MediaType!
     var movieTitle: String?
-    var imdbID: String?
     var posterImage = UIImage()
     var tmdbID: Int?
     var posterPath: String?
-    var rating: String?
-    var year: String?
-    var rated: String?
     
     let padding: CGFloat = 25
     var providersWidth: CGFloat = 0
@@ -102,17 +98,17 @@ class TitlePlotVC: UIViewController {
             yearAndRatedStack.topAnchor.constraint(equalTo: plotLabel.bottomAnchor, constant: 10),
             yearAndRatedStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             yearAndRatedStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            yearAndRatedStack.heightAnchor.constraint(equalToConstant: 40),
+            yearAndRatedStack.heightAnchor.constraint(equalToConstant: 35),
             
             genreView.topAnchor.constraint(equalTo: yearAndRatedStack.bottomAnchor, constant: 5),
             genreView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             genreView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            genreView.heightAnchor.constraint(equalToConstant: 60),
+            genreView.heightAnchor.constraint(equalToConstant: 45),
             
             runtimeOrSeasonsView.topAnchor.constraint(equalTo: genreView.bottomAnchor, constant: 5),
             runtimeOrSeasonsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             runtimeOrSeasonsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            runtimeOrSeasonsView.heightAnchor.constraint(equalToConstant: 60),
+            runtimeOrSeasonsView.heightAnchor.constraint(equalToConstant: 45),
             
             watchProvidersStackView.topAnchor.constraint(equalTo: runtimeOrSeasonsView.bottomAnchor, constant: 15),
             watchProvidersStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

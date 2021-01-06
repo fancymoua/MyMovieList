@@ -10,10 +10,11 @@ class SearchResultsVC: UIViewController {
         case main
     }
     
+    var cowEndpoint = String()
+    
     var searchText: String!
     var searchResultsArray = [MovieSearchResult]()
     var mediaType: MediaType!
-    var searchBaseURL = String()
     private let photoBaseURL = "https://image.tmdb.org/t/p/original"
     
     var datasource: UICollectionViewDiffableDataSource<Section, MovieSearchResult>!
@@ -29,7 +30,7 @@ class SearchResultsVC: UIViewController {
         configureUI()
         configDataSource()
 
-        getResults()
+        getResults(endpoint: cowEndpoint)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,11 +38,7 @@ class SearchResultsVC: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    func getResults() {
-        
-        let query = searchText.replacingOccurrences(of: " ", with: "+")
-        
-        let endpoint = searchBaseURL + "\(query)"
+    func getResults(endpoint: String) {
         
         guard let url = URL(string: endpoint) else {
             print("Bad URL")

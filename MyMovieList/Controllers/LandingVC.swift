@@ -57,8 +57,13 @@ class LandingVC: UIViewController {
             mediaSearchType = .TV
         }
         
+        if let userText = searchTextField.text {
+            let query = userText.replacingOccurrences(of: " ", with: "+")
+            let endpoint = searchBaseURL + "\(query)"
+            destVC.cowEndpoint = endpoint
+        }
+    
         destVC.searchText = searchTextField.text
-        destVC.searchBaseURL = searchBaseURL
         destVC.mediaType = mediaSearchType
         
         show(destVC, sender: self)

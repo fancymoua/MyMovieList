@@ -127,12 +127,12 @@ class NewDetailVC: UIViewController {
             addToWatchlistButton.heightAnchor.constraint(equalToConstant: 40),
             addToWatchlistButton.widthAnchor.constraint(equalToConstant: 40),
             
-            segmentedControl.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 25),
+            segmentedControl.topAnchor.constraint(equalTo: detailsBackgroundView.topAnchor, constant: 10),
             segmentedControl.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
             segmentedControl.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
             segmentedControl.heightAnchor.constraint(equalToConstant: 30),
             
-            containerView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10),
+            containerView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 5),
             containerView.leadingAnchor.constraint(equalTo: detailsBackgroundView.leadingAnchor, constant: padding),
             containerView.trailingAnchor.constraint(equalTo: detailsBackgroundView.trailingAnchor, constant: -padding),
             containerView.bottomAnchor.constraint(equalTo: detailsBackgroundView.bottomAnchor, constant: -10),
