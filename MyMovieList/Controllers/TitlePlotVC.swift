@@ -3,7 +3,7 @@
 import UIKit
 
 protocol PassMovieObject {
-    func updateMovieObject(movieObject: MovieDetailModel?, TVObject: TVDetailModel?)
+    func updateDetailObject(movieObject: MovieDetailModel?, TVObject: TVDetailModel?)
 }
 
 class TitlePlotVC: UIViewController {
@@ -38,7 +38,7 @@ class TitlePlotVC: UIViewController {
     var disMovie = MovieDetailModel()
     var disTV = TVDetailModel()
     
-    var movieDetailDelegate: PassMovieObject?
+    var DetailDelegate: PassMovieObject?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,7 +121,7 @@ class TitlePlotVC: UIViewController {
             MovieDetailsManager.getMovieDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
                 disMovie = daMovie
                 
-                movieDetailDelegate?.updateMovieObject(movieObject: daMovie, TVObject: nil)
+                DetailDelegate?.updateDetailObject(movieObject: daMovie, TVObject: nil)
                 
                 DispatchQueue.main.async {
                     self.titleLabel.text = daMovie.title
@@ -147,7 +147,7 @@ class TitlePlotVC: UIViewController {
             MovieDetailsManager.getTVDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
                 disTV = daMovie
                 
-                movieDetailDelegate?.updateMovieObject(movieObject: nil, TVObject: daMovie)
+                DetailDelegate?.updateDetailObject(movieObject: nil, TVObject: daMovie)
                 
                 DispatchQueue.main.async {
                     self.titleLabel.text = daMovie.name
@@ -178,16 +178,6 @@ class TitlePlotVC: UIViewController {
                     } else if daMovie.status == "Returning Series" {
                         self.yearView.setText(text: "\(firstAirYear) -")
                     }
-                }
-            }
-        }
-    }
-    
-    func getIMDBRating(imdbID: String?) {
-        if let imdbID = imdbID {
-            MovieDetailsManager.getIMDBRating(imdbID: imdbID) { (rating) in
-                DispatchQueue.main.async {
-                    self.ratingLabel.text = rating.imdbRating
                 }
             }
         }

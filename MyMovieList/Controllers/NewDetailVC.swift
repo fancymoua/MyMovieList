@@ -37,7 +37,7 @@ class NewDetailVC: UIViewController {
         // passing info to child views
         titlePlotVC.mediaType = mediaType
         titlePlotVC.tmdbID = tmdbID
-        titlePlotVC.movieDetailDelegate = self
+        titlePlotVC.DetailDelegate = self
 //        titlePlotVC.tvDetailDelegate = self
         
         castCrewVC.tmdbID = tmdbID!
@@ -188,7 +188,7 @@ class NewDetailVC: UIViewController {
 }
 
 extension NewDetailVC: PassMovieObject {
-    func updateMovieObject(movieObject: MovieDetailModel?, TVObject: TVDetailModel?) {
+    func updateDetailObject(movieObject: MovieDetailModel?, TVObject: TVDetailModel?) {
         if let movieObject = movieObject {
             mainDetailObjectMovie = movieObject
         }

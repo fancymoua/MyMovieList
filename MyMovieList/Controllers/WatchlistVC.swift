@@ -88,8 +88,14 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
         
         let title = watchlistItemsArray[indexPath.item].title
         let rating = watchlistItemsArray[indexPath.item].rating
-        let year = watchlistItemsArray[indexPath.item].year
         let rated = watchlistItemsArray[indexPath.item].rated
+        let mediaType = watchlistItemsArray[indexPath.item].mediaType
+        
+        var year = String()
+        
+        if let releasedYear = watchlistItemsArray[indexPath.item].year {
+            year = formatYear(dateString: releasedYear)
+        }
         
         var posterImage = UIImage()
         
@@ -110,7 +116,7 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
             }
         }
         
-        cell.configureCell(title, posterImage: posterImage, rating: rating ?? "n/a", year: year ?? "n/a", rated: rated ?? "...")
+        cell.configureCell(title, posterImage: posterImage, rating: rating ?? "n/a", year: year, rated: rated ?? "...")
         cell.configureConstraints()
         
         return cell
