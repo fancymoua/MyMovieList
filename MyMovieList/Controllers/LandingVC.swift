@@ -41,11 +41,6 @@ class LandingVC: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    @IBAction func searchButtonPressed(_ sender: Any) {
-        pushSearchResultsVC()
-        dismissKeyboardAndClearSearchTextField()
-    }
-    
     private func addSubviews() {
         let subviews = [searchTextField, keywordsCollectionView, trendingMoviesView, popularShowsView]
         
@@ -107,8 +102,7 @@ class LandingVC: UIViewController {
     }
     
     @objc func pushSearchResultsVC() {
-        let destVC = storyboard?.instantiateViewController(withIdentifier: "SearchResultsView") as! SearchResultsVC
-//        let destVC = SearchResultsVC()
+        let destVC = SearchResultsVC()
         
         guard userEnteredText else {
             print("Please enter movie title")

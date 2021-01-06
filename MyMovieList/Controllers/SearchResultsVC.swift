@@ -4,7 +4,7 @@ import UIKit
 
 class SearchResultsVC: UIViewController {
     
-    @IBOutlet weak var resultsCollectionView: UICollectionView!
+    let resultsCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     enum Section {
         case main
@@ -26,6 +26,10 @@ class SearchResultsVC: UIViewController {
         
         resultsCollectionView.delegate = self
         
+        resultsCollectionView.register(SmallMediaCardCell.self, forCellWithReuseIdentifier: SmallMediaCardCell.reuseID)
+        
+        constrainLayout()
+        
         configureCollectionView()
         configureUI()
         configDataSource()
@@ -36,6 +40,21 @@ class SearchResultsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    func constrainLayout() {
+        
+        view.addSubview(resultsCollectionView)
+        resultsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        resultsCollectionView.backgroundColor = .systemBackground
+        
+        NSLayoutConstraint.activate([
+            resultsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            resultsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            resultsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            resultsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
+        ])
     }
     
     func getResults(endpoint: String) {
@@ -111,7 +130,7 @@ class SearchResultsVC: UIViewController {
     func configDataSource() {
         datasource = UICollectionViewDiffableDataSource<Section, MovieSearchResult>(collectionView: resultsCollectionView, cellProvider: { [self] (collectionView, indexPath, follower) -> UICollectionViewCell? in
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallMediaCardCell.reuseID, for: indexPath) as! SmallMediaCardCell
             
             let title = self.searchResultsArray[indexPath.item].title
             var posterImage = UIImage()
@@ -133,7 +152,7 @@ class SearchResultsVC: UIViewController {
                 }
             }
             
-            cell.configureCell(title: title, posterImage: posterImage)
+            cell.configureCell(title: title, image: posterImage)
             
             return cell
         })
@@ -190,8 +209,8 @@ extension SearchResultsVC: UICollectionViewDelegate {
 
 extension SearchResultsVC {
     private func configureUI() {
-//        navigationItem.title = searchText
         navigationController?.navigationBar.prefersLargeTitles = true
+        view.backgroundColor = .systemBackground
     }
     
     func configureCollectionView() {
@@ -206,7 +225,7 @@ extension SearchResultsVC {
         
         let itemWidth = availableWidth / 3
         
-        flowLayout.itemSize = CGSize(width: itemWidth + 30, height: itemWidth + 90)
+        flowLayout.itemSize = CGSize(width: itemWidth + 40, height: 280)
         flowLayout.minimumLineSpacing = 20
         flowLayout.minimumInteritemSpacing = 5
         
