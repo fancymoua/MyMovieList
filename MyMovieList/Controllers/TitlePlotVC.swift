@@ -47,7 +47,13 @@ class TitlePlotVC: UIViewController {
         
         addSubviews()
         configureMovieDetailViews()
-        getMovieDetails()
+
+        if mediaType == .Movie {
+            setMovieDetails()
+        } else if mediaType == .TV {
+            setTVDetails()
+        }
+        
         getWatchProviders()
     }
     
@@ -114,73 +120,55 @@ class TitlePlotVC: UIViewController {
         ])
     }
     
-    func getMovieDetails() {
-        if mediaType == .Movie {
-            MovieDetailsManager.getMovieDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
-                disMovie = daMovie
-                
-                DetailDelegate?.updateDetailObject(movieObject: daMovie, TVObject: nil)
-                
-                DispatchQueue.main.async {
-                    self.titleLabel.text = daMovie.title
-                    self.plotLabel.text = daMovie.overview
-                    self.ratedView.setText(text: daMovie.rated ?? "not rated")
-                    self.ratingLabel.text = daMovie.imdbRating
-                    
-                    if let releaseDate = daMovie.release_date {
-                        let year = formatYear(dateString: releaseDate)
-                        self.yearView.setText(text: year)
-                    }
-                    
-                    if let runtime = daMovie.runtime {
-                        let tuple = minutesToHoursAndMinutes(runtime)
-                        self.runtimeOrSeasonsView.setText(text: "\(tuple.hours) hr \(tuple.leftMinutes) mins")
-                    }
+    func setMovieDetails() {
+        MovieDetailsManager.getMovieDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
+            disMovie = daMovie
             
-                    self.genreView.setText(text: daMovie.genres ?? "no genres")
+            DetailDelegate?.updateDetailObject(movieObject: daMovie, TVObject: nil)
             
+            DispatchQueue.main.async {
+                titleLabel.text = daMovie.title
+                plotLabel.text = daMovie.overview
+                ratedView.setText(text: daMovie.rated ?? "not rated")
+                ratingLabel.text = daMovie.imdbRating
+                genreView.setText(text: daMovie.genres ?? "no genres")
+                
+                if let releaseDate = daMovie.release_date {
+                    let year = formatYear(dateString: releaseDate)
+                    yearView.setText(text: year)
+                }
+                
+                if let runtime = daMovie.runtime {
+                    let tuple = minutesToHoursAndMinutes(runtime)
+                    runtimeOrSeasonsView.setText(text: "\(tuple.hours) hr \(tuple.leftMinutes) mins")
                 }
             }
-        } else if mediaType == .TV {
-            MovieDetailsManager.getTVDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
-                disTV = daMovie
+        }
+    }
+        
+    func setTVDetails() {
+        MovieDetailsManager.getTVDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
+            disTV = daMovie
+            
+            DetailDelegate?.updateDetailObject(movieObject: nil, TVObject: daMovie)
+            
+            DispatchQueue.main.async {
+                titleLabel.text = daMovie.name
+                plotLabel.text = daMovie.overview
+                yearView.setText(text: daMovie.yearAired ?? "n/a")
+                ratedView.setText(text: daMovie.contentRating ?? "no rating")
+                genreView.setText(text: daMovie.genres ?? "no genres")
+                ratingLabel.text = daMovie.imdbRating
                 
-                DetailDelegate?.updateDetailObject(movieObject: nil, TVObject: daMovie)
-                
-                DispatchQueue.main.async {
-                    self.titleLabel.text = daMovie.name
-                    self.plotLabel.text = daMovie.overview
-                    self.ratedView.setText(text: daMovie.contentRating ?? "no rating")
-                    self.genreView.setText(text: daMovie.genres ?? "no genres")
-                    self.ratingLabel.text = daMovie.imdbRating
-                    
-                    if let seasonsCount = daMovie.seasonsCount {
-                        if let episodesCount = daMovie.episodesCount {
-                            self.runtimeOrSeasonsView.setText(text: "\(seasonsCount) seasons / \(episodesCount) episodes")
-                        }
-                    }
-                    
-                    var firstAirYear = String()
-                    var lastAirYear = String()
-                    
-                    if let firstAirDate = daMovie.first_air_date {
-                        firstAirYear = formatYear(dateString: firstAirDate)
-                    } else { firstAirYear = ""}
-                    
-                    if let lastAirDate = daMovie.last_air_date {
-                        lastAirYear = formatYear(dateString: lastAirDate)
-                    } else {lastAirYear = ""}
-                    
-                    if daMovie.status == "Ended" {
-                        self.yearView.setText(text: "\(firstAirYear) - \(lastAirYear)")
-                    } else if daMovie.status == "Returning Series" {
-                        self.yearView.setText(text: "\(firstAirYear) -")
+                if let seasonsCount = daMovie.seasonsCount {
+                    if let episodesCount = daMovie.episodesCount {
+                        self.runtimeOrSeasonsView.setText(text: "\(seasonsCount) seasons / \(episodesCount) episodes")
                     }
                 }
             }
         }
     }
-
+        
     func getWatchProviders() {
         
         MovieDetailsManager.getWatchProviders(tmdbID: tmdbID, mediaType: mediaType) { [self] (providersArray) in
@@ -196,7 +184,7 @@ class TitlePlotVC: UIViewController {
                     providersWidth += 60
                     
                     providersStackViewWidthConstraint.constant = providersWidth
-                  
+                    
                     watchProvidersStackView.updateConstraints()
                     watchProvidersStackView.layoutIfNeeded()
                 }
@@ -204,3 +192,4 @@ class TitlePlotVC: UIViewController {
         }
     }
 }
+

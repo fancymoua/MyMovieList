@@ -120,12 +120,35 @@ class MovieDetailsManager {
                 
                 let genreJoined = genreNames.joined(separator: ", ")
                 
+                var runningYears = String()
+                
+                var firstAirYear = String()
+                var lastAirYear = String()
+                
+                if let firstAirDate = result.first_air_date {
+                    IDsManager.formatYear(dateString: firstAirDate) { (year) in
+                        firstAirYear = year
+                    }
+                } else { firstAirYear = ""}
+
+                if let lastAirDate = result.last_air_date {
+                    IDsManager.formatYear(dateString: lastAirDate) { (year) in
+                        lastAirYear = year
+                    }
+                } else {lastAirYear = ""}
+
+                if result.status == "Ended" {
+                    runningYears = "\(firstAirYear) - \(lastAirYear)"
+                } else if result.status == "Returning Series" {
+                    runningYears = "\(firstAirYear) -"
+                }
+                
                 // get IMDBId, then get IMDBRating, then create TVDetailModel object
                 IDsManager.getIMDBID(id: result.id! , type: .TV) { (daIMDBID) in
                     getIMDBRating(imdbID: daIMDBID) { (ratingModel) in
                         let rating = ratingModel.imdbRating
                         
-                        let thisMovie = TVDetailModel(name: result.name, first_air_date: result.first_air_date, last_air_date: result.last_air_date, overview: result.overview, poster_path: result.poster_path, status: result.status, contentRating: thisRating, genres: genreJoined, seasonsCount: result.number_of_seasons, episodesCount: result.number_of_episodes, imdbID: daIMDBID, imdbRating: rating)
+                        let thisMovie = TVDetailModel(name: result.name, yearAired: runningYears ,overview: result.overview, poster_path: result.poster_path, status: result.status, contentRating: thisRating, genres: genreJoined, seasonsCount: result.number_of_seasons, episodesCount: result.number_of_episodes, imdbID: daIMDBID, imdbRating: rating)
                         
                         completed(thisMovie)
                     }
