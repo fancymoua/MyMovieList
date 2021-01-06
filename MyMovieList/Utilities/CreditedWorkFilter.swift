@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct CreditedWorkDoNotShow {
+struct CreditedWorkFilter {
     static let noShows = [
         "Conan":                            32415,
         "Trevor Noah":                      2224,
