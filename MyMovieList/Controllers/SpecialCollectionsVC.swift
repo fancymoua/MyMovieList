@@ -231,6 +231,7 @@ extension SpecialCollectionsVC {
         
         destVC.cowEndpoint = dasURL
         destVC.mediaType = mediaType
+        destVC.navigationItem.title = collectionTitle.text
         
         show(destVC, sender: self)
     }

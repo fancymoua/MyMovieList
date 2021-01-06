@@ -46,6 +46,7 @@
 		B1823FB925A4F012003A8DCC /* RatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1823FB825A4F012003A8DCC /* RatingsAPI.swift */; };
 		B1823FBE25A4F062003A8DCC /* RatingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1823FBD25A4F062003A8DCC /* RatingModel.swift */; };
 		B1823FC325A51154003A8DCC /* TVDetailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1823FC225A51154003A8DCC /* TVDetailAPI.swift */; };
+		B1823FDA25A65E0F003A8DCC /* CreditedWorkDoNotShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1823FD925A65E0F003A8DCC /* CreditedWorkDoNotShow.swift */; };
 		B18532F825A38BB200449D4E /* SmallMediaCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18532F725A38BB200449D4E /* SmallMediaCardCell.swift */; };
 		B189BE8E258BE30500422624 /* CustomKeywordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B189BE8D258BE30500422624 /* CustomKeywordButton.swift */; };
 		B189BE9B258BFAD400422624 /* TrendingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B189BE9A258BFAD400422624 /* TrendingVC.swift */; };
@@ -128,6 +129,7 @@
 		B1823FB825A4F012003A8DCC /* RatingsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsAPI.swift; sourceTree = "<group>"; };
 		B1823FBD25A4F062003A8DCC /* RatingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingModel.swift; sourceTree = "<group>"; };
 		B1823FC225A51154003A8DCC /* TVDetailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVDetailAPI.swift; sourceTree = "<group>"; };
+		B1823FD925A65E0F003A8DCC /* CreditedWorkDoNotShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditedWorkDoNotShow.swift; sourceTree = "<group>"; };
 		B18532F725A38BB200449D4E /* SmallMediaCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallMediaCardCell.swift; sourceTree = "<group>"; };
 		B189BE8D258BE30500422624 /* CustomKeywordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeywordButton.swift; sourceTree = "<group>"; };
 		B189BE9A258BFAD400422624 /* TrendingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingVC.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				B1286C162592863A0063AD70 /* WatchProviders.swift */,
 				B143E3982593E2DC0063BD8F /* IconImages.swift */,
 				B160A137259A90F5004AC722 /* MediaType.swift */,
+				B1823FD925A65E0F003A8DCC /* CreditedWorkDoNotShow.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				B160A133259A8FA9004AC722 /* IDsManager.swift in Sources */,
 				B1E254E925A02C7D000F94ED /* CastCrewVC.swift in Sources */,
 				B18532F825A38BB200449D4E /* SmallMediaCardCell.swift in Sources */,
+				B1823FDA25A65E0F003A8DCC /* CreditedWorkDoNotShow.swift in Sources */,
 				B1823FC325A51154003A8DCC /* TVDetailAPI.swift in Sources */,
 				B143E3992593E2DC0063BD8F /* IconImages.swift in Sources */,
 				B160A138259A90F5004AC722 /* MediaType.swift in Sources */,

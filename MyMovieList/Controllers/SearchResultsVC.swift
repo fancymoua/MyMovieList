@@ -24,8 +24,6 @@ class SearchResultsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("cowEndpoint \(cowEndpoint)")
-        
         resultsCollectionView.delegate = self
         
         configureCollectionView()
@@ -192,7 +190,7 @@ extension SearchResultsVC: UICollectionViewDelegate {
 
 extension SearchResultsVC {
     private func configureUI() {
-        navigationItem.title = searchText
+//        navigationItem.title = searchText
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     

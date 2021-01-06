@@ -149,12 +149,10 @@ struct PersonManager {
                 if let castArray = result.cast {
                     
                     for item in castArray {
-                        var imdbID = String()
                         
-                        if item.poster_path != nil {
-                            imdbID = "TT"
+                        if item.poster_path != nil && !CreditedWorkDoNotShow.noShows.values.contains(item.id) {
                             
-                            let newItem = CreditedWorkResult(id: item.id, title: item.title ?? item.name ?? "no title", poster_path: item.poster_path, imdbID: imdbID, popularity: item.popularity, media_type: item.media_type)
+                            let newItem = CreditedWorkResult(id: item.id, title: item.title ?? item.name ?? "no title", poster_path: item.poster_path, popularity: item.popularity, media_type: item.media_type)
                             sumArray.append(newItem)
                         }
                     }
@@ -163,12 +161,10 @@ struct PersonManager {
                 if let crewArray = result.crew {
                     
                     for item in crewArray {
-                        var imdbID = String()
                         
-                        if item.poster_path != nil {
-                            imdbID = "TT"
+                        if item.poster_path != nil && !CreditedWorkDoNotShow.noShows.values.contains(item.id) {
                             
-                            let newItem = CreditedWorkResult(id: item.id, title: item.title ?? item.name ?? "no title", poster_path: item.poster_path, imdbID: imdbID, popularity: item.popularity, media_type: item.media_type)
+                            let newItem = CreditedWorkResult(id: item.id, title: item.title ?? item.name ?? "no title", poster_path: item.poster_path, popularity: item.popularity, media_type: item.media_type)
                             sumArray.append(newItem)
                         }
                     }
