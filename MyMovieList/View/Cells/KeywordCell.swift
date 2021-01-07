@@ -19,7 +19,7 @@ class KeywordCell: UICollectionViewCell {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         bgView.backgroundColor = .systemOrange
         
-        bgView.layer.cornerRadius = 4
+        bgView.layer.cornerRadius = 6
         
         nameLabel.textAlignment = .center
         nameLabel.textColor = .white

@@ -211,6 +211,7 @@ extension SearchResultsVC {
     private func configureUI() {
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .systemBackground
+//        navigationController?.hidesBottomBarWhenPushed = true
     }
     
     func configureCollectionView() {

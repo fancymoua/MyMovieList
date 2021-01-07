@@ -78,7 +78,7 @@ class LandingVC: UIViewController {
         
         let flowLayout = UICollectionViewFlowLayout()
         
-        flowLayout.itemSize = CGSize(width: 100, height: 35)
+        flowLayout.itemSize = CGSize(width: 100, height: 40)
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumInteritemSpacing = 5
         
@@ -96,7 +96,7 @@ class LandingVC: UIViewController {
             keywordsCollectionView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 15),
             keywordsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             keywordsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            keywordsCollectionView.heightAnchor.constraint(equalToConstant: 35),
+            keywordsCollectionView.heightAnchor.constraint(equalToConstant: 40),
             
             trendingMoviesView.topAnchor.constraint(equalTo: keywordsCollectionView.bottomAnchor, constant: 15),
             trendingMoviesView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -148,6 +148,7 @@ class LandingVC: UIViewController {
             destVC.cowEndpoint = endpoint
         }
     
+        destVC.hidesBottomBarWhenPushed = true
         destVC.navigationItem.title = searchTextField.text
         destVC.mediaType = mediaSearchType
         
@@ -173,6 +174,7 @@ extension LandingVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destVC = SearchResultsVC()
         
+        destVC.hidesBottomBarWhenPushed = true
         destVC.cowEndpoint = Array(keywordsArray)[indexPath.item].value
         destVC.mediaType = .Movie
         destVC.navigationItem.title = Array(keywordsArray)[indexPath.item].key
