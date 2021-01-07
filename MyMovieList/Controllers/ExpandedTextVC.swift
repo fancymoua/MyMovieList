@@ -15,6 +15,11 @@ class ExpandedTextVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     private func configure() {
         view.backgroundColor = .systemBackground
         view.addSubview(textView)

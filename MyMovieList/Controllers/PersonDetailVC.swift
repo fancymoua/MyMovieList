@@ -40,6 +40,11 @@ class PersonDetailVC: UIViewController {
         getCreditedWork()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     private func getDetails() {
         PersonManager.getPersonDetail(tmdbID: tmdbID) { (personModel) in
             DispatchQueue.main.async {
