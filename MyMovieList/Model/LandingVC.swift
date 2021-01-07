@@ -28,8 +28,6 @@ class LandingVC: UIViewController {
         
         keywordsCollectionView.register(KeywordCell.self, forCellWithReuseIdentifier: KeywordCell.reuseID)
         
-        print(keywordsArray)
-        
         addSubviews()
         constrainSubviews()
         
@@ -39,9 +37,6 @@ class LandingVC: UIViewController {
     }
     
     func populateKeywordArray() {
-//        for item in LandingKeywords.keywords {
-//            keywordsArray.append(item)
-//        }
         keywordsArray = LandingKeywords.keywords
     }
     

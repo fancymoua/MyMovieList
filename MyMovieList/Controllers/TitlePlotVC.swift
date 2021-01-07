@@ -70,6 +70,8 @@ class TitlePlotVC: UIViewController {
             runtimeOrSeasonsView.headerLabel.text = "Seasons:"
         }
         
+        plotLabel.numberOfLines = 6
+        
         ratingLabel.font = UIFont(name: "Avenir Next", size: 18)
         ratingLabel.textColor = .label
         
