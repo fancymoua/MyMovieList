@@ -70,7 +70,11 @@ class TitlePlotVC: UIViewController {
             runtimeOrSeasonsView.headerLabel.text = "Seasons:"
         }
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openPlotView))
+        
         plotLabel.numberOfLines = 6
+        plotLabel.isUserInteractionEnabled = true
+        plotLabel.addGestureRecognizer(tapGesture)
         
         ratingLabel.font = UIFont(name: "Avenir Next", size: 18)
         ratingLabel.textColor = .label
@@ -116,6 +120,24 @@ class TitlePlotVC: UIViewController {
             watchProvidersStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             watchProvidersStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
+    }
+    
+    @objc func openPlotView() {
+        print("Open plot view")
+        
+        let destVC = ExpandedTextVC()
+        
+        var text = String()
+        
+        if mediaType == .Movie {
+            text = disMovie.overview ?? "n/a"
+        } else if mediaType == .TV {
+            text = disTV.overview ?? "n/a"
+        }
+        
+        destVC.text = text
+        
+        show(destVC, sender: self)
     }
     
     func setMovieDetails() {
