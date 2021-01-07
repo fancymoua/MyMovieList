@@ -96,6 +96,11 @@ class PersonDetailVC: UIViewController {
         bioLabel.minimumScaleFactor = 0.7
         bioLabel.textAlignment = .left
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openPlotView))
+    
+        bioLabel.isUserInteractionEnabled = true
+        bioLabel.addGestureRecognizer(tapGesture)
+        
         creditedWorkLabel.text = "Most Popular:"
         creditedWorkLabel.font = UIFont(name: "Avenir Next Medium", size: 18)
         
@@ -129,6 +134,16 @@ class PersonDetailVC: UIViewController {
             creditedCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -5)
         ])
        
+    }
+    
+    @objc func openPlotView() {
+        print("Open plot view")
+        
+        let destVC = ExpandedTextVC()
+        
+        destVC.text = bioLabel.text ?? "none"
+        
+        show(destVC, sender: self)
     }
 }
 

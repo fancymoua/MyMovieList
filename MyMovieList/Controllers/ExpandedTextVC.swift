@@ -15,6 +15,11 @@ class ExpandedTextVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -24,8 +29,7 @@ class ExpandedTextVC: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(textView)
         textView.translatesAutoresizingMaskIntoConstraints = false
-        
-        textView.backgroundColor = .systemOrange
+    
         textView.text = text
         textView.font = UIFont(name: "Avenir Next", size: 20)
         textView.contentOffset = .zero
