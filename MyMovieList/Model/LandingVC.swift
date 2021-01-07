@@ -16,8 +16,19 @@ class LandingVC: UIViewController {
     let trendingMoviesVC = TrendingVC()
     let trendingShowsVC = SpecialListVC()
     
+    var keywordsArray = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        populateKeywordArray()
+        
+        keywordsCollectionView.delegate = self
+        keywordsCollectionView.dataSource = self
+        
+        keywordsCollectionView.register(KeywordCell.self, forCellWithReuseIdentifier: KeywordCell.reuseID)
+        
+        print(keywordsArray)
         
         addSubviews()
         constrainSubviews()
@@ -25,6 +36,12 @@ class LandingVC: UIViewController {
         configureUI()
         configureSearchTextField()
         mediaTypeSelection = mediaTypePicker.selectedSegmentIndex
+    }
+    
+    func populateKeywordArray() {
+        for item in LandingKeywords.keywords {
+            keywordsArray.append(item.key)
+        }
     }
     
     var userEnteredText: Bool {
@@ -132,6 +149,26 @@ class LandingVC: UIViewController {
         
         show(destVC, sender: self)
     }
+}
+
+extension LandingVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return keywordsArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: KeywordCell.reuseID, for: indexPath) as! KeywordCell
+        
+        let cellName = keywordsArray[indexPath.item]
+        
+        cell.configureCell(name: cellName)
+        
+        return cell
+    }
+    
+    
+    
+    
 }
 
 extension LandingVC {
