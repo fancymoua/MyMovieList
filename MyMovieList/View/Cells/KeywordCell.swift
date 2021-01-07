@@ -21,6 +21,8 @@ class KeywordCell: UICollectionViewCell {
         
         bgView.layer.cornerRadius = 6
         
+//        print("nameLabel width: \(nameLabel.)")
+        
         nameLabel.textAlignment = .center
         nameLabel.textColor = .white
         nameLabel.font = UIFont(name: "Avenir Next", size: 15)
@@ -30,6 +32,8 @@ class KeywordCell: UICollectionViewCell {
             bgView.trailingAnchor.constraint(equalTo: trailingAnchor),
             bgView.topAnchor.constraint(equalTo: topAnchor),
             bgView.bottomAnchor.constraint(equalTo: bottomAnchor),
+//            bgView.widthAnchor.constraint(equalToConstant: 100),
+//            bgView.heightAnchor.constraint(equalToConstant: 40),
             
             nameLabel.centerXAnchor.constraint(equalTo: bgView.centerXAnchor),
             nameLabel.centerYAnchor.constraint(equalTo: bgView.centerYAnchor)
