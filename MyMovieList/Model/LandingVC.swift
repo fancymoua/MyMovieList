@@ -16,7 +16,7 @@ class LandingVC: UIViewController {
     let trendingMoviesVC = TrendingVC()
     let trendingShowsVC = SpecialListVC()
     
-    var keywordsArray = [String]()
+    var keywordsArray = [String: String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +39,10 @@ class LandingVC: UIViewController {
     }
     
     func populateKeywordArray() {
-        for item in LandingKeywords.keywords {
-            keywordsArray.append(item.key)
-        }
+//        for item in LandingKeywords.keywords {
+//            keywordsArray.append(item)
+//        }
+        keywordsArray = LandingKeywords.keywords
     }
     
     var userEnteredText: Bool {
@@ -78,7 +79,15 @@ class LandingVC: UIViewController {
         trendingMoviesVC.didMove(toParent: self)
         trendingShowsVC.didMove(toParent: self)
         
-        keywordsCollectionView.backgroundColor = .systemPink
+        keywordsCollectionView.backgroundColor = .systemBackground
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        
+        flowLayout.itemSize = CGSize(width: 100, height: 35)
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumInteritemSpacing = 5
+        
+        keywordsCollectionView.collectionViewLayout = flowLayout
         
         constraintAgain(childView: trendingMoviesVC.view, container: trendingMoviesView)
         constraintAgain(childView: trendingShowsVC.view, container: popularShowsView)
@@ -89,12 +98,12 @@ class LandingVC: UIViewController {
             searchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             searchTextField.heightAnchor.constraint(equalToConstant: 45),
             
-            keywordsCollectionView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 10),
+            keywordsCollectionView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 15),
             keywordsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             keywordsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            keywordsCollectionView.heightAnchor.constraint(equalToConstant: 30),
+            keywordsCollectionView.heightAnchor.constraint(equalToConstant: 35),
             
-            trendingMoviesView.topAnchor.constraint(equalTo: keywordsCollectionView.bottomAnchor, constant: 10),
+            trendingMoviesView.topAnchor.constraint(equalTo: keywordsCollectionView.bottomAnchor, constant: 15),
             trendingMoviesView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             trendingMoviesView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             trendingMoviesView.heightAnchor.constraint(equalToConstant: 250),
@@ -159,16 +168,23 @@ extension LandingVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: KeywordCell.reuseID, for: indexPath) as! KeywordCell
         
-        let cellName = keywordsArray[indexPath.item]
+        let cellName = Array(keywordsArray)[indexPath.item].key
         
         cell.configureCell(name: cellName)
         
         return cell
     }
     
-    
-    
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let destVC = SearchResultsVC()
+        
+        destVC.cowEndpoint = Array(keywordsArray)[indexPath.item].value
+        destVC.mediaType = .Movie
+        destVC.navigationItem.title = Array(keywordsArray)[indexPath.item].key
+        
+        show(destVC, sender: self)
+    }
+
 }
 
 extension LandingVC {

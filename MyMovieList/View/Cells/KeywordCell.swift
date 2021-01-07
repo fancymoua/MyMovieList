@@ -6,18 +6,33 @@ class KeywordCell: UICollectionViewCell {
     
     static let reuseID = "KeywordCell"
     
+    var bgView = UIView()
     var nameLabel = UILabel()
     
     func configureCell(name: String) {
         self.nameLabel.text = name
         
-        addSubview(nameLabel)
+        addSubview(bgView)
+        bgView.addSubview(nameLabel)
+        
+        bgView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.backgroundColor = .systemOrange
+        bgView.backgroundColor = .systemOrange
+        
+        bgView.layer.cornerRadius = 4
+        
+        nameLabel.textAlignment = .center
+        nameLabel.textColor = .white
+        nameLabel.font = UIFont(name: "Avenir Next", size: 15)
         
         NSLayoutConstraint.activate([
-            nameLabel.widthAnchor.constraint(equalToConstant: 60),
-            nameLabel.heightAnchor.constraint(equalToConstant: 20)
+            bgView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            bgView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            bgView.topAnchor.constraint(equalTo: topAnchor),
+            bgView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            nameLabel.centerXAnchor.constraint(equalTo: bgView.centerXAnchor),
+            nameLabel.centerYAnchor.constraint(equalTo: bgView.centerYAnchor)
         ])
         
     }
