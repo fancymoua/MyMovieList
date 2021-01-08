@@ -174,7 +174,6 @@ class NewDetailVC: UIViewController {
         addToWatchlistButton.removeTarget(self, action: nil, for: .touchUpInside)
         
         if mediaType == .Movie {
-            
             if let releasedDate = mainDetailObjectMovie.release_date {
                let year = formatYear(dateString: releasedDate)
                 
