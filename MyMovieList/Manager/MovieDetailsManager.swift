@@ -126,13 +126,13 @@ class MovieDetailsManager {
                 var lastAirYear = String()
                 
                 if let firstAirDate = result.first_air_date {
-                    IDsManager.formatYear(dateString: firstAirDate) { (year) in
+                    DateTimeFormattingManager.formatYear(dateString: firstAirDate) { (year) in
                         firstAirYear = year
                     }
                 } else { firstAirYear = ""}
 
                 if let lastAirDate = result.last_air_date {
-                    IDsManager.formatYear(dateString: lastAirDate) { (year) in
+                    DateTimeFormattingManager.formatYear(dateString: lastAirDate) { (year) in
                         lastAirYear = year
                     }
                 } else {lastAirYear = ""}

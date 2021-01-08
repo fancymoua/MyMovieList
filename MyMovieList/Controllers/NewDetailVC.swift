@@ -176,7 +176,7 @@ class NewDetailVC: UIViewController {
             if let releasedDate = mainDetailObjectMovie.release_date {
                var year = String()
                 
-                IDsManager.formatYear(dateString: releasedDate) { (daYear) in
+                DateTimeFormattingManager.formatYear(dateString: releasedDate) { (daYear) in
                     year = daYear
                 }
                 

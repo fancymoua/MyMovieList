@@ -40,8 +40,4 @@ extension UIViewController {
         }
     }
     
-    func minutesToHoursAndMinutes (_ minutes : Int) -> (hours : Int , leftMinutes : Int) {
-        return (minutes / 60, (minutes % 60))
-    }
-    
 }

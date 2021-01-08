@@ -74,14 +74,14 @@ class TitlePlotVC: UIViewController {
                 if let releaseDate = daMovie.release_date {
                     var year = String()
                     
-                    IDsManager.formatYear(dateString: releaseDate) { (daYear) in
+                    DateTimeFormattingManager.formatYear(dateString: releaseDate) { (daYear) in
                         year = daYear
                     }
                     yearView.setText(text: year)
                 }
                 
                 if let runtime = daMovie.runtime {
-                    let tuple = minutesToHoursAndMinutes(runtime)
+                    let tuple = DateTimeFormattingManager.minutesToHoursAndMinutes(runtime)
                     runtimeOrSeasonsView.setText(text: "\(tuple.hours) hr \(tuple.leftMinutes) mins")
                 }
             }
