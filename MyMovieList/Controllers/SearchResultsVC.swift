@@ -10,7 +10,7 @@ class SearchResultsVC: UIViewController {
         case main
     }
     
-    var cowEndpoint = String()
+    var searchEndpoint = String()
     
     var searchText: String!
     var searchResultsArray = [SearchResultModel]()
@@ -34,7 +34,7 @@ class SearchResultsVC: UIViewController {
         configureUI()
         configDataSource()
 
-        getResults(endpoint: cowEndpoint)
+        getResults(endpoint: searchEndpoint)
     }
     
     override func viewWillAppear(_ animated: Bool) {

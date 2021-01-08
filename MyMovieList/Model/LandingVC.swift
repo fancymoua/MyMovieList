@@ -15,9 +15,7 @@ class LandingVC: UIViewController {
     let trendingMoviesVC = TrendingVC()     // child view
     let trendingShowsVC = SpecialListVC()   // child view
     
-    var userEnteredText: Bool {
-        return !searchTextField.text!.isEmpty
-    }
+    var userEnteredText: Bool { return !searchTextField.text!.isEmpty }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,7 +150,7 @@ class LandingVC: UIViewController {
         if let userText = searchTextField.text {
             let query = userText.replacingOccurrences(of: " ", with: "+")
             let endpoint = searchBaseURL + "\(query)"
-            destVC.cowEndpoint = endpoint
+            destVC.searchEndpoint = endpoint
         }
     
         destVC.hidesBottomBarWhenPushed = true
@@ -182,7 +180,7 @@ extension LandingVC: UICollectionViewDelegate, UICollectionViewDataSource {
         let destVC = SearchResultsVC()
         
         destVC.hidesBottomBarWhenPushed = true
-        destVC.cowEndpoint = Array(keywordsArray)[indexPath.item].value
+        destVC.searchEndpoint = Array(keywordsArray)[indexPath.item].value
         destVC.mediaType = .Movie
         destVC.navigationItem.title = Array(keywordsArray)[indexPath.item].key
         

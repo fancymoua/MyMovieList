@@ -229,7 +229,7 @@ extension SpecialCollectionsVC {
     @objc func showMoreResults() {
         let destVC = SearchResultsVC()
         
-        destVC.cowEndpoint = dasURL
+        destVC.searchEndpoint = dasURL
         destVC.mediaType = mediaType
         destVC.navigationItem.title = collectionTitle.text
         
