@@ -177,7 +177,6 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
         }
         
         destVC.hidesBottomBarWhenPushed = true
-        destVC.movieTitle = moviesArray[indexPath.item].title
         destVC.posterImage = posterImage
         destVC.tmdbID = moviesArray[indexPath.item].id
         destVC.mediaType = mediaType

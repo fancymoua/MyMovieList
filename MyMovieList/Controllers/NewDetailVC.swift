@@ -20,7 +20,6 @@ class NewDetailVC: UIViewController {
     var tmdbID: Int?
     var mediaType: MediaType!
     var posterImage = UIImage()
-    var movieTitle: String?   // used to check if title is on watchlist
     
     var mainDetailObjectMovie = MovieDetailModel()
     var mainDetailObjectTV = TVDetailModel()

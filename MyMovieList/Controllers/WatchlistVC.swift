@@ -148,7 +148,6 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
             mediaType = .TV
         }
         
-        destVC.movieTitle = watchlistItemsArray[indexPath.item].title
         destVC.tmdbID = watchlistItemsArray[indexPath.item].tmdbID
         destVC.posterImage = posterImage
         destVC.mediaType = mediaType

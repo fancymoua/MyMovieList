@@ -202,7 +202,6 @@ extension SearchResultsVC: UICollectionViewDelegate {
             }
         }
         
-        destVC.movieTitle = searchResultsArray[indexPath.item].title
         destVC.posterImage = posterImage
         destVC.tmdbID = searchResultsArray[indexPath.item].id
         destVC.mediaType = mediaType
