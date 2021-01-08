@@ -4,12 +4,10 @@ import UIKit
 
 class LandingVC: UIViewController {
     
-    let searchTextField = UITextField()
+    let searchTextField = LandingSearchTextField()
     let keywordsCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let trendingMoviesView = UIView()
     let trendingShowsView = UIView()
-    let searchButton = UIButton()
-    let mediaTypePicker = UISegmentedControl()
     
     var mediaTypeSelection = Int()
     var keywordsArray = [String: String]()
@@ -24,6 +22,11 @@ class LandingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchTextField.searchButton.addTarget(self, action: #selector(pushSearchResultsVC), for: .touchUpInside)
+        searchTextField.mediaTypePicker.addTarget(self, action: #selector(mediaTypeChanged(segmentedControl:)), for: .valueChanged)
+        
+        searchTextField.delegate = self
+        
         populateKeywordArray()
         
         addSubviews()
@@ -31,8 +34,6 @@ class LandingVC: UIViewController {
         addChildViews()
         
         configureUI()
-        configureSearchTextField()
-        mediaTypeSelection = mediaTypePicker.selectedSegmentIndex
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -195,29 +196,6 @@ extension LandingVC {
         view.backgroundColor = .systemBackground
     }
     
-    func configureSearchTextField() {
-        searchTextField.delegate = self
-        searchTextField.textColor = .label
-        searchTextField.font = UIFont.preferredFont(forTextStyle: .title2)
-        
-        searchTextField.backgroundColor = .systemGray5
-        searchTextField.borderStyle = .roundedRect
-    
-        mediaTypePicker.insertSegment(withTitle: "Movie", at: 0, animated: false)
-        mediaTypePicker.insertSegment(withTitle: "Show", at: 1, animated: false)
-        mediaTypePicker.addTarget(self, action: #selector(mediaTypeChanged(segmentedControl:)), for: .valueChanged)
-    
-        mediaTypePicker.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        mediaTypePicker.selectedSegmentIndex = 0
-        
-        searchButton.setImage(IconImages.searchGlass.image, for: .normal)
-        searchButton.addTarget(self, action: #selector(pushSearchResultsVC), for: .touchUpInside)
-        searchTextField.rightView = searchButton
-        searchTextField.rightViewMode = .always
-        searchTextField.leftView = mediaTypePicker
-        searchTextField.leftViewMode = .always
-    }
-    
     @objc func mediaTypeChanged(segmentedControl: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
@@ -231,10 +209,6 @@ extension LandingVC {
 }
 
 extension LandingVC: UITextFieldDelegate {
-    func createDismissKeyboardTapGesture() {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
-    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         pushSearchResultsVC()
