@@ -72,7 +72,11 @@ class TitlePlotVC: UIViewController {
                 genreView.setText(text: daMovie.genres ?? "no genres")
                 
                 if let releaseDate = daMovie.release_date {
-                    let year = formatYear(dateString: releaseDate)
+                    var year = String()
+                    
+                    IDsManager.formatYear(dateString: releaseDate) { (daYear) in
+                        year = daYear
+                    }
                     yearView.setText(text: year)
                 }
                 

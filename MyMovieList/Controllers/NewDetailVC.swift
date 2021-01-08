@@ -174,7 +174,11 @@ class NewDetailVC: UIViewController {
         
         if mediaType == .Movie {
             if let releasedDate = mainDetailObjectMovie.release_date {
-               let year = formatYear(dateString: releasedDate)
+               var year = String()
+                
+                IDsManager.formatYear(dateString: releasedDate) { (daYear) in
+                    year = daYear
+                }
                 
                 WatchlistManager.addToWatchlist(title: mainDetailObjectMovie.title ?? "no title", tmdbID: mainDetailObjectMovie.tmdbID ?? 5, posterPath: mainDetailObjectMovie.poster_path ?? "", rating: mainDetailObjectMovie.imdbRating ?? "n/a", year: year, rated: mainDetailObjectMovie.rated ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: "Movie" )
             }
