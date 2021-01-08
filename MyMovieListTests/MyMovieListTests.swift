@@ -9,25 +9,41 @@ import XCTest
 @testable import MyMovieList
 
 class MyMovieListTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    let dateTimeFormatter = DateTimeFormattingManager()
+    
+    func testGreeting() {
+        var greeting: String?
+        
+        greeting = "Hello Henry"
+        
+        XCTAssertNotNil(greeting)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func test_valid_year() {
+        
+        let wholeDate = "1991-10-10"
+        
+        let correctYear = "1991"
+        
+        DateTimeFormattingManager.formatYear(dateString: wholeDate) { (returnedYear) in
+            
+            XCTAssertEqual(returnedYear, correctYear)
         }
+    }
+    
+    func test_valid_conversion_runtime() {
+        let minutes = 159
+        
+        let correctTime = (hours: 2, leftMinutes: 39)
+        
+        let result = DateTimeFormattingManager.minutesToHoursAndMinutes(minutes)
+        
+        let resultHour = result.hours
+        let resultMinutesLeft = result.leftMinutes
+        
+        XCTAssertEqual(resultHour, correctTime.hours)
+        XCTAssertEqual(resultMinutesLeft, correctTime.leftMinutes)
     }
 
 }
