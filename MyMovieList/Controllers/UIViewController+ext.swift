@@ -40,4 +40,13 @@ extension UIViewController {
         }
     }
     
+    func presentAlert(title: String, body: String) {
+        DispatchQueue.main.async {
+            let alert = AlertVC(title: title, body: body)
+            alert.modalPresentationStyle = .overFullScreen
+            alert.modalTransitionStyle = .crossDissolve
+            self.present(alert, animated: true)
+        }
+    }
+    
 }

@@ -132,7 +132,7 @@ class LandingVC: UIViewController {
         
         guard userEnteredText else {
             print("Please enter movie title")
-            // later: show UI alert here
+            presentAlert(title: "Title missing", body: "Please enter a movie title.")
             return
         }
         
