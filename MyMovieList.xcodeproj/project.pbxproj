@@ -52,6 +52,7 @@
 		B189BE8E258BE30500422624 /* CustomKeywordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B189BE8D258BE30500422624 /* CustomKeywordButton.swift */; };
 		B189BE9B258BFAD400422624 /* TrendingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B189BE9A258BFAD400422624 /* TrendingVC.swift */; };
 		B1ABE33625A9098B000218E8 /* AlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ABE33525A9098B000218E8 /* AlertVC.swift */; };
+		B1ABE35025A92148000218E8 /* IDsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ABE34F25A92148000218E8 /* IDsManagerTests.swift */; };
 		B1BBC86C25A3F7EB00225541 /* MovieDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BBC86B25A3F7EB00225541 /* MovieDetailModel.swift */; };
 		B1BD626D25A683390082A74B /* LandingKeywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD626C25A683390082A74B /* LandingKeywords.swift */; };
 		B1C8115225944CA00084635F /* MovieDetailsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C8115125944CA00084635F /* MovieDetailsManager.swift */; };
@@ -141,6 +142,7 @@
 		B189BE8D258BE30500422624 /* CustomKeywordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeywordButton.swift; sourceTree = "<group>"; };
 		B189BE9A258BFAD400422624 /* TrendingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingVC.swift; sourceTree = "<group>"; };
 		B1ABE33525A9098B000218E8 /* AlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVC.swift; sourceTree = "<group>"; };
+		B1ABE34F25A92148000218E8 /* IDsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDsManagerTests.swift; sourceTree = "<group>"; };
 		B1BBC86B25A3F7EB00225541 /* MovieDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailModel.swift; sourceTree = "<group>"; };
 		B1BD626C25A683390082A74B /* LandingKeywords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingKeywords.swift; sourceTree = "<group>"; };
 		B1C8115125944CA00084635F /* MovieDetailsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsManager.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			children = (
 				B14DF2A22589536300FF8819 /* MyMovieListTests.swift */,
 				B14DF2A42589536300FF8819 /* Info.plist */,
+				B1ABE34F25A92148000218E8 /* IDsManagerTests.swift */,
 			);
 			path = MyMovieListTests;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1ABE35025A92148000218E8 /* IDsManagerTests.swift in Sources */,
 				B14DF2A32589536300FF8819 /* MyMovieListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,9 +1,4 @@
-//
-//  MyMovieListTests.swift
-//  MyMovieListTests
-//
-//  Created by Fancy on 12/15/20.
-//
+
 
 import XCTest
 @testable import MyMovieList
@@ -11,14 +6,6 @@ import XCTest
 class MyMovieListTests: XCTestCase {
     
     let dateTimeFormatter = DateTimeFormattingManager()
-    
-    func testGreeting() {
-        var greeting: String?
-        
-        greeting = "Hello Henry"
-        
-        XCTAssertNotNil(greeting)
-    }
     
     func test_valid_year() {
         
