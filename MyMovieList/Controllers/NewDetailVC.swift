@@ -84,7 +84,7 @@ class NewDetailVC: UIViewController {
     func configureMainViews() {
         addToWatchlistButton.backgroundColor = UIColor(white: 0.8, alpha: 0.9)
         addToWatchlistButton.tintColor = .red
-        addToWatchlistButton.setImage(WatchlistManager.checkIfAlreadyOnWatchlist(title: movieTitle!), for: .normal)
+        addToWatchlistButton.setImage(WatchlistManager.checkIfAlreadyOnWatchlist(tmdbID: tmdbID!), for: .normal)
         
         if addToWatchlistButton.image(for: .normal) == IconImages.heartUnfilled.image {
             addToWatchlistButton.addTarget(self, action: #selector(watchlistButtonTapped), for: .touchUpInside)

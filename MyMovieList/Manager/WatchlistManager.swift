@@ -29,7 +29,7 @@ struct WatchlistManager {
         retrieveWatchlist { (watchlist) in
             currentWatchlist = watchlist
             
-            let newWatchItem = WatchItem(title: title, tmdbID: tmdbID, posterPath: posterPath, rating: rating, rated: rated, year: year, imdbID: imdbID, mediaType: mediaType)
+            let newWatchItem = WatchItem(title: title, tmdbID: tmdbID, posterPath: posterPath, rating: rating, rated: rated, year: year, mediaType: mediaType)
             currentWatchlist.append(newWatchItem)
             
             do {
@@ -42,14 +42,14 @@ struct WatchlistManager {
         }
     }
     
-    static func checkIfAlreadyOnWatchlist(title: String) -> UIImage {
+    static func checkIfAlreadyOnWatchlist(tmdbID: Int) -> UIImage {
         
         var image = UIImage()
         var currentWatchlist = [WatchItem]()
         retrieveWatchlist { (watchlist) in
             currentWatchlist = watchlist
             
-            let filterForCurrentMovie = currentWatchlist.filter { $0.title == title }
+            let filterForCurrentMovie = currentWatchlist.filter { $0.tmdbID == tmdbID }
             
             if filterForCurrentMovie.isEmpty {
                 image = IconImages.heartUnfilled.image

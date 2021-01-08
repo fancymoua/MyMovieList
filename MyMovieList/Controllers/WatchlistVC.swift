@@ -149,7 +149,6 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
         }
         
         destVC.movieTitle = watchlistItemsArray[indexPath.item].title
-        destVC.posterImage = #imageLiteral(resourceName: "tenet")
         destVC.tmdbID = watchlistItemsArray[indexPath.item].tmdbID
         destVC.posterImage = posterImage
         destVC.mediaType = mediaType
@@ -160,8 +159,8 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             
-            let title = self.watchlistItemsArray[indexPath.item].title
-            self.watchlistItemsArray.removeAll { $0.title == title }
+            let tmdbID = self.watchlistItemsArray[indexPath.item].tmdbID
+            self.watchlistItemsArray.removeAll { $0.tmdbID == tmdbID }
             
             WatchlistManager.updateWatchlistAfterDeletion(watchlist: self.watchlistItemsArray)
             WatchlistManager.retrieveWatchlist { (watchlist) in
