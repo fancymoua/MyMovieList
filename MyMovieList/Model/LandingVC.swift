@@ -7,26 +7,24 @@ class LandingVC: UIViewController {
     let searchTextField = UITextField()
     let keywordsCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let trendingMoviesView = UIView()
-    let popularShowsView = UIView()
-    
+    let trendingShowsView = UIView()
     let searchButton = UIButton()
     let mediaTypePicker = UISegmentedControl()
+    
     var mediaTypeSelection = Int()
-    
-    let trendingMoviesVC = TrendingVC()
-    let trendingShowsVC = SpecialListVC()
-    
     var keywordsArray = [String: String]()
+    
+    let trendingMoviesVC = TrendingVC()     // child view
+    let trendingShowsVC = SpecialListVC()   // child view
+    
+    var userEnteredText: Bool {
+        return !searchTextField.text!.isEmpty
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         populateKeywordArray()
-        
-        keywordsCollectionView.delegate = self
-        keywordsCollectionView.dataSource = self
-        
-        keywordsCollectionView.register(KeywordCell.self, forCellWithReuseIdentifier: KeywordCell.reuseID)
         
         addSubviews()
         constrainSubviews()
@@ -35,14 +33,6 @@ class LandingVC: UIViewController {
         configureUI()
         configureSearchTextField()
         mediaTypeSelection = mediaTypePicker.selectedSegmentIndex
-    }
-    
-    func populateKeywordArray() {
-        keywordsArray = LandingKeywords.keywords
-    }
-    
-    var userEnteredText: Bool {
-        return !searchTextField.text!.isEmpty
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,8 +45,12 @@ class LandingVC: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    func populateKeywordArray() {
+        keywordsArray = LandingKeywords.keywords
+    }
+
     private func addSubviews() {
-        let subviews = [searchTextField, keywordsCollectionView, trendingMoviesView, popularShowsView]
+        let subviews = [searchTextField, keywordsCollectionView, trendingMoviesView, trendingShowsView]
         
         for view in subviews {
             self.view.addSubview(view)
@@ -84,14 +78,19 @@ class LandingVC: UIViewController {
             trendingMoviesView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             trendingMoviesView.heightAnchor.constraint(equalToConstant: 250),
             
-            popularShowsView.topAnchor.constraint(equalTo: trendingMoviesView.bottomAnchor, constant: 10),
-            popularShowsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            popularShowsView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            popularShowsView.heightAnchor.constraint(equalToConstant: 250),
+            trendingShowsView.topAnchor.constraint(equalTo: trendingMoviesView.bottomAnchor, constant: 10),
+            trendingShowsView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            trendingShowsView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            trendingShowsView.heightAnchor.constraint(equalToConstant: 250),
         ])
     }
     
     func configureKeywordCollectionView() {
+        keywordsCollectionView.delegate = self
+        keywordsCollectionView.dataSource = self
+        
+        keywordsCollectionView.register(KeywordCell.self, forCellWithReuseIdentifier: KeywordCell.reuseID)
+        
         keywordsCollectionView.backgroundColor = .systemBackground
         
         let flowLayout = UICollectionViewFlowLayout()
@@ -108,13 +107,13 @@ class LandingVC: UIViewController {
         addChild(trendingShowsVC)
         
         trendingMoviesView.addSubview(trendingMoviesVC.view)
-        popularShowsView.addSubview(trendingShowsVC.view)
+        trendingShowsView.addSubview(trendingShowsVC.view)
         
         trendingMoviesVC.didMove(toParent: self)
         trendingShowsVC.didMove(toParent: self)
         
         constrainChildViewToContainerView(childView: trendingMoviesVC.view, container: trendingMoviesView)
-        constrainChildViewToContainerView(childView: trendingShowsVC.view, container: popularShowsView)
+        constrainChildViewToContainerView(childView: trendingShowsVC.view, container: trendingShowsView)
     }
     
     func constrainChildViewToContainerView(childView: UIView, container: UIView) {

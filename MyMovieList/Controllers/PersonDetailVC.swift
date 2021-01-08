@@ -235,8 +235,5 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         flowLayout.minimumInteritemSpacing = 5
         
         creditedCollectionView.collectionViewLayout = flowLayout
-        
     }
-    
-    
 }
