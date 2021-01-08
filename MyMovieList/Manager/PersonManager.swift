@@ -150,7 +150,7 @@ struct PersonManager {
                     
                     for item in castArray {
                         
-                        if item.poster_path != nil && !CreditedWorkFilter.noShows.values.contains(item.id) {
+                        if item.poster_path != nil && !CreditedWorkFilter.talkShows.values.contains(item.id) {
                             
                             let newItem = CreditedWorkResult(id: item.id, title: item.title ?? item.name ?? "no title", poster_path: item.poster_path, popularity: item.popularity, media_type: item.media_type)
                             sumArray.append(newItem)
@@ -162,7 +162,7 @@ struct PersonManager {
                     
                     for item in crewArray {
                         
-                        if item.poster_path != nil && !CreditedWorkFilter.noShows.values.contains(item.id) {
+                        if item.poster_path != nil && !CreditedWorkFilter.talkShows.values.contains(item.id) {
                             
                             let newItem = CreditedWorkResult(id: item.id, title: item.title ?? item.name ?? "no title", poster_path: item.poster_path, popularity: item.popularity, media_type: item.media_type)
                             sumArray.append(newItem)

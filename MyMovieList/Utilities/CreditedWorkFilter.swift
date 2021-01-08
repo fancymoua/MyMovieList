@@ -2,7 +2,7 @@
 import Foundation
 
 struct CreditedWorkFilter {
-    static let noShows = [
+    static let talkShows = [
         "Conan":                            32415,
         "Trevor Noah":                      2224,
         "Saturday Night Live":              1667,
@@ -12,7 +12,7 @@ struct CreditedWorkFilter {
         "The Graham Norton Show":           1220,
         "Ellen Degeneres Show":             562,
         "Tonight Show w/ Jay Leno":         2518,
-        "The View":                         10767,
+        "The View":                         2221,
         "Close Up w/ Hollywood Reporter":   63498,
         "The Academy Awards":               27023,
         "Today":                            1709,

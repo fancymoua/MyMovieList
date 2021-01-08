@@ -1,6 +1,7 @@
 import UIKit
 
 struct TVDetailModel: Codable {
+    var tmdbID: Int?
     var name: String?
     var first_air_date: String?
     var last_air_date: String?

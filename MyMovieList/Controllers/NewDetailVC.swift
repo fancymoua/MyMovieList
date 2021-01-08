@@ -107,7 +107,7 @@ class NewDetailVC: UIViewController {
         addChild(titlePlotVC)
         containerView.addSubview(titlePlotVC.view)
         titlePlotVC.didMove(toParent: self)
-        constraintAgain(childView: titlePlotVC.view)
+        constrainChildViewToContainerView(childView: titlePlotVC.view)
         
         containerView.backgroundColor = .systemPink
         
@@ -139,7 +139,7 @@ class NewDetailVC: UIViewController {
         ])
     }
     
-    func constraintAgain(childView: UIView) {
+    func constrainChildViewToContainerView(childView: UIView) {
         
         childView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -157,12 +157,12 @@ class NewDetailVC: UIViewController {
             addChild(titlePlotVC)
             containerView.addSubview(titlePlotVC.view)
             titlePlotVC.didMove(toParent: self)
-            constraintAgain(childView: titlePlotVC.view)
+            constrainChildViewToContainerView(childView: titlePlotVC.view)
         case 1:
             addChild(castCrewVC)
             containerView.addSubview(castCrewVC.view)
             castCrewVC.didMove(toParent: self)
-            constraintAgain(childView: castCrewVC.view)
+            constrainChildViewToContainerView(childView: castCrewVC.view)
         default:
             return
         }
@@ -173,26 +173,20 @@ class NewDetailVC: UIViewController {
         addToWatchlistButton.setImage(IconImages.heartFilled.image, for: .normal)
         addToWatchlistButton.removeTarget(self, action: nil, for: .touchUpInside)
         
-        var cowMediaType = String()
-        
         if mediaType == .Movie {
-            cowMediaType = "Movie"
-            
-            var year = String()
             
             if let releasedDate = mainDetailObjectMovie.release_date {
-                year = formatYear(dateString: releasedDate)
+               let year = formatYear(dateString: releasedDate)
+                
+                WatchlistManager.addToWatchlist(title: mainDetailObjectMovie.title ?? "no title", tmdbID: mainDetailObjectMovie.tmdbID ?? 5, posterPath: mainDetailObjectMovie.poster_path ?? "", rating: mainDetailObjectMovie.imdbRating ?? "n/a", year: year, rated: mainDetailObjectMovie.rated ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: "Movie" )
             }
-            
-            WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: mainDetailObjectMovie.poster_path ?? "", rating: mainDetailObjectMovie.imdbRating ?? "n/a", year: year, rated: mainDetailObjectMovie.rated ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: cowMediaType )
         } else if mediaType == .TV {
-            cowMediaType = "TV"
-            WatchlistManager.addToWatchlist(title: movieTitle!, tmdbID: tmdbID!, posterPath: mainDetailObjectTV.poster_path ?? "", rating: mainDetailObjectTV.imdbRating ?? "n/a", year: mainDetailObjectTV.yearAired ?? "n/a", rated: mainDetailObjectTV.contentRating ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: cowMediaType )
+            WatchlistManager.addToWatchlist(title: mainDetailObjectTV.name ?? "no title", tmdbID: mainDetailObjectTV.tmdbID ?? 5, posterPath: mainDetailObjectTV.poster_path ?? "", rating: mainDetailObjectTV.imdbRating ?? "n/a", year: mainDetailObjectTV.yearAired ?? "n/a", rated: mainDetailObjectTV.contentRating ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: "TV" )
         }
-        
     }
 }
 
+// conforming to PassMovieObject protocol
 extension NewDetailVC: PassMovieObject {
     func updateDetailObject(movieObject: MovieDetailModel?, TVObject: TVDetailModel?) {
         if let movieObject = movieObject {

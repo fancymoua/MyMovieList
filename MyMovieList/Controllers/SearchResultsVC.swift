@@ -13,11 +13,11 @@ class SearchResultsVC: UIViewController {
     var cowEndpoint = String()
     
     var searchText: String!
-    var searchResultsArray = [MovieSearchResult]()
+    var searchResultsArray = [SearchResultModel]()
     var mediaType: MediaType!
     private let photoBaseURL = "https://image.tmdb.org/t/p/original"
     
-    var datasource: UICollectionViewDiffableDataSource<Section, MovieSearchResult>!
+    var datasource: UICollectionViewDiffableDataSource<Section, SearchResultModel>!
     
     let cache = NSCache<NSString, UIImage>()
     
@@ -88,15 +88,17 @@ class SearchResultsVC: UIViewController {
                     self.searchResultsArray = []
                 
                     for item in allData.results {
-                        let id = item.id
-                        let title = item.title
-                        let posterPath = item.poster_path
-                        
-                        let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath)
+                        if item.poster_path != nil {
+                            let id = item.id
+                            let title = item.title
+                            let posterPath = item.poster_path
+                            
+                            let movie = SearchResultModel(id: id, title: title, poster_path: posterPath)
 
-                        self.searchResultsArray.append(movie)
+                            self.searchResultsArray.append(movie)
 
-                        self.updateData(on: self.searchResultsArray)
+                            self.updateData(on: self.searchResultsArray)
+                        }
                     }
                 } catch {
                     print("Could not parse data")
@@ -109,15 +111,17 @@ class SearchResultsVC: UIViewController {
                     self.searchResultsArray = []
                 
                     for item in allData.results {
-                        let id = item.id
-                        let title = item.name
-                        let posterPath = item.poster_path
-                        
-                        let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath)
-                        
-                        self.searchResultsArray.append(movie)
-                        
-                        self.updateData(on: self.searchResultsArray)
+                        if item.poster_path != nil || item.id == nil {
+                            guard let id = item.id else {return}
+                            let title = item.name ?? "no title"
+                            let posterPath = item.poster_path
+                            
+                            let movie = SearchResultModel(id: id, title: title, poster_path: posterPath)
+                            
+                            self.searchResultsArray.append(movie)
+                            
+                            self.updateData(on: self.searchResultsArray)
+                        }
                     }
                 } catch {
                     print("Could not parse data")
@@ -128,7 +132,7 @@ class SearchResultsVC: UIViewController {
     }
     
     func configDataSource() {
-        datasource = UICollectionViewDiffableDataSource<Section, MovieSearchResult>(collectionView: resultsCollectionView, cellProvider: { [self] (collectionView, indexPath, MovieSearchResult) -> UICollectionViewCell? in
+        datasource = UICollectionViewDiffableDataSource<Section, SearchResultModel>(collectionView: resultsCollectionView, cellProvider: { [self] (collectionView, indexPath, MovieSearchResult) -> UICollectionViewCell? in
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallMediaCardCell.reuseID, for: indexPath) as! SmallMediaCardCell
             
@@ -158,9 +162,9 @@ class SearchResultsVC: UIViewController {
         })
     }
     
-    func updateData(on array: [MovieSearchResult]) {
+    func updateData(on array: [SearchResultModel]) {
         
-        var snapshot = NSDiffableDataSourceSnapshot<Section, MovieSearchResult>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, SearchResultModel>()
         
         snapshot.appendSections([.main])
         

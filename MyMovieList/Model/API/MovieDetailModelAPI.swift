@@ -3,6 +3,7 @@ import UIKit
 // TMDB API
 
 struct MovieDetailModelAPI: Codable {
+    var id: Int?
     var imdb_id: String?
     var title: String?
     var release_date: String?

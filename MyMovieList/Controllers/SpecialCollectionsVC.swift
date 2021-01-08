@@ -8,7 +8,7 @@ class SpecialCollectionsVC: UIViewController {
     let viewMoreButton = UIButton()
     let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
-    var moviesArray = [MovieSearchResult]()
+    var moviesArray = [SearchResultModel]()
     var mediaType: MediaType!
     
     let cache = NSCache<NSString, UIImage>()
@@ -74,7 +74,7 @@ class SpecialCollectionsVC: UIViewController {
                             self.mediaType = .Movie
                         }
                         
-                        let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath)
+                        let movie = SearchResultModel(id: id, title: title, poster_path: posterPath)
                         self.moviesArray.append(movie)
 
                         DispatchQueue.main.async {
@@ -93,8 +93,8 @@ class SpecialCollectionsVC: UIViewController {
                     
                     for item in allData.results {
                         
-                        let id = item.id
-                        let title = item.name
+                        guard let id = item.id else {return}
+                        let title = item.name ?? "no title"
                         let posterPath = item.poster_path
                         
                         if item.media_type == "tv" {
@@ -103,7 +103,7 @@ class SpecialCollectionsVC: UIViewController {
                             self.mediaType = .Movie
                         }
                         
-                        let movie = MovieSearchResult(id: id, title: title, poster_path: posterPath)
+                        let movie = SearchResultModel(id: id, title: title, poster_path: posterPath)
 
                         self.moviesArray.append(movie)
 

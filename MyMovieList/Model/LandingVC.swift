@@ -30,6 +30,7 @@ class LandingVC: UIViewController {
         
         addSubviews()
         constrainSubviews()
+        addChildViews()
         
         configureUI()
         configureSearchTextField()
@@ -65,27 +66,7 @@ class LandingVC: UIViewController {
     
     private func constrainSubviews() {
         
-        addChild(trendingMoviesVC)
-        addChild(trendingShowsVC)
-        
-        trendingMoviesView.addSubview(trendingMoviesVC.view)
-        popularShowsView.addSubview(trendingShowsVC.view)
-        
-        trendingMoviesVC.didMove(toParent: self)
-        trendingShowsVC.didMove(toParent: self)
-        
-        keywordsCollectionView.backgroundColor = .systemBackground
-        
-        let flowLayout = UICollectionViewFlowLayout()
-        
-        flowLayout.itemSize = CGSize(width: 100, height: 40)
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = 5
-        
-        keywordsCollectionView.collectionViewLayout = flowLayout
-        
-        constraintAgain(childView: trendingMoviesVC.view, container: trendingMoviesView)
-        constraintAgain(childView: trendingShowsVC.view, container: popularShowsView)
+        configureKeywordCollectionView()
         
         NSLayoutConstraint.activate([
             searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -110,7 +91,33 @@ class LandingVC: UIViewController {
         ])
     }
     
-    func constraintAgain(childView: UIView, container: UIView) {
+    func configureKeywordCollectionView() {
+        keywordsCollectionView.backgroundColor = .systemBackground
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        
+        flowLayout.itemSize = CGSize(width: 100, height: 40)
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumInteritemSpacing = 5
+        
+        keywordsCollectionView.collectionViewLayout = flowLayout
+    }
+    
+    private func addChildViews() {
+        addChild(trendingMoviesVC)
+        addChild(trendingShowsVC)
+        
+        trendingMoviesView.addSubview(trendingMoviesVC.view)
+        popularShowsView.addSubview(trendingShowsVC.view)
+        
+        trendingMoviesVC.didMove(toParent: self)
+        trendingShowsVC.didMove(toParent: self)
+        
+        constrainChildViewToContainerView(childView: trendingMoviesVC.view, container: trendingMoviesView)
+        constrainChildViewToContainerView(childView: trendingShowsVC.view, container: popularShowsView)
+    }
+    
+    func constrainChildViewToContainerView(childView: UIView, container: UIView) {
         
         childView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -181,7 +188,6 @@ extension LandingVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         show(destVC, sender: self)
     }
-
 }
 
 extension LandingVC {

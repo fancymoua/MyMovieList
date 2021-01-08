@@ -58,7 +58,7 @@ class MovieDetailsManager {
                 getIMDBRating(imdbID: result.imdb_id!) { (ratingModel) in
                     let rating = ratingModel.imdbRating
                     
-                    let thisMovie = MovieDetailModel(imdbID: result.imdb_id, title: result.title, release_date: result.release_date, overview: result.overview, poster_path: result.poster_path, rated: rated, genres: genreJoined, runtime: result.runtime, imdbRating: rating)
+                    let thisMovie = MovieDetailModel(tmdbID: result.id ,imdbID: result.imdb_id, title: result.title, release_date: result.release_date, overview: result.overview, poster_path: result.poster_path, rated: rated, genres: genreJoined, runtime: result.runtime, imdbRating: rating)
       
                     completed(thisMovie)
                 }
@@ -148,7 +148,7 @@ class MovieDetailsManager {
                     getIMDBRating(imdbID: daIMDBID) { (ratingModel) in
                         let rating = ratingModel.imdbRating
                         
-                        let thisMovie = TVDetailModel(name: result.name, yearAired: runningYears ,overview: result.overview, poster_path: result.poster_path, status: result.status, contentRating: thisRating, genres: genreJoined, seasonsCount: result.number_of_seasons, episodesCount: result.number_of_episodes, imdbID: daIMDBID, imdbRating: rating)
+                        let thisMovie = TVDetailModel(tmdbID: result.id ,name: result.name, yearAired: runningYears ,overview: result.overview, poster_path: result.poster_path, status: result.status, contentRating: thisRating, genres: genreJoined, seasonsCount: result.number_of_seasons, episodesCount: result.number_of_episodes, imdbID: daIMDBID, imdbRating: rating)
                         
                         completed(thisMovie)
                     }
