@@ -17,4 +17,5 @@ struct WorkItem: Codable {
     var poster_path: String?
     var character: String?
     var job: String?
+    var adult: Bool?
 }
