@@ -2,7 +2,8 @@
 
 import UIKit
 
-struct IDsManager {
+struct IDsManager: IdsManagerProtocol {
+    
     static func getIMDBID(id: Int, type: MediaType, completion: @escaping (String)->Void) {
         
         var convertURL = String()
