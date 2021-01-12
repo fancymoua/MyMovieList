@@ -12,7 +12,7 @@ class SpecialCollectionsVC: UIViewController {
     var mediaType: MediaType!
     
     let cache = NSCache<NSString, UIImage>()
-    private let photoBaseURL = "https://image.tmdb.org/t/p/original"
+    private let photoBaseURL = "https://image.tmdb.org/t/p/w342"
     
     var dasURL = String()
 
@@ -252,6 +252,8 @@ extension SpecialCollectionsVC {
         flowLayout.minimumLineSpacing = 20
         flowLayout.minimumInteritemSpacing = 5
         flowLayout.scrollDirection = .horizontal
+        
+        print("size is \(flowLayout.itemSize)")
         
         collectionView.collectionViewLayout = flowLayout
     }

@@ -9,7 +9,8 @@ class PersonDetailVC: UIViewController {
     let bioLabel = UILabel()
     let creditedWorkLabel = UILabel()
     
-    private let photoBaseURL = "https://image.tmdb.org/t/p/original"
+    private let avatarBaseURL = "https://image.tmdb.org/t/p/w185"
+    private let photoBaseURL = "https://image.tmdb.org/t/p/w342"
     
     let cache = NSCache<NSString, UIImage>()
     
@@ -52,7 +53,7 @@ class PersonDetailVC: UIViewController {
                 self.bioLabel.text = personModel.biography
                 
                 if let posterPath = personModel.profile_path {
-                    let posterURLString = self.photoBaseURL + "\(posterPath)"
+                    let posterURLString = self.avatarBaseURL + "\(posterPath)"
                     
                     guard let posterURL = URL(string: posterURLString) else { return }
                     

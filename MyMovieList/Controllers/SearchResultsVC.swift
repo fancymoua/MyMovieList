@@ -15,7 +15,7 @@ class SearchResultsVC: UIViewController {
     var searchText: String!
     var searchResultsArray = [SearchResultModel]()
     var mediaType: MediaType!
-    private let photoBaseURL = "https://image.tmdb.org/t/p/original"
+    private let photoBaseURL = "https://image.tmdb.org/t/p/w342"
     
     var datasource: UICollectionViewDiffableDataSource<Section, SearchResultModel>!
     

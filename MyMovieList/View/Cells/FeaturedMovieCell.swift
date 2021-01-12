@@ -27,6 +27,7 @@ class FeaturedMovieCell: UICollectionViewCell {
         addSubview(titleLabel)
         
         movieImageView.image = image
+        movieImageView.contentMode = .scaleAspectFit
         
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
