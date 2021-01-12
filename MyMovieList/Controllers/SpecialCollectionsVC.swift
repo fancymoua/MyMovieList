@@ -39,6 +39,8 @@ class SpecialCollectionsVC: UIViewController {
         
         let url = URL(string: trendingURL)
         
+        print("url is \(url)")
+        
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
             if let _ = error {

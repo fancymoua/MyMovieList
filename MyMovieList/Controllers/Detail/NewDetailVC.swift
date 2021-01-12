@@ -43,7 +43,7 @@ class NewDetailVC: UIViewController {
         castCrewVC.mediaType = mediaType
         
         recommendedVC.tmdbID = tmdbID!
-        recommendedVC.mediaType = mediaType
+        recommendedVC.thisMediaType = mediaType
  
         configureVC()
         
