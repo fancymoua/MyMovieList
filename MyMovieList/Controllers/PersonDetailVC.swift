@@ -29,7 +29,7 @@ class PersonDetailVC: UIViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = false
         
-        creditedCollectionView.register(SmallMediaCardCell.self, forCellWithReuseIdentifier: SmallMediaCardCell.reuseID)
+        creditedCollectionView.register(FeaturedMovieCell.self, forCellWithReuseIdentifier: FeaturedMovieCell.reuseID)
         
         creditedCollectionView.delegate = self
         creditedCollectionView.dataSource = self
@@ -102,7 +102,7 @@ class PersonDetailVC: UIViewController {
         bioLabel.isUserInteractionEnabled = true
         bioLabel.addGestureRecognizer(tapGesture)
         
-        creditedWorkLabel.text = "Most Popular:"
+        creditedWorkLabel.text = "Popular Work:"
         creditedWorkLabel.font = UIFont(name: "Avenir Next Medium", size: 18)
         
         creditedCollectionView.backgroundColor = .white
@@ -138,7 +138,6 @@ class PersonDetailVC: UIViewController {
     }
     
     @objc func openPlotView() {
-        print("Open plot view")
         
         let destVC = ExpandedTextVC()
         
@@ -154,7 +153,7 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallMediaCardCell.reuseID, for: indexPath) as! SmallMediaCardCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedMovieCell.reuseID, for: indexPath) as! FeaturedMovieCell
         
         var posterImage = UIImage()
         
@@ -224,15 +223,11 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         let flowLayout = UICollectionViewFlowLayout()
         
         let width = view.bounds.width
-        let padding: CGFloat = 5
-        let minimumSpacing: CGFloat = 5
         
-        let availableWidth = width - (padding * 2) - (minimumSpacing * 1)
+        let itemWidth = width / 2.5
         
-        let itemWidth = availableWidth / 3
-        
-        flowLayout.itemSize = CGSize(width: itemWidth + 30, height: 280)
-        flowLayout.minimumLineSpacing = 20
+        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 60)
+        flowLayout.minimumLineSpacing = 25
         flowLayout.minimumInteritemSpacing = 5
         
         creditedCollectionView.collectionViewLayout = flowLayout

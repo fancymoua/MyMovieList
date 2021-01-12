@@ -1,9 +1,3 @@
-//
-//  SmallMediaCardCell.swift
-//  MyMovieList
-//
-//  Created by Fancy on 1/4/21.
-//
 
 import UIKit
 
@@ -35,7 +29,6 @@ class SmallMediaCardCell: UICollectionViewCell {
         
         movieImageView.image = image
         titleLabel.text = title
-//        characterLabel.text = character
         
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -49,23 +42,12 @@ class SmallMediaCardCell: UICollectionViewCell {
         titleLabel.lineBreakMode = .byTruncatingTail
         titleLabel.font = UIFont(name: "Avenir Next Medium", size: 17)
         
-//        characterLabel.textAlignment = .center
-//        characterLabel.numberOfLines = 1
-//        characterLabel.minimumScaleFactor = 0.5
-//        characterLabel.lineBreakMode = .byTruncatingTail
-//        characterLabel.font = UIFont(name: "Avenir Next Italic", size: 14)
-        
         NSLayoutConstraint.activate([
             
             movieImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             movieImageView.heightAnchor.constraint(equalToConstant: 200),
-            
-//            characterLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-//            characterLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
-//            characterLabel.heightAnchor.constraint(equalToConstant: 20),
-//            characterLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
