@@ -15,6 +15,8 @@ class SpecialCollectionsVC: UIViewController {
     private let photoBaseURL = "https://image.tmdb.org/t/p/w342"
     
     var dasURL = String()
+    
+    var howMany: Int = 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +40,6 @@ class SpecialCollectionsVC: UIViewController {
         dasURL = trendingURL
         
         let url = URL(string: trendingURL)
-        
-        print("url is \(url)")
         
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
@@ -124,7 +124,7 @@ class SpecialCollectionsVC: UIViewController {
 
 extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return moviesArray.count - 10
+        return moviesArray.count - howMany
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

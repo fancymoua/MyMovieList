@@ -2,29 +2,39 @@
 
 import UIKit
 
-class RecommendedVC: SpecialCollectionsVC {
-    
-//    let trendingURL = "https://api.themoviedb.org/3/trending/movie/day?api_key=65db6bef59bff99c6a4504f0ce877ade"
+class RecommendedVC: UIViewController {
     
     var tmdbID = Int()
     var thisMediaType: MediaType!
+    
+    let specialCollectVC = SpecialCollectionsVC()
+    
+    private let containerView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        view.backgroundColor = .systemPink
+        view.backgroundColor = .systemBackground
+        
+        configure()
+        
+        addChild(specialCollectVC)
+        containerView.addSubview(specialCollectVC.view)
+        specialCollectVC.didMove(toParent: self)
+        constrainChildViewToContainerView(childView: specialCollectVC.view)
         
         var similarEndpoint = String()
         
-        print("thisMediaType \(thisMediaType)")
-        
         if thisMediaType == .Movie {
             similarEndpoint = "https://api.themoviedb.org/3/movie/" + "\(tmdbID)" + "/recommendations?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US&page=1"
+            specialCollectVC.mediaType = .Movie
         } else if thisMediaType == .TV {
             similarEndpoint = "https://api.themoviedb.org/3/tv/" + "\(tmdbID)" + "/recommendations?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US&page=1"
+            specialCollectVC.mediaType = .TV
         }
         
-        getTrendingItems(trendingURL: similarEndpoint, type: thisMediaType)
+        specialCollectVC.getTrendingItems(trendingURL: similarEndpoint, type: thisMediaType)
+        specialCollectVC.howMany = 11
         
         let width = view.bounds.width
         let padding: CGFloat = 0
@@ -39,9 +49,34 @@ class RecommendedVC: SpecialCollectionsVC {
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = minimumSpacing
         layout.scrollDirection = .vertical
-        collectionView.collectionViewLayout = layout
+        specialCollectVC.collectionView.collectionViewLayout = layout
         
-        viewMoreButton.removeFromSuperview()
+        specialCollectVC.viewMoreButton.removeFromSuperview()
     }
-
+    
+    private func configure() {
+        view.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        containerView.backgroundColor = .systemBackground
+        
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: view.topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
+    
+    private func constrainChildViewToContainerView(childView: UIView) {
+        
+        childView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            childView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            childView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            childView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            childView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+        ])
+    }
 }
