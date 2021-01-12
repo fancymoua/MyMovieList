@@ -253,8 +253,6 @@ extension SpecialCollectionsVC {
         flowLayout.minimumInteritemSpacing = 5
         flowLayout.scrollDirection = .horizontal
         
-        print("size is \(flowLayout.itemSize)")
-        
         collectionView.collectionViewLayout = flowLayout
     }
 }
