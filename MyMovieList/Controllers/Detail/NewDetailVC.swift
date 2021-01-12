@@ -6,6 +6,7 @@ class NewDetailVC: UIViewController {
     
     let titlePlotVC = TitlePlotVC()
     let castCrewVC = CastCrewVC()
+    let recommendedVC = RecommendedVC()
     
     // primary views
     let posterImageView = UIImageView()
@@ -40,6 +41,9 @@ class NewDetailVC: UIViewController {
         
         castCrewVC.tmdbID = tmdbID!
         castCrewVC.mediaType = mediaType
+        
+        recommendedVC.tmdbID = tmdbID!
+        recommendedVC.mediaType = mediaType
  
         configureVC()
         
@@ -98,7 +102,7 @@ class NewDetailVC: UIViewController {
         
         segmentedControl.insertSegment(withTitle: "Details", at: 0, animated: false)
         segmentedControl.insertSegment(withTitle: "Cast", at: 1, animated: false)
-        segmentedControl.insertSegment(withTitle: "Others", at: 2, animated: false)
+        segmentedControl.insertSegment(withTitle: "Similar", at: 2, animated: false)
         segmentedControl.backgroundColor = .systemGray5
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector(switchView), for: .valueChanged)
@@ -162,6 +166,11 @@ class NewDetailVC: UIViewController {
             containerView.addSubview(castCrewVC.view)
             castCrewVC.didMove(toParent: self)
             constrainChildViewToContainerView(childView: castCrewVC.view)
+        case 2:
+            addChild(recommendedVC)
+            containerView.addSubview(recommendedVC.view)
+            recommendedVC.didMove(toParent: self)
+            constrainChildViewToContainerView(childView: recommendedVC.view)
         default:
             return
         }
