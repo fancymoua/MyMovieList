@@ -28,10 +28,9 @@ class SearchResultsVC: UIViewController {
         
         resultsCollectionView.register(SmallMediaCardCell.self, forCellWithReuseIdentifier: SmallMediaCardCell.reuseID)
         
-        constrainLayout()
-        
+        configureVC()
         configureCollectionView()
-        configureUI()
+        
         configDataSource()
 
         getResults(endpoint: searchEndpoint)
@@ -42,12 +41,14 @@ class SearchResultsVC: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    func constrainLayout() {
+    func configureCollectionView() {
         
         view.addSubview(resultsCollectionView)
         resultsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         resultsCollectionView.backgroundColor = .systemBackground
+        
+        configureCollectionViewLayout()
         
         NSLayoutConstraint.activate([
             resultsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -211,13 +212,12 @@ extension SearchResultsVC: UICollectionViewDelegate {
 }
 
 extension SearchResultsVC {
-    private func configureUI() {
+    private func configureVC() {
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .systemBackground
-//        navigationController?.hidesBottomBarWhenPushed = true
     }
     
-    func configureCollectionView() {
+    func configureCollectionViewLayout() {
         
         let flowLayout = UICollectionViewFlowLayout()
         

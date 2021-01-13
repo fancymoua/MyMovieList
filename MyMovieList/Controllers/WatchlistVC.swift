@@ -11,13 +11,13 @@ class WatchlistVC: UIViewController {
     
     let cache = NSCache<NSString, UIImage>()
     
-    private let photoBaseURL = "https://image.tmdb.org/t/p/original"
+    private let photoBaseURL = "https://image.tmdb.org/t/p/w342"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         addSubviews()
-        configureUI()
+        configureSubviews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,15 +36,7 @@ class WatchlistVC: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    func getWatchlist() {
-        
-        WatchlistManager.retrieveWatchlist { (watchlist) in
-            self.watchlistItemsArray = watchlist
-            self.watchlistTableView.reloadData()
-        }
-    }
-    
-    func addSubviews() {
+    private func addSubviews() {
         let views = [header, watchlistTableView]
         
         for view in views {
@@ -53,7 +45,7 @@ class WatchlistVC: UIViewController {
         }
     }
     
-    func configureUI() {
+    private func configureSubviews() {
         
         header.text = "Watchlist"
         header.font = UIFont(name: "Avenir Next Regular", size: 30)
@@ -62,7 +54,9 @@ class WatchlistVC: UIViewController {
         watchlistTableView.register(WatchItemCell.self, forCellReuseIdentifier: WatchItemCell.reuseID)
         watchlistTableView.delegate = self
         watchlistTableView.dataSource = self
-        
+    }
+    
+    private func layoutSubviews() {
         NSLayoutConstraint.activate([
             header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             header.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -74,7 +68,14 @@ class WatchlistVC: UIViewController {
             watchlistTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             watchlistTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
         ])
+    }
+    
+    func getWatchlist() {
         
+        WatchlistManager.retrieveWatchlist { (watchlist) in
+            self.watchlistItemsArray = watchlist
+            self.watchlistTableView.reloadData()
+        }
     }
 }
 
