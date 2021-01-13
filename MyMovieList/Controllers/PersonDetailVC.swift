@@ -10,7 +10,7 @@ class PersonDetailVC: UIViewController {
     let creditedWorkLabel = UILabel()
     
     private let avatarBaseURL = "https://image.tmdb.org/t/p/w185"
-    private let photoBaseURL = "https://image.tmdb.org/t/p/w342"
+    private let posterBaseURL = "https://image.tmdb.org/t/p/w342"
     
     let cache = NSCache<NSString, UIImage>()
     
@@ -23,11 +23,7 @@ class PersonDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(tmdbID)
-        
-        view.backgroundColor = .systemBackground
-        
-        navigationController?.navigationBar.prefersLargeTitles = false
+        print("Person's id is: \(tmdbID)")
         
         creditedCollectionView.register(FeaturedMovieCell.self, forCellWithReuseIdentifier: FeaturedMovieCell.reuseID)
         
@@ -35,44 +31,16 @@ class PersonDetailVC: UIViewController {
         creditedCollectionView.dataSource = self
 
         addSubviews()
-        constrainSubviews()
+        configureSubviews()
+        layoutSubviews()
         
-        getDetails()
+        getPersonDetails()
         getCreditedWork()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
-    private func getDetails() {
-        PersonManager.getPersonDetail(tmdbID: tmdbID) { (personModel) in
-            DispatchQueue.main.async {
-                self.nameLabel.text = personModel.name
-                self.bioLabel.text = personModel.biography
-                
-                if let posterPath = personModel.profile_path {
-                    let posterURLString = self.avatarBaseURL + "\(posterPath)"
-                    
-                    guard let posterURL = URL(string: posterURLString) else { return }
-                    
-                    if let data = try? Data(contentsOf: posterURL) {
-                        let posterImage = UIImage(data: data)
-                        self.avatarImageView.image = posterImage
-                    }
-                }
-            }
-        }
-    }
-    
-    private func getCreditedWork() {
-        PersonManager.getPersonCreditedWork(tmdbID: tmdbID) { (meArray) in
-            self.creditedWorkArray = meArray
-            DispatchQueue.main.async {
-                self.creditedCollectionView.reloadData()
-            }
-        }
     }
     
     private func addSubviews() {
@@ -85,8 +53,7 @@ class PersonDetailVC: UIViewController {
         }
     }
     
-    private func constrainSubviews() {
-        
+    private func configureSubviews() {
         nameLabel.font = UIFont(name: "Avenir Next Medium", size: 18)
         nameLabel.textAlignment = .left
         
@@ -107,6 +74,9 @@ class PersonDetailVC: UIViewController {
         
         creditedCollectionView.backgroundColor = .white
         configureCollectionView()
+    }
+    
+    private func layoutSubviews() {
         
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -137,6 +107,35 @@ class PersonDetailVC: UIViewController {
        
     }
     
+    private func getPersonDetails() {
+        PersonManager.getPersonDetail(tmdbID: tmdbID) { (personModel) in
+            DispatchQueue.main.async {
+                self.nameLabel.text = personModel.name
+                self.bioLabel.text = personModel.biography
+                
+                if let posterPath = personModel.profile_path {
+                    let posterURLString = self.avatarBaseURL + "\(posterPath)"
+                    
+                    guard let posterURL = URL(string: posterURLString) else { return }
+                    
+                    if let data = try? Data(contentsOf: posterURL) {
+                        let posterImage = UIImage(data: data)
+                        self.avatarImageView.image = posterImage
+                    }
+                }
+            }
+        }
+    }
+    
+    private func getCreditedWork() {
+        PersonManager.getPersonCreditedWork(tmdbID: tmdbID) { (meArray) in
+            self.creditedWorkArray = meArray
+            DispatchQueue.main.async {
+                self.creditedCollectionView.reloadData()
+            }
+        }
+    }
+    
     @objc func openPlotView() {
         
         let destVC = ExpandedTextVC()
@@ -159,7 +158,7 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         if let posterPath = self.creditedWorkArray[indexPath.item].poster_path {
 
-            let endpoint = self.photoBaseURL + posterPath
+            let endpoint = self.posterBaseURL + posterPath
             let posterImageURL = URL(string: endpoint)!
 
             let cacheKey = NSString(string: endpoint)
@@ -190,7 +189,7 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         if let posterPath = self.creditedWorkArray[indexPath.item].poster_path {
             
-            let endpoint = self.photoBaseURL + posterPath
+            let endpoint = self.posterBaseURL + posterPath
             
             let cacheKey = NSString(string: endpoint)
             
@@ -229,5 +228,12 @@ extension PersonDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
         flowLayout.minimumInteritemSpacing = 5
         
         creditedCollectionView.collectionViewLayout = flowLayout
+    }
+}
+
+extension PersonDetailVC {
+    private func configureVC() {
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
 }
