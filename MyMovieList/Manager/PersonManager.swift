@@ -4,77 +4,6 @@ import Foundation
 
 struct PersonManager {
     
-    static var castCrewArray = [PersonModel]()
-    
-    static func getCastCrewInfo(tmdbiD: Int, mediaType: MediaType, completed: @escaping ([PersonModel], [PersonModel])-> Void) {
-        
-        var baseURL = String()
-        
-        if mediaType == .Movie {
-            baseURL = MediaType.Movie.castCrewBaseURL + "\(tmdbiD)" + "/credits?" + Constants.API.APIKey + "&language=en-US"
-        } else if mediaType == .TV {
-            baseURL = MediaType.TV.castCrewBaseURL + "\(tmdbiD)" + "/credits?" + Constants.API.APIKey + "&language=en-US"
-        }
-        
-        guard let url = URL(string: baseURL) else {
-            print("getCastCrew: bad URL")
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            if let _ = error {
-                print("getCastCrew -- error making call")
-            }
-            
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                print("getCastCrew -- something other than 200 returned")
-                return
-            }
-            
-            guard let data = data else {
-                print("getCastCrew -- no data")
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let result = try decoder.decode(CastCrewAPI.self, from: data)
-                
-                var castArray = [PersonModel]()
-                var directorArray = [PersonModel]()
-                
-                for item in result.cast {
-                    if item.order <= 3 {         // give me top
-                        let person = PersonModel(id: item.id, name: item.name, profile_path: item.profile_path)
-                        castArray.append(person)
-                    }
-                }
-                
-                for item in result.crew {
-                    switch mediaType {
-                    case .Movie:
-                        if item.job == "Director" {
-                            let person = PersonModel(id: item.id, name: item.name, profile_path: item.profile_path)
-                            directorArray.append(person)
-                        }
-                    case .TV:
-                        if item.job == "Executive Producer" {
-                            let person = PersonModel(id: item.id, name: item.name, profile_path: item.profile_path)
-                            directorArray.append(person)
-                        }
-                    }
-                }
-                completed(castArray, directorArray)
-            } catch {
-                print("Something went wrong getting castCrew")
-            }
-            
-        }
-        
-        task.resume()
-    }
-    
     static func getPersonDetail(tmdbID: Int, completed: @escaping (PersonModel)-> Void) {
         
         let endpoint = Constants.API.personBaseURL + "\(tmdbID)?" + Constants.API.APIKey + "&language=en-US"
@@ -150,9 +79,11 @@ struct PersonManager {
                     
                     for item in castArray {
                         
+                        // don't include items that are talk shows, porn, or missing poster images
                         if item.poster_path != nil && !CreditedWorkFilter.talkShows.values.contains(item.id) && item.adult == false {
                             
-                            let newItem = CreditedWorkResult(id: item.id, title: item.title ?? item.name ?? "no title", poster_path: item.poster_path, popularity: item.popularity, media_type: item.media_type)
+                            // movies have "title", shows have "name"
+                            let newItem = CreditedWorkResult(id: item.id, title: item.title ?? item.name, poster_path: item.poster_path, popularity: item.popularity, media_type: item.media_type)
                             sumArray.append(newItem)
                         }
                     }
@@ -162,14 +93,17 @@ struct PersonManager {
                     
                     for item in crewArray {
                         
-                        if item.poster_path != nil && !CreditedWorkFilter.talkShows.values.contains(item.id) {
+                        // don't include items that are talk shows, porn, or missing poster images
+                        if item.poster_path != nil && !CreditedWorkFilter.talkShows.values.contains(item.id) && item.adult == false {
                             
-                            let newItem = CreditedWorkResult(id: item.id, title: item.title ?? item.name ?? "no title", poster_path: item.poster_path, popularity: item.popularity, media_type: item.media_type)
+                            // movies have "title", shows have "name"
+                            let newItem = CreditedWorkResult(id: item.id, title: item.title ?? item.name, poster_path: item.poster_path, popularity: item.popularity, media_type: item.media_type)
                             sumArray.append(newItem)
                         }
                     }
                 }
                 
+                // sorting my popularity and removing repeats
                 let sortedByPop = sumArray.sorted(by: { $0.popularity! > $1.popularity! })
                 var noRepeats = [CreditedWorkResult]()
                 
@@ -181,7 +115,7 @@ struct PersonManager {
 
                 completed(noRepeats)
             } catch {
-                print("nah")
+                print("Could not decode PersonCreditedWorkAPI")
             }
             
         }

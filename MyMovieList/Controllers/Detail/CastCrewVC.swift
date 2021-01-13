@@ -54,7 +54,7 @@ class CastCrewVC: UIViewController {
     }
     
     func getCastCrew() {
-        PersonManager.getCastCrewInfo(tmdbiD: tmdbID, mediaType: mediaType) { (castArray, directorArray) in
+        MovieDetailsManager.getCastCrewInfo(tmdbiD: tmdbID, mediaType: mediaType) { (castArray, directorArray) in
             self.actorsArray = castArray
             self.directorArray = directorArray
             

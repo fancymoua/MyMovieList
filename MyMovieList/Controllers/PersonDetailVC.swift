@@ -111,8 +111,8 @@ class PersonDetailVC: UIViewController {
     private func getPersonDetails() {
         PersonManager.getPersonDetail(tmdbID: tmdbID) { (personModel) in
             DispatchQueue.main.async {
-                self.nameLabel.text = personModel.name
-                self.bioLabel.text = personModel.biography
+                self.nameLabel.text = personModel.name ?? "no name"
+                self.bioLabel.text = personModel.biography ?? "no bio availabile"
                 
                 if let posterPath = personModel.profile_path {
                     let posterURLString = self.avatarBaseURL + "\(posterPath)"
@@ -141,7 +141,7 @@ class PersonDetailVC: UIViewController {
         
         let destVC = ExpandedTextVC()
         
-        destVC.text = bioLabel.text ?? "none"
+        destVC.text = bioLabel.text ?? "no bio available"
         
         show(destVC, sender: self)
     }
