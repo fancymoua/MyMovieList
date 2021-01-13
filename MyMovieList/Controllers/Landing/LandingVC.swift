@@ -25,12 +25,11 @@ class LandingVC: UIViewController {
         addSubviews()
         layoutSubviews()
         addChildViews()
-        
+        addTargetsToSearchField()
         populateKeywordArray()
         
-        searchTextField.searchButton.addTarget(self, action: #selector(pushSearchResultsVC), for: .touchUpInside)
-        searchTextField.mediaTypePicker.addTarget(self, action: #selector(mediaTypeChanged(segmentedControl:)), for: .valueChanged)
         searchTextField.delegate = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,6 +113,10 @@ class LandingVC: UIViewController {
         keywordsCollectionView.collectionViewLayout = flowLayout
     }
     
+    func addTargetsToSearchField() {
+        searchTextField.searchButton.addTarget(self, action: #selector(pushSearchResultsVC), for: .touchUpInside)
+        searchTextField.mediaTypePicker.addTarget(self, action: #selector(mediaTypeChanged(segmentedControl:)), for: .valueChanged)
+    }
     
     @objc func pushSearchResultsVC() {
         let destVC = SearchResultsVC()
@@ -192,10 +195,10 @@ extension LandingVC {
             mediaTypeSelection = 0
         }
     }
+    
 }
 
 extension LandingVC: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         pushSearchResultsVC()
         dismissKeyboardAndClearSearchTextField()
@@ -207,3 +210,5 @@ extension LandingVC: UITextFieldDelegate {
         searchTextField.text = ""
     }
 }
+    
+
