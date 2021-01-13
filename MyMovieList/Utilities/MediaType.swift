@@ -6,6 +6,15 @@ enum MediaType {
     case Movie
     case TV
     
+    var baseURL: String {
+        switch self {
+        case .Movie:
+            return "https://api.themoviedb.org/3/movie/"
+        case .TV:
+            return "https://api.themoviedb.org/3/tv/"
+        }
+    }
+    
     var trendingURL: String {
         switch self {
         case .Movie:
@@ -29,15 +38,6 @@ enum MediaType {
         case .Movie:
             return "https://api.themoviedb.org/3/movie/"
         case .TV :
-            return "https://api.themoviedb.org/3/tv/"
-        }
-    }
-    
-    var watchProvidersBaseURL: String {
-        switch self {
-        case .Movie:
-            return "https://api.themoviedb.org/3/movie/"
-        case .TV:
             return "https://api.themoviedb.org/3/tv/"
         }
     }

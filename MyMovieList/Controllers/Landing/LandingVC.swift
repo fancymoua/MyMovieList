@@ -122,7 +122,6 @@ class LandingVC: UIViewController {
         let destVC = SearchResultsVC()
         
         guard userEnteredText else {
-            print("Please enter movie title")
             presentAlert(title: "Title missing", body: "Please enter a movie title.")
             return
         }

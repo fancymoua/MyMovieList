@@ -8,7 +8,7 @@ class MovieDetailsManager {
     
     static func getMovieDetails(tmdbID: Int, mediaType: MediaType, completed: @escaping (MovieDetailModel) -> Void) {
         
-        let baseURL = MediaType.Movie.detailBaseURL + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US&append_to_response=releases"
+        let baseURL = MediaType.Movie.detailBaseURL + "\(tmdbID)?" + Constants.API.APIKey + "&language=en-US&append_to_response=releases"
         
         guard let url = URL(string: baseURL) else {
             print("Bad movieEndpoint")
@@ -71,7 +71,7 @@ class MovieDetailsManager {
     
     static func getTVDetails(tmdbID: Int, mediaType: MediaType, completed: @escaping (TVDetailModel) -> Void) {
         
-        let baseURL = MediaType.TV.detailBaseURL + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US&append_to_response=content_ratings"
+        let baseURL = MediaType.TV.detailBaseURL + "\(tmdbID)?" + Constants.API.APIKey + "&language=en-US&append_to_response=content_ratings"
         
         guard let url = URL(string: baseURL) else {
             print("Bad movieEndpoint")
@@ -169,9 +169,9 @@ class MovieDetailsManager {
             var endpoint = String()
             
             if mediaType == .Movie {
-                endpoint = MediaType.Movie.watchProvidersBaseURL + "\(id)" + "/watch/providers?api_key=65db6bef59bff99c6a4504f0ce877ade"
+                endpoint = MediaType.Movie.baseURL + "\(id)" + "/watch/providers?" + Constants.API.APIKey
             } else if mediaType == .TV {
-                endpoint = MediaType.TV.watchProvidersBaseURL + "\(id)" + "/watch/providers?api_key=65db6bef59bff99c6a4504f0ce877ade"
+                endpoint = MediaType.TV.baseURL + "\(id)" + "/watch/providers?" + Constants.API.APIKey
             }
             
             guard let url = URL(string: endpoint) else {
@@ -237,7 +237,7 @@ class MovieDetailsManager {
     }
     
     static func getIMDBRating(imdbID: String, completion: @escaping (RatingModel)->Void) {
-        let baseURL = "https://www.omdbapi.com/?apikey=1383769a&i=" + "\(imdbID)"
+        let baseURL = Constants.API.omdbAPIBaseURL + "\(imdbID)"
         
         guard let url = URL(string: baseURL) else {
             print("bad getIMDBRating URL")
