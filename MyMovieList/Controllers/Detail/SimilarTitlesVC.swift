@@ -5,7 +5,7 @@ import UIKit
 class SimilarTitlesVC: UIViewController {
     
     var tmdbID = Int()
-    var thisMediaType: MediaType!
+    var mediaType: MediaType!
     
     let specialCollectVC = SpecialCollectionsVC()
     
@@ -16,13 +16,13 @@ class SimilarTitlesVC: UIViewController {
 
         view.backgroundColor = .systemBackground
         
-        configure()
+        configureContainerView()
         addChildView()
         populateCollectionView()
         configureCollectionViewLayout()
     }
     
-    private func configure() {
+    private func configureContainerView() {
         view.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -44,17 +44,17 @@ class SimilarTitlesVC: UIViewController {
     }
     
     private func populateCollectionView() {
-        var similarEndpoint = String()
+        var searchEndpoint = String()
         
-        if thisMediaType == .Movie {
-            similarEndpoint = "https://api.themoviedb.org/3/movie/" + "\(tmdbID)" + "/recommendations?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US&page=1"
+        if mediaType == .Movie {
+            searchEndpoint = "https://api.themoviedb.org/3/movie/" + "\(tmdbID)" + "/recommendations?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US&page=1"
             specialCollectVC.mediaType = .Movie
-        } else if thisMediaType == .TV {
-            similarEndpoint = "https://api.themoviedb.org/3/tv/" + "\(tmdbID)" + "/recommendations?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US&page=1"
+        } else if mediaType == .TV {
+            searchEndpoint = "https://api.themoviedb.org/3/tv/" + "\(tmdbID)" + "/recommendations?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US&page=1"
             specialCollectVC.mediaType = .TV
         }
         
-        specialCollectVC.getResults(endpoint: similarEndpoint, type: thisMediaType)
+        specialCollectVC.getResults(endpoint: searchEndpoint, type: mediaType)
         specialCollectVC.howMany = 14
     }
     
@@ -62,9 +62,6 @@ class SimilarTitlesVC: UIViewController {
         let width = view.bounds.width
         
         let itemWidth = width / 3.5
-        
-        print("width \(width)")
-        print("itemWidth is \(itemWidth)")
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth + 50)

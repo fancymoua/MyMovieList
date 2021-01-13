@@ -148,7 +148,7 @@ class NewDetailVC: UIViewController {
         castCrewVC.mediaType = mediaType
         
         similarTitles.tmdbID = tmdbID!
-        similarTitles.thisMediaType = mediaType
+        similarTitles.mediaType = mediaType
     }
     
     @objc func switchView(segmentedControl: UISegmentedControl) {
