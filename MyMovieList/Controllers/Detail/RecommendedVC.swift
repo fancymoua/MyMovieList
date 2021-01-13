@@ -54,7 +54,7 @@ class RecommendedVC: UIViewController {
             specialCollectVC.mediaType = .TV
         }
         
-        specialCollectVC.getTrendingItems(trendingURL: similarEndpoint, type: thisMediaType)
+        specialCollectVC.getResults(endpoint: similarEndpoint, type: thisMediaType)
         specialCollectVC.howMany = 14
     }
     

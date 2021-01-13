@@ -14,32 +14,71 @@ class SpecialCollectionsVC: UIViewController {
     let cache = NSCache<NSString, UIImage>()
     private let photoBaseURL = "https://image.tmdb.org/t/p/w342"
     
-    var dasURL = String()
-    
     var howMany: Int = 10
+    var searchEndpoint = String()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.register(FeaturedMovieCell.self, forCellWithReuseIdentifier: "FeaturedMovieCell")
         
-        configureView()
+        addSubviews()
+        layoutSubviews()
+        configureSubviews()
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
     }
     
-    func setCollectionTitle(title: String) {
-        collectionTitle.text = title
-        collectionTitle.textColor = .label
-        collectionTitle.backgroundColor = .systemBackground
+    func addSubviews() {
+        let subviews = [collectionView, collectionTitle, viewMoreButton]
+        
+        for view in subviews {
+            self.view.addSubview(view)
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
-    func getTrendingItems(trendingURL: String, type: MediaType) {
+    func layoutSubviews() {
         
-        dasURL = trendingURL
+        NSLayoutConstraint.activate([
+            collectionTitle.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionTitle.trailingAnchor.constraint(equalTo: viewMoreButton.leadingAnchor),
+            collectionTitle.heightAnchor.constraint(equalToConstant: 20),
+            
+            viewMoreButton.topAnchor.constraint(equalTo: view.topAnchor),
+            viewMoreButton.widthAnchor.constraint(equalToConstant: 90),
+            viewMoreButton.heightAnchor.constraint(equalToConstant: 20),
+            viewMoreButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            collectionView.topAnchor.constraint(equalTo: collectionTitle.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
         
-        let url = URL(string: trendingURL)
+        configureLayout()
+    }
+    
+    func configureSubviews() {
+        collectionTitle.textColor = .black
+        collectionTitle.font = UIFont(name: "Avenir Next Demi Bold", size: 16)
+        
+        viewMoreButton.setTitle("View More", for: .normal)
+        viewMoreButton.setTitleColor(.blue, for: .normal)
+        viewMoreButton.titleLabel?.font = UIFont(name: "Avenir Next", size: 14)
+        viewMoreButton.titleLabel?.textAlignment = .right
+        viewMoreButton.addTarget(self, action: #selector(showMoreResults), for: .touchUpInside)
+        
+        collectionView.backgroundColor = .systemBackground
+    }
+    
+    func getResults(endpoint: String, type: MediaType) {
+        searchEndpoint = endpoint   // gets passed to searchResultsVC when user taps "View More" to get more results
+        
+        let url = URL(string: endpoint)
         
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
@@ -120,11 +159,17 @@ class SpecialCollectionsVC: UIViewController {
         }
         task.resume()
     }
+    
+    func setCollectionTitle(title: String) {
+        collectionTitle.text = title
+        collectionTitle.textColor = .label
+        collectionTitle.backgroundColor = .systemBackground
+    }
 }
 
 extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return moviesArray.count - howMany
+        return moviesArray.count - howMany  // array always has 20 results; subtract howMany to get # you want to show
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -187,50 +232,11 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 extension SpecialCollectionsVC {
-    func configureView() {
-        view.addSubview(collectionView)
-        view.addSubview(collectionTitle)
-        view.addSubview(viewMoreButton)
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionTitle.translatesAutoresizingMaskIntoConstraints = false
-        viewMoreButton.translatesAutoresizingMaskIntoConstraints = false
-        collectionTitle.textColor = .black
-        collectionTitle.font = UIFont(name: "Avenir Next Demi Bold", size: 16)
-        
-        viewMoreButton.setTitle("View More", for: .normal)
-        viewMoreButton.setTitleColor(.blue, for: .normal)
-        viewMoreButton.titleLabel?.font = UIFont(name: "Avenir Next", size: 14)
-        viewMoreButton.titleLabel?.textAlignment = .right
-        viewMoreButton.addTarget(self, action: #selector(showMoreResults), for: .touchUpInside)
-//        viewMoreButton.backgroundColor = .red
-        
-        collectionView.backgroundColor = .systemBackground
-        
-        NSLayoutConstraint.activate([
-            collectionTitle.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionTitle.trailingAnchor.constraint(equalTo: viewMoreButton.leadingAnchor),
-            collectionTitle.heightAnchor.constraint(equalToConstant: 20),
-            
-            viewMoreButton.topAnchor.constraint(equalTo: view.topAnchor),
-            viewMoreButton.widthAnchor.constraint(equalToConstant: 90),
-            viewMoreButton.heightAnchor.constraint(equalToConstant: 20),
-            viewMoreButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-            collectionView.topAnchor.constraint(equalTo: collectionTitle.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-        
-        configureLayout()
-    }
     
     @objc func showMoreResults() {
         let destVC = SearchResultsVC()
         
-        destVC.searchEndpoint = dasURL
+        destVC.searchEndpoint = searchEndpoint
         destVC.mediaType = mediaType
         destVC.navigationItem.title = collectionTitle.text
         
