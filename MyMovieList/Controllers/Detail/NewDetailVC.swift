@@ -6,7 +6,7 @@ class NewDetailVC: UIViewController {
     
     let titlePlotVC = TitlePlotVC()
     let castCrewVC = CastCrewVC()
-    let recommendedVC = RecommendedVC()
+    let similarTitles = SimilarTitles()
     
     // primary views
     let posterImageView = UIImageView()
@@ -14,7 +14,7 @@ class NewDetailVC: UIViewController {
     let addToWatchlistButton = UIButton()
     
     // goes inside detailsBackgroundView
-    let segmentedControl = UISegmentedControl()
+    let segmentedControl = ThreeItemsSegmentedControl()
     var containerView = UIView()
       
     // variables populated from previous view
@@ -38,8 +38,11 @@ class NewDetailVC: UIViewController {
  
         configureVC()
         addSubviews()
+        configureSubviews()
+        layoutSubviews()
         addTapGestureToPosterImageView()
-        configureMainViews()
+        
+        addChildViews()
         
         WatchlistManager.retrieveWatchlist { (watchlist) in self.currentWatchlist = watchlist }
     }
@@ -58,19 +61,6 @@ class NewDetailVC: UIViewController {
         present(destVC, animated: true, completion: nil)
     }
     
-    private func passDataToChildViews() {
-        
-        titlePlotVC.mediaType = mediaType
-        titlePlotVC.tmdbID = tmdbID
-        titlePlotVC.DetailDelegate = self
-        
-        castCrewVC.tmdbID = tmdbID!
-        castCrewVC.mediaType = mediaType
-        
-        recommendedVC.tmdbID = tmdbID!
-        recommendedVC.thisMediaType = mediaType
-    }
-    
     private func addSubviews() {
         let mainViews = [posterImageView, detailsBackgroundView, addToWatchlistButton ]
         let detailViews = [segmentedControl, containerView]
@@ -86,7 +76,7 @@ class NewDetailVC: UIViewController {
         }
     }
 
-    func configureMainViews() {
+    private func configureSubviews() {
         addToWatchlistButton.backgroundColor = UIColor(white: 0.8, alpha: 0.9)
         addToWatchlistButton.tintColor = .red
         addToWatchlistButton.setImage(WatchlistManager.checkIfAlreadyOnWatchlist(tmdbID: tmdbID!), for: .normal)
@@ -96,26 +86,20 @@ class NewDetailVC: UIViewController {
         }
         
         posterImageView.image = self.posterImage  // passed from previous VC
-        
         posterImageView.contentMode = .scaleAspectFill
         
         detailsBackgroundView.backgroundColor = .systemBackground
         detailsBackgroundView.layer.cornerRadius = 30
-        
-        segmentedControl.insertSegment(withTitle: "Details", at: 0, animated: false)
-        segmentedControl.insertSegment(withTitle: "Cast", at: 1, animated: false)
-        segmentedControl.insertSegment(withTitle: "Similar", at: 2, animated: false)
-        segmentedControl.backgroundColor = .systemGray5
-        segmentedControl.selectedSegmentIndex = 0
+    
         segmentedControl.addTarget(self, action: #selector(switchView), for: .valueChanged)
         
-        addChild(titlePlotVC)
         containerView.addSubview(titlePlotVC.view)
-        titlePlotVC.didMove(toParent: self)
         constrainChildViewToContainerView(childView: titlePlotVC.view, container: containerView)
         
         containerView.backgroundColor = .systemBackground
-        
+    }
+    
+    private func layoutSubviews() {
         NSLayoutConstraint.activate([
             posterImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -60),
             posterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -144,23 +128,40 @@ class NewDetailVC: UIViewController {
         ])
     }
     
+    private func addChildViews() {
+        addChild(titlePlotVC)
+        addChild(castCrewVC)
+        addChild(similarTitles)
+        
+        titlePlotVC.didMove(toParent: self)
+        castCrewVC.didMove(toParent: self)
+        similarTitles.didMove(toParent: self)
+    }
+    
+    private func passDataToChildViews() {
+        
+        titlePlotVC.mediaType = mediaType
+        titlePlotVC.tmdbID = tmdbID
+        titlePlotVC.DetailDelegate = self
+        
+        castCrewVC.tmdbID = tmdbID!
+        castCrewVC.mediaType = mediaType
+        
+        similarTitles.tmdbID = tmdbID!
+        similarTitles.thisMediaType = mediaType
+    }
+    
     @objc func switchView(segmentedControl: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            addChild(titlePlotVC)
             containerView.addSubview(titlePlotVC.view)
-            titlePlotVC.didMove(toParent: self)
             constrainChildViewToContainerView(childView: titlePlotVC.view, container: containerView)
         case 1:
-            addChild(castCrewVC)
             containerView.addSubview(castCrewVC.view)
-            castCrewVC.didMove(toParent: self)
             constrainChildViewToContainerView(childView: castCrewVC.view, container: containerView)
         case 2:
-            addChild(recommendedVC)
-            containerView.addSubview(recommendedVC.view)
-            recommendedVC.didMove(toParent: self)
-            constrainChildViewToContainerView(childView: recommendedVC.view, container: containerView)
+            containerView.addSubview(similarTitles.view)
+            constrainChildViewToContainerView(childView: similarTitles.view, container: containerView)
         default:
             return
         }
@@ -173,13 +174,14 @@ class NewDetailVC: UIViewController {
         
         if mediaType == .Movie {
             if let releasedDate = mainDetailObjectMovie.release_date {
-               var year = String()
+               var releaseYear = String()
                 
+                // only want to save the release year to watchlist
                 DateTimeFormattingManager.formatYear(dateString: releasedDate) { (daYear) in
-                    year = daYear
+                    releaseYear = daYear
                 }
                 
-                WatchlistManager.addToWatchlist(title: mainDetailObjectMovie.title ?? "no title", tmdbID: mainDetailObjectMovie.tmdbID ?? 5, posterPath: mainDetailObjectMovie.poster_path ?? "", rating: mainDetailObjectMovie.imdbRating ?? "n/a", year: year, rated: mainDetailObjectMovie.rated ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: "Movie" )
+                WatchlistManager.addToWatchlist(title: mainDetailObjectMovie.title ?? "no title", tmdbID: mainDetailObjectMovie.tmdbID ?? 5, posterPath: mainDetailObjectMovie.poster_path ?? "", rating: mainDetailObjectMovie.imdbRating ?? "n/a", year: releaseYear, rated: mainDetailObjectMovie.rated ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: "Movie" )
             }
         } else if mediaType == .TV {
             WatchlistManager.addToWatchlist(title: mainDetailObjectTV.name ?? "no title", tmdbID: mainDetailObjectTV.tmdbID ?? 5, posterPath: mainDetailObjectTV.poster_path ?? "", rating: mainDetailObjectTV.imdbRating ?? "n/a", year: mainDetailObjectTV.yearAired ?? "n/a", rated: mainDetailObjectTV.contentRating ?? "n/a", imdbID: mainDetailObjectMovie.imdbID ?? "n/a", mediaType: "TV" )
@@ -188,6 +190,7 @@ class NewDetailVC: UIViewController {
 }
 
 // conforming to PassMovieObject protocol
+// the below object is built on the child view TitlePlotVC; it gets passed back to this parent view to be ready to add user's watchlist
 extension NewDetailVC: PassMovieObject {
     func updateDetailObject(movieObject: MovieDetailModel?, TVObject: TVDetailModel?) {
         if let movieObject = movieObject {

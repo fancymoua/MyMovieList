@@ -2,7 +2,7 @@
 
 import UIKit
 
-class RecommendedVC: UIViewController {
+class SimilarTitles: UIViewController {
     
     var tmdbID = Int()
     var thisMediaType: MediaType!

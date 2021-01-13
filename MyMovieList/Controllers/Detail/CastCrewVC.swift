@@ -61,7 +61,6 @@ class CastCrewVC: UIViewController {
             }
         }
     }
-    
 }
 
 extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
