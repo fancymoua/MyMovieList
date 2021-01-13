@@ -77,7 +77,7 @@ struct PersonManager {
     
     static func getPersonDetail(tmdbID: Int, completed: @escaping (PersonModel)-> Void) {
         
-        let endpoint = "https://api.themoviedb.org/3/person/" + "\(tmdbID)" + "?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
+        let endpoint = Constants.API.personBaseURL + "\(tmdbID)?" + Constants.API.APIKey + "&language=en-US"
         
         guard let url = URL(string: endpoint) else {
             print("Bad person detail url")
@@ -117,7 +117,7 @@ struct PersonManager {
     
     static func getPersonCreditedWork(tmdbID: Int, completed: @escaping ([CreditedWorkResult])->Void) {
         
-        let endpoint = "https://api.themoviedb.org/3/person/" + "\(tmdbID)" + "/combined_credits?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
+        let endpoint = Constants.API.personBaseURL + "\(tmdbID)" + "/combined_credits?" + Constants.API.APIKey
         
         guard let url = URL(string: endpoint) else {
             print("getPersonCreditedWork -- bad url")
