@@ -16,15 +16,15 @@ class CastCrewVC: UIViewController {
         super.viewDidLoad()
 
         addSubviews()
-        configure()
+        configureSubviews()
+        layoutSubviews()
+        getCastCrew()
         
         mainCollectionView.register(Detail_CastCrewCellCollectionViewCell.self, forCellWithReuseIdentifier: "CastCrewCell")
         mainCollectionView.register(CastCrewSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CastCrewSectionHeader.headerReuseIdentifer)
         
         mainCollectionView.dataSource = self
         mainCollectionView.delegate = self
-        
-        getCastCrew()
     }
     
     private func addSubviews() {
@@ -36,25 +36,27 @@ class CastCrewVC: UIViewController {
         }
     }
     
-    private func configure() {
+    private func configureSubviews() {
         
         mainCollectionView.backgroundColor = .systemBackground
         mainCollectionView.isScrollEnabled = true
         
+        configureCollectionViewLayout()
+    }
+    
+    private func layoutSubviews() {
         NSLayoutConstraint.activate([
             mainCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             mainCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mainCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mainCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
-        configureLayout()
     }
     
     func getCastCrew() {
         PersonManager.getCastCrewInfo(tmdbiD: tmdbID, mediaType: mediaType) { (castArray, directorArray) in
-            self.directorArray = directorArray
             self.actorsArray = castArray
+            self.directorArray = directorArray
             
             DispatchQueue.main.async {
                 self.mainCollectionView.reloadData()
@@ -91,9 +93,9 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         
         switch indexPath.section {
         case 0:
-            name = directorArray[indexPath.item].name!
+            name = directorArray[indexPath.item].name ?? "no name"
         case 1:
-            name = actorsArray[indexPath.item].name!
+            name = actorsArray[indexPath.item].name ?? "no name"
         default:
             name = ""
         }
@@ -110,9 +112,13 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         
         switch indexPath.section {
         case 0:
-            tmdbID = directorArray[indexPath.item].id!
+            if let id = directorArray[indexPath.item].id {
+                tmdbID = id
+            } else { return }
         case 1:
-            tmdbID = actorsArray[indexPath.item].id!
+            if let id = actorsArray[indexPath.item].id {
+                tmdbID = id
+            } else { return }
         default:
             print("Nada")
         }
@@ -122,7 +128,7 @@ extension CastCrewVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         show(destVC, sender: self)
     }
     
-    func configureLayout() {
+    func configureCollectionViewLayout() {
         
         let flowLayout = UICollectionViewFlowLayout()
         

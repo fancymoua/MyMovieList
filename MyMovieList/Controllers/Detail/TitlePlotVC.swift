@@ -8,6 +8,7 @@ protocol PassMovieObject {
 
 class TitlePlotVC: UIViewController {
     
+    // subviews
     let titleLabel = MovieTitleLabel()
     let imdbLogo = UIImageView(image: #imageLiteral(resourceName: "imdb-square-icon"))
     let ratingLabel = UILabel()
@@ -22,7 +23,6 @@ class TitlePlotVC: UIViewController {
     
     // variables populated from previous view
     var mediaType: MediaType!
-    var movieTitle: String?
     var posterImage = UIImage()
     var tmdbID: Int?
     var posterPath: String?
@@ -39,7 +39,8 @@ class TitlePlotVC: UIViewController {
         view.backgroundColor = .systemBackground
         
         addSubviews()
-        configureMovieDetailViews()
+        configureSubviews()
+        layoutSubviews()
 
         if mediaType == .Movie {
             setMovieDetails()
@@ -59,81 +60,7 @@ class TitlePlotVC: UIViewController {
         }
     }
     
-    func setMovieDetails() {
-        MovieDetailsManager.getMovieDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
-            
-            DetailDelegate?.updateDetailObject(movieObject: daMovie, TVObject: nil)
-            
-            DispatchQueue.main.async {
-                titleLabel.text = daMovie.title
-                plotLabel.text = daMovie.overview
-                ratedView.setText(text: daMovie.rated ?? "not rated")
-                ratingLabel.text = daMovie.imdbRating
-                genreView.setText(text: daMovie.genres ?? "no genres")
-                
-                if let releaseDate = daMovie.release_date {
-                    var year = String()
-                    
-                    DateTimeFormattingManager.formatYear(dateString: releaseDate) { (daYear) in
-                        year = daYear
-                    }
-                    yearView.setText(text: year)
-                }
-                
-                if let runtime = daMovie.runtime {
-                    let tuple = DateTimeFormattingManager.minutesToHoursAndMinutes(runtime)
-                    runtimeOrSeasonsView.setText(text: "\(tuple.hours) hr \(tuple.leftMinutes) mins")
-                }
-            }
-        }
-    }
-        
-    func setTVDetails() {
-        MovieDetailsManager.getTVDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (daMovie)  in
-            
-            DetailDelegate?.updateDetailObject(movieObject: nil, TVObject: daMovie)
-            
-            DispatchQueue.main.async {
-                titleLabel.text = daMovie.name
-                plotLabel.text = daMovie.overview
-                yearView.setText(text: daMovie.yearAired ?? "n/a")
-                ratedView.setText(text: daMovie.contentRating ?? "no rating")
-                genreView.setText(text: daMovie.genres ?? "no genres")
-                ratingLabel.text = daMovie.imdbRating
-                
-                if let seasonsCount = daMovie.seasonsCount {
-                    if let episodesCount = daMovie.episodesCount {
-                        self.runtimeOrSeasonsView.setText(text: "\(seasonsCount) seasons / \(episodesCount) episodes")
-                    }
-                }
-            }
-        }
-    }
-        
-    func getWatchProviders() {
-        
-        MovieDetailsManager.getWatchProviders(tmdbID: tmdbID, mediaType: mediaType) { [self] (providersArray) in
-            
-            for provider in providersArray {
-                let rate = provider.rate
-                let logo = provider.logo
-                
-                DispatchQueue.main.sync {
-                    let netBlock = WatchProviderBlock(image: logo, rate: rate)
-                    watchProvidersStackView.addArrangedSubview(netBlock)
-                    
-                    providersWidth += 60
-                    
-                    providersStackViewWidthConstraint.constant = providersWidth
-                    
-                    watchProvidersStackView.updateConstraints()
-                    watchProvidersStackView.layoutIfNeeded()
-                }
-            }
-        }
-    }
-    
-    func configureMovieDetailViews() {
+    private func configureSubviews() {
         
         if mediaType == .Movie {
             runtimeOrSeasonsView.headerLabel.text = "Runtime:"
@@ -154,7 +81,9 @@ class TitlePlotVC: UIViewController {
         providersStackViewWidthConstraint = NSLayoutConstraint(item: watchProvidersStackView, attribute: .width, relatedBy: .equal, toItem: .none , attribute: .notAnAttribute, multiplier: 0, constant: providersWidth)
         
         providersStackViewWidthConstraint.isActive = true
-        
+    }
+    
+    private func layoutSubviews() {
         NSLayoutConstraint.activate([
             
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
@@ -193,19 +122,85 @@ class TitlePlotVC: UIViewController {
         ])
     }
     
+    func setMovieDetails() {
+        MovieDetailsManager.getMovieDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (movie)  in
+            
+            DetailDelegate?.updateDetailObject(movieObject: movie, TVObject: nil)
+            
+            DispatchQueue.main.async {
+                titleLabel.text = movie.title
+                plotLabel.text = movie.overview
+                ratedView.setText(text: movie.rated ?? "not rated")
+                ratingLabel.text = movie.imdbRating
+                genreView.setText(text: movie.genres ?? "no genres")
+                
+                if let releaseDate = movie.release_date {
+                    var year = String()
+                    
+                    DateTimeFormattingManager.formatYear(dateString: releaseDate) { (daYear) in
+                        year = daYear
+                    }
+                    yearView.setText(text: year)
+                }
+                
+                if let runtime = movie.runtime {
+                    let tuple = DateTimeFormattingManager.minutesToHoursAndMinutes(runtime)
+                    runtimeOrSeasonsView.setText(text: "\(tuple.hours) hr \(tuple.leftMinutes) mins")
+                }
+            }
+        }
+    }
+        
+    func setTVDetails() {
+        MovieDetailsManager.getTVDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (show)  in
+            
+            DetailDelegate?.updateDetailObject(movieObject: nil, TVObject: show)
+            
+            DispatchQueue.main.async {
+                titleLabel.text = show.name
+                plotLabel.text = show.overview
+                yearView.setText(text: show.yearAired ?? "n/a")
+                ratedView.setText(text: show.contentRating ?? "no rating")
+                genreView.setText(text: show.genres ?? "no genres")
+                ratingLabel.text = show.imdbRating
+                
+                if let seasonsCount = show.seasonsCount {
+                    if let episodesCount = show.episodesCount {
+                        self.runtimeOrSeasonsView.setText(text: "\(seasonsCount) seasons / \(episodesCount) episodes")
+                    }
+                }
+            }
+        }
+    }
+        
+    func getWatchProviders() {
+        
+        MovieDetailsManager.getWatchProviders(tmdbID: tmdbID, mediaType: mediaType) { [self] (providersArray) in
+            
+            for provider in providersArray {
+                let rate = provider.rate
+                let logo = provider.logo
+                
+                DispatchQueue.main.sync {
+                    let netBlock = WatchProviderBlock(image: logo, rate: rate)
+                    watchProvidersStackView.addArrangedSubview(netBlock)
+                    
+                    providersWidth += 60
+                    
+                    providersStackViewWidthConstraint.constant = providersWidth
+                    
+                    watchProvidersStackView.updateConstraints()
+                    watchProvidersStackView.layoutIfNeeded()
+                }
+            }
+        }
+    }
+    
     @objc func openPlotView() {
         
         let destVC = ExpandedTextVC()
         
-        var text = String()
-        
-        if mediaType == .Movie {
-            text = plotLabel.text ?? "n/a"
-        } else if mediaType == .TV {
-            text = plotLabel.text ?? "n/a"
-        }
-        
-        destVC.text = text
+        destVC.text = plotLabel.text ?? "no plot"
         
         show(destVC, sender: self)
     }
