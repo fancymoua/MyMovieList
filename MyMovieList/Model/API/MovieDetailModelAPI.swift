@@ -16,7 +16,7 @@ struct MovieDetailModelAPI: Codable {
 
 // ratings i.e. PG-13, R, etc.
 struct Countries: Codable {
-    var countries: [Certification]
+    var countries: [Certification]?
 }
 
 struct Certification: Codable {
@@ -25,6 +25,6 @@ struct Certification: Codable {
 }
 
 struct Genre: Codable {
-    var id: Int
-    var name: String
+    var id: Int?
+    var name: String?
 }

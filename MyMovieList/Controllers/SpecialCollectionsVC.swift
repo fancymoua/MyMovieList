@@ -132,24 +132,26 @@ class SpecialCollectionsVC: UIViewController {
                     
                     self.moviesArray = []
                     
-                    for item in allData.results {
-                        
-                        guard let id = item.id else {return}
-                        let title = item.name ?? "no title"
-                        let posterPath = item.poster_path
-                        
-                        if item.media_type == "tv" {
-                            self.mediaType = .TV
-                        } else if item.media_type == "movie" {
-                            self.mediaType = .Movie
-                        }
-                        
-                        let movie = SearchResultModel(id: id, title: title, poster_path: posterPath)
+                    if let results = allData.results {
+                        for item in results {
+                            guard let id = item.id else { return }
+                            let title = item.name ?? "no title"
+                            let posterPath = item.poster_path
+                            
+                            // API returns media type as a string; have to convert to our enum
+                            if item.media_type == "tv" {
+                                self.mediaType = .TV
+                            } else if item.media_type == "movie" {
+                                self.mediaType = .Movie
+                            }
+                            
+                            let movie = SearchResultModel(id: id, title: title, poster_path: posterPath)
 
-                        self.moviesArray.append(movie)
+                            self.moviesArray.append(movie)
 
-                        DispatchQueue.main.async {
-                            self.collectionView.reloadData()
+                            DispatchQueue.main.async {
+                                self.collectionView.reloadData()
+                            }
                         }
                     }
                 } catch {

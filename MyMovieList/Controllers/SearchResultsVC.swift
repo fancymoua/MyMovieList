@@ -111,17 +111,19 @@ class SearchResultsVC: UIViewController {
                     
                     self.searchResultsArray = []
                 
-                    for item in allData.results {
-                        if item.poster_path != nil || item.id == nil {
-                            guard let id = item.id else {return}
-                            let title = item.name ?? "no title"
-                            let posterPath = item.poster_path
-                            
-                            let movie = SearchResultModel(id: id, title: title, poster_path: posterPath)
-                            
-                            self.searchResultsArray.append(movie)
-                            
-                            self.updateData(on: self.searchResultsArray)
+                    if let results = allData.results {
+                        for item in results {
+                            if item.poster_path != nil || item.id == nil {
+                                guard let id = item.id else { return }
+                                let title = item.name
+                                let posterPath = item.poster_path
+                                
+                                let movie = SearchResultModel(id: id, title: title, poster_path: posterPath)
+                                
+                                self.searchResultsArray.append(movie)
+                                
+                                self.updateData(on: self.searchResultsArray)
+                            }
                         }
                     }
                 } catch {
@@ -137,7 +139,7 @@ class SearchResultsVC: UIViewController {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallMediaCardCell.reuseID, for: indexPath) as! SmallMediaCardCell
             
-            let title = self.searchResultsArray[indexPath.item].title
+            let title = self.searchResultsArray[indexPath.item].title ?? "no title"
             var posterImage = UIImage()
             
             if let posterPath = self.searchResultsArray[indexPath.item].poster_path {

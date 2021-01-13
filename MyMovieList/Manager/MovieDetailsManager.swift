@@ -18,11 +18,11 @@ class MovieDetailsManager {
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             if let _ = error {
-                print("error making call to OMDB")
+                print("error making call to tmdb")
             }
             
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                print("Something other than 200 from OMDB")
+                print("Something other than 200 from tmdb")
                 return
             }
             
@@ -49,7 +49,9 @@ class MovieDetailsManager {
                 
                 if let genres = result.genres {
                     for item in genres {
-                        genreNames.append(item.name)
+                        if let name = item.name {
+                            genreNames.append(name)
+                        }
                     }
                 }
                 
@@ -114,7 +116,9 @@ class MovieDetailsManager {
                 
                 if let genres = result.genres {
                     for item in genres {
-                        genreNames.append(item.name)
+                        if let name = item.name {
+                            genreNames.append(name)
+                        }
                     }
                 }
                 

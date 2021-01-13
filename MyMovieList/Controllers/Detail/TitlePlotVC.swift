@@ -128,10 +128,10 @@ class TitlePlotVC: UIViewController {
             DetailDelegate?.updateDetailObject(movieObject: movie, TVObject: nil)
             
             DispatchQueue.main.async {
-                titleLabel.text = movie.title
-                plotLabel.text = movie.overview
+                titleLabel.text = movie.title ?? "no title"
+                plotLabel.text = movie.overview ?? "no plot"
                 ratedView.setText(text: movie.rated ?? "not rated")
-                ratingLabel.text = movie.imdbRating
+                ratingLabel.text = movie.imdbRating ?? "n/a"
                 genreView.setText(text: movie.genres ?? "no genres")
                 
                 if let releaseDate = movie.release_date {

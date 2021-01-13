@@ -5,7 +5,7 @@ import UIKit
 // used in user's search results + special collection results
 
 struct TVDataAPI: Codable {
-    var results: [TVResult]
+    var results: [TVResult]?
 }
 
 struct TVResult: Codable {

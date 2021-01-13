@@ -7,7 +7,7 @@ import UIKit
 
 struct SearchResultModel: Codable, Hashable {
     var id: Int
-    var title: String
+    var title: String?
     var poster_path: String?
     var imdbID: String?
     var popularity: Float?
