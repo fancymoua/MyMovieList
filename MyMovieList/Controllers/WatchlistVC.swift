@@ -18,6 +18,7 @@ class WatchlistVC: UIViewController {
 
         addSubviews()
         configureSubviews()
+        layoutSubviews()
     }
     
     override func viewDidAppear(_ animated: Bool) {

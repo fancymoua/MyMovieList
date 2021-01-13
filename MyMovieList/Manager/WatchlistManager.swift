@@ -8,7 +8,7 @@ struct WatchlistManager {
         
         var itemsArray = [WatchItem]()
         
-        if let watchlistRaw = UserDefaults.standard.object(forKey: "Watchlist") as? Data {
+        if let watchlistRaw = UserDefaults.standard.object(forKey: Constants.watchlistKey) as? Data {
             do {
                 let decoder = JSONDecoder()
                 itemsArray = try decoder.decode([WatchItem].self, from: watchlistRaw)
@@ -35,7 +35,7 @@ struct WatchlistManager {
             do {
                 let encoder = JSONEncoder()
                 let encodedWatchlist = try encoder.encode(currentWatchlist)
-                UserDefaults.standard.setValue(encodedWatchlist, forKey: "Watchlist")
+                UserDefaults.standard.setValue(encodedWatchlist, forKey: Constants.watchlistKey)
             } catch {
                 print("Could not set encodedWatchlist to userDefaults")
             }
@@ -64,7 +64,7 @@ struct WatchlistManager {
         do {
             let encoder = JSONEncoder()
             let encodedWatchlist = try encoder.encode(watchlist)
-            UserDefaults.standard.setValue(encodedWatchlist, forKey: "Watchlist")
+            UserDefaults.standard.setValue(encodedWatchlist, forKey: Constants.watchlistKey)
         } catch {
             print("Could not set encodedWatchlist to userDefaults")
         }

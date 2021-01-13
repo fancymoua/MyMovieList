@@ -11,9 +11,9 @@ struct PersonManager {
         var baseURL = String()
         
         if mediaType == .Movie {
-            baseURL = MediaType.Movie.castCrewBaseURL + "\(tmdbiD)" + "/credits?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
+            baseURL = MediaType.Movie.castCrewBaseURL + "\(tmdbiD)" + "/credits?" + Constants.API.APIKey + "&language=en-US"
         } else if mediaType == .TV {
-            baseURL = MediaType.TV.castCrewBaseURL + "\(tmdbiD)" + "/credits?api_key=65db6bef59bff99c6a4504f0ce877ade&language=en-US"
+            baseURL = MediaType.TV.castCrewBaseURL + "\(tmdbiD)" + "/credits?" + Constants.API.APIKey + "&language=en-US"
         }
         
         guard let url = URL(string: baseURL) else {
