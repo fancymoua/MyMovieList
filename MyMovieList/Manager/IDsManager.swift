@@ -10,9 +10,9 @@ struct IDsManager: IdsManagerProtocol {
         
         // get IMDB ID
         if type == .Movie {
-            convertURL = "https://api.themoviedb.org/3/movie/" + "\(id)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
+            convertURL = MediaType.Movie.baseURL + "\(id)" + "/external_ids?" + Constants.API.APIKey
         } else if type == .TV {
-            convertURL = "https://api.themoviedb.org/3/tv/" + "\(id)" + "/external_ids?api_key=65db6bef59bff99c6a4504f0ce877ade"
+            convertURL = MediaType.TV.baseURL + "\(id)" + "/external_ids?" + Constants.API.APIKey
         }
         
         guard let url = URL(string: convertURL) else {
