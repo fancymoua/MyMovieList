@@ -73,7 +73,7 @@ class PersonDetailVC: UIViewController {
         creditedWorkLabel.text = "Popular Work:"
         creditedWorkLabel.font = UIFont(name: "Avenir Next Medium", size: 18)
         
-        creditedCollectionView.backgroundColor = .white
+        creditedCollectionView.backgroundColor = .systemBackground
         configureCollectionView()
     }
     

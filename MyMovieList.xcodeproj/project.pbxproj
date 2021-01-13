@@ -285,9 +285,9 @@
 		B14DF28A2589536000FF8819 /* MyMovieList */ = {
 			isa = PBXGroup;
 			children = (
-				B143E3A32593E91F0063BD8F /* Manager */,
 				B14DF28B2589536000FF8819 /* AppDelegate.swift */,
 				B14DF28D2589536000FF8819 /* SceneDelegate.swift */,
+				B143E3A32593E91F0063BD8F /* Manager */,
 				B1286C15259286280063AD70 /* Utilities */,
 				B14DF2D825896A9100FF8819 /* Model */,
 				B14DF2C925895F5200FF8819 /* Controllers */,
