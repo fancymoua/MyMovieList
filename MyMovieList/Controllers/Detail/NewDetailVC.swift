@@ -6,7 +6,7 @@ class NewDetailVC: UIViewController {
     
     let titlePlotVC = TitlePlotVC()
     let castCrewVC = CastCrewVC()
-    let similarTitles = SimilarTitles()
+    let similarTitles = SimilarTitlesVC()
     
     // primary views
     let posterImageView = UIImageView()

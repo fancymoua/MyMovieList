@@ -2,7 +2,7 @@
 
 import UIKit
 
-class SimilarTitles: UIViewController {
+class SimilarTitlesVC: UIViewController {
     
     var tmdbID = Int()
     var thisMediaType: MediaType!
