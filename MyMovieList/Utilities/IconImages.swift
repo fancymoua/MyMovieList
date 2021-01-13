@@ -4,7 +4,6 @@ import UIKit
 
 let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular, scale: .large)
 
-
 enum IconImages {
     case heartUnfilled
     case heartFilled

@@ -1,6 +1,8 @@
 
 import Foundation
 
+// filter for items we don't want to show in a person's credited work list
+
 struct CreditedWorkFilter {
     static let talkShows = [
         "Conan":                            32415,

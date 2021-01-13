@@ -9,8 +9,8 @@ class PersonDetailVC: UIViewController {
     let bioLabel = UILabel()
     let creditedWorkLabel = UILabel()
     
-    private let avatarBaseURL = "https://image.tmdb.org/t/p/w185"
-    private let posterBaseURL = "https://image.tmdb.org/t/p/w342"
+    private let avatarBaseURL = Constants.API.imageURL + "w185"
+    private let posterBaseURL = Constants.API.imageURL + "w342"
     
     let cache = NSCache<NSString, UIImage>()
     
@@ -30,6 +30,7 @@ class PersonDetailVC: UIViewController {
         creditedCollectionView.delegate = self
         creditedCollectionView.dataSource = self
 
+        configureVC()
         addSubviews()
         configureSubviews()
         layoutSubviews()

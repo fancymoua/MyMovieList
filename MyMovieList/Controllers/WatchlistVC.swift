@@ -4,14 +4,14 @@ import UIKit
 
 class WatchlistVC: UIViewController {
     
-    let header = UILabel()
+    let headerLabel = UILabel()
     let watchlistTableView = UITableView()
     
     var watchlistItemsArray = [WatchItem]()
     
     let cache = NSCache<NSString, UIImage>()
     
-    private let photoBaseURL = "https://image.tmdb.org/t/p/w342"
+    private let photoBaseURL = Constants.API.imageURL + "w342"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ class WatchlistVC: UIViewController {
     }
     
     private func addSubviews() {
-        let views = [header, watchlistTableView]
+        let views = [headerLabel, watchlistTableView]
         
         for view in views {
             self.view.addSubview(view)
@@ -47,9 +47,9 @@ class WatchlistVC: UIViewController {
     
     private func configureSubviews() {
         
-        header.text = "Watchlist"
-        header.font = UIFont(name: "Avenir Next Regular", size: 30)
-        header.textColor = .label
+        headerLabel.text = "Watchlist"
+        headerLabel.font = UIFont(name: "Avenir Next Regular", size: 30)
+        headerLabel.textColor = .label
         
         watchlistTableView.register(WatchItemCell.self, forCellReuseIdentifier: WatchItemCell.reuseID)
         watchlistTableView.delegate = self
@@ -58,12 +58,12 @@ class WatchlistVC: UIViewController {
     
     private func layoutSubviews() {
         NSLayoutConstraint.activate([
-            header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            header.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            header.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            header.heightAnchor.constraint(equalToConstant: 25),
+            headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            headerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            headerLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            headerLabel.heightAnchor.constraint(equalToConstant: 25),
             
-            watchlistTableView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 20),
+            watchlistTableView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 20),
             watchlistTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             watchlistTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             watchlistTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
