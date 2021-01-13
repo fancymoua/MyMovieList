@@ -6,32 +6,31 @@ class LandingVC: UIViewController {
     
     let searchTextField = LandingSearchTextField()
     let keywordsCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    
     let trendingMoviesView = UIView()
     let trendingShowsView = UIView()
     
-    var mediaTypeSelection = Int()
-    var keywordsArray = [String: String]()
-    
     let trendingMoviesVC = TrendingVC()     // child view
     let trendingShowsVC = SpecialListVC()   // child view
+    
+    var mediaTypeSelection = Int()
+    var keywordsArray = [String: String]()
     
     var userEnteredText: Bool { return !searchTextField.text!.isEmpty }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchTextField.searchButton.addTarget(self, action: #selector(pushSearchResultsVC), for: .touchUpInside)
-        searchTextField.mediaTypePicker.addTarget(self, action: #selector(mediaTypeChanged(segmentedControl:)), for: .valueChanged)
-        
-        searchTextField.delegate = self
+        configureVC()
+        addSubviews()
+        layoutSubviews()
+        addChildViews()
         
         populateKeywordArray()
         
-        addSubviews()
-        constrainSubviews()
-        addChildViews()
-        
-        configureUI()
+        searchTextField.searchButton.addTarget(self, action: #selector(pushSearchResultsVC), for: .touchUpInside)
+        searchTextField.mediaTypePicker.addTarget(self, action: #selector(mediaTypeChanged(segmentedControl:)), for: .valueChanged)
+        searchTextField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,10 +42,6 @@ class LandingVC: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
-    func populateKeywordArray() {
-        keywordsArray = LandingKeywords.keywords
-    }
 
     private func addSubviews() {
         let subviews = [searchTextField, keywordsCollectionView, trendingMoviesView, trendingShowsView]
@@ -57,7 +52,7 @@ class LandingVC: UIViewController {
         }
     }
     
-    private func constrainSubviews() {
+    private func layoutSubviews() {
         
         configureKeywordCollectionView()
         
@@ -84,6 +79,24 @@ class LandingVC: UIViewController {
         ])
     }
     
+    private func addChildViews() {
+        addChild(trendingMoviesVC)
+        addChild(trendingShowsVC)
+        
+        trendingMoviesView.addSubview(trendingMoviesVC.view)
+        trendingShowsView.addSubview(trendingShowsVC.view)
+        
+        trendingMoviesVC.didMove(toParent: self)
+        trendingShowsVC.didMove(toParent: self)
+        
+        constrainChildViewToContainerView(childView: trendingMoviesVC.view, container: trendingMoviesView)
+        constrainChildViewToContainerView(childView: trendingShowsVC.view, container: trendingShowsView)
+    }
+    
+    func populateKeywordArray() {
+        keywordsArray = LandingKeywords.keywords
+    }
+    
     func configureKeywordCollectionView() {
         keywordsCollectionView.delegate = self
         keywordsCollectionView.dataSource = self
@@ -101,31 +114,6 @@ class LandingVC: UIViewController {
         keywordsCollectionView.collectionViewLayout = flowLayout
     }
     
-    private func addChildViews() {
-        addChild(trendingMoviesVC)
-        addChild(trendingShowsVC)
-        
-        trendingMoviesView.addSubview(trendingMoviesVC.view)
-        trendingShowsView.addSubview(trendingShowsVC.view)
-        
-        trendingMoviesVC.didMove(toParent: self)
-        trendingShowsVC.didMove(toParent: self)
-        
-        constrainChildViewToContainerView(childView: trendingMoviesVC.view, container: trendingMoviesView)
-        constrainChildViewToContainerView(childView: trendingShowsVC.view, container: trendingShowsView)
-    }
-    
-    func constrainChildViewToContainerView(childView: UIView, container: UIView) {
-        
-        childView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            childView.topAnchor.constraint(equalTo: container.topAnchor),
-            childView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-            childView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-            childView.bottomAnchor.constraint(equalTo: container.bottomAnchor),
-        ])
-    }
     
     @objc func pushSearchResultsVC() {
         let destVC = SearchResultsVC()
@@ -190,7 +178,7 @@ extension LandingVC: UICollectionViewDelegate, UICollectionViewDataSource {
 
 extension LandingVC {
     
-    private func configureUI() {
+    private func configureVC() {
         view.backgroundColor = .systemBackground
     }
     

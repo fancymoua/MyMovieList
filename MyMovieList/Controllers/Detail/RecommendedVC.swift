@@ -40,19 +40,7 @@ class RecommendedVC: UIViewController {
         addChild(specialCollectVC)
         containerView.addSubview(specialCollectVC.view)
         specialCollectVC.didMove(toParent: self)
-        constrainChildViewToContainerView(childView: specialCollectVC.view)
-    }
-    
-    private func constrainChildViewToContainerView(childView: UIView) {
-        
-        childView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            childView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            childView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            childView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            childView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-        ])
+        constrainChildViewToContainerView(childView: specialCollectVC.view, container: containerView)
     }
     
     private func populateCollectionView() {

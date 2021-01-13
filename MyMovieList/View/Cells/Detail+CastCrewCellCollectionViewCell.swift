@@ -10,7 +10,6 @@ class Detail_CastCrewCellCollectionViewCell: UICollectionViewCell {
     var nameLabel = UILabel()
     
     func configure(name: String) {
-//        backgroundColor = .systemTeal
         addSubview(bgView)
         addSubview(self.nameLabel)
         
@@ -31,15 +30,11 @@ class Detail_CastCrewCellCollectionViewCell: UICollectionViewCell {
             
             bgView.widthAnchor.constraint(equalToConstant: 80),
             bgView.heightAnchor.constraint(equalToConstant: 80),
-//            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-//            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             bgView.centerXAnchor.constraint(equalTo: centerXAnchor),
             bgView.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             nameLabel.widthAnchor.constraint(equalToConstant: 60),
             nameLabel.heightAnchor.constraint(equalToConstant: 60),
-//            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-//            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             nameLabel.centerXAnchor.constraint(equalTo: bgView.centerXAnchor),
             nameLabel.centerYAnchor.constraint(equalTo: bgView.centerYAnchor)
         ])

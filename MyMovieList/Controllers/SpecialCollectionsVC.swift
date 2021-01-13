@@ -131,7 +131,6 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeaturedMovieCell", for: indexPath) as! FeaturedMovieCell
         
         var posterImage = UIImage()
-        var title = String()
         
         if let posterPath = self.moviesArray[indexPath.item].poster_path {
 
@@ -152,7 +151,7 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
         
         title = moviesArray[indexPath.item].title
         
-        cell.configureCell(title: title, image: posterImage)
+        cell.configureCell(image: posterImage)
          
         return cell
     }

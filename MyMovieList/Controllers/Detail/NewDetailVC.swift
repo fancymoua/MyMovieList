@@ -34,7 +34,32 @@ class NewDetailVC: UIViewController {
         
         print("tmdbID \(tmdbID!)")
         
-        // passing info to child views
+        passDataToChildViews()
+ 
+        configureVC()
+        addSubviews()
+        addTapGestureToPosterImageView()
+        configureMainViews()
+        
+        WatchlistManager.retrieveWatchlist { (watchlist) in self.currentWatchlist = watchlist }
+    }
+    
+    func addTapGestureToPosterImageView() {
+        posterImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(openFullSizeImageView))
+        posterImageView.addGestureRecognizer(tap)
+    }
+    
+    @objc func openFullSizeImageView() {
+        let destVC = FullSizePosterVC()
+        destVC.posterImage = posterImage
+        destVC.modalPresentationStyle = .fullScreen
+        destVC.modalTransitionStyle = .crossDissolve
+        present(destVC, animated: true, completion: nil)
+    }
+    
+    private func passDataToChildViews() {
+        
         titlePlotVC.mediaType = mediaType
         titlePlotVC.tmdbID = tmdbID
         titlePlotVC.DetailDelegate = self
@@ -44,32 +69,9 @@ class NewDetailVC: UIViewController {
         
         recommendedVC.tmdbID = tmdbID!
         recommendedVC.thisMediaType = mediaType
- 
-        configureVC()
-        
-        WatchlistManager.retrieveWatchlist { (watchlist) in self.currentWatchlist = watchlist }
-     
-        addSubviews()
-        configureMainViews()
-        
-        addTapGestureToPosterImageView()
     }
     
-    func addTapGestureToPosterImageView() {
-        posterImageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(openNewImageView))
-        posterImageView.addGestureRecognizer(tap)
-    }
-    
-    @objc func openNewImageView() {
-        let destVC = FullSizePosterVC()
-        destVC.posterImage = posterImage
-        destVC.modalPresentationStyle = .fullScreen
-        destVC.modalTransitionStyle = .crossDissolve
-        present(destVC, animated: true, completion: nil)
-    }
-    
-    func addSubviews() {
+    private func addSubviews() {
         let mainViews = [posterImageView, detailsBackgroundView, addToWatchlistButton ]
         let detailViews = [segmentedControl, containerView]
 
@@ -110,9 +112,9 @@ class NewDetailVC: UIViewController {
         addChild(titlePlotVC)
         containerView.addSubview(titlePlotVC.view)
         titlePlotVC.didMove(toParent: self)
-        constrainChildViewToContainerView(childView: titlePlotVC.view)
+        constrainChildViewToContainerView(childView: titlePlotVC.view, container: containerView)
         
-        containerView.backgroundColor = .systemPink
+        containerView.backgroundColor = .systemBackground
         
         NSLayoutConstraint.activate([
             posterImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: -60),
@@ -142,35 +144,23 @@ class NewDetailVC: UIViewController {
         ])
     }
     
-    func constrainChildViewToContainerView(childView: UIView) {
-        
-        childView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            childView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            childView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            childView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            childView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-        ])
-    }
-    
     @objc func switchView(segmentedControl: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             addChild(titlePlotVC)
             containerView.addSubview(titlePlotVC.view)
             titlePlotVC.didMove(toParent: self)
-            constrainChildViewToContainerView(childView: titlePlotVC.view)
+            constrainChildViewToContainerView(childView: titlePlotVC.view, container: containerView)
         case 1:
             addChild(castCrewVC)
             containerView.addSubview(castCrewVC.view)
             castCrewVC.didMove(toParent: self)
-            constrainChildViewToContainerView(childView: castCrewVC.view)
+            constrainChildViewToContainerView(childView: castCrewVC.view, container: containerView)
         case 2:
             addChild(recommendedVC)
             containerView.addSubview(recommendedVC.view)
             recommendedVC.didMove(toParent: self)
-            constrainChildViewToContainerView(childView: recommendedVC.view)
+            constrainChildViewToContainerView(childView: recommendedVC.view, container: containerView)
         default:
             return
         }

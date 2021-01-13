@@ -14,7 +14,6 @@ class CastCrewSectionHeader: UICollectionReusableView {
         sectionTitle.translatesAutoresizingMaskIntoConstraints = false
         sectionTitle.text = title
         sectionTitle.font = UIFont(name: "Avenir Next Medium", size: 20)
-//        sectionTitle.backgroundColor = .systemYellow
         
         NSLayoutConstraint.activate([
             sectionTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),

@@ -49,4 +49,16 @@ extension UIViewController {
         }
     }
     
+    func constrainChildViewToContainerView(childView: UIView, container: UIView) {
+        
+        childView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            childView.topAnchor.constraint(equalTo: container.topAnchor),
+            childView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            childView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+            childView.bottomAnchor.constraint(equalTo: container.bottomAnchor),
+        ])
+    }
+    
 }
