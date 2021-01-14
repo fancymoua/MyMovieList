@@ -214,13 +214,17 @@ extension SpecialCollectionsVC: UICollectionViewDelegate, UICollectionViewDataSo
         if let posterPath = self.moviesArray[indexPath.item].poster_path {
             
             let endpoint = self.photoBaseURL + posterPath
+            let posterImageURL = URL(string: endpoint)!
             
             let cacheKey = NSString(string: endpoint)
             
             if let image = cache.object(forKey: cacheKey) {
                 posterImage = image
             } else {
-                posterImage =  #imageLiteral(resourceName: "question-mark")
+                if let data = try? Data(contentsOf: posterImageURL) {
+                    posterImage = UIImage(data: data) ?? #imageLiteral(resourceName: "question-mark")
+                    self.cache.setObject(posterImage, forKey: cacheKey)
+                }
             }
         }
         
