@@ -12,7 +12,7 @@ class SpecialCollectionsVC: UIViewController {
     var mediaType: MediaType!
     
     let cache = NSCache<NSString, UIImage>()
-    private let photoBaseURL = Constants.API.imageURL + "w342"
+    private let photoBaseURL = Constants.API.imageURL + "w500"
     
     var howMany: Int = 10
     var searchEndpoint = String()
