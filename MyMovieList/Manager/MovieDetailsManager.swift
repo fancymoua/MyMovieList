@@ -103,9 +103,11 @@ class MovieDetailsManager {
                 var thisRating = String()
                 
                 if let contentRatings = result.content_ratings?.results {
-                    for item in contentRatings{
+                    for item in contentRatings {
                         if item.iso_3166_1 == "US" {
-                            thisRating = item.rating ?? "---"
+                            thisRating = item.rating ?? "not rated"
+                        } else {
+                            thisRating = "not rated"
                         }
                     }
                 } else {

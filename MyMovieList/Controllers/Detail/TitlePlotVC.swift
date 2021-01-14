@@ -160,7 +160,7 @@ class TitlePlotVC: UIViewController {
                 titleLabel.text = show.name
                 plotLabel.text = show.overview
                 yearView.setText(text: show.yearAired ?? "n/a")
-                ratedView.setText(text: show.contentRating ?? "no rating")
+                ratedView.setText(text: show.contentRating ?? "not rated")
                 genreView.setText(text: show.genres ?? "no genres")
                 ratingLabel.text = show.imdbRating
                 
