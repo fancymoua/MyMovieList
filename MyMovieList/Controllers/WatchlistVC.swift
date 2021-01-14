@@ -11,7 +11,7 @@ class WatchlistVC: UIViewController {
     
     let cache = NSCache<NSString, UIImage>()
     
-    private let photoBaseURL = Constants.API.imageURL + "w342"
+    private let photoBaseURL = Constants.API.imageURL + "w500"
 
     override func viewDidLoad() {
         super.viewDidLoad()
