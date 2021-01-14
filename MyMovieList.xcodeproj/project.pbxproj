@@ -212,8 +212,8 @@
 		B143E3A32593E91F0063BD8F /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				B143E3A42593E92C0063BD8F /* WatchlistManager.swift */,
 				B1C8115125944CA00084635F /* MovieDetailsManager.swift */,
+				B143E3A42593E92C0063BD8F /* WatchlistManager.swift */,
 				B160A132259A8FA9004AC722 /* IDsManager.swift */,
 				B1E2550425A13C69000F94ED /* PersonManager.swift */,
 				B1D9569B25A8EF09001A7D37 /* DateTimeFormattingManager.swift */,
@@ -434,8 +434,8 @@
 			children = (
 				B14DF2D925896AA400FF8819 /* SearchResultModel.swift */,
 				B100618425A3B4A5004715C4 /* TVDetailModel.swift */,
-				B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */,
 				B1BBC86B25A3F7EB00225541 /* MovieDetailModel.swift */,
+				B1E8BCC2258FEEBB009F8FB2 /* WatchProviderModel.swift */,
 				B1286C2E2592E2B10063AD70 /* WatchItem.swift */,
 				B1E254FC25A13A67000F94ED /* PersonModel.swift */,
 				B100618F25A3D818004715C4 /* CreditedWorkResult.swift */,
