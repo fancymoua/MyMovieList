@@ -200,7 +200,8 @@ class TitlePlotVC: UIViewController {
         
         let destVC = ExpandedTextVC()
         
-        destVC.text = plotLabel.text ?? "no plot"
+        destVC.titleLabel.text = titleLabel.text ?? "no title"
+        destVC.textView.text = plotLabel.text ?? "no plot"
         
         show(destVC, sender: self)
     }

@@ -143,7 +143,8 @@ class PersonDetailVC: UIViewController {
         
         let destVC = ExpandedTextVC()
         
-        destVC.text = bioLabel.text ?? "no bio available"
+        destVC.titleLabel.text = nameLabel.text ?? "no name"
+        destVC.textView.text = bioLabel.text ?? "no bio available"
         
         show(destVC, sender: self)
     }
