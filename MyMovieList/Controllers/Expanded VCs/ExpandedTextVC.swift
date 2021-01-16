@@ -32,18 +32,21 @@ class ExpandedTextVC: UIViewController {
         view.addSubview(textView)
         textView.translatesAutoresizingMaskIntoConstraints = false
         
-        titleLabel.font = UIFont(name: "Avenir Next Medium", size: 26)
+        titleLabel.font = UIFont(name: "Avenir Next Medium", size: 25)
+        titleLabel.numberOfLines = 2
     
         textView.font = UIFont(name: "Avenir Next", size: 20)
         textView.contentOffset = .zero
         
+//        titleLabel.backgroundColor = .systemPink
+        
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            titleLabel.heightAnchor.constraint(equalToConstant: 40),
+            titleLabel.heightAnchor.constraint(equalToConstant: 90),
             
-            textView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            textView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
             textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             textView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
