@@ -57,6 +57,8 @@ class PersonDetailVC: UIViewController {
     private func configureSubviews() {
         nameLabel.font = UIFont(name: "Avenir Next Medium", size: 18)
         nameLabel.textAlignment = .left
+        nameLabel.adjustsFontSizeToFitWidth = true
+        nameLabel.minimumScaleFactor = 0.70
         
         bioLabel.font = UIFont(name: "Avenir Next", size: 14)
         bioLabel.numberOfLines = 7
@@ -87,7 +89,7 @@ class PersonDetailVC: UIViewController {
             
             nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 10),
-            nameLabel.widthAnchor.constraint(equalToConstant: 125),
+            nameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             nameLabel.heightAnchor.constraint(equalToConstant: 20),
             
             bioLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
