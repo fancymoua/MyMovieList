@@ -18,8 +18,9 @@ class FullSizePosterVC: UIViewController {
     private func configure() {
         view.backgroundColor = .systemBackground
         
-        view.addSubview(posterImageView)
         view.addSubview(closeButton)
+        view.addSubview(posterImageView)
+        
         posterImageView.translatesAutoresizingMaskIntoConstraints = false
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -31,15 +32,15 @@ class FullSizePosterVC: UIViewController {
         closeButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            posterImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            posterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            posterImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            posterImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
             closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             closeButton.widthAnchor.constraint(equalToConstant: 100),
-            closeButton.heightAnchor.constraint(equalToConstant: 50)
+            closeButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            posterImageView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 10),
+            posterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            posterImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            posterImageView.heightAnchor.constraint(equalToConstant: 600)
         ])
     }
     

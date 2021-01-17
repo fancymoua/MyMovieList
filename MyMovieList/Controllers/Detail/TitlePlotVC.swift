@@ -123,7 +123,7 @@ class TitlePlotVC: UIViewController {
     }
     
     func setMovieDetails() {
-        MovieDetailsManager.getMovieDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (movie)  in
+        MovieDetailsManager.getMovieDetails(tmdbID: tmdbID!, mediaType: mediaType) { [self] (movie) in
             
             DetailDelegate?.updateDetailObject(movieObject: movie, TVObject: nil)
             

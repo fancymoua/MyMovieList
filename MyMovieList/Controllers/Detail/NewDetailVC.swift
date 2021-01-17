@@ -34,6 +34,8 @@ class NewDetailVC: UIViewController {
         
         print("tmdbID \(tmdbID!)")
         
+        showLoadingView()
+        
         passDataToChildViews()
  
         configureVC()
@@ -77,6 +79,7 @@ class NewDetailVC: UIViewController {
     }
 
     private func configureSubviews() {
+        
         addToWatchlistButton.backgroundColor = UIColor(white: 0.8, alpha: 0.9)
         addToWatchlistButton.tintColor = .red
         addToWatchlistButton.setImage(WatchlistManager.checkIfAlreadyOnWatchlist(tmdbID: tmdbID!), for: .normal)
@@ -97,6 +100,7 @@ class NewDetailVC: UIViewController {
         constrainChildViewToContainerView(childView: titlePlotVC.view, container: containerView)
         
         containerView.backgroundColor = .systemBackground
+    
     }
     
     private func layoutSubviews() {

@@ -60,6 +60,8 @@ class SearchResultsVC: UIViewController {
     
     func getResults(endpoint: String) {
         
+        showLoadingView()
+        
         guard let url = URL(string: endpoint) else {
             print("Bad URL")
             return
@@ -99,6 +101,8 @@ class SearchResultsVC: UIViewController {
                             self.searchResultsArray.append(movie)
 
                             self.updateData(on: self.searchResultsArray)
+                            
+                            self.dismissLoadingView()
                         }
                     }
                 } catch {
