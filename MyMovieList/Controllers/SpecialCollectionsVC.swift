@@ -72,7 +72,7 @@ class SpecialCollectionsVC: UIViewController {
         viewMoreButton.titleLabel?.textAlignment = .right
         viewMoreButton.addTarget(self, action: #selector(showMoreResults), for: .touchUpInside)
         
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .clear
     }
     
     func getResults(endpoint: String, type: MediaType) {

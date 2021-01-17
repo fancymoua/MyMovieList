@@ -37,7 +37,7 @@ class FullSizePosterVC: UIViewController {
             closeButton.widthAnchor.constraint(equalToConstant: 100),
             closeButton.heightAnchor.constraint(equalToConstant: 30),
             
-            posterImageView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 10),
+            posterImageView.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 20),
             posterImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             posterImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             posterImageView.heightAnchor.constraint(equalToConstant: 600)

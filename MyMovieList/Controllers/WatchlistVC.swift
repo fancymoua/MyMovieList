@@ -23,7 +23,7 @@ class WatchlistVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+    
         getWatchlist()
     }
     
@@ -72,7 +72,6 @@ class WatchlistVC: UIViewController {
     }
     
     func getWatchlist() {
-        
         WatchlistManager.retrieveWatchlist { (watchlist) in
             self.watchlistItemsArray = watchlist
             self.watchlistTableView.reloadData()
