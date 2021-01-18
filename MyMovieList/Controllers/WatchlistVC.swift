@@ -15,6 +15,8 @@ class WatchlistVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .systemBackground
 
         addSubviews()
         configureSubviews()

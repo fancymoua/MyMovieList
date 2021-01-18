@@ -13,6 +13,8 @@ enum IconImages {
     case movieDetailActors
     case ratingStar
     case searchGlass
+    case watchlist
+    case houseFilled
     
     var image: UIImage {
         switch self {
@@ -32,6 +34,10 @@ enum IconImages {
             return UIImage(systemName: "star.fill")!
         case .searchGlass:
             return UIImage(systemName: "magnifyingglass", withConfiguration: largeConfig)!
+        case .watchlist:
+            return UIImage(systemName: "list.bullet", withConfiguration: largeConfig)!
+        case .houseFilled:
+            return UIImage(systemName: "house.fill", withConfiguration: largeConfig)!
         }
     }
 }
