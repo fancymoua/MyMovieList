@@ -97,6 +97,7 @@ class SpecialCollectionsVC: UIViewController {
             }
             
             if type == .Movie {
+                self.mediaType = .Movie
                 do {
                     let decoder = JSONDecoder()
                     let allData = try decoder.decode(MovieDataAPI.self, from: data)
@@ -126,6 +127,7 @@ class SpecialCollectionsVC: UIViewController {
                     print("Couldn't do it")
                 }
             } else if type == .TV {
+                self.mediaType = .TV
                 do {
                     let decoder = JSONDecoder()
                     let allData = try decoder.decode(TVDataAPI.self, from: data)

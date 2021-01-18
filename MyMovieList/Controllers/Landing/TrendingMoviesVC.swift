@@ -2,12 +2,12 @@
 
 import UIKit
 
-class TrendingVC: SpecialCollectionsVC {
+class TrendingMoviesVC: SpecialCollectionsVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setCollectionTitle(title: "Trending")
+        setCollectionTitle(title: "Trending Movies")
         getResults(endpoint: MediaType.Movie.trendingURL, type: .Movie)
     }
     

@@ -9,16 +9,18 @@ class LandingVC: UIViewController {
     let pinkView = UIView()
     
     let scrollView = UIScrollView(frame: .zero)
-    let patContainerView = UIView()
+    let searchContainerView = UIView()
     
     let searchTextField = LandingSearchTextField()
     let keywordsCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     let trendingMoviesView = UIView()
     let trendingShowsView = UIView()
+    let featuredDirectorView = UIView()
     
-    let trendingMoviesVC = TrendingVC()     // child view
-    let trendingShowsVC = SpecialListVC()   // child view
+    let trendingMoviesVC = TrendingMoviesVC()     // child view
+    let trendingShowsVC = TrendingShowsVC()   // child view
+    let featuredDirectorVC = FeaturedDirectorVC()
     
     var mediaTypeSelection = Int()
     var keywordsArray = [String: String]()
@@ -34,7 +36,7 @@ class LandingVC: UIViewController {
         scrollView.frame = self.view.bounds
         scrollView.contentSize = contentViewSize
         
-        patContainerView.frame.size = contentViewSize
+        searchContainerView.frame.size = contentViewSize
         
         configureVC()
         addSubviews()
@@ -65,17 +67,19 @@ class LandingVC: UIViewController {
         
         pinkView.addSubview(searchTextField)
         
-        scrollView.addSubview(patContainerView)
+        scrollView.addSubview(searchContainerView)
         
-        patContainerView.addSubview(keywordsCollectionView)
-        patContainerView.addSubview(trendingMoviesView)
-        patContainerView.addSubview(trendingShowsView)
+        searchContainerView.addSubview(keywordsCollectionView)
+        searchContainerView.addSubview(trendingMoviesView)
+        searchContainerView.addSubview(trendingShowsView)
+        searchContainerView.addSubview(featuredDirectorView)
         
         pinkView.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         keywordsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         trendingMoviesView.translatesAutoresizingMaskIntoConstraints = false
         trendingShowsView.translatesAutoresizingMaskIntoConstraints = false
+        featuredDirectorView.translatesAutoresizingMaskIntoConstraints = false
         
 //        scrollView.backgroundColor = .systemYellow
         pinkView.backgroundColor = .systemBackground
@@ -100,35 +104,44 @@ class LandingVC: UIViewController {
             searchTextField.trailingAnchor.constraint(equalTo: pinkView.trailingAnchor, constant: -10),
             searchTextField.heightAnchor.constraint(equalToConstant: 45),
             
-            keywordsCollectionView.topAnchor.constraint(equalTo: patContainerView.topAnchor, constant: 90),
-            keywordsCollectionView.leadingAnchor.constraint(equalTo: patContainerView.leadingAnchor, constant: 20),
-            keywordsCollectionView.trailingAnchor.constraint(equalTo: patContainerView.trailingAnchor, constant: -5),
+            keywordsCollectionView.topAnchor.constraint(equalTo: searchContainerView.topAnchor, constant: 90),
+            keywordsCollectionView.leadingAnchor.constraint(equalTo: searchContainerView.leadingAnchor, constant: 20),
+            keywordsCollectionView.trailingAnchor.constraint(equalTo: searchContainerView.trailingAnchor, constant: -5),
             keywordsCollectionView.heightAnchor.constraint(equalToConstant: 40),
             
             trendingMoviesView.topAnchor.constraint(equalTo: keywordsCollectionView.bottomAnchor, constant: 15),
-            trendingMoviesView.leadingAnchor.constraint(equalTo: patContainerView.leadingAnchor, constant: 20),
-            trendingMoviesView.trailingAnchor.constraint(equalTo: patContainerView.trailingAnchor, constant: -5),
+            trendingMoviesView.leadingAnchor.constraint(equalTo: searchContainerView.leadingAnchor, constant: 20),
+            trendingMoviesView.trailingAnchor.constraint(equalTo: searchContainerView.trailingAnchor, constant: -5),
             trendingMoviesView.heightAnchor.constraint(equalToConstant: 250),
             
             trendingShowsView.topAnchor.constraint(equalTo: trendingMoviesView.bottomAnchor, constant: 10),
-            trendingShowsView.leadingAnchor.constraint(equalTo: patContainerView.leadingAnchor, constant: 20),
-            trendingShowsView.trailingAnchor.constraint(equalTo: patContainerView.trailingAnchor, constant: -5),
+            trendingShowsView.leadingAnchor.constraint(equalTo: searchContainerView.leadingAnchor, constant: 20),
+            trendingShowsView.trailingAnchor.constraint(equalTo: searchContainerView.trailingAnchor, constant: -5),
             trendingShowsView.heightAnchor.constraint(equalToConstant: 250),
+            
+            featuredDirectorView.topAnchor.constraint(equalTo: trendingShowsView.bottomAnchor, constant: 10),
+            featuredDirectorView.leadingAnchor.constraint(equalTo: searchContainerView.leadingAnchor, constant: 20),
+            featuredDirectorView.trailingAnchor.constraint(equalTo: searchContainerView.trailingAnchor, constant: -5),
+            featuredDirectorView.heightAnchor.constraint(equalToConstant: 250),
         ])
     }
     
     private func addChildViews() {
         addChild(trendingMoviesVC)
         addChild(trendingShowsVC)
+        addChild(featuredDirectorVC)
         
         trendingMoviesView.addSubview(trendingMoviesVC.view)
         trendingShowsView.addSubview(trendingShowsVC.view)
+        featuredDirectorView.addSubview(featuredDirectorVC.view)
         
         trendingMoviesVC.didMove(toParent: self)
         trendingShowsVC.didMove(toParent: self)
+        featuredDirectorVC.didMove(toParent: self)
         
         constrainChildViewToContainerView(childView: trendingMoviesVC.view, container: trendingMoviesView)
         constrainChildViewToContainerView(childView: trendingShowsVC.view, container: trendingShowsView)
+        constrainChildViewToContainerView(childView: featuredDirectorVC.view, container: featuredDirectorView)
     }
     
     func populateKeywordArray() {

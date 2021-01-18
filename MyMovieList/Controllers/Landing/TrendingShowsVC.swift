@@ -1,7 +1,7 @@
 
 import UIKit
 
-class SpecialListVC: SpecialCollectionsVC {
+class TrendingShowsVC: SpecialCollectionsVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
