@@ -2,7 +2,7 @@
 
 import UIKit
 
-class MovieTitleLabel: UILabel {
+class H1Label: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -14,11 +14,12 @@ class MovieTitleLabel: UILabel {
     }
     
     private func configure() {
-        font = UIFont(name: "Avenir Next Demi Bold", size: 20)
+        font = UIFont(name: "Avenir Next Medium", size: 30)
         textColor = .label
+        numberOfLines = 1
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.9
+        minimumScaleFactor = 0.8
         lineBreakMode = .byTruncatingTail
-        numberOfLines = 2
     }
+
 }

@@ -7,48 +7,39 @@ class WatchItemCell: UITableViewCell {
     static let reuseID = "WatchItemCell"
 
     var posterImage = UIImageView()
-    var title = UILabel()
-    lazy var ratingStack = horizontalStackView(subviews: [starIcon, ratingLabel], spacing: 3)
+    var title = H3Label()
+    lazy var userRatingStack = horizontalStackView(subviews: [starIcon, userRatingLabel], spacing: 3)
     let starIcon = UIImageView(image: IconImages.ratingStar.image)
-    let ratingLabel = UILabel()
-    lazy var otherInfoStackView = horizontalStackView(subviews: [yearLabel, ratedLabel], spacing: 3)
-    let yearLabel = UILabel()
-    let ratedLabel = UILabel()
+    let userRatingLabel = P1Label()
+    lazy var yearAndContentRatingStack = horizontalStackView(subviews: [yearLabel, ratedLabel], spacing: 3)
+    let yearLabel = P2Label()
+    let ratedLabel = P2Label()
     
-    func configureCell(_ title: String, posterImage: UIImage, rating: String, year: String, rated: String) {
+    func setWatchItemInfo(_ title: String, posterImage: UIImage, rating: String, year: String, rated: String) {
         self.title.text = title
         self.posterImage.image = posterImage
-        self.ratingLabel.text = rating
+        self.userRatingLabel.text = rating
         self.yearLabel.text = year
         self.ratedLabel.text = rated
         
         selectionStyle = .none
     }
     
-    func configureConstraints() {
+    func configureCell() {
         addSubview(posterImage)
         addSubview(title)
-        addSubview(ratingStack)
-        addSubview(otherInfoStackView)
+        addSubview(userRatingStack)
+        addSubview(yearAndContentRatingStack)
         
         posterImage.translatesAutoresizingMaskIntoConstraints = false
         title.translatesAutoresizingMaskIntoConstraints = false
-        ratingStack.translatesAutoresizingMaskIntoConstraints = false
-        otherInfoStackView.translatesAutoresizingMaskIntoConstraints = false
+        userRatingStack.translatesAutoresizingMaskIntoConstraints = false
+        yearAndContentRatingStack.translatesAutoresizingMaskIntoConstraints = false
         
-        title.textColor = .label
-        title.font = UIFont(name: "Avenir Next Medium", size: 19)
-        title.numberOfLines = 1
-        title.lineBreakMode = .byTruncatingTail
         title.textAlignment = .left
-        
-        ratingLabel.font = UIFont(name: "Avenir Next", size: 16)
-        ratingLabel.textColor = .label
         
         starIcon.tintColor = .systemYellow
         
-        yearLabel.font = UIFont(name: "Avenir Next Medium", size: 14)
-        ratedLabel.font = UIFont(name: "Avenir Next Medium", size: 14)
         yearLabel.textColor = .systemGray
         ratedLabel.textColor = .systemGray
         
@@ -59,20 +50,19 @@ class WatchItemCell: UITableViewCell {
             posterImage.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             title.leadingAnchor.constraint(equalTo: posterImage.trailingAnchor, constant: 15),
-//            title.centerYAnchor.constraint(equalTo: centerYAnchor),
             title.topAnchor.constraint(equalTo: topAnchor, constant: 25),
             title.heightAnchor.constraint(equalToConstant: 22),
-            title.trailingAnchor.constraint(equalTo: ratingStack.leadingAnchor, constant: -10),
+            title.trailingAnchor.constraint(equalTo: userRatingStack.leadingAnchor, constant: -10),
             
-            ratingStack.centerYAnchor.constraint(equalTo: centerYAnchor),
-            ratingStack.widthAnchor.constraint(equalToConstant: 50),
-            ratingStack.heightAnchor.constraint(equalToConstant: 23),
-            ratingStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            userRatingStack.centerYAnchor.constraint(equalTo: centerYAnchor),
+            userRatingStack.widthAnchor.constraint(equalToConstant: 50),
+            userRatingStack.heightAnchor.constraint(equalToConstant: 23),
+            userRatingStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             
-            otherInfoStackView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
-            otherInfoStackView.heightAnchor.constraint(equalToConstant: 20),
-            otherInfoStackView.leadingAnchor.constraint(equalTo: posterImage.trailingAnchor, constant: 15),
-            otherInfoStackView.widthAnchor.constraint(equalToConstant: 170)
+            yearAndContentRatingStack.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
+            yearAndContentRatingStack.heightAnchor.constraint(equalToConstant: 20),
+            yearAndContentRatingStack.leadingAnchor.constraint(equalTo: posterImage.trailingAnchor, constant: 15),
+            yearAndContentRatingStack.widthAnchor.constraint(equalToConstant: 170)
         ])
         
     }

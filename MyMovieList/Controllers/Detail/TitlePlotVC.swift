@@ -9,7 +9,7 @@ protocol PassMovieObject {
 class TitlePlotVC: UIViewController {
     
     // subviews
-    let titleLabel = MovieTitleLabel()
+    let titleLabel = H2Label()
     let imdbLogo = UIImageView(image: #imageLiteral(resourceName: "imdb-square-icon"))
     let ratingLabel = UILabel()
     lazy var ratingStackView = horizontalStackView(subviews: [imdbLogo, ratingLabel], spacing: 12)
@@ -89,7 +89,7 @@ class TitlePlotVC: UIViewController {
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: ratingStackView.leadingAnchor, constant: -15),
-            titleLabel.heightAnchor.constraint(equalToConstant: 20),
+            titleLabel.heightAnchor.constraint(equalToConstant: 25),
             
             ratingStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             ratingStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),

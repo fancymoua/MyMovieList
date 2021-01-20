@@ -4,7 +4,7 @@ import UIKit
 
 class SpecialCollectionsVC: UIViewController {
     
-    let collectionTitle = UILabel()
+    let collectionTitle = H3Label()
     let viewMoreButton = UIButton()
     let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
@@ -46,7 +46,7 @@ class SpecialCollectionsVC: UIViewController {
             collectionTitle.topAnchor.constraint(equalTo: view.topAnchor),
             collectionTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionTitle.trailingAnchor.constraint(equalTo: viewMoreButton.leadingAnchor),
-            collectionTitle.heightAnchor.constraint(equalToConstant: 20),
+            collectionTitle.heightAnchor.constraint(equalToConstant: 25),
             
             viewMoreButton.topAnchor.constraint(equalTo: view.topAnchor),
             viewMoreButton.widthAnchor.constraint(equalToConstant: 90),
@@ -63,8 +63,6 @@ class SpecialCollectionsVC: UIViewController {
     }
     
     func configureSubviews() {
-        collectionTitle.textColor = .black
-        collectionTitle.font = UIFont(name: "Avenir Next Demi Bold", size: 16)
         
         viewMoreButton.setTitle("View More", for: .normal)
         viewMoreButton.setTitleColor(.blue, for: .normal)

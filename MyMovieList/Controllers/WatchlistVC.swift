@@ -4,7 +4,7 @@ import UIKit
 
 class WatchlistVC: UIViewController {
     
-    let headerLabel = UILabel()
+    let headerLabel = H1Label()
     let watchlistTableView = UITableView()
     
     var watchlistItemsArray = [WatchItem]()
@@ -51,8 +51,6 @@ class WatchlistVC: UIViewController {
     private func configureSubviews() {
         
         headerLabel.text = "Watchlist"
-        headerLabel.font = UIFont(name: "Avenir Next Regular", size: 30)
-        headerLabel.textColor = .label
         
         watchlistTableView.register(WatchItemCell.self, forCellReuseIdentifier: WatchItemCell.reuseID)
         watchlistTableView.delegate = self
@@ -113,8 +111,8 @@ extension WatchlistVC: UITableViewDataSource, UITableViewDelegate {
             }
         }
         
-        cell.configureCell(title, posterImage: posterImage, rating: rating ?? "n/a", year: year ?? "n/a", rated: rated ?? "...")
-        cell.configureConstraints()
+        cell.setWatchItemInfo(title, posterImage: posterImage, rating: rating ?? "n/a", year: year ?? "n/a", rated: rated ?? "...")
+        cell.configureCell()
         
         return cell
     }
