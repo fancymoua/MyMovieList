@@ -6,10 +6,10 @@ class LandingVC: UIViewController {
     
     var contentViewSize = CGSize()
     
-    let pinkView = UIView()
+    let searchContainerView = UIView()
     
     let scrollView = UIScrollView(frame: .zero)
-    let searchContainerView = UIView()
+    let scrollContainerView = UIView()
     
     let searchTextField = LandingSearchTextField()
     let keywordsCollectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -36,7 +36,7 @@ class LandingVC: UIViewController {
         scrollView.frame = self.view.bounds
         scrollView.contentSize = contentViewSize
         
-        searchContainerView.frame.size = contentViewSize
+        scrollContainerView.frame.size = contentViewSize
         
         configureVC()
         addSubviews()
@@ -60,29 +60,29 @@ class LandingVC: UIViewController {
     }
 
     private func addSubviews() {
-        view.addSubview(pinkView)
+        view.addSubview(searchContainerView)
         view.addSubview(scrollView)
         
         view.sendSubviewToBack(scrollView)
         
-        pinkView.addSubview(searchTextField)
+        searchContainerView.addSubview(searchTextField)
         
-        scrollView.addSubview(searchContainerView)
+        scrollView.addSubview(scrollContainerView)
         
-        searchContainerView.addSubview(keywordsCollectionView)
-        searchContainerView.addSubview(trendingMoviesView)
-        searchContainerView.addSubview(trendingShowsView)
-        searchContainerView.addSubview(featuredDirectorView)
+        scrollContainerView.addSubview(keywordsCollectionView)
+        scrollContainerView.addSubview(trendingMoviesView)
+        scrollContainerView.addSubview(trendingShowsView)
+        scrollContainerView.addSubview(featuredDirectorView)
         
-        pinkView.translatesAutoresizingMaskIntoConstraints = false
+        searchContainerView.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         keywordsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         trendingMoviesView.translatesAutoresizingMaskIntoConstraints = false
         trendingShowsView.translatesAutoresizingMaskIntoConstraints = false
         featuredDirectorView.translatesAutoresizingMaskIntoConstraints = false
         
-        pinkView.backgroundColor = .systemBackground
-        pinkView.layer.borderColor = UIColor.lightGray.cgColor
+        searchContainerView.backgroundColor = .systemBackground
+        searchContainerView.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     private func layoutSubviews() {
@@ -91,34 +91,34 @@ class LandingVC: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            pinkView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            pinkView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            pinkView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            pinkView.heightAnchor.constraint(equalToConstant: 120),
+            searchContainerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            searchContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            searchContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            searchContainerView.heightAnchor.constraint(equalToConstant: 120),
             
-            searchTextField.bottomAnchor.constraint(equalTo: pinkView.bottomAnchor, constant: -5),
-            searchTextField.leadingAnchor.constraint(equalTo: pinkView.leadingAnchor, constant: 20),
-            searchTextField.trailingAnchor.constraint(equalTo: pinkView.trailingAnchor, constant: -10),
+            searchTextField.bottomAnchor.constraint(equalTo: searchContainerView.bottomAnchor, constant: -5),
+            searchTextField.leadingAnchor.constraint(equalTo: searchContainerView.leadingAnchor, constant: 20),
+            searchTextField.trailingAnchor.constraint(equalTo: searchContainerView.trailingAnchor, constant: -10),
             searchTextField.heightAnchor.constraint(equalToConstant: 45),
             
-            keywordsCollectionView.topAnchor.constraint(equalTo: searchContainerView.topAnchor, constant: 90),
-            keywordsCollectionView.leadingAnchor.constraint(equalTo: searchContainerView.leadingAnchor, constant: 20),
-            keywordsCollectionView.trailingAnchor.constraint(equalTo: searchContainerView.trailingAnchor, constant: -5),
+            keywordsCollectionView.topAnchor.constraint(equalTo: scrollContainerView.topAnchor, constant: 90),
+            keywordsCollectionView.leadingAnchor.constraint(equalTo: scrollContainerView.leadingAnchor, constant: 20),
+            keywordsCollectionView.trailingAnchor.constraint(equalTo: scrollContainerView.trailingAnchor, constant: -5),
             keywordsCollectionView.heightAnchor.constraint(equalToConstant: 40),
             
             trendingMoviesView.topAnchor.constraint(equalTo: keywordsCollectionView.bottomAnchor, constant: 15),
-            trendingMoviesView.leadingAnchor.constraint(equalTo: searchContainerView.leadingAnchor, constant: 20),
-            trendingMoviesView.trailingAnchor.constraint(equalTo: searchContainerView.trailingAnchor, constant: -5),
+            trendingMoviesView.leadingAnchor.constraint(equalTo: scrollContainerView.leadingAnchor, constant: 20),
+            trendingMoviesView.trailingAnchor.constraint(equalTo: scrollContainerView.trailingAnchor, constant: -5),
             trendingMoviesView.heightAnchor.constraint(equalToConstant: 250),
             
             trendingShowsView.topAnchor.constraint(equalTo: trendingMoviesView.bottomAnchor, constant: 10),
-            trendingShowsView.leadingAnchor.constraint(equalTo: searchContainerView.leadingAnchor, constant: 20),
-            trendingShowsView.trailingAnchor.constraint(equalTo: searchContainerView.trailingAnchor, constant: -5),
+            trendingShowsView.leadingAnchor.constraint(equalTo: scrollContainerView.leadingAnchor, constant: 20),
+            trendingShowsView.trailingAnchor.constraint(equalTo: scrollContainerView.trailingAnchor, constant: -5),
             trendingShowsView.heightAnchor.constraint(equalToConstant: 250),
             
             featuredDirectorView.topAnchor.constraint(equalTo: trendingShowsView.bottomAnchor, constant: 10),
-            featuredDirectorView.leadingAnchor.constraint(equalTo: searchContainerView.leadingAnchor, constant: 20),
-            featuredDirectorView.trailingAnchor.constraint(equalTo: searchContainerView.trailingAnchor, constant: -5),
+            featuredDirectorView.leadingAnchor.constraint(equalTo: scrollContainerView.leadingAnchor, constant: 20),
+            featuredDirectorView.trailingAnchor.constraint(equalTo: scrollContainerView.trailingAnchor, constant: -5),
             featuredDirectorView.heightAnchor.constraint(equalToConstant: 250),
         ])
     }
