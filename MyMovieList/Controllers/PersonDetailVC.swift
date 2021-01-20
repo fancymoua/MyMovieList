@@ -6,7 +6,7 @@ class PersonDetailVC: UIViewController {
     
     let avatarImageView = UIImageView()
     let nameLabel = H3Label()
-    let bioLabel = P3Label(numberOfLines: 6)
+    let bioLabel = P3Label(numberOfLines: 6, alignment: .left)
     let creditedWorkLabel = H3Label()
     
     private let avatarBaseURL = Constants.API.imageURL + "w185"

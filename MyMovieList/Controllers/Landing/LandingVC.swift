@@ -81,9 +81,7 @@ class LandingVC: UIViewController {
         trendingShowsView.translatesAutoresizingMaskIntoConstraints = false
         featuredDirectorView.translatesAutoresizingMaskIntoConstraints = false
         
-//        scrollView.backgroundColor = .systemYellow
         pinkView.backgroundColor = .systemBackground
-//        pinkView.layer.borderWidth = 0.25
         pinkView.layer.borderColor = UIColor.lightGray.cgColor
     }
     
@@ -98,7 +96,6 @@ class LandingVC: UIViewController {
             pinkView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             pinkView.heightAnchor.constraint(equalToConstant: 120),
             
-//            searchTextField.topAnchor.constraint(equalTo: pinkView.topAnchor, constant: 20),
             searchTextField.bottomAnchor.constraint(equalTo: pinkView.bottomAnchor, constant: -5),
             searchTextField.leadingAnchor.constraint(equalTo: pinkView.leadingAnchor, constant: 20),
             searchTextField.trailingAnchor.constraint(equalTo: pinkView.trailingAnchor, constant: -10),
@@ -174,7 +171,7 @@ class LandingVC: UIViewController {
         let destVC = SearchResultsVC()
         
         guard userEnteredText else {
-            presentAlert(title: "Title missing", body: "Please enter a movie title.")
+            presentAlert(title: "Title missing", body: "Please enter a title to perform search.")
             return
         }
         

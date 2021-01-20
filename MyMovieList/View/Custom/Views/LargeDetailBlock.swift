@@ -6,7 +6,7 @@ class LargeDetailBlock: UIView {
 
     let iconImageView = UIImageView()
     let headerLabel = UILabel()
-    let detailLabel = P2Label(numberOfLines: 3)
+    let detailLabel = P2Label(numberOfLines: 3, alignment: .left)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

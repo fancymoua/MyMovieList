@@ -13,7 +13,7 @@ class TitlePlotVC: UIViewController {
     let imdbLogo = UIImageView(image: #imageLiteral(resourceName: "imdb-square-icon"))
     let userRatingLabel = P2Label()
     lazy var ratingStackView = horizontalStackView(subviews: [imdbLogo, userRatingLabel], spacing: 12)
-    let plotLabel = P1Label(numberOfLines: 5)
+    let plotLabel = P1Label(numberOfLines: 5, alignment: .left)
     lazy var yearAndRatedStack = horizontalStackView(subviews: [yearView, contentRatingView], spacing: 5)
     let yearView = SmallDetailBlock(icon: IconImages.movieDetailDate.image)
     let contentRatingView = SmallDetailBlock(icon: IconImages.movieDetailRated.image)

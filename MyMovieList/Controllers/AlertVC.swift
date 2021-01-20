@@ -5,8 +5,8 @@ import UIKit
 class AlertVC: UIViewController {
     
     let bgView = UIView()
-    let titleLabel = UILabel()
-    let bodyLabel = UILabel()
+    let titleLabel = H2Label(alignment: .center)
+    let bodyLabel = P2Label(numberOfLines: 2, alignment: .center)
     let confirmButton = UIButton()
 
     override func viewDidLoad() {
@@ -53,20 +53,9 @@ class AlertVC: UIViewController {
         confirmButton.layer.cornerRadius = 5
         confirmButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "Avenir Next Medium", size: 22)
-        titleLabel.textColor = .label
-        
-        bodyLabel.textAlignment = .center
-        bodyLabel.font = UIFont(name: "Avenir Next", size: 18)
-        bodyLabel.textColor = .label
-        
-        titleLabel.numberOfLines = 2
-        bodyLabel.numberOfLines = 2
-        
         NSLayoutConstraint.activate([
-            bgView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            bgView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            bgView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            bgView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             bgView.heightAnchor.constraint(equalToConstant: 200),
             bgView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
@@ -81,8 +70,8 @@ class AlertVC: UIViewController {
             bodyLabel.heightAnchor.constraint(equalToConstant: 60),
             
             confirmButton.bottomAnchor.constraint(equalTo: bgView.bottomAnchor, constant: -15),
-            confirmButton.leadingAnchor.constraint(equalTo: bgView.leadingAnchor, constant: 35),
-            confirmButton.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: -35),
+            confirmButton.leadingAnchor.constraint(equalTo: bgView.leadingAnchor, constant: 45),
+            confirmButton.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: -45),
             confirmButton.heightAnchor.constraint(equalToConstant: 45),
         ])
         

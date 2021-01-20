@@ -13,6 +13,12 @@ class H1Label: UILabel {
         super.init(coder: aDecoder)
     }
     
+    init(alignment: NSTextAlignment) {
+        super.init(frame: .zero)
+        self.textAlignment = alignment
+        configure()
+    }
+    
     private func configure() {
         font = UIFont(name: "Avenir Next Medium", size: 30)
         textColor = .label

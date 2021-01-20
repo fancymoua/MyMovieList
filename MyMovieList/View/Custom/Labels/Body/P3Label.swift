@@ -12,9 +12,10 @@ class P3Label: UILabel {
         super.init(coder: aDecoder)
     }
     
-    init(numberOfLines: Int) {
+    init(numberOfLines: Int, alignment: NSTextAlignment) {
         super.init(frame: .zero)
         self.numberOfLines = numberOfLines
+        self.textAlignment = alignment
         configure()
     }
     
