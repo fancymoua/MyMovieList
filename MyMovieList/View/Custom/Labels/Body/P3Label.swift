@@ -20,7 +20,7 @@ class P3Label: UILabel {
     }
     
     private func configure() {
-        font = UIFont(name: "Avenir Next", size: 14)
+        font = UIFont(name: Constants.Fonts.appFontRegular, size: 14)
         lineBreakMode = .byWordWrapping
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.7

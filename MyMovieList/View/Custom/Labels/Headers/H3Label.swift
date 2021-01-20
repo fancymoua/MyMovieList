@@ -20,7 +20,7 @@ class H3Label: UILabel {
     }
     
     private func configure() {
-        font = UIFont(name: "Avenir Next Medium", size: 18)
+        font = UIFont(name: Constants.Fonts.appFontMedium, size: 18)
         textColor = .label
         numberOfLines = 1
         adjustsFontSizeToFitWidth = true

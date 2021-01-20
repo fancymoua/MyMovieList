@@ -73,9 +73,6 @@ class TitlePlotVC: UIViewController {
         plotLabel.isUserInteractionEnabled = true
         plotLabel.addGestureRecognizer(tapGesture)
         
-//        userRatingLabel.font = UIFont(name: "Avenir Next", size: 18)
-//        userRatingLabel.textColor = .label
-        
         // if there is a provider, constant is increased below. Otherwise, constant is 0.
         providersStackViewWidthConstraint = NSLayoutConstraint(item: watchProvidersStackView, attribute: .width, relatedBy: .equal, toItem: .none , attribute: .notAnAttribute, multiplier: 0, constant: providersWidth)
         

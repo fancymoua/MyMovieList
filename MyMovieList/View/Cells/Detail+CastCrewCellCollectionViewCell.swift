@@ -7,7 +7,7 @@ class Detail_CastCrewCellCollectionViewCell: UICollectionViewCell {
     static let reuseID = "CastCrewCell"
     
     private var bgView = UIView()
-    var nameLabel = UILabel()
+    var nameLabel = P3Label(numberOfLines: 2, alignment: .center)
     
     func configure(name: String) {
         addSubview(bgView)
@@ -19,9 +19,6 @@ class Detail_CastCrewCellCollectionViewCell: UICollectionViewCell {
         bgView.clipsToBounds = true
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.font = UIFont(name: "Avenir Next", size: 14)
-        nameLabel.numberOfLines = 2
-        nameLabel.textAlignment = .center
         nameLabel.textColor = .white
         
         self.nameLabel.text = name

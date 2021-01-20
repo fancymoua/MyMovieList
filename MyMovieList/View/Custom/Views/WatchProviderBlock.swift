@@ -6,7 +6,7 @@ class WatchProviderBlock: UIView {
     
     let smallView = UIView()
     let logoImageView = UIImageView()
-    let rateLabel = UILabel()
+    let rateLabel = UILabel()       // super small font, so not using custom labels here for now
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,7 +35,6 @@ class WatchProviderBlock: UIView {
         
         logoImageView.layer.cornerRadius = 8
         logoImageView.clipsToBounds = true
-
         
         rateLabel.textAlignment = .center
         rateLabel.textColor = .label

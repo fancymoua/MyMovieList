@@ -21,7 +21,7 @@ class P1Label: UILabel {
     }
     
     private func configure() {
-        font = UIFont(name: "Avenir Next", size: 20)
+        font = UIFont(name: Constants.Fonts.appFontRegular, size: 20)
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.7
     }

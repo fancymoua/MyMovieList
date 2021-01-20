@@ -12,4 +12,8 @@ struct Constants {
         static let omdbAPIBaseURL = "https://www.omdbapi.com/?apikey=1383769a&i="
         static let personBaseURL = "https://api.themoviedb.org/3/person/"
     }
+    struct Fonts {
+        static let appFontRegular = "Avenir Next"
+        static let appFontMedium = "Avenir Next Medium"
+    }
 }

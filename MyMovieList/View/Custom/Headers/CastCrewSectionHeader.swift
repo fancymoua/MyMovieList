@@ -4,7 +4,7 @@ import UIKit
 
 class CastCrewSectionHeader: UICollectionReusableView {
     
-    let sectionTitle = UILabel()
+    let sectionTitle = H2Label(alignment: .left)
     
     static let headerReuseIdentifer = "CastCrewHeader"
     

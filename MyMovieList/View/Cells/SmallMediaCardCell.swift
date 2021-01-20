@@ -6,8 +6,7 @@ class SmallMediaCardCell: UICollectionViewCell {
     static let reuseID = "SmallMediaCardCell"
     
     var movieImageView = UIImageView()
-    var titleLabel = UILabel()
-    var characterLabel = UILabel()
+    var titleLabel = H3Label(alignment: .center)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,22 +24,14 @@ class SmallMediaCardCell: UICollectionViewCell {
         
         addSubview(movieImageView)
         addSubview(titleLabel)
-        addSubview(characterLabel)
         
         movieImageView.image = image
         titleLabel.text = title
         
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        characterLabel.translatesAutoresizingMaskIntoConstraints = false
         
         movieImageView.contentMode = .scaleAspectFill
-        
-        titleLabel.textAlignment = .center
-        titleLabel.numberOfLines = 2
-        titleLabel.minimumScaleFactor = 0.5
-        titleLabel.lineBreakMode = .byTruncatingTail
-        titleLabel.font = UIFont(name: "Avenir Next Medium", size: 17)
         
         NSLayoutConstraint.activate([
             

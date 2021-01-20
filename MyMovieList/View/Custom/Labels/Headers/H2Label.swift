@@ -20,7 +20,7 @@ class H2Label: UILabel {
     }
     
     private func configure() {
-        font = UIFont(name: "Avenir Next Medium", size: 20)
+        font = UIFont(name: Constants.Fonts.appFontMedium, size: 20)
         textColor = .label
         numberOfLines = 1
         adjustsFontSizeToFitWidth = true

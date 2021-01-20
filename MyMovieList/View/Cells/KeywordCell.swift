@@ -7,7 +7,7 @@ class KeywordCell: UICollectionViewCell {
     static let reuseID = "KeywordCell"
     
     var bgView = UIView()
-    var nameLabel = UILabel()
+    var nameLabel = P3Label(numberOfLines: 1, alignment: .center)
     
     func configureCell(name: String) {
         self.nameLabel.text = name
