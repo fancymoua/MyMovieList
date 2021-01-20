@@ -5,7 +5,7 @@ import UIKit
 class SmallDetailBlock: UIView {
     
     let iconImageView = UIImageView()
-    let textLabel = P2Label(numberOfLines: 3, alignment: .left)
+    let textLabel = P3Label(numberOfLines: 3, alignment: .left)
     
     var width = CGFloat()
 
