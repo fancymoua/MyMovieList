@@ -5,7 +5,7 @@ import UIKit
 class SmallDetailBlock: UIView {
     
     let iconImageView = UIImageView()
-    let textLabel = UILabel()
+    let textLabel = P2Label(numberOfLines: 3)
     
     var width = CGFloat()
 
@@ -34,11 +34,6 @@ class SmallDetailBlock: UIView {
         addSubview(textLabel)
         
         iconImageView.tintColor = .label
-        
-        textLabel.font = UIFont(name: "Avenir Next", size: 15)
-        textLabel.adjustsFontSizeToFitWidth = true
-        textLabel.minimumScaleFactor = 0.6
-        textLabel.numberOfLines = 3
         
         NSLayoutConstraint.activate([
             iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),

@@ -16,6 +16,7 @@ class P1Label: UILabel {
     init(numberOfLines: Int) {
         super.init(frame: .zero)
         self.numberOfLines = numberOfLines
+        configure()
     }
     
     private func configure() {

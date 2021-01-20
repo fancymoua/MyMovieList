@@ -4,7 +4,7 @@ import UIKit
 
 class ExpandedTextVC: UIViewController {
     
-    let titleLabel = UILabel()
+    let titleLabel = H2Label()
     let textView = UITextView()
 
     override func viewDidLoad() {
@@ -32,9 +32,6 @@ class ExpandedTextVC: UIViewController {
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         textView.translatesAutoresizingMaskIntoConstraints = false
-        
-        titleLabel.font = UIFont(name: "Avenir Next Medium", size: 25)
-        titleLabel.numberOfLines = 2
     
         textView.font = UIFont(name: "Avenir Next", size: 20)
         textView.contentOffset = .zero

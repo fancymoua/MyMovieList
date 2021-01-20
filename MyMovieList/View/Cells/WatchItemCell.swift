@@ -12,8 +12,8 @@ class WatchItemCell: UITableViewCell {
     let starIcon = UIImageView(image: IconImages.ratingStar.image)
     let userRatingLabel = P1Label()
     lazy var yearAndContentRatingStack = horizontalStackView(subviews: [yearLabel, ratedLabel], spacing: 3)
-    let yearLabel = P2Label()
-    let ratedLabel = P2Label()
+    let yearLabel = P3Label()
+    let ratedLabel = P3Label()
     
     func setWatchItemInfo(_ title: String, posterImage: UIImage, rating: String, year: String, rated: String) {
         self.title.text = title

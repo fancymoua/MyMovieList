@@ -6,7 +6,7 @@ class LargeDetailBlock: UIView {
 
     let iconImageView = UIImageView()
     let headerLabel = UILabel()
-    let detailLabel = UILabel()
+    let detailLabel = P2Label(numberOfLines: 3)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,12 +39,6 @@ class LargeDetailBlock: UIView {
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
         
         headerLabel.font = UIFont(name: "Avenir Next Demi Bold", size: 15)
-        
-        detailLabel.font = UIFont(name: "Avenir Next", size: 16)
-        detailLabel.adjustsFontSizeToFitWidth = true
-        detailLabel.minimumScaleFactor = 0.4
-        detailLabel.numberOfLines = 3
-        detailLabel.lineBreakMode = .byTruncatingTail
         
         NSLayoutConstraint.activate([
             iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),

@@ -18,7 +18,6 @@ class MoviePlotLabel: UILabel {
         numberOfLines = 5
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.7
-//        plotLabel.backgroundColor = .systemPink
     }
 
 }

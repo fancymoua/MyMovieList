@@ -1,9 +1,8 @@
 
-
 import UIKit
 
-class P2Label: UILabel {
-
+class P3Label: UILabel {
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -20,7 +19,8 @@ class P2Label: UILabel {
     }
     
     private func configure() {
-        font = UIFont(name: "Avenir Next", size: 17)
+        font = UIFont(name: "Avenir Next", size: 14)
+        lineBreakMode = .byWordWrapping
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.7
     }

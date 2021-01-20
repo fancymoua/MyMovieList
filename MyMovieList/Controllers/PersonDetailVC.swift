@@ -5,9 +5,9 @@ import UIKit
 class PersonDetailVC: UIViewController {
     
     let avatarImageView = UIImageView()
-    let nameLabel = UILabel()
-    let bioLabel = UILabel()
-    let creditedWorkLabel = UILabel()
+    let nameLabel = H3Label()
+    let bioLabel = P3Label(numberOfLines: 6)
+    let creditedWorkLabel = H3Label()
     
     private let avatarBaseURL = Constants.API.imageURL + "w185"
     private let posterBaseURL = Constants.API.imageURL + "w342"
@@ -55,17 +55,6 @@ class PersonDetailVC: UIViewController {
     }
     
     private func configureSubviews() {
-        nameLabel.font = UIFont(name: "Avenir Next Medium", size: 18)
-        nameLabel.textAlignment = .left
-        nameLabel.adjustsFontSizeToFitWidth = true
-        nameLabel.minimumScaleFactor = 0.70
-        
-        bioLabel.font = UIFont(name: "Avenir Next", size: 14)
-        bioLabel.numberOfLines = 7
-        bioLabel.adjustsFontSizeToFitWidth = true
-        bioLabel.lineBreakMode = .byWordWrapping
-        bioLabel.minimumScaleFactor = 0.7
-        bioLabel.textAlignment = .left
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openPlotView))
     
@@ -73,7 +62,6 @@ class PersonDetailVC: UIViewController {
         bioLabel.addGestureRecognizer(tapGesture)
         
         creditedWorkLabel.text = "Popular Work:"
-        creditedWorkLabel.font = UIFont(name: "Avenir Next Medium", size: 18)
         
         creditedCollectionView.backgroundColor = .systemBackground
         configureCollectionView()

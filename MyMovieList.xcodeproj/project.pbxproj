@@ -47,6 +47,7 @@
 		B17C918A25B8BBC500DC6E8A /* H3Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C918925B8BBC500DC6E8A /* H3Label.swift */; };
 		B17C919725B8DFF400DC6E8A /* P1Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C919625B8DFF400DC6E8A /* P1Label.swift */; };
 		B17C919F25B8E14B00DC6E8A /* P2Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C919E25B8E14B00DC6E8A /* P2Label.swift */; };
+		B17C91A425B8E6A100DC6E8A /* P3Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17C91A325B8E6A100DC6E8A /* P3Label.swift */; };
 		B1823FB925A4F012003A8DCC /* RatingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1823FB825A4F012003A8DCC /* RatingsAPI.swift */; };
 		B1823FBE25A4F062003A8DCC /* RatingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1823FBD25A4F062003A8DCC /* RatingModel.swift */; };
 		B1823FC325A51154003A8DCC /* TVDetailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1823FC225A51154003A8DCC /* TVDetailAPI.swift */; };
@@ -144,6 +145,7 @@
 		B17C918925B8BBC500DC6E8A /* H3Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H3Label.swift; sourceTree = "<group>"; };
 		B17C919625B8DFF400DC6E8A /* P1Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P1Label.swift; sourceTree = "<group>"; };
 		B17C919E25B8E14B00DC6E8A /* P2Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2Label.swift; sourceTree = "<group>"; };
+		B17C91A325B8E6A100DC6E8A /* P3Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P3Label.swift; sourceTree = "<group>"; };
 		B1823FB825A4F012003A8DCC /* RatingsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsAPI.swift; sourceTree = "<group>"; };
 		B1823FBD25A4F062003A8DCC /* RatingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingModel.swift; sourceTree = "<group>"; };
 		B1823FC225A51154003A8DCC /* TVDetailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVDetailAPI.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				B1286C0325915DFF0063AD70 /* MoviePlotLabel.swift */,
 				B17C919625B8DFF400DC6E8A /* P1Label.swift */,
 				B17C919E25B8E14B00DC6E8A /* P2Label.swift */,
+				B17C91A325B8E6A100DC6E8A /* P3Label.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -655,6 +658,7 @@
 				B1DA121625B51DB60059007B /* FeaturedDirectorVC.swift in Sources */,
 				B189BE9B258BFAD400422624 /* TrendingMoviesVC.swift in Sources */,
 				B17C917D25B8B8EF00DC6E8A /* H1Label.swift in Sources */,
+				B17C91A425B8E6A100DC6E8A /* P3Label.swift in Sources */,
 				B17C919F25B8E14B00DC6E8A /* P2Label.swift in Sources */,
 				B1BBC86C25A3F7EB00225541 /* MovieDetailModel.swift in Sources */,
 				B1E254F325A03DE4000F94ED /* CastCrewSectionHeader.swift in Sources */,

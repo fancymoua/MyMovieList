@@ -11,12 +11,12 @@ class TitlePlotVC: UIViewController {
     // subviews
     let titleLabel = H2Label()
     let imdbLogo = UIImageView(image: #imageLiteral(resourceName: "imdb-square-icon"))
-    let ratingLabel = UILabel()
-    lazy var ratingStackView = horizontalStackView(subviews: [imdbLogo, ratingLabel], spacing: 12)
-    let plotLabel = MoviePlotLabel()
-    lazy var yearAndRatedStack = horizontalStackView(subviews: [yearView, ratedView], spacing: 5)
+    let userRatingLabel = P2Label()
+    lazy var ratingStackView = horizontalStackView(subviews: [imdbLogo, userRatingLabel], spacing: 12)
+    let plotLabel = P1Label(numberOfLines: 5)
+    lazy var yearAndRatedStack = horizontalStackView(subviews: [yearView, contentRatingView], spacing: 5)
     let yearView = SmallDetailBlock(icon: IconImages.movieDetailDate.image)
-    let ratedView = SmallDetailBlock(icon: IconImages.movieDetailRated.image)
+    let contentRatingView = SmallDetailBlock(icon: IconImages.movieDetailRated.image)
     let genreView = LargeDetailBlock(icon: IconImages.movieDetailDirector.image, header: "Genres:")
     let runtimeOrSeasonsView = LargeDetailBlock(icon: IconImages.movieDetailActors.image, header: "Runtime:")
     lazy var watchProvidersStackView = horizontalStackView(subviews: [], spacing: 10)
@@ -70,12 +70,11 @@ class TitlePlotVC: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openPlotView))
         
-        plotLabel.numberOfLines = 6
         plotLabel.isUserInteractionEnabled = true
         plotLabel.addGestureRecognizer(tapGesture)
         
-        ratingLabel.font = UIFont(name: "Avenir Next", size: 18)
-        ratingLabel.textColor = .label
+//        userRatingLabel.font = UIFont(name: "Avenir Next", size: 18)
+//        userRatingLabel.textColor = .label
         
         // if there is a provider, constant is increased below. Otherwise, constant is 0.
         providersStackViewWidthConstraint = NSLayoutConstraint(item: watchProvidersStackView, attribute: .width, relatedBy: .equal, toItem: .none , attribute: .notAnAttribute, multiplier: 0, constant: providersWidth)
@@ -130,8 +129,8 @@ class TitlePlotVC: UIViewController {
             DispatchQueue.main.async {
                 titleLabel.text = movie.title ?? "no title"
                 plotLabel.text = movie.overview ?? "no plot"
-                ratedView.setText(text: movie.rated ?? "not rated")
-                ratingLabel.text = movie.imdbRating ?? "n/a"
+                contentRatingView.setText(text: movie.rated ?? "not rated")
+                userRatingLabel.text = movie.imdbRating ?? "n/a"
                 genreView.setText(text: movie.genres ?? "no genres")
                 
                 if let releaseDate = movie.release_date {
@@ -160,9 +159,9 @@ class TitlePlotVC: UIViewController {
                 titleLabel.text = show.name
                 plotLabel.text = show.overview
                 yearView.setText(text: show.yearAired ?? "n/a")
-                ratedView.setText(text: show.contentRating ?? "not rated")
+                contentRatingView.setText(text: show.contentRating ?? "not rated")
                 genreView.setText(text: show.genres ?? "no genres")
-                ratingLabel.text = show.imdbRating
+                userRatingLabel.text = show.imdbRating
                 
                 if let seasonsCount = show.seasonsCount {
                     if let episodesCount = show.episodesCount {
